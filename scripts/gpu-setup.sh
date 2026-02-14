@@ -15,18 +15,33 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install fastapi uvicorn transformers accelerate bitsandbytes torch huggingface_hub scipy
 
-cat <<EOF > /app/main.py
+if [ -f /app/llm.env ]; then
+    export $(grep -v '^#' /app/llm.env | xargs)
+fi
+
+cat <<'EOF' > /app/main.py
 from fastapi import FastAPI, Body, Header, HTTPException
 from huggingface_hub import snapshot_download
 import torch
+import sys
+import logging
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline, BitsAndBytesConfig
 import os
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger("llm-service")
 
 app = FastAPI()
 model_cache = {}
 
+logger.info("Checking environment variables...")
 API_KEY = os.getenv("API_KEY")
 if not API_KEY:
+    logger.error("FATAL: API_KEY environment variable is missing!")
     raise ValueError("API_KEY environment variable is required")
 
 @app.get("/health")
@@ -39,6 +54,7 @@ async def generate(
     x_api_key: str = Header(None)
 ):
     if x_api_key != API_KEY:
+        logger.warning(f"Unauthorized access attempt with key: {x_api_key}")
         raise HTTPException(status_code=403, detail="Unauthorised")
 
     default_model = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-Coder-7B-Instruct")
@@ -46,9 +62,10 @@ async def generate(
     diff = payload.get("diff", "")
     
     if model_id not in model_cache:
-        print(f"Downloading {model_id}...")
+        logger.info(f"Attempting to load model: {model_id}")
         path = snapshot_download(repo_id=model_id)
         
+        logger.info("Configuring 4-bit quantization")
         quantization_config = BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_compute_dtype=torch.float16,
@@ -56,6 +73,7 @@ async def generate(
             bnb_4bit_use_double_quant=True
         )
         
+        logger.info("Loading tokenizer and model")
         tokenizer = AutoTokenizer.from_pretrained(path)
         model = AutoModelForCausalLM.from_pretrained(
             path, 
@@ -63,10 +81,12 @@ async def generate(
             device_map="auto"
         )
         model_cache[model_id] = pipeline("text-generation", model=model, tokenizer=tokenizer)
+        logger.info(f"Model {model_id} loaded successfully.")
     
     pipe = model_cache[model_id]
     prompt = f"### Instruction:\nAnalyze the git diff and write a Playwright test.\n\n### Diff:\n{diff}\n\n### Response:\n"
     
+    logger.info("Generating response")
     output = pipe(prompt, max_new_tokens=500, temperature=0.1)
     return {"generated_code": output[0]['generated_text']}
 EOF
@@ -81,6 +101,7 @@ User=root
 WorkingDirectory=/app
 Environment="API_KEY=$API_KEY"
 Environment="MODEL_NAME=$MODEL_NAME"
+Environment="PYTHONUNBUFFERED=1"
 Environment="LD_LIBRARY_PATH=/usr/local/cuda/lib64"
 ExecStart=/app/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
