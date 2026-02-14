@@ -114,41 +114,41 @@ jobs:
             exit 1
           fi
 
-cleanup:
-  runs-on: ubuntu-latest
-  needs: provision
-  if: always()
-  steps:
-    - name: Install doctl (Digital Ocean CLI)
-      uses: digitalocean/action-doctl@v2
-      with:
-        token: ${{ secrets.DO_TOKEN }}
+  cleanup:
+    runs-on: ubuntu-latest
+    needs: provision
+    if: always()
+    steps:
+      - name: Install doctl (Digital Ocean CLI)
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_TOKEN }}
 
-    - name: Remove firewall rule
-      run: |
-        FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
-        RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
-          
-        echo "Removing firewall rule for IP: $RUNNER_IP"
-        doctl compute firewall remove-rules $FIREWALL_ID \
-          --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || \
-        echo "Warning: Failed to remove firewall rule (may not exist)"
+      - name: Remove firewall rule
+        run: |
+          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+          RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
+            
+          echo "Removing firewall rule for IP: $RUNNER_IP"
+          doctl compute firewall remove-rules $FIREWALL_ID \
+            --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || \
+          echo "Warning: Failed to remove firewall rule (may not exist)"
 
-    - name: Delete GPU Droplet
-      if: always()
-      run: |
-        DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
-          
-        if [ -n "$DROPLET_ID" ] && [ "$DROPLET_ID" != "" ]; then
-          echo "Deleting droplet: $DROPLET_ID"
-          doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
-        else
-          echo "No droplet ID found, searching by name..."
-          DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-${{ github.sha }}" | awk '{print $1}' | head -1)
-          if [ -n "$DROPLET_ID" ]; then
-            echo "Found and deleting droplet: $DROPLET_ID"
+      - name: Delete GPU Droplet
+        if: always()
+        run: |
+          DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
+            
+          if [ -n "$DROPLET_ID" ] && [ "$DROPLET_ID" != "" ]; then
+            echo "Deleting droplet: $DROPLET_ID"
             doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
           else
-            echo "No droplet found to delete"
+            echo "No droplet ID found, searching by name..."
+            DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-${{ github.sha }}" | awk '{print $1}' | head -1)
+            if [ -n "$DROPLET_ID" ]; then
+              echo "Found and deleting droplet: $DROPLET_ID"
+              doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
+            else
+              echo "No droplet found to delete"
+            fi
           fi
-        fi
