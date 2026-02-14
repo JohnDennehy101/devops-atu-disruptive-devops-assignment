@@ -21,6 +21,39 @@ jobs:
           echo "FW_ID=$FIREWALL_ID" >> $GITHUB_ENV
           
           echo "RUNNER_IP=$(curl -s https://icanhazip.com)" >> $GITHUB_ENV
+      
+      - name: Obtain GPU ID for available GPU in target region
+        id: find_h100_size
+        run: |
+          echo "=== All GPU sizes in target region ==="
+          doctl compute size list --format Slug,Description,Regions --no-header | grep -i gpu || echo "No GPU sizes found"
+          
+          echo ""
+          echo "=== H100 specific sizes ==="
+          doctl compute size list --format Slug,Description,Regions --no-header | grep -i h100 || echo "No H100 sizes found"
+          
+          echo ""
+          echo "=== Finding H100 with 20 vCPU and 240 GB RAM ==="
+          # Try to find the exact match
+          H100_SIZE=$(doctl compute size list --format Slug,Description --no-header | grep -iE "h100.*20.*240|240.*20.*h100|h100.*240.*20" | head -1 | awk '{print $1}')
+          
+          if [ -z "$H100_SIZE" ]; then
+            # Try alternative patterns
+            H100_SIZE=$(doctl compute size list --format Slug,Description --no-header | grep -i h100 | grep -iE "20|240" | head -1 | awk '{print $1}')
+          fi
+          
+          if [ -z "$H100_SIZE" ]; then
+            # Just get first H100 if available
+            H100_SIZE=$(doctl compute size list --format Slug,Description --no-header | grep -i h100 | head -1 | awk '{print $1}')
+          fi
+          
+          if [ -z "$H100_SIZE" ]; then
+            echo "ERROR: Could not find H100 size. Please check the output above."
+            exit 1
+          fi
+          
+          echo "Found H100 size: $H100_SIZE"
+          echo "H100_SIZE=$H100_SIZE" >> $GITHUB_ENV
 
       - name: Spin up GPU Droplet on Digital Ocean
         id: gpu
