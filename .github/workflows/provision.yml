@@ -51,7 +51,7 @@ jobs:
             --size gpu-h100x1-80gb \
             --image gpu-h100x1-base \
             --user-data-file /tmp/user-data.yml \
-            --ssh-keys "${{ secrets.DO_SSH_KEY_ID }}"
+            --ssh-keys "${{ secrets.DO_SSH_KEY_ID }}" \
             --wait --format ID --no-header)
           
           IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
