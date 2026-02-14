@@ -30,25 +30,20 @@ jobs:
       - name: Spin up GPU Droplet on Digital Ocean
         id: gpu
         run: |
-          API_KEY_VALUE="${{ secrets.LLM_API_KEY }}"
-          MODEL_VALUE="${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}"
-
           cat > /tmp/user-data.yml <<EOF
           write_files:
             - path: /app/llm.env
               content: |
-                API_KEY=$API_KEY_VALUE
-                MODEL_NAME=$MODEL_VALUE
-              owner: root:root
-              permissions: '0600'
-          
+                API_KEY=${{ secrets.LLM_API_KEY }}
+                MODEL_NAME=${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}
           runcmd:
-            - export API_KEY='$API_KEY_VALUE'
-            - export MODEL_NAME='$MODEL_VALUE'
-            - |
-              $(cat ./scripts/gpu-setup.sh | sed 's/\$/\\\$/g' | tail -n +2)
+            - export API_KEY='${{ secrets.LLM_API_KEY }}'
+            - export MODEL_NAME='${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}'
           EOF
-          
+
+          echo "    - |" >> /tmp/user-data.yml
+          sed 's/^/      /' ./scripts/gpu-setup.sh >> /tmp/user-data.yml
+
           DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
             --region ams3 \
             --size gpu-h100x1-80gb \
