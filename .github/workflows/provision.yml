@@ -42,20 +42,31 @@ jobs:
       - name: Spin up GPU Droplet on Digital Ocean
         id: gpu
         run: |
+          MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
+          if [ -z "$MODEL_NAME_VALUE" ]; then
+            MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
+          fi
+          
+          SCRIPT_CONTENT=$(cat ./scripts/gpu-setup.sh)
+
           cat > /tmp/user-data.yml <<EOF
           #cloud-config
           write_files:
             - path: /app/llm.env
               content: |
                 API_KEY=${{ secrets.LLM_API_KEY }}
-                MODEL_NAME=${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}
-          runcmd:
-            - export API_KEY='${{ secrets.LLM_API_KEY }}'
-            - export MODEL_NAME='${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}'
-          EOF
+                MODEL_NAME=${MODEL_NAME_VALUE}
+              owner: root:root
+              permissions: '0600'
+            - path: /app/setup.sh
+              content: |
+          $(echo "$SCRIPT_CONTENT" | sed 's/^/                /')
+              owner: root:root
+              permissions: '0700'
 
-          echo "    - |" >> /tmp/user-data.yml
-          sed 's/^/      /' ./scripts/gpu-setup.sh >> /tmp/user-data.yml
+          runcmd:
+            - [ bash, /app/setup.sh ]
+          EOF
 
           DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
             --region ams3 \
@@ -66,9 +77,9 @@ jobs:
             --wait --format ID --no-header)
           
           IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
-          echo "DROPLET_ID=$DROPLET_ID" >> $GITHUB_ENV
-          echo "DROPLET_IP=$IP" >> $GITHUB_ENV
           echo "id=$DROPLET_ID" >> $GITHUB_OUTPUT
+          echo "DROPLET_IP=$IP" >> $GITHUB_ENV
+          echo "DROPLET_ID=$DROPLET_ID" >> $GITHUB_ENV
 
       - name: Update firewall to allow current runner IP access
         run: |
