@@ -1,0 +1,141 @@
+name: Provision GPU with Hugging Face Model Configured
+on:
+  workflow_dispatch:
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    outputs:
+      runner_ip: ${{ steps.ip_step.outputs.ipv4 }}
+      droplet_id: ${{ steps.gpu.outputs.id }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install doctl (Digital Ocean CLI)
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_TOKEN }}
+      
+      - name: Check for Existing GPU Droplets
+        run: |
+          EXISTING_COUNT=$(doctl compute droplet list --format Name --no-header | grep -c "ai-worker" || true)
+          
+          echo "Found $EXISTING_COUNT existing GPU droplets."
+          
+          if [ "$EXISTING_COUNT" -ge 1 ]; then
+            echo "ERROR: Account limit reached. 1 GPU droplet is already running."
+            echo "Please delete the existing droplet manually or use the running one for testing."
+            exit 1
+          fi
+
+      - name: Get GitHub Runner Config & Digital Ocean Firewall config
+        id: ip_step
+        run: |
+          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+          echo "FW_ID=$FIREWALL_ID" >> $GITHUB_ENV
+          IP=$(curl -s https://icanhazip.com)
+          echo "ipv4=$IP" >> $GITHUB_OUTPUT
+          echo "RUNNER_IP=$IP" >> $GITHUB_ENV
+
+      - name: Spin up GPU Droplet on Digital Ocean
+        id: gpu
+        run: |
+          MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
+          if [ -z "$MODEL_NAME_VALUE" ]; then
+            MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
+          fi
+          
+          SCRIPT_CONTENT=$(cat ./scripts/gpu-setup.sh)
+
+          cat > /tmp/user-data.yml <<EOF
+          #cloud-config
+          write_files:
+            - path: /app/llm.env
+              content: |
+                API_KEY='${{ secrets.LLM_API_KEY }}'
+                MODEL_NAME='${MODEL_NAME_VALUE}'
+              owner: root:root
+              permissions: '0600'
+            - path: /app/setup.sh
+              content: |
+          $(echo "$SCRIPT_CONTENT" | sed 's/^/                /')
+              owner: root:root
+              permissions: '0700'
+
+          runcmd:
+            - [ bash, /app/setup.sh ]
+          EOF
+
+          DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
+            --region ams3 \
+            --size gpu-h100x1-80gb \
+            --image gpu-h100x1-base \
+            --user-data-file /tmp/user-data.yml \
+            --ssh-keys "${{ secrets.DO_SSH_KEY_ID }}" \
+            --wait --format ID --no-header)
+          
+          IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
+          echo "id=$DROPLET_ID" >> $GITHUB_OUTPUT
+          echo "DROPLET_IP=$IP" >> $GITHUB_ENV
+          echo "DROPLET_ID=$DROPLET_ID" >> $GITHUB_ENV
+
+      - name: Update firewall to allow current runner IP access
+        run: |
+          doctl compute firewall add-rules ${{ env.FW_ID }} \
+            --inbound-rules "protocol:tcp,ports:8000,address:${{ env.RUNNER_IP }}/32"
+
+      - name: Poll API until health check responds as expected
+        run: |
+          echo "Waiting for FastAPI service to start..."
+          MAX_ATTEMPTS=60
+          ATTEMPT=0
+          
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            if curl -s -f "http://${{ env.DROPLET_IP }}:8000/health" | grep -q "ok"; then
+              echo "Service is ready"
+              break
+            fi
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "Attempt $ATTEMPT/$MAX_ATTEMPTS: Service not ready yet, waiting 10 seconds..."
+            sleep 10
+          done
+          
+          if [ $ATTEMPT -eq $MAX_ATTEMPTS ]; then
+            echo "ERROR: Service did not become ready within $MAX_ATTEMPTS attempts"
+            exit 1
+          fi
+      
+      - name: Test API connection
+        run: |
+          RAW_DIFF="diff --git a/test.py b/test.py
+          +def hello():
+          +    return 'Hello World'"
+          
+          SAFE_DIFF=$(echo "$RAW_DIFF" | python3 -c 'import json, sys; print(json.dumps(sys.stdin.read()))')
+          
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "http://${{ env.DROPLET_IP }}:8000/generate-test" \
+            -H "Content-Type: application/json" \
+            -H "X-API-Key: ${{ secrets.LLM_API_KEY }}" \
+            -d "{\"diff\": $SAFE_DIFF}")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          
+          echo "HTTP Status Code: $HTTP_CODE"
+          echo "Response Body: $BODY"
+          
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "ERROR: API test failed with status code $HTTP_CODE"
+            exit 1
+          fi
+
+      - name: Job Summary
+        run: |
+          echo "## Cleanup this droplet" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Input | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| droplet_id | \`${{ env.DROPLET_ID }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner_ip | \`${{ env.RUNNER_IP }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| sha | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
