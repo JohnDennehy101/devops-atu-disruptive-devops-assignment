@@ -109,20 +109,22 @@ jobs:
       
       - name: Test API connection
         run: |
-          TEST_DIFF="diff --git a/test.py b/test.py
+          RAW_DIFF="diff --git a/test.py b/test.py
           +def hello():
           +    return 'Hello World'"
+          
+          SAFE_DIFF=$(echo "$RAW_DIFF" | python3 -c 'import json, sys; print(json.dumps(sys.stdin.read()))')
           
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "http://${{ env.DROPLET_IP }}:8000/generate-test" \
             -H "Content-Type: application/json" \
             -H "X-API-Key: ${{ secrets.LLM_API_KEY }}" \
-            -d "{\"diff\": \"$TEST_DIFF\"}")
+            -d "{\"diff\": $SAFE_DIFF}")
           
           HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
           BODY=$(echo "$RESPONSE" | head -n-1)
           
           echo "HTTP Status Code: $HTTP_CODE"
-          echo "Response: $(echo "$BODY" | head -c 500)"
+          echo "Response Body: $BODY"
           
           if [ "$HTTP_CODE" != "200" ]; then
             echo "ERROR: API test failed with status code $HTTP_CODE"
