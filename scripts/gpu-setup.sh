@@ -1,4 +1,8 @@
 #!/bin/bash
+set -a
+source /app/llm.env
+set +a
+
 apt-get update
 apt-get install -y python3-pip python3-venv git-lfs
 
@@ -75,7 +79,8 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/app
-EnvironmentFile=/app/llm.env
+Environment="API_KEY=$API_KEY"
+Environment="MODEL_NAME=$MODEL_NAME"
 Environment="LD_LIBRARY_PATH=/usr/local/cuda/lib64"
 ExecStart=/app/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
