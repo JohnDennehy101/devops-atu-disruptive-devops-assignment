@@ -1,7 +1,6 @@
 name: Provision GPU with Hugging Face Model Configured
 on:
-  pull_request:
-    types: [opened, synchronize]
+  workflow_dispatch:
 
 jobs:
   provision:
@@ -26,7 +25,7 @@ jobs:
           
           if [ "$EXISTING_COUNT" -ge 1 ]; then
             echo "ERROR: Account limit reached. 1 GPU droplet is already running."
-            echo "Please wait for the existing PR to finish or delete the droplet manually."
+            echo "Please delete the existing droplet manually or use the running one for testing."
             exit 1
           fi
 
@@ -130,3 +129,13 @@ jobs:
             echo "ERROR: API test failed with status code $HTTP_CODE"
             exit 1
           fi
+
+      - name: Job Summary
+        run: |
+          echo "## Cleanup this droplet" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Input | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| droplet_id | \`${{ env.DROPLET_ID }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| runner_ip | \`${{ env.RUNNER_IP }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| sha | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY

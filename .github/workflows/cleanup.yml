@@ -33,7 +33,7 @@ jobs:
             exit 0
           fi
           
-          RUNNER_IP="${{ inputs.runner_ip }}"
+          RUNNER_IP="${{ github.event.inputs.runner_ip }}"
           if [ -z "$RUNNER_IP" ]; then
             RUNNER_IP=$(curl -s https://icanhazip.com)
             echo "Auto-detected runner IP: $RUNNER_IP"
@@ -46,10 +46,10 @@ jobs:
 
       - name: Delete GPU Droplet
         run: |
-          DROPLET_ID="${{ inputs.droplet_id }}"
+          DROPLET_ID="${{ github.event.inputs.droplet_id }}"
           
           if [ -z "$DROPLET_ID" ]; then
-            SEARCH_SHA="${{ inputs.sha || github.sha }}"
+            SEARCH_SHA="${{ github.event.inputs.sha || github.sha }}"
             echo "Searching for droplet with SHA: $SEARCH_SHA"
             DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-$SEARCH_SHA" | awk '{print $1}' | head -1)
           fi
