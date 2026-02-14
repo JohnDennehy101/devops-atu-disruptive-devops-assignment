@@ -12,10 +12,8 @@ pip install --upgrade pip
 pip install fastapi uvicorn transformers accelerate bitsandbytes torch huggingface_hub scipy
 
 if [ -f /app/llm.env ]; then
-  while IFS= read -r line || [ -n "$line" ]; do
-    clean_line=$(echo "$line" | sed "s/'//g")
-    export "$clean_line"
-  done < /app/llm.env
+  sed -i "s/'//g" /app/llm.env
+  export $(grep -v '^#' /app/llm.env | xargs)
 fi
 
 cat <<'EOF' > /app/main.py
@@ -98,9 +96,9 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/app
-Environment="API_KEY=$API_KEY"
-Environment="MODEL_NAME=$MODEL_NAME"
+EnvironmentFile=/app/llm.env
 Environment="PYTHONUNBUFFERED=1"
+Environment="PYTHONPATH=/app"
 Environment="LD_LIBRARY_PATH=/usr/local/cuda/lib64"
 ExecStart=/app/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000
 Restart=always
