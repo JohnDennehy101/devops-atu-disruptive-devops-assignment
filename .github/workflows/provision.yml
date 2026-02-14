@@ -49,7 +49,7 @@ jobs:
           DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
             --region ams3 \
             --size gpu-h100x1-80gb \
-            --image nvidia-cuda-ubuntu-22-04 \
+            --image gpu-h100x1-base \
             --user-data-file /tmp/user-data.yml \
             --wait --format ID --no-header)
           
