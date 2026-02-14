@@ -43,6 +43,7 @@ jobs:
         id: gpu
         run: |
           cat > /tmp/user-data.yml <<EOF
+          #cloud-config
           write_files:
             - path: /app/llm.env
               content: |
