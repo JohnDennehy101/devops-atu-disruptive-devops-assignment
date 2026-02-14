@@ -7,6 +7,9 @@ jobs:
   provision:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
       - name: Install doctl (Digital Ocean CLI)
         uses: digitalocean/action-doctl@v2
         with:
@@ -22,23 +25,32 @@ jobs:
       - name: Spin up GPU Droplet on Digital Ocean
         id: gpu
         run: |
-          {
-            echo '#!/bin/bash'
-            echo "export API_KEY='${{ secrets.LLM_API_KEY }}'"
-            MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
-            if [ -z "$MODEL_NAME_VALUE" ]; then
-              MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
-            fi
-            echo "export MODEL_NAME='$MODEL_NAME_VALUE'"
-            cat ./scripts/gpu-setup.sh | tail -n +2
-          } > /tmp/user-data.sh
+          MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
+          if [ -z "$MODEL_NAME_VALUE" ]; then
+            MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
+          fi
+
+          cat > /tmp/user-data.yml <<EOF
+          write_files:
+            - path: /app/llm.env
+              content: |
+                API_KEY=${{ secrets.LLM_API_KEY }}
+                MODEL_NAME=${MODEL_NAME_VALUE}
+              owner: root:root
+              permissions: '0600'
+          
+          runcmd:
+            - export API_KEY='${{ secrets.LLM_API_KEY }}'
+            - export MODEL_NAME='${MODEL_NAME_VALUE}'
+            - |
+              $(cat ./scripts/gpu-setup.sh | tail -n +2)
+          EOF
           
           DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
-            --region nyc3 \
-            --size g-4vcpu-16gb-a10 \
-            --image ubuntu-22-04-x64 \
-            --user-data-file /tmp/user-data.sh \
-            --firewalls "${{ env.FW_ID }}" \
+            --region ams3 \
+            --size g-8vcpu-64gb-h100 \
+            --image nvidia-cuda-ubuntu-22-04 \
+            --user-data-file /tmp/user-data.yml \
             --wait --format ID --no-header)
           
           IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
