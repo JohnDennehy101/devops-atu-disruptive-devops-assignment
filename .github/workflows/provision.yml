@@ -7,8 +7,8 @@ jobs:
   provision:
     runs-on: ubuntu-latest
     outputs:
-      runner_ip: ${{ env.RUNNER_IP }}
-      droplet_id: ${{ env.DROPLET_ID }}
+      runner_ip: ${{ steps.ip_step.outputs.ipv4 }}
+      droplet_id: ${{ steps.gpu.outputs.id }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
@@ -19,34 +19,34 @@ jobs:
           token: ${{ secrets.DO_TOKEN }}
 
       - name: Get GitHub Runner Config & Digital Ocean Firewall config
+        id: ip_step
         run: |
           FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
           echo "FW_ID=$FIREWALL_ID" >> $GITHUB_ENV
-          
-          echo "RUNNER_IP=$(curl -s https://icanhazip.com)" >> $GITHUB_ENV
+          IP=$(curl -s https://icanhazip.com)
+          echo "ipv4=$IP" >> $GITHUB_OUTPUT
+          echo "RUNNER_IP=$IP" >> $GITHUB_ENV
 
       - name: Spin up GPU Droplet on Digital Ocean
         id: gpu
         run: |
-          MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
-          if [ -z "$MODEL_NAME_VALUE" ]; then
-            MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
-          fi
+          API_KEY_VALUE="${{ secrets.LLM_API_KEY }}"
+          MODEL_VALUE="${{ secrets.MODEL_NAME || 'Qwen/Qwen2.5-Coder-7B-Instruct' }}"
 
           cat > /tmp/user-data.yml <<EOF
           write_files:
             - path: /app/llm.env
               content: |
-                API_KEY=${{ secrets.LLM_API_KEY }}
-                MODEL_NAME=${MODEL_NAME_VALUE}
+                API_KEY=$API_KEY_VALUE
+                MODEL_NAME=$MODEL_VALUE
               owner: root:root
               permissions: '0600'
           
           runcmd:
-            - export API_KEY='${{ secrets.LLM_API_KEY }}'
-            - export MODEL_NAME='${MODEL_NAME_VALUE}'
+            - export API_KEY='$API_KEY_VALUE'
+            - export MODEL_NAME='$MODEL_VALUE'
             - |
-              $(cat ./scripts/gpu-setup.sh | tail -n +2)
+              $(cat ./scripts/gpu-setup.sh | sed 's/\$/\\\$/g' | tail -n +2)
           EOF
           
           DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
@@ -60,6 +60,7 @@ jobs:
           IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
           echo "DROPLET_ID=$DROPLET_ID" >> $GITHUB_ENV
           echo "DROPLET_IP=$IP" >> $GITHUB_ENV
+          echo "id=$DROPLET_ID" >> $GITHUB_OUTPUT
 
       - name: Update firewall to allow current runner IP access
         run: |
@@ -117,42 +118,42 @@ jobs:
             echo "Response: $BODY"
             exit 1
           fi
-          
- cleanup:
-    runs-on: ubuntu-latest
-    needs: provision
-    if: always()
-    steps:
-      - name: Install doctl (Digital Ocean CLI)
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DO_TOKEN }}
 
-      - name: Remove firewall rule
-        run: |
-          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
-          RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
-          
-          echo "Removing firewall rule for IP: $RUNNER_IP"
-          doctl compute firewall remove-rules $FIREWALL_ID \
-            --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || \
-          echo "Warning: Failed to remove firewall rule (may not exist)"
+cleanup:
+  runs-on: ubuntu-latest
+  needs: provision
+  if: always()
+  steps:
+    - name: Install doctl (Digital Ocean CLI)
+      uses: digitalocean/action-doctl@v2
+      with:
+        token: ${{ secrets.DO_TOKEN }}
 
-      - name: Delete GPU Droplet
-        if: always()
-        run: |
-          DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
+    - name: Remove firewall rule
+      run: |
+        FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+        RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
           
-          if [ -n "$DROPLET_ID" ] && [ "$DROPLET_ID" != "" ]; then
-            echo "Deleting droplet: $DROPLET_ID"
+        echo "Removing firewall rule for IP: $RUNNER_IP"
+        doctl compute firewall remove-rules $FIREWALL_ID \
+          --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || \
+        echo "Warning: Failed to remove firewall rule (may not exist)"
+
+    - name: Delete GPU Droplet
+      if: always()
+      run: |
+        DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
+          
+        if [ -n "$DROPLET_ID" ] && [ "$DROPLET_ID" != "" ]; then
+          echo "Deleting droplet: $DROPLET_ID"
+          doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
+        else
+          echo "No droplet ID found, searching by name..."
+          DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-${{ github.sha }}" | awk '{print $1}' | head -1)
+          if [ -n "$DROPLET_ID" ]; then
+            echo "Found and deleting droplet: $DROPLET_ID"
             doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
           else
-            echo "No droplet ID found, searching by name..."
-            DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-${{ github.sha }}" | awk '{print $1}' | head -1)
-            if [ -n "$DROPLET_ID" ]; then
-              echo "Found and deleting droplet: $DROPLET_ID"
-              doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
-            else
-              echo "No droplet found to delete"
-            fi
+            echo "No droplet found to delete"
           fi
+        fi
