@@ -17,6 +17,18 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DO_TOKEN }}
+      
+      - name: Check for Existing GPU Droplets
+        run: |
+          EXISTING_COUNT=$(doctl compute droplet list --format Name --no-header | grep -c "ai-worker" || true)
+          
+          echo "Found $EXISTING_COUNT existing GPU droplets."
+          
+          if [ "$EXISTING_COUNT" -ge 1 ]; then
+            echo "ERROR: Account limit reached. 1 GPU droplet is already running."
+            echo "Please wait for the existing PR to finish or delete the droplet manually."
+            exit 1
+          fi
 
       - name: Get GitHub Runner Config & Digital Ocean Firewall config
         id: ip_step
@@ -116,6 +128,7 @@ jobs:
           token: ${{ secrets.DO_TOKEN }}
 
       - name: Remove firewall rule
+        if: needs.provision.outputs.runner_ip != ''
         run: |
           FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
           RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
@@ -123,6 +136,7 @@ jobs:
             --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || echo "Rule already gone"
 
       - name: Delete GPU Droplet
+        if: needs.provision.outputs.droplet_id != ''
         run: |
           DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
           if [ -n "$DROPLET_ID" ]; then
