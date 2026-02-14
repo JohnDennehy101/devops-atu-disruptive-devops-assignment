@@ -1,0 +1,51 @@
+name: Provision GPU with Hugging Face Model Configured
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl (Digital Ocean CLI)
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_TOKEN }}
+
+      - name: Get GitHub Runner Config & Digital Ocean Firewall config
+        run: |
+          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+          echo "FW_ID=$FIREWALL_ID" >> $GITHUB_ENV
+          
+          echo "RUNNER_IP=$(curl -s https://icanhazip.com)" >> $GITHUB_ENV
+
+      - name: Spin up GPU Droplet on Digital Ocean
+        id: gpu
+        run: |
+          {
+            echo '#!/bin/bash'
+            echo "export API_KEY='${{ secrets.LLM_API_KEY }}'"
+            MODEL_NAME_VALUE="${{ secrets.MODEL_NAME }}"
+            if [ -z "$MODEL_NAME_VALUE" ]; then
+              MODEL_NAME_VALUE="Qwen/Qwen2.5-Coder-7B-Instruct"
+            fi
+            echo "export MODEL_NAME='$MODEL_NAME_VALUE'"
+            cat ./scripts/gpu-setup.sh | tail -n +2
+          } > /tmp/user-data.sh
+          
+          DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
+            --region nyc3 \
+            --size g-4vcpu-16gb-a10 \
+            --image ubuntu-22-04-x64 \
+            --user-data-file /tmp/user-data.sh \
+            --firewalls "${{ env.FW_ID }}" \
+            --wait --format ID --no-header)
+          
+          IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
+          echo "DROPLET_ID=$DROPLET_ID" >> $GITHUB_ENV
+          echo "DROPLET_IP=$IP" >> $GITHUB_ENV
+
+      - name: Update firewall to allow current runner IP access
+        run: |
+          doctl compute firewall add-rules ${{ env.FW_ID }} \
+            --inbound-rules "protocol:tcp,ports:8000,address:${{ env.RUNNER_IP }}/32"
