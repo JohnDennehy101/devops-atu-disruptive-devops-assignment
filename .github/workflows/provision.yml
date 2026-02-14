@@ -131,28 +131,28 @@ jobs:
             exit 1
           fi
 
-  cleanup:
-    runs-on: ubuntu-latest
-    needs: provision
-    if: always()
-    steps:
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DO_TOKEN }}
+  # cleanup:
+  #   runs-on: ubuntu-latest
+  #   needs: provision
+  #   if: always()
+  #   steps:
+  #     - name: Install doctl
+  #       uses: digitalocean/action-doctl@v2
+  #       with:
+  #         token: ${{ secrets.DO_TOKEN }}
 
-      - name: Remove firewall rule
-        if: needs.provision.outputs.runner_ip != ''
-        run: |
-          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
-          RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
-          doctl compute firewall remove-rules $FIREWALL_ID \
-            --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || echo "Rule already gone"
+  #     - name: Remove firewall rule
+  #       if: needs.provision.outputs.runner_ip != ''
+  #       run: |
+  #         FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+  #         RUNNER_IP="${{ needs.provision.outputs.runner_ip }}"
+  #         doctl compute firewall remove-rules $FIREWALL_ID \
+  #           --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || echo "Rule already gone"
 
-      - name: Delete GPU Droplet
-        if: needs.provision.outputs.droplet_id != ''
-        run: |
-          DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
-          if [ -n "$DROPLET_ID" ]; then
-            doctl compute droplet delete $DROPLET_ID --force
-          fi
+  #     - name: Delete GPU Droplet
+  #       if: needs.provision.outputs.droplet_id != ''
+  #       run: |
+  #         DROPLET_ID="${{ needs.provision.outputs.droplet_id }}"
+  #         if [ -n "$DROPLET_ID" ]; then
+  #           doctl compute droplet delete $DROPLET_ID --force
+  #         fi
