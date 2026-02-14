@@ -1,0 +1,69 @@
+name: Cleanup GPU on Digital Ocean
+on:
+  workflow_dispatch:
+    inputs:
+      droplet_id:
+        description: 'Droplet ID to delete (leave empty to search by name)'
+        required: false
+        type: string
+      runner_ip:
+        description: 'Runner IP for firewall rule removal (leave empty to auto-detect)'
+        required: false
+        type: string
+      sha:
+        description: 'Git SHA to search for droplet (defaults to current SHA)'
+        required: false
+        type: string
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_TOKEN }}
+
+      - name: Remove firewall rule
+        run: |
+          FIREWALL_ID=$(doctl compute firewall list --format ID,Name --no-header | grep "LocalAccess" | awk '{print $1}')
+          
+          if [ -z "$FIREWALL_ID" ]; then
+            echo "No firewall found"
+            exit 0
+          fi
+          
+          RUNNER_IP="${{ inputs.runner_ip }}"
+          if [ -z "$RUNNER_IP" ]; then
+            RUNNER_IP=$(curl -s https://icanhazip.com)
+            echo "Auto-detected runner IP: $RUNNER_IP"
+          fi
+          
+          echo "Removing firewall rule for IP: $RUNNER_IP"
+          doctl compute firewall remove-rules $FIREWALL_ID \
+            --inbound-rules "protocol:tcp,ports:8000,address:$RUNNER_IP/32" || \
+          echo "Warning: Failed to remove firewall rule (may not exist)"
+
+      - name: Delete GPU Droplet
+        run: |
+          DROPLET_ID="${{ inputs.droplet_id }}"
+          
+          if [ -z "$DROPLET_ID" ]; then
+            SEARCH_SHA="${{ inputs.sha || github.sha }}"
+            echo "Searching for droplet with SHA: $SEARCH_SHA"
+            DROPLET_ID=$(doctl compute droplet list --format ID,Name --no-header | grep "ai-worker-$SEARCH_SHA" | awk '{print $1}' | head -1)
+          fi
+          
+          if [ -n "$DROPLET_ID" ] && [ "$DROPLET_ID" != "" ]; then
+            echo "Deleting droplet: $DROPLET_ID"
+            doctl compute droplet delete $DROPLET_ID --force || echo "Warning: Failed to delete droplet"
+          else
+            echo "No droplet found to delete"
+            echo "Available droplets:"
+            doctl compute droplet list --format ID,Name,Status
+          fi
+
+      - name: List remaining GPU droplets
+        run: |
+          echo "Remaining GPU droplets:"
+          doctl compute droplet list --format ID,Name,Status,PublicIPv4 | grep -i "ai-worker" || echo "None found"
