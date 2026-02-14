@@ -54,8 +54,8 @@ jobs:
           write_files:
             - path: /app/llm.env
               content: |
-                API_KEY=${{ secrets.LLM_API_KEY }}
-                MODEL_NAME=${MODEL_NAME_VALUE}
+                API_KEY='${{ secrets.LLM_API_KEY }}'
+                MODEL_NAME='${MODEL_NAME_VALUE}'
               owner: root:root
               permissions: '0600'
             - path: /app/setup.sh

@@ -1,8 +1,4 @@
 #!/bin/bash
-set -a
-source /app/llm.env
-set +a
-
 apt-get update
 apt-get install -y python3-pip python3-venv git-lfs
 
@@ -16,7 +12,10 @@ pip install --upgrade pip
 pip install fastapi uvicorn transformers accelerate bitsandbytes torch huggingface_hub scipy
 
 if [ -f /app/llm.env ]; then
-    export $(grep -v '^#' /app/llm.env | xargs)
+  while IFS= read -r line || [ -n "$line" ]; do
+    clean_line=$(echo "$line" | sed "s/'//g")
+    export "$clean_line"
+  done < /app/llm.env
 fi
 
 cat <<'EOF' > /app/main.py
