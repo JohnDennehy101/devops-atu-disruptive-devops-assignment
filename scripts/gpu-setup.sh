@@ -25,6 +25,10 @@ API_KEY = os.getenv("API_KEY")
 if not API_KEY:
     raise ValueError("API_KEY environment variable is required")
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 @app.post("/generate-test")
 async def generate(
     payload: dict = Body(...), 
