@@ -66,14 +66,14 @@ export const api = {
 
   getNote: async (id: number): Promise<Note> => {
     const notes = getNotes()
-    const note = notes.find((n) => n.id === id)
+    const note = notes.find(n => n.id === id)
     if (!note) throw new Error(`Note not found: ${id}`)
     return note
   },
 
   updateNote: async (id: number, input: UpdateNoteInput): Promise<Note> => {
     const notes = getNotes()
-    const index = notes.findIndex((n) => n.id === id)
+    const index = notes.findIndex(n => n.id === id)
     if (index === -1) throw new Error(`Note not found: ${id}`)
     const existing = notes[index]
     const updated: Note = {
@@ -91,7 +91,7 @@ export const api = {
   },
 
   deleteNote: async (id: number): Promise<void> => {
-    const notes = getNotes().filter((n) => n.id !== id)
+    const notes = getNotes().filter(n => n.id !== id)
     setNotes(notes)
   },
 }
