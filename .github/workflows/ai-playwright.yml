@@ -1,0 +1,21 @@
+name: Custom Playwright Action Test
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  ai-playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: AI Playwright
+        uses: johndennehy101/ai-playwright-action@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          llm-api-key: ${{ secrets.LLM_API_KEY }}
+          llm-host: ${{ secrets.LLM_HOST }}
+          model-id: ${{ secrets.MODEL_NAME }}
