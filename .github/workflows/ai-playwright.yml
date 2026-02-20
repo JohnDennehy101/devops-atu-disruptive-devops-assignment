@@ -22,3 +22,4 @@ jobs:
           llm-api-key: ${{ secrets.LLM_API_KEY }}
           llm-host: ${{ secrets.LLM_HOST }}
           model-id: ${{ secrets.MODEL_NAME }}
+          exclude-pattern: ^versions/
