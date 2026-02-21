@@ -1,0 +1,1 @@
+Change 1: Character count now shown under note body. Test added

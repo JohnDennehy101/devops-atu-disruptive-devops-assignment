@@ -90,6 +90,10 @@ export const api = {
     return updated
   },
 
+  getNotes: async (): Promise<Note[]> => {
+    return getNotes()
+  },
+
   deleteNote: async (id: number): Promise<void> => {
     const notes = getNotes().filter(n => n.id !== id)
     setNotes(notes)
