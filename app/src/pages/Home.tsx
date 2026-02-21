@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { JSX, useState, useEffect } from "react"
 import { api, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
 
 export function Home(): JSX.Element {
   const [notes, setNotes] = useState<Note[]>([])
+  const [tagFilter, setTagFilter] = useState("")
+  const [allNotes, setAllNotes] = useState<Note[]>([])
   const [selectedNote, setSelectedNote] = useState<Note | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -13,6 +15,10 @@ export function Home(): JSX.Element {
   const [formTags, setFormTags] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [savedIds, setSavedIds] = useState<number[]>([])
+
+  useEffect(() => {
+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
+  }, [savedIds])
 
   useEffect(() => {
     const saved = localStorage.getItem("noteIds")
@@ -29,6 +35,14 @@ export function Home(): JSX.Element {
       localStorage.setItem("noteIds", JSON.stringify(updated))
     }
   }
+
+  const displayedIds = useMemo(() => {
+    if (!tagFilter.trim()) return savedIds
+    const lower = tagFilter.trim().toLowerCase()
+    return allNotes
+      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))
+      .map(n => n.id)
+  }, [savedIds, allNotes, tagFilter])
 
   const removeNoteId = (id: number) => {
     const updated = savedIds.filter(nid => nid !== id)
@@ -47,12 +61,6 @@ export function Home(): JSX.Element {
       setError(err instanceof Error ? err.message : "Failed to load note")
     } finally {
       setLoading(false)
-    }
-  }
-
-  const copyNoteBody = () => {
-    if (selectedNote && navigator.clipboard) {
-      navigator.clipboard.writeText(selectedNote.body)
     }
   }
 
@@ -193,11 +201,11 @@ export function Home(): JSX.Element {
               onSubmit={
                 isEditing
                   ? e => {
-                      e.preventDefault()
-                      handleUpdateNote().catch(err => {
-                        console.error("Update note error:", err)
-                      })
-                    }
+                    e.preventDefault()
+                    handleUpdateNote().catch(err => {
+                      console.error("Update note error:", err)
+                    })
+                  }
                   : handleCreateNote
               }
             >
@@ -291,15 +299,24 @@ export function Home(): JSX.Element {
         <div className="space-y-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-              Your Notes ({savedIds.length})
+              Your Notes ({displayedIds.length})
             </h3>
+            <input
+              type="text"
+              placeholder="Filter by tag"
+              value={tagFilter}
+              onChange={e => setTagFilter(e.target.value)}
+              className="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+            />
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {savedIds.length === 0 ? (
+              {displayedIds.length === 0 ? (
                 <p className="text-gray-500 dark:text-gray-400 text-sm">
-                  No notes yet
+                  {savedIds.length === 0
+                    ? "No notes yet"
+                    : "No notes match the filter"}
                 </p>
               ) : (
-                savedIds.map(id => (
+                displayedIds.map(id => (
                   <button
                     key={id}
                     onClick={() => {
@@ -327,12 +344,6 @@ export function Home(): JSX.Element {
                   className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   Edit
-                </button>
-                <button
-                type="button"
-                onClick={copyNoteBody}
-                className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
-                  Copy
                 </button>
               </div>
               <div className="space-y-2 text-sm">
