@@ -1,0 +1,1 @@
+Change 1: 'Copy Note' functionality added on Edit view (copies selected note body). Test added
