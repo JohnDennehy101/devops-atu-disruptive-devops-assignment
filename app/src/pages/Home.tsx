@@ -50,6 +50,12 @@ export function Home(): JSX.Element {
     }
   }
 
+  const copyNoteBody = () => {
+    if (selectedNote && navigator.clipboard) {
+      navigator.clipboard.writeText(selectedNote.body)
+    }
+  }
+
   const handleCreateNote = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
@@ -221,9 +227,6 @@ export function Home(): JSX.Element {
                   rows={8}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
                 />
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {formBody.length} / 5000
-                </p>
               </div>
 
               <div className="mb-4">
@@ -324,6 +327,12 @@ export function Home(): JSX.Element {
                   className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                 >
                   Edit
+                </button>
+                <button
+                type="button"
+                onClick={copyNoteBody}
+                className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
+                  Copy
                 </button>
               </div>
               <div className="space-y-2 text-sm">
