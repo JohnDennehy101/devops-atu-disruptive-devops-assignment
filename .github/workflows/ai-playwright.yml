@@ -23,3 +23,6 @@ jobs:
           llm-host: ${{ secrets.LLM_HOST }}
           model-id: ${{ secrets.MODEL_NAME }}
           exclude-pattern: ^versions/
+          include-existing-tests: 'true' 
+          test-file-suffixes: '.spec'
+          test-file-roots: 'app/e2e'
