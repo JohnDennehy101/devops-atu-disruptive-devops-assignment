@@ -7,17 +7,17 @@ test.describe("Note Taking App", () => {
     await page.reload()
   })
 
-  // test("has title and create form visible", async ({ page }) => {
-  //   await expect(
-  //     page.getByRole("heading", { name: "Note Taking App" }),
-  //   ).toBeVisible()
-  //   await expect(
-  //     page.getByRole("heading", { name: /Create New Note/ }),
-  //   ).toBeVisible()
-  //   await expect(
-  //     page.getByRole("button", { name: "Create Note" }),
-  //   ).toBeVisible()
-  // })
+  test("has title and create form visible", async ({ page }) => {
+    await expect(
+      page.getByRole("heading", { name: "Note Taking App" }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole("heading", { name: /Create New Note/ }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole("button", { name: "Create Note" }),
+    ).toBeVisible()
+  })
 
   test("can create a note and see it in the sidebar", async ({ page }) => {
     await page.getByLabel("Title").fill("My first note")
