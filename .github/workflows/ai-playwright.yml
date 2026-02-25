@@ -24,5 +24,5 @@ jobs:
           model-id: ${{ secrets.MODEL_NAME }}
           exclude-pattern: ^versions/
           include-existing-tests: 'true' 
-          test-file-suffixes: '.spec,.test,.e2e,.playwright'
-          test-file-roots: 'src,app,packages/app'
+          test-file-suffixes: '.spec'
+          test-file-roots: 'app/e2e'
