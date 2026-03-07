@@ -1,11 +1,9 @@
-import React, { useMemo } from "react"
+import React from "react"
 import { JSX, useState, useEffect } from "react"
 import { api, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
 
 export function Home(): JSX.Element {
   const [notes, setNotes] = useState<Note[]>([])
-  const [tagFilter, setTagFilter] = useState("")
-  const [allNotes, setAllNotes] = useState<Note[]>([])
   const [selectedNote, setSelectedNote] = useState<Note | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -15,10 +13,6 @@ export function Home(): JSX.Element {
   const [formTags, setFormTags] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [savedIds, setSavedIds] = useState<number[]>([])
-
-  useEffect(() => {
-    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
-  }, [savedIds])
 
   useEffect(() => {
     const saved = localStorage.getItem("noteIds")
@@ -35,14 +29,6 @@ export function Home(): JSX.Element {
       localStorage.setItem("noteIds", JSON.stringify(updated))
     }
   }
-
-  const displayedIds = useMemo(() => {
-    if (!tagFilter.trim()) return savedIds
-    const lower = tagFilter.trim().toLowerCase()
-    return allNotes
-      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))
-      .map(n => n.id)
-  }, [savedIds, allNotes, tagFilter])
 
   const removeNoteId = (id: number) => {
     const updated = savedIds.filter(nid => nid !== id)
@@ -178,11 +164,25 @@ export function Home(): JSX.Element {
     }
   }, [selectedNote, isEditing])
 
+  const clearAllNotes = () => {
+    setSavedIds([])
+    setSelectedNote(null)
+    setFormTitle("")
+    setFormBody("")
+    setFormTags("")
+    setIsEditing(false)
+    localStorage.setItem("noteIds", JSON.stringify([]))
+  }
+
   return (
     <div className="w-full p-6">
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
         Note Taking App
       </h1>
+
+      <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+        Create and manage notes. Your notes are stored locally.
+      </p>
 
       {error && (
         <div className="mb-4 p-4 bg-red-100 dark:bg-red-900 border border-red-400 text-red-700 dark:text-red-200 rounded">
@@ -298,25 +298,27 @@ export function Home(): JSX.Element {
 
         <div className="space-y-4">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-              Your Notes ({displayedIds.length})
-            </h3>
-            <input
-              type="text"
-              placeholder="Filter by tag"
-              value={tagFilter}
-              onChange={e => setTagFilter(e.target.value)}
-              className="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Your Notes ({savedIds.length})
+              </h3>
+              {savedIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={clearAllNotes}
+                  className="text-sm text-red-600 dark:text-red-400 hover:underline"
+                >
+                  Clear all
+                </button>
+              )}
+            </div>
             <div className="space-y-2 max-h-64 overflow-y-auto">
-              {displayedIds.length === 0 ? (
+              {savedIds.length === 0 ? (
                 <p className="text-gray-500 dark:text-gray-400 text-sm">
-                  {savedIds.length === 0
-                    ? "No notes yet"
-                    : "No notes match the filter"}
+                  No notes yet
                 </p>
               ) : (
-                displayedIds.map(id => (
+                savedIds.map(id => (
                   <button
                     key={id}
                     onClick={() => {
