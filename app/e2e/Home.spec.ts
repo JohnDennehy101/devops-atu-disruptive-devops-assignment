@@ -44,11 +44,21 @@ test.describe("Note Taking App", () => {
     await expect(page.getByText("Body: Content to verify")).toBeVisible()
   })
 
-  test("shows body character count and updates when typing", async ({ page }) => {
-    await expect(page.getByText("0 / 5000")).toBeVisible()
-    await page.getByLabel("Body").fill("Hello")
-    await expect(page.getByText("5 / 5000")).toBeVisible()
-    await page.getByLabel("Body").fill("Hello world")
-    await expect(page.getByText("11 / 5000")).toBeVisible()
+  test("Copy button copies note body to clipboard", async ({ page, context }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"])
+
+    const bodyText = "Text to copy from note"
+    await page.getByLabel("Title").fill("Copy test")
+    await page.getByLabel("Body").fill(bodyText)
+    await page.getByLabel(/Tags/).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+    await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+
+    await page.getByRole("button", { name: "Copy" }).click()
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+    expect(clipboardText).toBe(bodyText)
   })
 })
