@@ -44,21 +44,29 @@ test.describe("Note Taking App", () => {
     await expect(page.getByText("Body: Content to verify")).toBeVisible()
   })
 
-  test("Copy button copies note body to clipboard", async ({ page, context }) => {
-    await context.grantPermissions(["clipboard-read", "clipboard-write"])
-
-    const bodyText = "Text to copy from note"
-    await page.getByLabel("Title").fill("Copy test")
-    await page.getByLabel("Body").fill(bodyText)
-    await page.getByLabel(/Tags/).fill("tag1")
+  test("filter by tag shows only matching notes", async ({ page }) => {
+    await page.getByLabel("Title").fill("Work note")
+    await page.getByLabel("Body").fill("Body one")
+    await page.getByLabel(/Tags/).fill("work, urgent")
     await page.getByRole("button", { name: "Create Note" }).click()
 
-    await page.getByRole("button", { name: /Note #\d+/ }).click()
-    await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+    await page.getByLabel("Title").fill("Personal note")
+    await page.getByLabel("Body").fill("Body two")
+    await page.getByLabel(/Tags/).fill("personal")
+    await page.getByRole("button", { name: "Create Note" }).click()
 
-    await page.getByRole("button", { name: "Copy" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
 
-    const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
-    expect(clipboardText).toBe(bodyText)
+    await page.getByPlaceholder("Filter by tag").fill("work")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Note #1" })).toBeVisible()
+    await expect(page.getByRole("button", { name: "Note #2" })).not.toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent")
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("")
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
   })
 })
