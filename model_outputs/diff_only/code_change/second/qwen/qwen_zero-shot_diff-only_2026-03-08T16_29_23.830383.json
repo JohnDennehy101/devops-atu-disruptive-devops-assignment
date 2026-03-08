@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T16:29:23.830383",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 11.546,
+            "tokens_per_sec": 7.28,
+            "input_token_count": 89,
+            "output_token_count": 84,
+            "total_token_count": 173
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "```typescript\nimport { expect, test } from '@playwright/test';\n\ntest('displays character count', async ({ page }) => {\n  await page.goto('/home');\n  const charCount = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1').textContent();\n  expect(charCount).toBe('0 / 5000');\n});\n```",
+            "extracted_code": "```typescript\nimport { expect, test } from '@playwright/test';\n\ntest('displays character count', async ({ page }) => {\n  await page.goto('/home');\n  const charCount = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1').textContent();\n  expect(charCount).toBe('0 / 5000');\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T18:02:47.729220",
+        "model_id": "mistralai/Mistral-Nemo-Instruct-2407",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 36.422,
+            "tokens_per_sec": 9.72,
+            "input_token_count": 170,
+            "output_token_count": 354,
+            "total_token_count": 524
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "### SOURCE CODE:\n\n```tsx\nimport React, { useState } from'react';\nimport { Note } from '../../types/note';\n\nexport const Home: React.FC = () => {\n  const [selectedNote, setSelectedNote] = useState<Note | null>(null);\n\n  //... other code...\n\n  return (\n    <div>\n      {/*... other code... */}\n      <button\n        type=\"button\"\n        onClick={copyNoteBody}\n        className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n        Copy\n      </button>\n    </div>\n  );\n};\n```\n\n### TEST STEPS:\n\n1. Navigate to the home page.\n2. Ensure that the \"Copy\" button is displayed.\n3. Click the \"Copy\" button.\n4. Verify that the note body is copied to the clipboard.\n\n### PLAYWRIGHT TEST CODE:\n\n```ts\nimport { test, expect } from '@playwright/test';\n\ntest('Test copy note body functionality', async ({ page }) => {\n  await page.goto('/');\n\n  // Step 1: Navigate to the home page\n  await expect(page).toHaveTitle(/Home/);\n\n  // Step 2: Ensure that the \"Copy\" button is displayed\n  await expect(page.locator('button')).toBeVisible();\n\n  // Step 3: Click the \"Copy\" button\n  await page.locator('button').click();\n\n  // Step 4: Verify that the note body is copied to the clipboard\n  const noteBody = 'Your expected note body here';\n  await expect(navigator.clipboard.readText()).toEqual(noteBody);\n});\n```",
+            "extracted_code": "### SOURCE CODE:\n\n```tsx\nimport React, { useState } from'react';\nimport { Note } from '../../types/note';\n\nexport const Home: React.FC = () => {\n  const [selectedNote, setSelectedNote] = useState<Note | null>(null);\n\n  //... other code...\n\n  return (\n    <div>\n      {/*... other code... */}\n      <button\n        type=\"button\"\n        onClick={copyNoteBody}\n        className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n        Copy\n      </button>\n    </div>\n  );\n};\n```\n\n### TEST STEPS:\n\n1. Navigate to the home page.\n2. Ensure that the \"Copy\" button is displayed.\n3. Click the \"Copy\" button.\n4. Verify that the note body is copied to the clipboard.\n\n### PLAYWRIGHT TEST CODE:\n\n```ts\nimport { test, expect } from '@playwright/test';\n\ntest('Test copy note body functionality', async ({ page }) => {\n  await page.goto('/');\n\n  // Step 1: Navigate to the home page\n  await expect(page).toHaveTitle(/Home/);\n\n  // Step 2: Ensure that the \"Copy\" button is displayed\n  await expect(page.locator('button')).toBeVisible();\n\n  // Step 3: Click the \"Copy\" button\n  await page.locator('button').click();\n\n  // Step 4: Verify that the note body is copied to the clipboard\n  const noteBody = 'Your expected note body here';\n  await expect(navigator.clipboard.readText()).toEqual(noteBody);\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]
