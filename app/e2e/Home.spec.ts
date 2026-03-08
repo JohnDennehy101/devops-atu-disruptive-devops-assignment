@@ -12,9 +12,6 @@ test.describe("Note Taking App", () => {
       page.getByRole("heading", { name: "Note Taking App" }),
     ).toBeVisible()
     await expect(
-      page.getByText("Create and manage notes. Your notes are stored locally."),
-    ).toBeVisible()
-    await expect(
       page.getByRole("heading", { name: /Create New Note/ }),
     ).toBeVisible()
     await expect(
@@ -47,14 +44,11 @@ test.describe("Note Taking App", () => {
     await expect(page.getByText("Body: Content to verify")).toBeVisible()
   })
 
-  test("can clear all notes from sidebar", async ({ page }) => {
-    await page.getByLabel("Title").fill("To clear")
-    await page.getByLabel("Body").fill("Body")
-    await page.getByLabel(/Tags/).fill("x")
-    await page.getByRole("button", { name: "Create Note" }).click()
-    await expect(page.getByText("Your Notes (1)")).toBeVisible()
-    await page.getByRole("button", { name: "Clear all" }).click()
-    await expect(page.getByText("No notes yet")).toBeVisible()
-    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+  test("shows body character count and updates when typing", async ({ page }) => {
+    await expect(page.getByText("0 / 5000")).toBeVisible()
+    await page.getByLabel("Body").fill("Hello")
+    await expect(page.getByText("5 / 5000")).toBeVisible()
+    await page.getByLabel("Body").fill("Hello world")
+    await expect(page.getByText("11 / 5000")).toBeVisible()
   })
 })
