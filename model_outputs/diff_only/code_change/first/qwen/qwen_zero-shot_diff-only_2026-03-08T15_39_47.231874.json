@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T15:39:47.231874",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 43.728,
+            "tokens_per_sec": 7.27,
+            "input_token_count": 315,
+            "output_token_count": 318,
+            "total_token_count": 633
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "```typescript\nimport { expect, test } from '@playwright/test';\n\ntest('Home page displays correct note count and clear all button', async ({ page }) => {\n  await page.goto('/');\n\n  // Check if the note count is displayed correctly\n  const noteCountText = await page.textContent('h3');\n  expect(noteCountText).toContain('Your Notes (0)');\n\n  // Add a note to check the count update\n  await page.fill('input[name=\"title\"]', 'Test Note');\n  await page.fill('textarea[name=\"body\"]', 'This is a test note.');\n  await page.click('button[type=\"submit\"]');\n  \n  // Wait for the note to be added\n  await page.waitForTimeout(1000);\n\n  // Check if the note count is updated\n  const updatedNoteCountText = await page.textContent('h3');\n  expect(updatedNoteCountText).toContain('Your Notes (1)');\n\n  // Check if the clear all button is displayed\n  const clearAllButton = await page.isVisible('button:has-text(\"Clear all\")');\n  expect(clearAllButton).toBe(true);\n\n  // Click the clear all button\n  await page.click('button:has-text(\"Clear all\")');\n\n  // Wait for the notes to be cleared\n  await page.waitForTimeout(1000);\n\n  // Check if the note count is reset to zero\n  const finalNoteCountText = await page.textContent('h3');\n  expect(finalNoteCountText).toContain('Your Notes (0)');\n});\n```",
+            "extracted_code": "```typescript\nimport { expect, test } from '@playwright/test';\n\ntest('Home page displays correct note count and clear all button', async ({ page }) => {\n  await page.goto('/');\n\n  // Check if the note count is displayed correctly\n  const noteCountText = await page.textContent('h3');\n  expect(noteCountText).toContain('Your Notes (0)');\n\n  // Add a note to check the count update\n  await page.fill('input[name=\"title\"]', 'Test Note');\n  await page.fill('textarea[name=\"body\"]', 'This is a test note.');\n  await page.click('button[type=\"submit\"]');\n  \n  // Wait for the note to be added\n  await page.waitForTimeout(1000);\n\n  // Check if the note count is updated\n  const updatedNoteCountText = await page.textContent('h3');\n  expect(updatedNoteCountText).toContain('Your Notes (1)');\n\n  // Check if the clear all button is displayed\n  const clearAllButton = await page.isVisible('button:has-text(\"Clear all\")');\n  expect(clearAllButton).toBe(true);\n\n  // Click the clear all button\n  await page.click('button:has-text(\"Clear all\")');\n\n  // Wait for the notes to be cleared\n  await page.waitForTimeout(1000);\n\n  // Check if the note count is reset to zero\n  const finalNoteCountText = await page.textContent('h3');\n  expect(finalNoteCountText).toContain('Your Notes (0)');\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

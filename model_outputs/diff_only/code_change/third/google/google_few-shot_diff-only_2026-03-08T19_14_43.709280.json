@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T19:14:43.709280",
+        "model_id": "google/gemma-3-12b-it",
+        "prompt_type": "few-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 9.675,
+            "tokens_per_sec": 6.61,
+            "input_token_count": 364,
+            "output_token_count": 64,
+            "total_token_count": 428
+        },
+        "content": {
+            "prompt": "Examples of our testing style:\n\n### EXAMPLE 1\nGIT DIFF:\n+ <button id=\"cancel-order\">Cancel Order</button>\nEXISTING TEST FILE:\ntest('cancel button is functional', async ({ page }) => {\n  await page.goto('/');\n  await page.locator('#cancel-order').click();\n  await expect(page.getByText('Order Cancelled')).toBeVisible();\n});\n\n### EXAMPLE 2\nGIT DIFF:\n- if (count > 0)\n+ if (count > 10)\nEXISTING TEST FILE:\ntest('shows warning only when count exceeds 10', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#count-input', '5');\n  await expect(page.getByText('Warning')).setHidden();\n  await page.fill('#count-input', '11');\n  await expect(page.getByText('Warning')).toBeVisible();\n});\n\n\nNow, generate a Playwright test for this specific change:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "EXISTING TEST FILE:\ntest('copy note body', async ({ page }) => {\n  await page.goto('/');\n  await page.getByRole('button', { name: 'Copy' }).click();\n  await page.getByDisplayValue('Copied!').toBeVisible();\n});\n",
+            "extracted_code": "EXISTING TEST FILE:\ntest('copy note body', async ({ page }) => {\n  await page.goto('/');\n  await page.getByRole('button', { name: 'Copy' }).click();\n  await page.getByDisplayValue('Copied!').toBeVisible();\n});\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

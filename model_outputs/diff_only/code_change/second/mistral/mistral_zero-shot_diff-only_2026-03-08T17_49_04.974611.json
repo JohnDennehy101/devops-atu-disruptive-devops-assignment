@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T17:49:04.974611",
+        "model_id": "mistralai/Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 11.185,
+            "tokens_per_sec": 9.57,
+            "input_token_count": 92,
+            "output_token_count": 107,
+            "total_token_count": 199
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "### PLAYWRIGHT TEST:\n\n```typescript\nimport { test, expect } from '@playwright/test';\nimport { HomePage } from '../../pages/Home';\n\ntest('should display character count', async ({ page }) => {\n  await page.goto('/');\n  const homePage = new HomePage(page);\n  await homePage.fillFormBody('a'.repeat(5000));\n  await expect(homePage.getCharacterCount()).toHaveText('5000 / 5000');\n});\n```",
+            "extracted_code": "### PLAYWRIGHT TEST:\n\n```typescript\nimport { test, expect } from '@playwright/test';\nimport { HomePage } from '../../pages/Home';\n\ntest('should display character count', async ({ page }) => {\n  await page.goto('/');\n  const homePage = new HomePage(page);\n  await homePage.fillFormBody('a'.repeat(5000));\n  await expect(homePage.getCharacterCount()).toHaveText('5000 / 5000');\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

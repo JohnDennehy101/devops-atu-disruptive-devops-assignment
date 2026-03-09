@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T17:40:46.318032",
+        "model_id": "mistralai/Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 10.772,
+            "tokens_per_sec": 8.63,
+            "input_token_count": 327,
+            "output_token_count": 93,
+            "total_token_count": 420
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\nimport { HomePage } from '../../pages/Home';\n\ntest('Clear all notes', async ({ page }) => {\n  const homePage = new HomePage(page);\n  await homePage.goto();\n  await homePage.clearAllNotes();\n  expect(await homePage.getNotesCount()).toBe(0);\n  expect(await homePage.getClearAllButton()).toBeNull();\n});\n```",
+            "extracted_code": "```typescript\nimport { test, expect } from '@playwright/test';\nimport { HomePage } from '../../pages/Home';\n\ntest('Clear all notes', async ({ page }) => {\n  const homePage = new HomePage(page);\n  await homePage.goto();\n  await homePage.clearAllNotes();\n  expect(await homePage.getNotesCount()).toBe(0);\n  expect(await homePage.getClearAllButton()).toBeNull();\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

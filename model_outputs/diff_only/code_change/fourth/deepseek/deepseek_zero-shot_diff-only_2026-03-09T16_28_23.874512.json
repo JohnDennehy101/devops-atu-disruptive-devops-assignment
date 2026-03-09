@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-09T16:28:23.874512",
+        "model_id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 80.835,
+            "tokens_per_sec": 4.22,
+            "input_token_count": 495,
+            "output_token_count": 341,
+            "total_token_count": 836
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n-import React from \"react\"\n+import React, { useMemo } from \"react\"\n+  const [tagFilter, setTagFilter] = useState(\"\")\n+  const [allNotes, setAllNotes] = useState<Note[]>([])\n+  useEffect(() => {\n+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))\n+  }, [savedIds])\n+\n+  const displayedIds = useMemo(() => {\n+    if (!tagFilter.trim()) return savedIds\n+    const lower = tagFilter.trim().toLowerCase()\n+    return allNotes\n+      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))\n+      .map(n => n.id)\n+  }, [savedIds, allNotes, tagFilter])\n+\n-              Your Notes ({savedIds.length})\n+              Your Notes ({displayedIds.length})\n+            <input\n+              type=\"text\"\n+              placeholder=\"Filter by tag\"\n+              value={tagFilter}\n+              onChange={e => setTagFilter(e.target.value)}\n+              className=\"w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500\"\n+            />\n-              {savedIds.length === 0 ? (\n+              {displayedIds.length === 0 ? (\n-                  No notes yet\n+                  {savedIds.length === 0\n+                    ? \"No notes yet\"\n+                    : \"No notes match the filter\"}\n-                savedIds.map(id => (\n+                displayedIds.map(id => (\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should display notes based on filter', async ({ page }) => {\n  await page.goto('http://localhost:3000');\n\n  // Add initial notes\n  await page.evaluate(() => {\n    api.getNotes = jest.fn().mockResolvedValue([\n      { id: 1, tags: ['work', 'personal'] },\n      { id: 2, tags: ['work'] },\n      { id: 3, tags: ['personal'] },\n    ]);\n  });\n\n  // Wait for notes to load\n  await page.waitForSelector('text=Your Notes (3)');\n\n  // Filter by tag\n  await page.fill('input[placeholder=\"Filter by tag\"]', 'work');\n  await page.waitForSelector('text=Your Notes (2)');\n\n  // Check if only notes with 'work' tag are displayed\n  const notes = await page.evaluate(() => {\n    return Array.from(document.querySelectorAll('.note')).map(el => ({\n      id: parseInt(el.getAttribute('data-note-id')),\n      tags: Array.from(el.querySelectorAll('.tag')).map(tagEl => tagEl.textContent.trim()),\n    }));\n  });\n\n  expect(notes).toEqual([\n    { id: 1, tags: ['work', 'personal'] },\n    { id: 2, tags: ['work'] },\n  ]);\n});\n```\n",
+            "extracted_code": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should display notes based on filter', async ({ page }) => {\n  await page.goto('http://localhost:3000');\n\n  // Add initial notes\n  await page.evaluate(() => {\n    api.getNotes = jest.fn().mockResolvedValue([\n      { id: 1, tags: ['work', 'personal'] },\n      { id: 2, tags: ['work'] },\n      { id: 3, tags: ['personal'] },\n    ]);\n  });\n\n  // Wait for notes to load\n  await page.waitForSelector('text=Your Notes (3)');\n\n  // Filter by tag\n  await page.fill('input[placeholder=\"Filter by tag\"]', 'work');\n  await page.waitForSelector('text=Your Notes (2)');\n\n  // Check if only notes with 'work' tag are displayed\n  const notes = await page.evaluate(() => {\n    return Array.from(document.querySelectorAll('.note')).map(el => ({\n      id: parseInt(el.getAttribute('data-note-id')),\n      tags: Array.from(el.querySelectorAll('.tag')).map(tagEl => tagEl.textContent.trim()),\n    }));\n  });\n\n  expect(notes).toEqual([\n    { id: 1, tags: ['work', 'personal'] },\n    { id: 2, tags: ['work'] },\n  ]);\n});\n```\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

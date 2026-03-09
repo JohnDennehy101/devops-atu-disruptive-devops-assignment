@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T17:02:42.453053",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 38.831,
+            "tokens_per_sec": 7.44,
+            "input_token_count": 156,
+            "output_token_count": 289,
+            "total_token_count": 445
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "### TEST CASE:\n1. Navigate to the Home page.\n2. Select a note.\n3. Click on the \"Copy\" button.\n4. Verify that the note body is copied to the clipboard.\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('Copy note body to clipboard', async ({ page }) => {\n  // Step 1: Navigate to the Home page\n  await page.goto('/home');\n\n  // Step 2: Select a note\n  // Assuming there's a note with text \"Sample Note\"\n  const note = await page.getByText('Sample Note');\n  await note.click();\n\n  // Step 3: Click on the \"Copy\" button\n  const copyButton = await page.getByRole('button', { name: 'Copy' });\n  await copyButton.click();\n\n  // Step 4: Verify that the note body is copied to the clipboard\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  // Assuming the note body is \"This is a sample note.\"\n  await expect(clipboardText).toBe('This is a sample note.');\n});\n```\n\nThis test script uses `getByText` and `getByRole` locators as per the rules provided. It also includes assertions to verify that the note body is correctly copied to the clipboard. The test is written in TypeScript, as required.",
+            "extracted_code": "### TEST CASE:\n1. Navigate to the Home page.\n2. Select a note.\n3. Click on the \"Copy\" button.\n4. Verify that the note body is copied to the clipboard.\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('Copy note body to clipboard', async ({ page }) => {\n  // Step 1: Navigate to the Home page\n  await page.goto('/home');\n\n  // Step 2: Select a note\n  // Assuming there's a note with text \"Sample Note\"\n  const note = await page.getByText('Sample Note');\n  await note.click();\n\n  // Step 3: Click on the \"Copy\" button\n  const copyButton = await page.getByRole('button', { name: 'Copy' });\n  await copyButton.click();\n\n  // Step 4: Verify that the note body is copied to the clipboard\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  // Assuming the note body is \"This is a sample note.\"\n  await expect(clipboardText).toBe('This is a sample note.');\n});\n```\n\nThis test script uses `getByText` and `getByRole` locators as per the rules provided. It also includes assertions to verify that the note body is correctly copied to the clipboard. The test is written in TypeScript, as required."
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]
