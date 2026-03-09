@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-08T20:28:46.779351",
+        "model_id": "google/gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 61.259,
+            "tokens_per_sec": 6.61,
+            "input_token_count": 287,
+            "output_token_count": 405,
+            "total_token_count": 692
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/e2e/Home.spec.ts\n+++ b/app/e2e/Home.spec.ts\n+\n+  test(\"shows body character count and updates when typing\", async ({ page }) => {\n+    await expect(page.getByText(\"0 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello\")\n+    await expect(page.getByText(\"5 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello world\")\n+    await expect(page.getByText(\"11 / 5000\")).toBeVisible()\n+  })\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "### Test Case:\n\n**Test Case Title:** Verify character count updates correctly on the Home page.\n\n**Objective:** To ensure the character count displayed on the Home page accurately reflects the number of characters entered in the \"Body\" text area.\n\n**Steps:**\n\n1.  Navigate to the Home page.\n2.  Verify that the initial character count is \"0 / 5000\".\n3.  Enter \"Hello\" into the \"Body\" text area.\n4.  Verify that the character count updates to \"5 / 5000\".\n5.  Enter \" world\" after the existing text in the \"Body\" text area.\n6.  Verify that the character count updates to \"11 / 5000\".\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest(\"shows body character count and updates when typing\", async ({ page }) => {\n  // Step 2: Verify that the initial character count is \"0 / 5000\".\n  await expect(page.getByText(\"0 / 5000\")).toBeVisible();\n\n  // Step 3: Enter \"Hello\" into the \"Body\" text area.\n  await page.getByLabel(\"Body\").fill(\"Hello\");\n\n  // Step 4: Verify that the character count updates to \"5 / 5000\".\n  await expect(page.getByText(\"5 / 5000\")).toBeVisible();\n\n  // Step 5: Enter \" world\" after the existing text in the \"Body\" text area.\n  await page.getByLabel(\"Body\").fill(\" world\");\n\n  // Step 6: Verify that the character count updates to \"11 / 5000\".\n  await expect(page.getByText(\"11 / 5000\")).toBeVisible();\n});\n```\n",
+            "extracted_code": "### Test Case:\n\n**Test Case Title:** Verify character count updates correctly on the Home page.\n\n**Objective:** To ensure the character count displayed on the Home page accurately reflects the number of characters entered in the \"Body\" text area.\n\n**Steps:**\n\n1.  Navigate to the Home page.\n2.  Verify that the initial character count is \"0 / 5000\".\n3.  Enter \"Hello\" into the \"Body\" text area.\n4.  Verify that the character count updates to \"5 / 5000\".\n5.  Enter \" world\" after the existing text in the \"Body\" text area.\n6.  Verify that the character count updates to \"11 / 5000\".\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest(\"shows body character count and updates when typing\", async ({ page }) => {\n  // Step 2: Verify that the initial character count is \"0 / 5000\".\n  await expect(page.getByText(\"0 / 5000\")).toBeVisible();\n\n  // Step 3: Enter \"Hello\" into the \"Body\" text area.\n  await page.getByLabel(\"Body\").fill(\"Hello\");\n\n  // Step 4: Verify that the character count updates to \"5 / 5000\".\n  await expect(page.getByText(\"5 / 5000\")).toBeVisible();\n\n  // Step 5: Enter \" world\" after the existing text in the \"Body\" text area.\n  await page.getByLabel(\"Body\").fill(\" world\");\n\n  // Step 6: Verify that the character count updates to \"11 / 5000\".\n  await expect(page.getByText(\"11 / 5000\")).toBeVisible();\n});\n```\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

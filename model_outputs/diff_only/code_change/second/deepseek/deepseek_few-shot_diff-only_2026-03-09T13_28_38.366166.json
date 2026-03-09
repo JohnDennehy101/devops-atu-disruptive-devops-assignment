@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-09T13:28:38.366166",
+        "model_id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "few-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 34.561,
+            "tokens_per_sec": 4.28,
+            "input_token_count": 330,
+            "output_token_count": 148,
+            "total_token_count": 478
+        },
+        "content": {
+            "prompt": "Examples of our testing style:\n\n### EXAMPLE 1\nGIT DIFF:\n+ <button id=\"cancel-order\">Cancel Order</button>\nEXISTING TEST FILE:\ntest('cancel button is functional', async ({ page }) => {\n  await page.goto('/');\n  await page.locator('#cancel-order').click();\n  await expect(page.getByText('Order Cancelled')).toBeVisible();\n});\n\n### EXAMPLE 2\nGIT DIFF:\n- if (count > 0)\n+ if (count > 10)\nEXISTING TEST FILE:\ntest('shows warning only when count exceeds 10', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#count-input', '5');\n  await expect(page.getByText('Warning')).setHidden();\n  await page.fill('#count-input', '11');\n  await expect(page.getByText('Warning')).toBeVisible();\n});\n\n\nNow, generate a Playwright test for this specific change:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "### EXISTING TEST FILE:\ntest('displays character count in the footer', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#input-field', 'Hello, world!');\n  await expect(page.getByText('5 / 50')).toBeVisible();\n});\n\n### NEW TEST FILE:\ntest('displays character count in the footer with new text', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#input-field', 'Hello, world!');\n+  await expect(page.getByText('11 / 5000')).toBeVisible();\n});",
+            "extracted_code": "### EXISTING TEST FILE:\ntest('displays character count in the footer', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#input-field', 'Hello, world!');\n  await expect(page.getByText('5 / 50')).toBeVisible();\n});\n\n### NEW TEST FILE:\ntest('displays character count in the footer with new text', async ({ page }) => {\n  await page.goto('/');\n  await page.fill('#input-field', 'Hello, world!');\n+  await expect(page.getByText('11 / 5000')).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

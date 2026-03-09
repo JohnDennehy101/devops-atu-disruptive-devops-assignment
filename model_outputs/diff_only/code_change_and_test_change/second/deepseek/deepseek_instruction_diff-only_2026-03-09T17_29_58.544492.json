@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-09T17:29:58.544492",
+        "model_id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 48.13,
+            "tokens_per_sec": 4.18,
+            "input_token_count": 300,
+            "output_token_count": 201,
+            "total_token_count": 501
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/e2e/Home.spec.ts\n+++ b/app/e2e/Home.spec.ts\n+\n+  test(\"shows body character count and updates when typing\", async ({ page }) => {\n+    await expect(page.getByText(\"0 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello\")\n+    await expect(page.getByText(\"5 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello world\")\n+    await expect(page.getByText(\"11 / 5000\")).toBeVisible()\n+  })\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "### Playwright Test:\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('shows body character count and updates when typing', async ({ page }) => {\n  // Check initial character count\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  // Type \"Hello\" and check the character count\n  await page.getByLabel('Body').fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n\n  // Type \"Hello world\" and check the character count\n  await page.getByLabel('Body').fill('Hello world');\n  await expect(page.getByText('11 / 5000')).toBeVisible();\n});\n```\n\nThis test will verify that the character count updates correctly as text is entered into the body field.",
+            "extracted_code": "### Playwright Test:\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('shows body character count and updates when typing', async ({ page }) => {\n  // Check initial character count\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  // Type \"Hello\" and check the character count\n  await page.getByLabel('Body').fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n\n  // Type \"Hello world\" and check the character count\n  await page.getByLabel('Body').fill('Hello world');\n  await expect(page.getByText('11 / 5000')).toBeVisible();\n});\n```\n\nThis test will verify that the character count updates correctly as text is entered into the body field."
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]
