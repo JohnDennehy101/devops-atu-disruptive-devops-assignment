@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test'
+
+test('Copy button copies note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+
+  // Grant permissions for clipboard access
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write'])
+
+  // Fill out the note creation form
+  await page.getByLabel('Title').fill('Copy test')
+  await page.getByLabel('Body').fill('Text to copy from note')
+  await page.getByLabel(/Tags/).fill('tag1')
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  // Click on the newly created note
+  await page.getByRole('button', { name: /Note #\d+/ }).click()
+  await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible()
+
+  // Click the copy button
+  await page.getByRole('button', { name: 'Copy' }).click()
+
+  // Read the clipboard content and assert it matches the note body
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+  expect(clipboardText).toBe('Text to copy from note')
+})
+
+```

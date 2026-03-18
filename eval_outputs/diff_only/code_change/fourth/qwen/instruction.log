@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › Home page note filtering
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › Home page note filtering ───────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText(/Your Notes \(\d+\)/)[22m
+
+
+       6 |
+       7 |   // Step 2: Check that the initial count of notes is displayed correctly
+    >  8 |   const initialNoteCount = await page.getByText(/Your Notes \(\d+\)/).textContent();
+         |                                                                       ^
+       9 |   const initialCount = parseInt(initialNoteCount.match(/\d+/)?.[0] || '0', 10);
+      10 |   expect(initialCount).toBeGreaterThan(0); // Assuming there are notes initially
+      11 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:8:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/qwen/artefacts/instruction/instruction-Home-page-note-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/qwen/artefacts/instruction/instruction-Home-page-note-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/qwen/artefacts/instruction/instruction-Home-page-note-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/qwen/artefacts/instruction/instruction-Home-page-note-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/qwen/artefacts/instruction/instruction-Home-page-note-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › Home page note filtering ────────────────────────────
+
+
+=== STDERR ===
+

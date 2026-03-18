@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes ───────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test('filter by tag shows only matching notes', async ({ page }) => {
+      4 |   // Navigate to the home page
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 |
+      7 |   // Create a note with tags "work, urgent"
+      8 |   await page.getByLabel("Title").fill("Work note");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes ────────
+
+
+=== STDERR ===
+

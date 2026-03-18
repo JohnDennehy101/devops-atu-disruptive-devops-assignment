@@ -1,0 +1,33 @@
+# Page snapshot
+
+```yaml
+- main [ref=e4]:
+  - generic [ref=e5]:
+    - heading "Note Taking App" [level=1] [ref=e6]
+    - paragraph [ref=e7]: Create and manage notes. Your notes are stored locally.
+    - generic [ref=e8]:
+      - generic [ref=e10]:
+        - heading "Create New Note" [level=2] [ref=e11]
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: Title
+            - textbox "Title" [ref=e15]
+          - generic [ref=e16]:
+            - generic [ref=e17]: Body
+            - textbox "Body" [ref=e18]
+          - generic [ref=e19]:
+            - generic [ref=e20]: Tags (comma-separated)
+            - textbox "Tags (comma-separated)" [ref=e21]:
+              - /placeholder: tag1, tag2, tag3
+          - button "Create Note" [ref=e23]
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - heading "Your Notes (5)" [level=3] [ref=e27]
+          - button "Clear all" [ref=e28]
+        - generic [ref=e29]:
+          - 'button "Note #1" [ref=e30]'
+          - 'button "Note #2" [ref=e31]'
+          - 'button "Note #3" [ref=e32]'
+          - 'button "Note #4" [ref=e33]'
+          - 'button "Note #5" [ref=e34]'
+```

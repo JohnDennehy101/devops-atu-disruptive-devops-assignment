@@ -1,0 +1,24 @@
+test('should display clear all button when notes exist', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#note-1').click();
+  await expect(page.locator('.clear-all-button')).toBeVisible();
+});
+
+### NEW TEST FILE:
+test('should display clear all button when notes exist', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#note-1').click();
+  await expect(page.locator('.clear-all-button')).toBeVisible();
+});
+
+test('should call clearAllNotes when clear all button is clicked', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#note-1').click();
+  await page.locator('.clear-all-button').click();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});
+
+test('should not display clear all button when no notes exist', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.clear-all-button')).not.toBeVisible();
+});

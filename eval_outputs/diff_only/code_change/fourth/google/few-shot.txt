@@ -1,0 +1,4 @@
+test('displays correct number of notes', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+});

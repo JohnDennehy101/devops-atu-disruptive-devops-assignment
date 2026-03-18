@@ -1,0 +1,22 @@
+const { test, expect } = require('@playwright/test');
+
+test('Tag Filter Test', async ({ page }) => {
+  // Step 1: Open the application
+  await page.goto('http://localhost:3000');
+
+  // Step 2: Verify that the tag filter input field is present
+  const tagFilterInput = page.locator('input[type="text"][placeholder="Filter by tag"]');
+  await expect(tagFilterInput).toBeVisible();
+
+  // Step 3: Enter a tag filter and verify that the notes are filtered accordingly
+  const tagToFilter = 'testTag';
+  await page.fill('input[type="text"][placeholder="Filter by tag"]', tagToFilter);
+
+  // Step 4: Ensure that the notes count is updated based on the filtered results
+  const notesCount = page.locator('Your Notes (1)'); // Adjust the selector based on the actual count
+  await expect(notesCount).toHaveText('Your Notes (1)'); // Adjust the expected count based on the filter
+
+  // Step 5: Check the rendering logic to ensure it correctly reflects the filtered results
+  const notes = page.locator('.note-item'); // Adjust the selector based on the actual note item
+  await expect(notes).toHaveCount(1); // Adjust the expected count based on the filter
+});

@@ -1,0 +1,54 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › shows body character count and updates when typing
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › shows body character count and updates when typing 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('11 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('11 / 5000')[22m
+
+
+      13 |     await expect(page.getByText("5 / 5000")).toBeVisible();
+      14 |     await page.getByLabel("Body").fill(" world");
+    > 15 |     await expect(page.getByText("11 / 5000")).toBeVisible();
+         |                                               ^
+      16 |   });
+      17 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:15:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-646c3-unt-and-updates-when-typing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-646c3-unt-and-updates-when-typing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-646c3-unt-and-updates-when-typing-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-646c3-unt-and-updates-when-typing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-646c3-unt-and-updates-when-typing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › shows body character count and updates when typing 
+
+
+=== STDERR ===
+

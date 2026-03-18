@@ -1,0 +1,22 @@
+test("can clear all notes", async ({ page }) => {
+  // Create some notes
+  await page.getByLabel("Title").fill("Note 1")
+  await page.getByLabel("Body").fill("Body 1")
+  await page.getByLabel(/Tags/).fill("tag1")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await page.getByLabel("Title").fill("Note 2")
+  await page.getByLabel("Body").fill("Body 2")
+  await page.getByLabel(/Tags/).fill("tag2")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  // Check that notes are displayed
+  await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(2)
+
+  // Click "Clear all" button
+  await page.getByRole("button", { name: "Clear all" }).click()
+
+  // Check that notes are cleared
+  await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(0)
+  await expect(page.getByText("Your Notes (0)")).toBeVisible()
+})

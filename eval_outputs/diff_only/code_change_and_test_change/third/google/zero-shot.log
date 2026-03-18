@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy button copies note body to clipboard
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy button copies note body to clipboard ────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Title')[22m
+
+
+       5 |
+       6 |   const bodyText = "Text to copy from note"
+    >  7 |   await page.getByLabel("Title").fill("Copy test")
+         |                                  ^
+       8 |   await page.getByLabel("Body").fill(bodyText)
+       9 |   await page.getByLabel(/Tags/).fill("tag1")
+      10 |   await page.getByRole("button", { name: "Create Note" }).click()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:7:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy button copies note body to clipboard ─────────────
+
+
+=== STDERR ===
+

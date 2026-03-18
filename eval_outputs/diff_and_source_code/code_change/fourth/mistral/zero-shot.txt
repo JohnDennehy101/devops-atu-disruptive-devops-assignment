@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+import { Home } from './Home';
+
+test('should display "No notes yet" when no notes are saved', async ({ page }) => {
+  await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [] }));
+  await page.setLocalStorage('noteIds', JSON.stringify([]));
+  await page.setContent('<Home />');
+  await page.waitForSelector('text/No notes yet');
+  expect(await page.textContent('text/No notes yet')).toBe('No notes yet');
+});
+
+test('should display "Your Notes (1)" and "Note #1" when one note is saved', async ({ page }) => {
+  await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [{ id: 1, title: 'Test Note', body: 'This is a test note.', tags: [], archived: false, updated_at: new Date().toISOString() }] }));
+  await page.setLocalStorage('noteIds', JSON.stringify([1]));
+  await page.setContent('<Home />');
+  await page.waitForSelector('text/Your Notes (1)');
+  expect(await page.textContent('text/Your Notes (1)')).toBe('Your Notes (1)');
+  await page.waitForSelector('text/Note #1');
+  expect(await page.textContent('text/Note #1')).toBe('Note #1');
+});
+
+test('should display "No notes match the filter" when filtering by tag with no matching notes', async ({ page }) => {
+  await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [{ id: 1, title: 'Test Note', body: 'This is a test note.', tags: [], archived: false, updated_at: new Date().toISOString() }] }));
+  await page.setLocalStorage('noteIds', JSON.stringify([1]));
+  await page.setContent('<Home />');
+  await page.locator('input[placeholder="Filter by tag"]').fill('nonexistent_tag');
+  await page.waitForSelector('text/No notes match the filter');
+  expect(await page.textContent('text/No notes match the filter')).toBe('No notes match the filter');
+});

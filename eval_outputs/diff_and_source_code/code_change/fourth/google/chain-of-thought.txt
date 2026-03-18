@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test';
+
+test('Tag filter works correctly', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Get the number of notes displayed initially
+  const initialNoteCount = await page.locator('text=Note #').count();
+
+  // Enter a tag in the filter input
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+
+  // Wait for the filtered notes to load
+  await page.waitForTimeout(500); // Adjust as needed
+
+  // Get the number of notes displayed after filtering
+  const filteredNoteCount = await page.locator('text=Note #').count();
+
+  // Verify that the number of notes has changed
+  expect(filteredNoteCount).toBeLessThan(initialNoteCount);
+
+  // Clear the filter input
+  await page.locator('input[placeholder="Filter by tag"]').clear();
+
+  // Wait for the notes to reload
+  await page.waitForTimeout(500); // Adjust as needed
+
+  // Verify that the number of notes is back to the initial count
+  const finalNoteCount = await page.locator('text=Note #').count();
+  expect(finalNoteCount).toBe(initialNoteCount);
+});
+
+test('No notes yet message is displayed when no tags match', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Enter a tag that doesn't match any notes
+  await page.locator('input[placeholder="Filter by tag"]').fill('nonexistenttag');
+
+  // Wait for the filtered notes to load
+  await page.waitForTimeout(500); // Adjust as needed
+
+  // Verify that the "No notes yet" message is displayed
+  await expect(page.locator('text=No notes yet')).toBeVisible();
+});

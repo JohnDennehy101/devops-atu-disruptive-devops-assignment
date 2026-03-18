@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('shows body character count and updates when typing', async ({ page }) => {
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+  await page.getByLabel('Body').fill('Hello');
+  await expect(page.getByText('5 / 5000')).toBeVisible();
+  await page.getByLabel('Body').fill('Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+});
+```
+
+### EXPLANATION:
+
+1. **Test Setup**: The test is set up using Playwright's `test` function.
+2. **Assertion**: The `await expect(page.getByText('0 / 5000')).toBeVisible();` line checks if the text "0 / 5000" is visible on the page.
+3. **Typing and Updating**: The `await page.getByLabel('Body').fill('Hello');` line fills the body input with "Hello".
+4. **Assertion After Update**: The `await expect(page.getByText('5 / 5000')).toBeVisible();` line checks if the text "5 / 5000" is visible after updating the body.
+5. **Further Update**: The `await page.getByLabel('Body').fill('Hello world');` line updates the body to "Hello world".
+6. **Final Assertion**: The `await expect(page.getByText('11 / 5000')).toBeVisible();` line checks if the text "11 / 5000" is visible after further updating the body.
+
+This test ensures that the character count updates correctly when the body input is updated.

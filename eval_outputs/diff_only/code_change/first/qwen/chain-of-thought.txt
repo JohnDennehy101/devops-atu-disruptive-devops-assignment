@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes functionality', async ({ page }) => {
+  await page.goto('/home');
+
+  // Check if the "Clear all" button is not visible when there are no notes
+  await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+
+  // Add some notes (simulated by setting local storage)
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+  });
+
+  // Reload the page to reflect changes
+  await page.reload();
+
+  // Check if the "Clear all" button is visible when there are notes
+  await expect(page.locator('button:has-text("Clear all")')).toBeVisible();
+
+  // Click on the "Clear all" button
+  await page.click('button:has-text("Clear all")');
+
+  // Verify that all notes are cleared and the "Clear all" button is no longer visible
+  await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+});

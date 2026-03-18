@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Copy note body
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Copy note body ────────────────────────────────
+
+    TypeError: page.locate is not a function
+
+       5 |
+       6 |   // Assuming there's a note with ID 1 and body "This is a test note."
+    >  7 |   await page.locate('button').withText('Note #1').click();
+         |              ^
+       8 |   await page.locate('button').withText('Copy').click();
+       9 |
+      10 |   // Check if the note body is copied to the clipboard
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Copy note body ─────────────────────────────────
+
+
+=== STDERR ===
+

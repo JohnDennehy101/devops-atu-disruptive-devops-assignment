@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › Home page displays correct note count and clear all button
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › Home page displays correct note count and clear all button 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[name="title"]')[22m
+
+
+       9 |
+      10 |   // Add a note to check the count update
+    > 11 |   await page.fill('input[name="title"]', 'Test Note');
+         |              ^
+      12 |   await page.fill('textarea[name="body"]', 'This is a test note.');
+      13 |   await page.click('button[type="submit"]');
+      14 |   
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:11:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/zero-shot/zero-shot-Home-page-displa-2b368--count-and-clear-all-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/zero-shot/zero-shot-Home-page-displa-2b368--count-and-clear-all-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/qwen/artefacts/zero-shot/zero-shot-Home-page-displa-2b368--count-and-clear-all-button-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/zero-shot/zero-shot-Home-page-displa-2b368--count-and-clear-all-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/qwen/artefacts/zero-shot/zero-shot-Home-page-displa-2b368--count-and-clear-all-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › Home page displays correct note count and clear all button 
+
+
+=== STDERR ===
+

@@ -1,0 +1,83 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/zero-shot.spec.ts:8:1 › Copy button copies note body to clipboard
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:8:1 › Copy button copies note body to clipboard ────────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 |
+      4 | async function navigateToHome(page: Page) {
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 | }
+      7 |
+      8 | test('Copy button copies note body to clipboard', async ({ page }) => {
+        at navigateToHome (/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:14)
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:9:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/zero-shot.spec.ts:24:1 › Clicking a note selects it
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:24:1 › Clicking a note selects it ──────────────────────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 |
+      4 | async function navigateToHome(page: Page) {
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 | }
+      7 |
+      8 | test('Copy button copies note body to clipboard', async ({ page }) => {
+        at navigateToHome (/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:14)
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:25:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Clicking-a-note-selects-it-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Clicking-a-note-selects-it-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Clicking-a-note-selects-it-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/artefacts/zero-shot/zero-shot-Clicking-a-note-selects-it-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/zero-shot.spec.ts:8:1 › Copy button copies note body to clipboard ─────────────
+    [chromium] › e2e/zero-shot.spec.ts:24:1 › Clicking a note selects it ───────────────────────────
+
+
+=== STDERR ===
+

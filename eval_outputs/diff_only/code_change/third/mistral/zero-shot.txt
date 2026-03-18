@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+import { HomePage } from '../../pages/Home';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('/');
+  const homePage = new HomePage(page);
+  await homePage.copyNoteBody();
+  expect(navigator.clipboard.readText()).toBe(homePage.selectedNote.body);
+});

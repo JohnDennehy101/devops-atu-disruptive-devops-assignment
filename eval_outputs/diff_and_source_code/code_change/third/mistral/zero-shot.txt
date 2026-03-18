@@ -1,0 +1,23 @@
+import { test, expect } from "@playwright/test"
+import { mount } from "enzyme"
+import { Home } from "./Home"
+
+test("Copy button should copy selected note body", async () => {
+  const wrapper = mount(<Home />)
+  const copyButton = wrapper.find("button[title='Copy']")
+
+  // Assuming selectedNote is set and has a body
+  wrapper.setProps({ selectedNote: { body: "Test note body" } })
+
+  // Mock navigator.clipboard.writeText
+  const writeTextMock = jest.fn()
+  window.navigator.clipboard = {
+    writeText: writeTextMock,
+  }
+
+  // Simulate click on copy button
+  copyButton.simulate("click")
+
+  // Assert that writeText was called with the correct argument
+  expect(writeTextMock).toHaveBeenCalledWith("Test note body")
+})

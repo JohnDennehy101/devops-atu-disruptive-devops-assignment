@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify new paragraph element and form body length', async ({ page }) => {
+  await page.goto('/'); // Navigate to the Home page
+
+  // Check if the new paragraph element is present
+  const paragraph = await page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  expect(paragraph).toBeVisible();
+
+  // Verify that the initial text is correct
+  expect(await paragraph.innerText()).toBe('0 / 5000');
+
+  // Type some text in the form body input
+  await page.locator('textarea#note-body').fill('Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
+
+  // Verify that the text in the paragraph updates correctly
+  expect(await paragraph.innerText()).toBe('51 / 5000');
+});

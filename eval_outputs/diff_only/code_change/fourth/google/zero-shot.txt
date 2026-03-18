@@ -1,0 +1,114 @@
+--- a/app/src/utils/api.ts
++++ b/app/src/utils/api.ts
+-export const getNotes = async () => {
++export const getNotes = async (): Promise<Note[]> => {
+   try {
+     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes`)
+     if (!response.ok) {
+       throw new Error(`Failed to fetch notes: ${response.status}`)
+     }
+     const data = await response.json()
+-    return data as Note[]
++    return data
+   } catch (error) {
+     console.error("Error fetching notes:", error)
+     return []
+   }
+ }
+ 
+
+--- a/app/src/types/Note.ts
++++ b/app/src/types/Note.ts
+-export interface Note {
++interface Note {
+   id: string
+   title: string
+   content: string
+   tags: string[]
+   createdAt: string
+   updatedAt: string
+ }
+ export default Note
+\
+--- a/app/src/utils/api.ts
++++ b/app/src/utils/api.ts
+@@ -1,6 +1,6 @@
+ import { Note } from "@/src/types/Note";
+
+-export const getNotes = async () => {
++export const getNotes = async (): Promise<Note[]> => {
+   try {
+     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes`)
+     if (!response.ok) {
+@@ -7,7 +7,7 @@
+     const data = await response.json()
+-    return data as Note[]
++    return data
+   } catch (error) {
+     console.error("Error fetching notes:", error)
+     return []
+@@ -15,6 +15,11 @@
+ 
+
+ export const createNote = async (note: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>) => {
++  try {
++    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
++      method: 'POST',
++      headers: { 'Content-Type': 'application/json' },
++      body: JSON.stringify(note)
++    });
++  } catch (error) {
++    console.error("Error creating note:", error);
++  }
+ };
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
+@@ -1,11 +1,21 @@
+ import React, { useMemo, useState, useEffect } from "react"
++import { Note } from "@/src/types/Note";
++import { api } from "@/src/utils/api";
+ 
+-  const [tagFilter, setTagFilter] = useState("")
+-  const [allNotes, setAllNotes] = useState<Note[]>([])
+-  useEffect(() => {
+-    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
++  const [tagFilter, setTagFilter] = useState("")
++  const [savedIds, setSavedIds] = useState<string[]>([])
++  const [allNotes, setAllNotes] = useState<Note[]>([]);
++
++  useEffect(() => {
++    const fetchNotes = async () => {
++      try {
++        const notes = await api.getNotes();
++        setAllNotes(notes);
++      } catch (error) {
++        setAllNotes([]);
++      }
++    };
++    fetchNotes();
+   }, [savedIds])
+-
++
+   const displayedIds = useMemo(() => {
+     if (!tagFilter.trim()) return savedIds
+     const lower = tagFilter.trim().toLowerCase()
+@@ -13,12 +23,14 @@
+      .map(n => n.id)
+   }, [savedIds, allNotes, tagFilter])
+ 
+-              Your Notes ({savedIds.length})
++  const noteList = displayedIds.map(id => (
++    <li key={id}>{id}</li>
++  ));
++
++  const noteCount = displayedIds.length;
++
++  const noteTitle = noteCount === 0
++   ? "No notes yet"
++    : `Your Notes (${noteCount})`;
++
++  const filterInput = (
++    <input
++      type="text"
++

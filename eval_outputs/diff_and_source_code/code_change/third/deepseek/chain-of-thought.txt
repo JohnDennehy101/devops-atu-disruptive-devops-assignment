@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:3000');
+  });
+
+  test('should create, edit, copy, and delete a note', async ({ page }) => {
+    // Ensure no notes are loaded initially
+    await expect(page.locator('.space-y-2 button')).toHaveText('No notes yet');
+
+    // Create a new note
+    await page.locator('input[id="note-title"]').fill('Test Note');
+    await page.locator('textarea[id="note-body"]').fill('This is the body of the test note.');
+    await page.locator('input[id="note-tags"]').fill('test, note');
+    await page.locator('button:has-text("Create Note")').click();
+
+    // Verify the new note is displayed
+    await expect(page.locator('.space-y-2 button')).toContainText('Note #');
+
+    // Edit the note and save the changes
+    const noteId = await page.locator('.space-y-2 button').first().innerText();
+    await page.locator('.space-y-2 button').first().click();
+    await page.locator('input[id="note-title"]').fill('Updated Note');
+    await page.locator('textarea[id="note-body"]').fill('This is the updated body of the test note.');
+    await page.locator('button:has-text("Save")').click();
+
+    // Verify the note is updated and displayed correctly
+    await expect(page.locator('.space-y-2 button')).toContainText('Updated Note');
+
+    // Copy the note body and ensure it is copied to the clipboard
+    await page.locator('button:has-text("Copy")').click();
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe('This is the updated body of the test note.');
+
+    // Delete the note and ensure it is removed from the UI
+    await page.locator('button:has-text("Delete")').click();
+    await expect(page.locator('.space-y-2 button')).toHaveText('No notes yet');
+  });
+});
+
+```

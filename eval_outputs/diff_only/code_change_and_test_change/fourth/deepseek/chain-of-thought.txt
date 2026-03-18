@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('filter by tag shows only matching notes', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('http://localhost:3000');
+
+  // Create a note with tags "work, urgent"
+  await page.getByLabel("Title").fill("Work note");
+  await page.getByLabel("Body").fill("Body one");
+  await page.getByLabel(/Tags/).fill("work, urgent");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Create a note with tag "personal"
+  await page.getByLabel("Title").fill("Personal note");
+  await page.getByLabel("Body").fill("Body two");
+  await page.getByLabel(/Tags/).fill("personal");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Verify that the notes are displayed
+  await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+  // Apply filter "work"
+  await page.getByPlaceholder("Filter by tag").fill("work");
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Note #1" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Note #2" })).not.toBeVisible();
+
+  // Apply filter "nonexistent"
+  await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+  await expect(page.getByText("No notes match the filter")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+  // Remove filter
+  await page.getByPlaceholder("Filter by tag").fill("");
+  await expect(page.getByText("Your Notes (2)")).toBeVisible();
+});

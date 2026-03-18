@@ -1,0 +1,20 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes functionality', async ({ page }) => {
+  // Navigate to the Home page
+  await page.goto('/');
+
+  // Check if the "Clear all" button is displayed when there are saved notes
+  await expect(page.locator('button:text-is("Clear all")')).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.locator('button:text-is("Clear all")').click();
+
+  // Verify that all notes are removed from the saved notes list
+  await expect(page.locator('button:has-text("Note #1")')).not.toBeVisible();
+  await expect(page.locator('button:has-text("Note #2")')).not.toBeVisible();
+  // Add more expectations for other saved notes if any
+
+  // Check if the "Clear all" button is not displayed when there are no saved notes
+  await expect(page.locator('button:text-is("Clear all")')).not.toBeVisible();
+});

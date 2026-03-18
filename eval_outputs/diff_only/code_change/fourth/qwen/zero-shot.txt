@@ -1,0 +1,27 @@
+import { expect, test } from '@playwright/test';
+import { HomePage } from './pages/HomePage';
+
+test('displays correct number of notes after filtering', async ({ page }) => {
+  const homePage = new HomePage(page);
+  await homePage.goto();
+
+  // Assuming there are initially 5 notes
+  await expect(homePage.noteCount()).toHaveText('Your Notes (5)');
+
+  // Enter a filter that matches 3 notes
+  await homePage.setFilter('tag1');
+  await expect(homePage.noteCount()).toHaveText('Your Notes (3)');
+
+  // Clear the filter
+  await homePage.clearFilter();
+  await expect(homePage.noteCount()).toHaveText('Your Notes (5)');
+});
+
+test('displays no notes message when filter does not match any notes', async ({ page }) => {
+  const homePage = new HomePage(page);
+  await homePage.goto();
+
+  // Enter a filter that does not match any notes
+  await homePage.setFilter('nonexistenttag');
+  await expect(homePage.noNotesMessage()).toHaveText('No notes match the filter');
+});

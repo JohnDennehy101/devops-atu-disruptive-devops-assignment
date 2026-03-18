@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+import { HomePage } from '../../pages/Home';
+
+test('Clear all notes', async ({ page }) => {
+  const homePage = new HomePage(page);
+  await homePage.goto();
+  await homePage.clearAllNotes();
+  expect(await homePage.getNotesCount()).toBe(0);
+  expect(await homePage.getClearAllButton()).toBeNull();
+});

@@ -1,0 +1,43 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:4:1 › Verify that clicking a note card selects the note and displays its content in the "Copy" button
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:1 › Verify that clicking a note card selects the note and displays its content in the "Copy" button 
+
+    ReferenceError: jest is not defined
+
+      4 | test('Verify that clicking a note card selects the note and displays its content in the "Copy" button', async ({ page }) => {
+      5 |   // Mock the useNote hook to avoid needing a NoteProvider in the test
+    > 6 |   const useNoteMock = jest.fn(() => ({
+        |                       ^
+      7 |     selectedNote: null,
+      8 |     setSelectedNote: jest.fn(),
+      9 |   }));
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:6:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/instruction/instruction-Verify-that-cl-7566d--content-in-the-Copy-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/instruction/instruction-Verify-that-cl-7566d--content-in-the-Copy-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/instruction/instruction-Verify-that-cl-7566d--content-in-the-Copy-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/artefacts/instruction/instruction-Verify-that-cl-7566d--content-in-the-Copy-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:4:1 › Verify that clicking a note card selects the note and displays its content in the "Copy" button 
+
+
+=== STDERR ===
+

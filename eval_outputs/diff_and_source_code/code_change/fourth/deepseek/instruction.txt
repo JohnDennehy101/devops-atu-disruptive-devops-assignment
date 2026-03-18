@@ -1,0 +1,71 @@
+import { test, expect } from '@playwright/test'
+
+test('should create a new note', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+
+  // Fill out the note creation form
+  await page.getByRole('textbox', { name: 'Title' }).fill('Test Note')
+  await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note.')
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('test, note')
+
+  // Submit the form to create the note
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  // Wait for the note to appear in the list
+  await page.getByRole('button', { name: 'Note #' }).first().click()
+
+  // Check that the note details are correct
+  await expect(page.getByText('Test Note')).toBeVisible()
+  await expect(page.getByText('This is a test note.')).toBeVisible()
+  await expect(page.getByText('test, note')).toBeVisible()
+})
+
+test('should filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+
+  // Create a few notes with different tags
+  await page.getByRole('textbox', { name: 'Title' }).fill('Note 1')
+  await page.getByRole('textbox', { name: 'Body' }).fill('Body 1')
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag1')
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  await page.getByRole('textbox', { name: 'Title' }).fill('Note 2')
+  await page.getByRole('textbox', { name: 'Body' }).fill('Body 2')
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag2')
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  await page.getByRole('textbox', { name: 'Title' }).fill('Note 3')
+  await page.getByRole('textbox', { name: 'Body' }).fill('Body 3')
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag1, tag2')
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  // Filter notes by tag
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('tag1')
+
+  // Check that only notes with 'tag1' are displayed
+  await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Note #3' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Note #2' })).not.toBeVisible()
+})
+
+test('should delete a note', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+
+  // Create a note to delete
+  await page.getByRole('textbox', { name: 'Title' }).fill('Note to Delete')
+  await page.getByRole('textbox', { name: 'Body' }).fill('This note will be deleted.')
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('delete')
+  await page.getByRole('button', { name: 'Create Note' }).click()
+
+  // Delete the note
+  await page.getByRole('button', { name: 'Note to Delete' }).click()
+  await page.getByRole('button', { name: 'Delete' }).click()
+
+  // Check that the note is no longer displayed
+  await expect(page.getByRole('button', { name: 'Note to Delete' })).not.toBeVisible()
+})
+
+test('should edit a note', async ({ page }) => {
+  await page.goto('http://localhost:3000')
+
+  // Create a note to

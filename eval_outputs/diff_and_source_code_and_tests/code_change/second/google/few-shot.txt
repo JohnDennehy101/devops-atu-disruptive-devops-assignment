@@ -1,0 +1,7 @@
+test('shows the number of form bodies saved', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#count-input', '5');
+  await expect(page.getByText('Warning')).setHidden();
+  await page.fill('#count-input', '11');
+  await expect(page.getByText('Warning')).toBeVisible();
+});

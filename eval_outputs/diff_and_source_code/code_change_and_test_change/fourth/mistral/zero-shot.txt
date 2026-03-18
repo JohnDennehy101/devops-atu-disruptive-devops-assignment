@@ -1,0 +1,68 @@
+import React, { useMemo, useState } from "react"
+import { api, Note } from "../services/api"
+
+export function Home(): JSX.Element {
+  const [tagFilter, setTagFilter] = useState("")
+  const [allNotes, setAllNotes] = useState<Note[]>([])
+  const [savedIds, setSavedIds] = useState<number[]>([])
+
+  useEffect(() => {
+    const saved = localStorage.getItem("noteIds")
+    if (saved) {
+      setSavedIds(JSON.parse(saved) as number[])
+    }
+  }, [])
+
+  useEffect(() => {
+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
+  }, [savedIds])
+
+  const displayedIds = useMemo(() => {
+    if (!tagFilter.trim()) return savedIds
+    const lower = tagFilter.trim().toLowerCase()
+    return allNotes
+     .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))
+     .map(n => n.id)
+  }, [savedIds, allNotes, tagFilter])
+
+  return (
+    <div className="w-full p-6">
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+        Note Taking App
+      </h1>
+
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+          Your Notes ({displayedIds.length})
+        </h2>
+        <input
+          type="text"
+          placeholder="Filter by tag"
+          value={tagFilter}
+          onChange={e => setTagFilter(e.target.value)}
+          className="w-full max-w-sm px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      {displayedIds.length === 0? (
+        <p className="text-gray-500 dark:text-gray-400 text-sm">
+          {savedIds.length === 0? "No notes yet" : "No notes match the filter"}
+        </p>
+      ) : (
+        <div className="space-y-2 max-h-64 overflow-y-auto">
+          {displayedIds.map(id => (
+            <button
+              key={id}
+              onClick={() => {
+                // Handle note selection here
+              }}
+              className="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white"
+            >
+              Note #{id}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}

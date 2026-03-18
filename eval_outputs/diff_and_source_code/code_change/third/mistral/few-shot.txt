@@ -1,0 +1,12 @@
+test('copy button is functional', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#note-title').fill('Test Note');
+  await page.locator('#note-body').fill('This is a test note.');
+  await page.locator('#note-tags').fill('tag1, tag2');
+  await page.locator('button[type="submit"]').click();
+  await expect(page.locator('#note-title')).toHaveText('Test Note');
+  await expect(page.locator('#note-body')).toHaveText('This is a test note.');
+  await expect(page.locator('#note-tags')).toHaveText('tag1, tag2');
+  await page.locator('button[aria-label="Copy"]').click();
+  await expect(navigator.clipboard.readText()).toEqual('This is a test note.');
+});

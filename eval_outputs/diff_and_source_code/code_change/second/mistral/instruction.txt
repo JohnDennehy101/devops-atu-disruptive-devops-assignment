@@ -1,0 +1,13 @@
+import { test, expect } from '@playwright/test';
+import { getByRole, getByText } from '@playwright/test';
+
+test('Check the length of formBody', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  // Assuming the formBody is inside a paragraph with role="text"
+  const formBodyElement = await page.getByRole('text').first();
+  const formBodyText = await formBodyElement.textContent();
+
+  // Check if the length of formBodyText is 5000
+  expect(formBodyText.length).toBe(5000);
+});

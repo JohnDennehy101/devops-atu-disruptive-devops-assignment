@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify note count on home page', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Get the note count paragraph using getByRole
+  const noteCountParagraph = await page.getByRole('paragraph', {
+    name: /^[0-9]+ \/ 5000$/,
+  });
+
+  // Extract the note count from the paragraph text
+  const noteCountText = await noteCountParagraph.textContent();
+
+  // Extract the number from the text
+  const noteCount = parseInt(noteCountText.split('/')[0]);
+
+  // Assert that the note count is a number
+  expect(noteCount).toBeNumber();
+
+  // Assert that the note count is less than or equal to 5000
+  expect(noteCount).toBeLessThanOrEqual(5000);
+});

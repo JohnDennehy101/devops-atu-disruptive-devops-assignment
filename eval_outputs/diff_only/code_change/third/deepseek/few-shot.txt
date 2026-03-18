@@ -1,0 +1,16 @@
+test('copy button is functional', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#note-body', 'This is a test note');
+  await page.click('#copy-button');
+  await expect(page.getByText('Note copied')).toBeVisible();
+});
+
+### NEW TEST FILE:
+test('copy button is functional', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#note-body', 'This is a test note');
+  await page.click('#copy-button');
+  await expect(page.getByText('Note copied')).toBeVisible();
+});
+
+Note: The existing test file already covers the scenario, so no changes are needed.

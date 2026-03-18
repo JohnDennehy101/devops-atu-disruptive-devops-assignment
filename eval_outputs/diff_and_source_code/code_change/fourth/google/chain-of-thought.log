@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Tag filter works correctly
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Tag filter works correctly ────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0[39m
+    Received:   [31m0[39m
+
+      18 |
+      19 |   // Verify that the number of notes has changed
+    > 20 |   expect(filteredNoteCount).toBeLessThan(initialNoteCount);
+         |                             ^
+      21 |
+      22 |   // Clear the filter input
+      23 |   await page.locator('input[placeholder="Filter by tag"]').clear();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:20:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/chain-of-thought/chain-of-thought-Tag-filter-works-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/chain-of-thought/chain-of-thought-Tag-filter-works-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/chain-of-thought/chain-of-thought-Tag-filter-works-correctly-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/chain-of-thought/chain-of-thought-Tag-filter-works-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/chain-of-thought/chain-of-thought-Tag-filter-works-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/chain-of-thought.spec.ts:33:1 › No notes yet message is displayed when no tags match
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Tag filter works correctly ─────────────────────
+  1 passed (3.2s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,27 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Invalid left-hand side in prefix operation. (1:2)
+
+> 1 | --- a/app/src/components/Form.tsx
+    |   ^
+  2 | +++ b/app/src/components/Form.tsx
+  3 | @@ -14,6 +14,7 @@
+  4 |    const [formBody, setFormBody] = useState<string>("");
+
+   at instruction.spec.ts:1
+
+> 1 | --- a/app/src/components/Form.tsx
+    |  ^
+  2 | +++ b/app/src/components/Form.tsx
+  3 | @@ -14,6 +14,7 @@
+  4 |    const [formBody, setFormBody] = useState<string>("");
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

@@ -1,0 +1,59 @@
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import Home from './Home'
+
+describe('Home Page', () => {
+  beforeEach(() => {
+    jest.spyOn(api, 'getNotes').mockResolvedValue([])
+    jest.spyOn(api, 'getNote').mockResolvedValue({
+      id: 1,
+      title: 'Test Note',
+      body: 'This is a test note.',
+      tags: ['test'],
+      archived: false,
+      created_at: new Date(),
+      updated_at: new Date(),
+    })
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  it('renders the home page with no notes', () => {
+    render(<Home />)
+    expect(screen.getByText('Your Notes (0)')).toBeInTheDocument()
+    expect(screen.getByText('No notes yet')).toBeInTheDocument()
+  })
+
+  it('filters notes by tag', async () => {
+    const mockNotes = [
+      { id: 1, title: 'Test Note 1', body: 'This is a test note.', tags: ['test'], archived: false, created_at: new Date(), updated_at: new Date() },
+      { id: 2, title: 'Test Note 2', body: 'Another test note.', tags: ['example'], archived: false, created_at: new Date(), updated_at: new Date() },
+    ]
+    jest.spyOn(api, 'getNotes').mockResolvedValue(mockNotes)
+
+    render(<Home />)
+    await waitFor(() => expect(screen.getByText('Your Notes (2)')).toBeInTheDocument())
+
+    fireEvent.change(screen.getByPlaceholderText('Filter by tag'), { target: { value: 'test' } })
+    await waitFor(() => expect(screen.getByText('Your Notes (1)')).toBeInTheDocument())
+    expect(screen.getByText('Test Note 1')).toBeInTheDocument()
+    expect(screen.queryByText('Test Note 2')).not.toBeInTheDocument()
+  })
+
+  it('displays a message when no notes match the filter', async () => {
+    const mockNotes = [
+      { id: 1, title: 'Test Note 1', body: 'This is a test note.', tags: ['test'], archived: false, created_at: new Date(), updated_at: new Date() },
+      { id: 2, title: 'Test Note 2', body: 'Another test note.', tags: ['example'], archived: false, created_at: new Date(), updated_at: new Date() },
+    ]
+    jest.spyOn(api, 'getNotes').mockResolvedValue(mockNotes)
+
+    render(<Home />)
+    await waitFor(() => expect(screen.getByText('Your Notes (2)')).toBeInTheDocument())
+
+    fireEvent.change(screen.getByPlaceholderText('Filter by tag'), { target: { value: 'nonexistent' } })
+    await waitFor(() => expect(screen.getByText('Your Notes (0)')).toBeInTheDocument())
+    expect(screen.getByText('No notes match the filter')).toBeInTheDocument()
+  })
+})

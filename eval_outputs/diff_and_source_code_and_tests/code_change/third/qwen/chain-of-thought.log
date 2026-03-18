@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/chain-of-thought.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can copy the body of a selected note
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can copy the body of a selected note 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      59 |
+      60 |     // Verify the copied text
+    > 61 |     const copiedText = await page.evaluate(() => navigator.clipboard.readText())
+         |                                   ^
+      62 |     await expect(copiedText).toBe("This is the body text to copy")
+      63 |   })
+      64 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:61:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/chain-of-thought/chain-of-thought-Note-Taki-dc0fa-the-body-of-a-selected-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/chain-of-thought/chain-of-thought-Note-Taki-dc0fa-the-body-of-a-selected-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/chain-of-thought/chain-of-thought-Note-Taki-dc0fa-the-body-of-a-selected-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/chain-of-thought/chain-of-thought-Note-Taki-dc0fa-the-body-of-a-selected-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/chain-of-thought/chain-of-thought-Note-Taki-dc0fa-the-body-of-a-selected-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can copy the body of a selected note 
+  3 passed (2.3s)
+
+
+=== STDERR ===
+

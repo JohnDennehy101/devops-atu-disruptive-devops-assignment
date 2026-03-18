@@ -1,0 +1,23 @@
+test('copy button is functional', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Create a new note
+  await page.getByLabel('Title').fill('Test Note');
+  await page.getByLabel('Body').fill('This is a test note.');
+  await page.getByLabel(/Tags/).fill('test, e2e');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Wait for the note to appear in the sidebar
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toBeVisible();
+
+  // Open the note
+  await page.getByRole('button', { name: /Note #\d+/ }).click();
+
+  // Click the copy button
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  // Verify that the note body was copied to the clipboard
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  await expect(clipboardText).toBe('This is a test note.');
+});

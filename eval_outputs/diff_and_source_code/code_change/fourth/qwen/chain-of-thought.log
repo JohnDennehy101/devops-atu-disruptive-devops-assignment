@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter notes by tag
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter notes by tag ───────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+       8 |   const initialNoteCount = await page.locator('text=Your Notes').textContent();
+       9 |   const initialCount = parseInt(initialNoteCount?.match(/\d+/)?.[0] || '0', 10);
+    > 10 |   expect(initialCount).toBeGreaterThan(0);
+         |                        ^
+      11 |
+      12 |   // Step 3: Enter a tag in the filter input
+      13 |   await page.fill('input[placeholder="Filter by tag"]', 'exampleTag');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:10:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter notes by tag ────────────────────────────
+
+
+=== STDERR ===
+

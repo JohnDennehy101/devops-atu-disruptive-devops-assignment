@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('character count should update correctly', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('http://localhost:3000');
+
+  // Locate the textarea and character count element
+  const textarea = page.locator('textarea');
+  const characterCount = page.locator('p.text-xs');
+
+  // Verify initial state
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  // Type text into the textarea
+  await textarea.fill('Hello, world!');
+  await expect(characterCount).toHaveText('13 / 5000');
+
+  // Add more text to exceed the limit
+  await textarea.fill('Hello, world! This is a test to exceed the character limit.');
+  await expect(characterCount).toHaveText('50 / 5000');
+
+  // Clear the textarea
+  await textarea.fill('');
+  await expect(characterCount).toHaveText('0 / 5000');
+});

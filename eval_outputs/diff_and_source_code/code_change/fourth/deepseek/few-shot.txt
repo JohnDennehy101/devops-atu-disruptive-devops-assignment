@@ -1,0 +1,28 @@
+test('should create, edit, and delete a note', async ({ page }) => {
+  await page.goto('/');
+
+  // Create a new note
+  await page.fill('input[name="title"]', 'Test Note Title');
+  await page.fill('textarea[name="body"]', 'This is the body of the test note.');
+  await page.fill('input[name="tags"]', 'test, editing');
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to appear in the list
+  await page.waitForSelector('button:has-text("Note #")');
+
+  // Edit the note
+  await page.click('button:has-text("Edit")');
+  await page.fill('input[name="title"]', 'Updated Note Title');
+  await page.fill('textarea[name="body"]', 'This is the updated body of the test note.');
+  await page.fill('input[name="tags"]', 'updated, test');
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to be updated
+  await page.waitForSelector('button:has-text("Note #")');
+
+  // Delete the note
+  await page.click('button:has-text("Delete")');
+
+  // Wait for the note to be removed
+  await page.waitForSelector('button:has-text("No notes yet")');
+});

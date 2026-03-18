@@ -1,0 +1,53 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › shows body character count and updates when typing
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › shows body character count and updates when typing ───
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('0 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('0 / 5000')[22m
+
+
+      2 |
+      3 | test("shows body character count and updates when typing", async ({ page }) => {
+    > 4 |   await expect(page.getByText("0 / 5000")).toBeVisible()
+        |                                            ^
+      5 |   await page.getByLabel("Body").fill("Hello")
+      6 |   await expect(page.getByText("5 / 5000")).toBeVisible()
+      7 |   await page.getByLabel("Body").fill("Hello world")
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:4:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/artefacts/zero-shot/zero-shot-shows-body-character-count-and-updates-when-typing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/artefacts/zero-shot/zero-shot-shows-body-character-count-and-updates-when-typing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/artefacts/zero-shot/zero-shot-shows-body-character-count-and-updates-when-typing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/artefacts/zero-shot/zero-shot-shows-body-character-count-and-updates-when-typing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › shows body character count and updates when typing ────
+
+
+=== STDERR ===
+

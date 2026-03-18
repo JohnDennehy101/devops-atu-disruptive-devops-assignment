@@ -1,0 +1,6 @@
+test('shows the number of form bodies', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#form-body', 'test');
+  await page.click('button[type="submit"]');
+  await page.getByText('1 / 5000').isVisible();
+});

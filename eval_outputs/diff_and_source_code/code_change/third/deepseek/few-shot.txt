@@ -1,0 +1,95 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body button functionality', async ({ page }) => {
+  await page.goto('/');
+
+  // Ensure the note body is copied when the button is clicked
+  await page.evaluate(() => {
+    window.navigator.clipboard = {
+      writeText: (text) => {
+        console.log('Clipboard write:', text);
+      },
+    };
+  });
+
+  await page.click('button[type="button"][onClick="copyNoteBody"]');
+
+  // Add an assertion to verify the clipboard content
+  await expect(page).toHaveClipboard('Copied note body');
+});
+
+test('copy note body button functionality with selected note', async ({ page }) => {
+  await page.goto('/');
+
+  // Select a note to trigger the copy functionality
+  await page.evaluate(() => {
+    window.navigator.clipboard = {
+      writeText: (text) => {
+        console.log('Clipboard write:', text);
+      },
+    };
+  });
+
+  // Assuming there's a note loaded, trigger the copy functionality
+  await page.click('button[type="button"][onClick="copyNoteBody"]');
+
+  // Add an assertion to verify the clipboard content
+  await expect(page).toHaveClipboard('Selected note body');
+});
+
+test('copy note body button functionality with selected note', async ({ page }) => {
+  await page.goto('/');
+
+  // Select a note to trigger the copy functionality
+  await page.evaluate(() => {
+    window.navigator.clipboard = {
+      writeText: (text) => {
+        console.log('Clipboard write:', text);
+      },
+    };
+  });
+
+  // Assuming there's a note loaded, trigger the copy functionality
+  await page.click('button[type="button"][onClick="copyNoteBody"]');
+
+  // Add an assertion to verify the clipboard content
+  await expect(page).toHaveClipboard('Selected note body');
+});
+
+test('copy note body button functionality with selected note', async ({ page }) => {
+  await page.goto('/');
+
+  // Select a note to trigger the copy functionality
+  await page.evaluate(() => {
+    window.navigator.clipboard = {
+      writeText: (text) => {
+        console.log('Clipboard write:', text);
+      },
+    };
+  });
+
+  // Assuming there's a note loaded, trigger the copy functionality
+  await page.click('button[type="button"][onClick="copyNoteBody"]');
+
+  // Add an assertion to verify the clipboard content
+  await expect(page).toHaveClipboard('Selected note body');
+});
+
+test('copy note body button functionality with selected note', async ({ page }) => {
+  await page.goto('/');
+
+  // Select a note to trigger the copy functionality
+  await page.evaluate(() => {
+    window.navigator.clipboard = {
+      writeText: (text) => {
+        console.log('Clipboard write:', text);
+      },
+    };
+  });
+
+  // Assuming there's a note loaded, trigger the copy functionality
+  await page.click('button[type="button"][onClick="copyNoteBody"]');
+
+  // Add an assertion to verify the clipboard content
+  await expect(page).toHaveClipboard('Selected note body');
+});

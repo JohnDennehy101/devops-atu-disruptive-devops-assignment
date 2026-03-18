@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('copies note body to clipboard', async ({ page }) => {
+  // Assuming the page has already loaded and a note is selected.
+  // You might need to navigate to the Home page and select a note first.
+
+  // Click the "Copy" button.
+  await page.click('button:has-text("Copy")');
+
+  // Verify that the note body is in the clipboard.
+  const clipboardText = await navigator.clipboard.readText();
+  const noteBody = await page.locator('data-test-note-body').textContent(); // Assuming a data-test-note-body attribute exists on the note body element
+
+  expect(clipboardText).toBe(noteBody);
+
+  // Optional: Verify a visual confirmation message (if it exists).
+  // await expect(page.locator('data-test-copy-confirmation')).toBeVisible();
+});

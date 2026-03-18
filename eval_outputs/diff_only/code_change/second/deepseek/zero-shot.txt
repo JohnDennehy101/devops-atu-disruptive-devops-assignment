@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count in the form', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  const form = page.locator('form');
+  await form.fill('test content', { timeout: 1000 });
+
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('5 / 5000');
+});

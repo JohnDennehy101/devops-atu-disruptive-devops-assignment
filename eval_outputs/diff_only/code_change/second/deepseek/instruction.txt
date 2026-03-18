@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test';
+
+test('Character count should be displayed correctly', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('http://localhost:3000');
+
+  // Find the input field and type some text
+  const input = page.getByRole('textbox');
+  await input.fill('Hello, world!');
+
+  // Get the character count text
+  const characterCount = await page.getByText('5 / 5000');
+
+  // Assert that the character count is displayed correctly
+  await expect(characterCount).toBeVisible();
+});

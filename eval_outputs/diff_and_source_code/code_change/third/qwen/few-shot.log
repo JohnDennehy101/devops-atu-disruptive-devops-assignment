@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/few-shot.spec.ts:3:1 › copy button is functional
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:3:1 › copy button is functional ─────────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Note #1")')[22m
+
+
+       5 |
+       6 |   // Select a note
+    >  7 |   await page.click('button:has-text("Note #1")');
+         |              ^
+       8 |
+       9 |   // Click the copy button
+      10 |   await page.click('button:has-text("Copy")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/few-shot/few-shot-copy-button-is-functional-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/few-shot/few-shot-copy-button-is-functional-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/few-shot/few-shot-copy-button-is-functional-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/few-shot/few-shot-copy-button-is-functional-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/few-shot/few-shot-copy-button-is-functional-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/few-shot.spec.ts:3:1 › copy button is functional ──────────────────────────────
+
+
+=== STDERR ===
+

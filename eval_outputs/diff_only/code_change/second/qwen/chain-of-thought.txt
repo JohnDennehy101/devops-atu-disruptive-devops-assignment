@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('character count updates correctly', async ({ page }) => {
+  await page.goto('/home');
+
+  // Enter text into the input field
+  const inputField = page.locator('input');
+  await inputField.fill('a'.repeat(5000));
+
+  // Verify that the character count updates correctly
+  const charCountText = page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  await expect(charCountText).toHaveText('5000 / 5000');
+
+  // Ensure that the character count does not exceed 5000 characters
+  await inputField.fill('a'.repeat(5001));
+  await expect(charCountText).toHaveText('5000 / 5000');
+});

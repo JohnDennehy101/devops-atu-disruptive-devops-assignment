@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes button
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes button ─────────────────────────────
+
+    Error: locator.click: Unexpected token "getByText(" while parsing css selector "getByText("Your Notes (1)")". Did you mean to CSS.escape it?
+    Call log:
+    [2m  - waiting for getByText("Your Notes (1)")[22m
+
+
+       6 |
+       7 |   // Test case 1: Verify that the "Clear all" button is visible when there are notes
+    >  8 |   await page.locator('getByText("Your Notes (1)")').click();
+         |                                                     ^
+       9 |   await expect(page.locator('getByText("Clear all")')).toBeVisible();
+      10 |
+      11 |   // Test case 2: Verify that the "Clear all" button is hidden when there are no notes
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:8:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/instruction/instruction-Clear-all-notes-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/instruction/instruction-Clear-all-notes-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/mistral/artefacts/instruction/instruction-Clear-all-notes-button-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/instruction/instruction-Clear-all-notes-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/mistral/artefacts/instruction/instruction-Clear-all-notes-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes button ──────────────────────────────
+
+
+=== STDERR ===
+

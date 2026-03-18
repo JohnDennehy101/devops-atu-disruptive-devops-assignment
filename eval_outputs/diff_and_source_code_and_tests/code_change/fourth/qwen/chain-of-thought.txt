@@ -1,0 +1,67 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("has title and create form visible", async ({ page }) => {
+    await expect(
+      page.getByRole("heading", { name: "Note Taking App" }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole("heading", { name: /Create New Note/ }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole("button", { name: "Create Note" }),
+    ).toBeVisible()
+  })
+
+  test("can create a note and see it in the sidebar", async ({ page }) => {
+    await page.getByLabel("Title").fill("My first note")
+    await page.getByLabel("Body").fill("Some body text")
+    await page.getByLabel(/Tags/).fill("demo, e2e")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toBeVisible()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+  })
+
+  test("can open a note and see its details", async ({ page }) => {
+    await page.getByLabel("Title").fill("Detail test")
+    await page.getByLabel("Body").fill("Content to verify")
+    await page.getByLabel(/Tags/).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+
+    await expect(
+      page.getByRole("heading", { name: "Note Details" }),
+    ).toBeVisible()
+    await expect(page.getByText("Title: Detail test")).toBeVisible()
+    await expect(page.getByText("Body: Content to verify")).toBeVisible()
+  })
+
+  test("can filter notes by tag", async ({ page }) => {
+    // Create two notes with different tags
+    await page.getByLabel("Title").fill("Note with tag1")
+    await page.getByLabel("Body").fill("Body for tag1")
+    await page.getByLabel(/Tags/).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByLabel("Title").fill("Note with tag2")
+    await page.getByLabel("Body").fill("Body for tag2")
+    await page.getByLabel(/Tags/).fill("tag2")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Ensure both notes are visible initially
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(2)
+
+    // Filter by tag1
+    await page.getByPlaceholder("Filter by tag").fill("tag1")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1)
+    await expect(page.getByText("Note with tag1")).toBeVisible

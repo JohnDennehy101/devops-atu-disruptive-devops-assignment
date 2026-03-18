@@ -1,0 +1,6 @@
+test('copy button copies note body to clipboard', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#note-body').fill('Hello, World!');
+  await page.locator('#copy-button').click();
+  await expect(navigator.clipboard.readText()).toEqual('Hello, World!');
+});

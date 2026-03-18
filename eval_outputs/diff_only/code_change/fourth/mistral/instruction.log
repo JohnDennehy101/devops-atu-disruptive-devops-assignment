@@ -1,0 +1,27 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Missing semicolon. (35:54)
+
+  33 |   await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  34 |   await expect(page.getByText('Note 1')).toBeVisible();
+> 35 |   await expect(page.getByText('Note 2')).toBeVisible());
+     |                                                       ^
+  36 | });
+
+   at instruction.spec.ts:35
+
+  33 |   await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  34 |   await expect(page.getByText('Note 1')).toBeVisible();
+> 35 |   await expect(page.getByText('Note 2')).toBeVisible());
+     |                                                      ^
+  36 | });
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

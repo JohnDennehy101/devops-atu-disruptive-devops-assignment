@@ -1,0 +1,38 @@
+const { test, expect } = require('@playwright/test');
+
+test.describe('Home Page Tests', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:3000'); // Adjust the URL if your app runs on a different port or domain
+  });
+
+  test('should not show clear all button when no notes are saved', async ({ page }) => {
+    await page.waitForSelector('text=Your Notes (0)'); // Ensure the initial state is loaded
+    const clearAllButton = page.locator('button', { hasText: 'Clear all' });
+    await expect(clearAllButton).not.toBeVisible();
+  });
+
+  test('should show clear all button and clear notes when notes are saved', async ({ page }) => {
+    // Add a note to simulate saved notes
+    await page.locator('button', { hasText: 'Add Note' }).click();
+    await page.locator('input[name="title"]').fill('Test Note');
+    await page.locator('input[name="body"]').fill('This is a test note.');
+    await page.locator('button', { hasText: 'Save Note' }).click();
+
+    await page.waitForSelector('text=Your Notes (1)'); // Ensure the note is added
+    const clearAllButton = page.locator('button', { hasText: 'Clear all' });
+    await expect(clearAllButton).toBeVisible();
+
+    // Click the clear all button
+    await clearAllButton.click();
+
+    // Verify that the notes are cleared
+    await page.waitForSelector('text=Your Notes (0)');
+    const noteTitle = page.locator('text=Your Notes (0) ~ input[name="title"]');
+    await expect(noteTitle).toBeEmpty();
+    const noteBody = page.locator('text=Your Notes (0) ~ input[name="body"]');
+    await expect(noteBody).toBeEmpty();
+
+    // Verify that the button is not visible after clearing
+    await expect(clearAllButton).not.toBeVisible();
+  });
+});

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes ───────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button[name="Create Note"]')[22m
+
+
+       9 |   await page.fill('label[for="note-body"]', 'Body one');
+      10 |   await page.fill('label[for="note-tags"]', 'work, urgent');
+    > 11 |   await page.click('button[name="Create Note"]');
+         |              ^
+      12 |
+      13 |   // Step 3: Create another note with the title "Personal note", body "Body two", and tags "personal"
+      14 |   await page.fill('label[for="note-title"]', 'Personal note');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:11:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/fourth/qwen/artefacts/chain-of-thought/chain-of-thought-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › filter by tag shows only matching notes ────────
+
+
+=== STDERR ===
+

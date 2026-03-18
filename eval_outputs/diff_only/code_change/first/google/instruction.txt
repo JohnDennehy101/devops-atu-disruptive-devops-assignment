@@ -1,0 +1,93 @@
+--- a/app/src/components/NoteCard.tsx
++++ b/app/src/components/NoteCard.tsx
++  const handleNoteClick = () => {
++    props.onClick(noteId);
++  };
++
++  return (
++    <div
++      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mb-4"
++      onClick={handleNoteClick}
++    >
++      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{noteTitle}</h4>
++      <p className="text-gray-700 dark:text-gray-400">{noteBody}</p>
++      <div className="text-gray-500 dark:text-gray-400 text-sm">
++        Tags: {noteTags.join(", ")}
++      </div>
++    </div>
++  );
++
++
++
++interface NoteCardProps {
++  noteId: string;
++  noteTitle: string;
++  noteBody: string;
++  noteTags: string[];
++  onClick: (noteId: string) => void;
++}
+
+--- a/app/src/utils/localStorage.ts
++++ b/app/src/utils/localStorage.ts
++
++export const getNoteIds = (): string[] => {
++  return JSON.parse(localStorage.getItem("noteIds") || "[]");
++};
++
++export const setNoteIds = (ids: string[]): void => {
++  localStorage.setItem("noteIds", JSON.stringify(ids));
++};
+
+--- a/app/src/components/CreateNoteForm.tsx
++++ b/app/src/components/CreateNoteForm.tsx
+@@ -1,6 +1,7 @@
+ import { useState } from "react";
+ 
+-const CreateNoteForm = ({ savedIds, setSelectedNote, setFormTitle, setFormBody, setFormTags, setIsEditing }: { savedIds: string[]; setSelectedNote: (noteId: string | null) => void; setFormTitle: (title: string) => void; setFormBody: (body: string) => void; setFormTags: (tags: string) => void; setIsEditing: (isEditing: boolean) => void; }) => {
++const CreateNoteForm = ({ savedIds, setSelectedNote, setFormTitle, setFormBody, setFormTags, setIsEditing }: { savedIds: string[]; setSelectedNote: (noteId: string | null) => void; setFormTitle: (title: string) => void; setFormBody: (body: string) => void; setFormTags: (tags: string) => void; setIsEditing: (isEditing: boolean) => void; }) => {
+   const [title, setTitle] = useState("");
+   const [body, setBody] = useState("");
+   const [tags, setTags] = useState("");
+@@ -11,7 +12,7 @@
+     setIsEditing(false);
+     setFormTitle("");
+     setFormBody("");
+-    setFormTags("");
++    setTags("");
+     setSelectedNote(null);
+   };
+ 
+@@ -19,7 +20,7 @@
+     const handleSubmit = (e: React.FormEvent) => {
+       e.preventDefault();
+ 
+-      setFormTitle(title);
++      setTags(tags);
+       setFormBody(body);
+       setTitle("");
+       setBody("");
+@@ -27,7 +28,7 @@
+     };
+ 
+     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+-      setTitle(e.target.value);
++      setTitle(e.target.value);
+     };
+ 
+     const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+@@ -35,7 +36,7 @@
+     };
+ 
+     const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+-      setFormTags(e.target.value);
++      setTags(e.target.value);
+     };
+ 
+   return (
+@@ -43,7 +44,7 @@
+     <form onSubmit={handleSubmit} className="space-y-4">
+       <div>
+         <label htmlFor="title" className="block text-gray-700 dark:text-gray-300">
+-          Title:
++          Title:
+         </label

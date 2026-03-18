@@ -1,0 +1,23 @@
+test('verify note character limit display', async ({ page }) => {
+  await page.goto('/');
+
+  // Fill the title field with 5001 characters to trigger the character limit display
+  await page.fill('#note-title', 'a'.repeat(5001));
+
+  // Verify that the character limit text is visible
+  await expect(page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toBeVisible();
+
+  // Fill the body field with 5001 characters to trigger the character limit display
+  await page.fill('#note-body', 'b'.repeat(5001));
+
+  // Verify that the character limit text is visible
+  await expect(page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toBeVisible();
+
+  // Fill the tags field with 5001 characters to trigger the character limit display
+  await page.fill('#note-tags', 'c'.repeat(5001));
+
+  // Verify that the character limit text is visible
+  await expect(page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toBeVisible();
+});
+
+This test will ensure that the character limit for the title, body, and tags fields is correctly displayed when they exceed the specified limit.

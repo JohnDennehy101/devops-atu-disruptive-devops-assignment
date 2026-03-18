@@ -1,0 +1,23 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Character Count", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("displays character count in the form", async ({ page }) => {
+    await page.getByLabel("Title").fill("A" * 5000)
+    await page.getByLabel("Body").fill("B" * 5000)
+
+    await expect(page.getByText("5000 / 5000")).toBeVisible()
+  })
+
+  test("does not display character count when under limit", async ({ page }) => {
+    await page.getByLabel("Title").fill("A" * 4999)
+    await page.getByLabel("Body").fill("B" * 4999)
+
+    await expect(page.queryByText("4999 / 5000")).not.toBeVisible()
+  })
+})

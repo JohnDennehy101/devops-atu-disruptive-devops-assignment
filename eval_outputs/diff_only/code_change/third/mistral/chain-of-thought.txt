@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('Test copy note body functionality', async ({ page }) => {
+  await page.goto('/');
+
+  // Step 1: Navigate to the home page
+  await expect(page).toHaveTitle(/Home/);
+
+  // Step 2: Ensure that the "Copy" button is displayed
+  await expect(page.locator('button')).toBeVisible();
+
+  // Step 3: Click the "Copy" button
+  await page.locator('button').click();
+
+  // Step 4: Verify that the note body is copied to the clipboard
+  const noteBody = 'Your expected note body here';
+  await expect(navigator.clipboard.readText()).toEqual(noteBody);
+});

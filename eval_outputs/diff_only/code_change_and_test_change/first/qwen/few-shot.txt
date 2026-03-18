@@ -1,0 +1,6 @@
+test('displays note functionality description', async ({ page }) => {
+  await page.goto('/');
+  await expect(
+    page.getByText("Create and manage notes. Your notes are stored locally."),
+  ).toBeVisible();
+});

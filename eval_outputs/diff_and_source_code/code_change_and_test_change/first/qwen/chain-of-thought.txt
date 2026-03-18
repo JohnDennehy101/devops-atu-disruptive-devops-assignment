@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('can clear all notes from sidebar', async ({ page }) => {
+  // Step 1: Navigate to the Home page
+  await page.goto('/');
+
+  // Step 2: Fill in the note details
+  await page.fill('label[for="note-title"]', 'To clear');
+  await page.fill('label[for="note-body"]', 'Body');
+  await page.fill('label[for="note-tags"]', 'x');
+
+  // Step 3: Click on the "Create Note" button
+  await page.click('button[name="Create Note"]');
+
+  // Step 4: Verify that the note count is displayed correctly
+  await expect(page.locator('text="Your Notes (1)"')).toBeVisible();
+
+  // Step 5: Click on the "Clear all" button
+  await page.click('button:has-text("Clear all")');
+
+  // Step 6: Verify that all notes are cleared
+  await expect(page.locator('text="No notes yet"')).toBeVisible();
+  await expect(page.locator('text="Your Notes (0)"')).toBeVisible();
+});

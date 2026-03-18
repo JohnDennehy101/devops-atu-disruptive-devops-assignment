@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected "," (19:17)
+
+  17 |
+  18 |     // Render the Home component with the mock selectedNote
+> 19 |     render(<Home />)
+     |                  ^
+  20 |
+  21 |     // Simulate selecting a note
+  22 |     fireEvent.click(screen.getByText('Note #1'))
+
+   at zero-shot.spec.ts:19
+
+  17 |
+  18 |     // Render the Home component with the mock selectedNote
+> 19 |     render(<Home />)
+     |                 ^
+  20 |
+  21 |     // Simulate selecting a note
+  22 |     fireEvent.click(screen.getByText('Note #1'))
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

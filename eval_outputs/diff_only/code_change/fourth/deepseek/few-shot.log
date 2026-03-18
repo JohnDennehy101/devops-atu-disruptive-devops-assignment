@@ -1,0 +1,30 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (9:0)
+
+   7 | });
+   8 |
+>  9 | ### NEW TEST FILE:
+     | ^
+  10 | test('renders notes correctly and filters by tag', async ({ page }) => {
+  11 |   await page.goto('/');
+  12 |   // Add your test steps here
+
+   at few-shot.spec.ts:9
+
+   7 | });
+   8 |
+>  9 | ### NEW TEST FILE:
+  10 | test('renders notes correctly and filters by tag', async ({ page }) => {
+  11 |   await page.goto('/');
+  12 |   // Add your test steps here
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

@@ -1,0 +1,28 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page - Notes filtering', async ({ page }) => {
+  await page.goto('/');
+
+  // Check initial note count
+  const initialNoteCount = await page.locator('h3 >> text=Your Notes').getAttribute('title');
+  expect(initialNoteCount).toBe('Your Notes (3)');
+
+  // Check if "Filter by tag" input field is present
+  const filterInput = await page.locator('input[placeholder="Filter by tag"]');
+  expect(filterInput).toBeVisible();
+
+  // Enter a valid tag and check filtered notes
+  await filterInput.fill('test');
+  const filteredNoteCount = await page.locator('button >> text=Note #1').count();
+  expect(filteredNoteCount).toBe(1);
+
+  // Enter an invalid tag and check no notes are displayed
+  await filterInput.fill('invalid');
+  const noNotesCount = await page.locator('p >> text=No notes yet').count();
+  expect(noNotesCount).toBe(1);
+
+  // Clear the input field and check all notes are displayed again
+  await filterInput.clear();
+  const allNotesCount = await page.locator('button >> text=Note #1').count();
+  expect(allNotesCount).toBe(3);
+});

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test Home page
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test Home page ────────────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[name="name"]')[22m
+
+
+      3 | test('Test Home page', async ({ page }) => {
+      4 |   await page.goto('/');
+    > 5 |   await page.locator('input[name="name"]').fill('John Doe');
+        |                                            ^
+      6 |   await page.locator('input[name="email"]').fill('john.doe@example.com');
+      7 |   await page.locator('textarea[name="message"]').fill('Hello, World!');
+      8 |   await page.locator('button[type="submit"]').click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:5:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/artefacts/chain-of-thought/chain-of-thought-Test-Home-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/artefacts/chain-of-thought/chain-of-thought-Test-Home-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/mistral/artefacts/chain-of-thought/chain-of-thought-Test-Home-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/artefacts/chain-of-thought/chain-of-thought-Test-Home-page-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/mistral/artefacts/chain-of-thought/chain-of-thought-Test-Home-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test Home page ─────────────────────────────────
+
+
+=== STDERR ===
+

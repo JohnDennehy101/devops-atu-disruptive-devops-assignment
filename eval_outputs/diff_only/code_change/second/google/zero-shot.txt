@@ -1,0 +1,14 @@
+import { test, expect } from '@playwright/test';
+
+test('displays form body count', async ({ page }) => {
+  await page.goto('/');
+
+  // Wait for the form body count to be displayed
+  await page.locator('p').filter({ hasText: /^\d+ \/ 5000$/ }).waitFor();
+
+  // Get the text of the form body count
+  const formBodyCountText = await page.locator('p').filter({ hasText: /^\d+ \/ 5000$/ }).textContent();
+
+  // Check that the form body count is displayed correctly
+  expect(formBodyCountText).toBe('0 / 5000');
+});

@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected "," (6:30)
+
+  4 |
+  5 | test("Copy button should copy selected note body", async () => {
+> 6 |   const wrapper = mount(<Home />)
+    |                               ^
+  7 |   const copyButton = wrapper.find("button[title='Copy']")
+  8 |
+  9 |   // Assuming selectedNote is set and has a body
+
+   at zero-shot.spec.ts:6
+
+  4 |
+  5 | test("Copy button should copy selected note body", async () => {
+> 6 |   const wrapper = mount(<Home />)
+    |                              ^
+  7 |   const copyButton = wrapper.find("button[title='Copy']")
+  8 |
+  9 |   // Assuming selectedNote is set and has a body
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

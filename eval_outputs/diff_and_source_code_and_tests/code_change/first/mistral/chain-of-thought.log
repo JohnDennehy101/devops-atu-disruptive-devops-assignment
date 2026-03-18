@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App - Clear All Notes › can create multiple notes and see them in the sidebar
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App - Clear All Notes › can create multiple notes and see them in the sidebar 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('.note-button')
+    Expected: [32m5[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for locator('.note-button')[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      18 |
+      19 |     // Check that all notes are displayed in the sidebar
+    > 20 |     await expect(page.locator(".note-button")).toHaveCount(5)
+         |                                                ^
+      21 |     await expect(page.getByText("Your Notes (5)")).toBeVisible()
+      22 |
+      23 |     // Click the "Clear all" button
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:20:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/mistral/artefacts/chain-of-thought/chain-of-thought-Note-Taki-aef43-and-see-them-in-the-sidebar-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/mistral/artefacts/chain-of-thought/chain-of-thought-Note-Taki-aef43-and-see-them-in-the-sidebar-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/first/mistral/artefacts/chain-of-thought/chain-of-thought-Note-Taki-aef43-and-see-them-in-the-sidebar-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/mistral/artefacts/chain-of-thought/chain-of-thought-Note-Taki-aef43-and-see-them-in-the-sidebar-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/first/mistral/artefacts/chain-of-thought/chain-of-thought-Note-Taki-aef43-and-see-them-in-the-sidebar-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App - Clear All Notes › can create multiple notes and see them in the sidebar 
+
+
+=== STDERR ===
+

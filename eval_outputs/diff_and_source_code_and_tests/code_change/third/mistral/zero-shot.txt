@@ -1,0 +1,19 @@
+test("can copy note body", async ({ page }) => {
+  await page.getByLabel("Title").fill("Copy test")
+  await page.getByLabel("Body").fill("Copy me")
+  await page.getByLabel(/Tags/).fill("copy")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await page.getByRole("button", { name: /Note #\d+/ }).click()
+
+  await expect(page.getByRole("button", { name: "Copy" })).toBeVisible()
+
+  const copyButton = page.getByRole("button", { name: "Copy" })
+  await copyButton.click()
+
+  const clipboardContent = await page.evaluate(() => {
+    return navigator.clipboard.readText()
+  })
+
+  await expect(clipboardContent).toEqual("Copy me")
+})

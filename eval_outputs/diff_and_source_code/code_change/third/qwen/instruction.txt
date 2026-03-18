@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy note body', async ({ page }) => {
+  // Step 1: Navigate to the home page
+  await page.goto('/');
+
+  // Step 2: Create a new note with a title and body
+  await page.fill('input[id="note-title"]', 'Test Note');
+  await page.fill('textarea[id="note-body"]', 'This is a test note body.');
+  await page.click('button[type="submit"]');
+
+  // Step 3: Select the newly created note
+  // Assuming the note is listed by its ID or title
+  await page.click('button:has-text("Test Note")');
+
+  // Step 4: Click on the "Copy" button
+  await page.click('button:has-text("Copy")');
+
+  // Step 5: Verify that the note's body has been copied to the clipboard
+  const clipboardText = await page.evaluate(async () => {
+    return navigator.clipboard.readText();
+  });
+
+  expect(clipboardText).toBe('This is a test note body.');
+});

@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Home page - Notes filtering
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Home page - Notes filtering ───────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"Your Notes (3)"[39m
+    Received: [31mnull[39m
+
+       6 |   // Check initial note count
+       7 |   const initialNoteCount = await page.locator('h3 >> text=Your Notes').getAttribute('title');
+    >  8 |   expect(initialNoteCount).toBe('Your Notes (3)');
+         |                            ^
+       9 |
+      10 |   // Check if "Filter by tag" input field is present
+      11 |   const filterInput = await page.locator('input[placeholder="Filter by tag"]');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:8:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/chain-of-thought/chain-of-thought-Home-page---Notes-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/chain-of-thought/chain-of-thought-Home-page---Notes-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/chain-of-thought/chain-of-thought-Home-page---Notes-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/chain-of-thought/chain-of-thought-Home-page---Notes-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/chain-of-thought/chain-of-thought-Home-page---Notes-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Home page - Notes filtering ────────────────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/few-shot.spec.ts:3:1 › copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:3:1 › copy note body to clipboard ───────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Sample Note')[22m
+
+
+       7 |   // Assuming there is a way to select a note, e.g., by clicking on it
+       8 |   // For example, let's assume there is a note with the text "Sample Note"
+    >  9 |   await page.click('text=Sample Note');
+         |              ^
+      10 |
+      11 |   // Click the "Copy" button
+      12 |   await page.click('button:has-text("Copy")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:9:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/few-shot/few-shot-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/few-shot/few-shot-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/qwen/artefacts/few-shot/few-shot-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/few-shot/few-shot-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/qwen/artefacts/few-shot/few-shot-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/few-shot.spec.ts:3:1 › copy note body to clipboard ────────────────────────────
+
+
+=== STDERR ===
+

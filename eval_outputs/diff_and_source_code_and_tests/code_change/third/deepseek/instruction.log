@@ -1,0 +1,206 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › clicking the 'Copy' button copies the note body to the clipboard
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › clicking the 'Copy' button copies the note body to the clipboard 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      13 |     await page.getByRole("button", { name: "Create Note" }).click()
+      14 |
+    > 15 |     await page.getByRole("button", { name: "Copy" }).click()
+         |                                                      ^
+      16 |
+      17 |     // Use Playwright's API to verify clipboard content
+      18 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:15:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-46b82--note-body-to-the-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-46b82--note-body-to-the-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-46b82--note-body-to-the-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-46b82--note-body-to-the-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-46b82--note-body-to-the-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/5] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › clicking the 'Edit' button allows editing the note
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › clicking the 'Edit' button allows editing the note 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Edit' })[22m
+
+
+      25 |     await page.getByRole("button", { name: "Create Note" }).click()
+      26 |
+    > 27 |     await page.getByRole("button", { name: "Edit" }).click()
+         |                                                      ^
+      28 |
+      29 |     await expect(page.getByLabel("Title")).toBeEditable()
+      30 |     await expect(page.getByLabel("Body")).toBeEditable()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:27:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-dc079-ton-allows-editing-the-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-dc079-ton-allows-editing-the-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-dc079-ton-allows-editing-the-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-dc079-ton-allows-editing-the-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-dc079-ton-allows-editing-the-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/instruction.spec.ts:33:3 › Note Taking App › clicking the 'Save' button updates the note
+[1A[2K  3) [chromium] › e2e/instruction.spec.ts:33:3 › Note Taking App › clicking the 'Save' button updates the note 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Edit' })[22m
+
+
+      36 |     await page.getByRole("button", { name: "Create Note" }).click()
+      37 |
+    > 38 |     await page.getByRole("button", { name: "Edit" }).click()
+         |                                                      ^
+      39 |     await page.getByLabel("Title").fill("Updated title")
+      40 |     await page.getByLabel("Body").fill("Updated body text.")
+      41 |     await page.getByRole("button", { name: "Save" }).click()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:38:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-170fa-ave-button-updates-the-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-170fa-ave-button-updates-the-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-170fa-ave-button-updates-the-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-170fa-ave-button-updates-the-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-170fa-ave-button-updates-the-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › clicking the 'Cancel' button cancels the edit
+[1A[2K  4) [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › clicking the 'Cancel' button cancels the edit 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Edit' })[22m
+
+
+      50 |     await page.getByRole("button", { name: "Create Note" }).click()
+      51 |
+    > 52 |     await page.getByRole("button", { name: "Edit" }).click()
+         |                                                      ^
+      53 |     await page.getByLabel("Title").fill("Edited title")
+      54 |     await page.getByRole("button", { name: "Cancel" }).click()
+      55 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:52:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-7aaf3-cel-button-cancels-the-edit-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-7aaf3-cel-button-cancels-the-edit-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-7aaf3-cel-button-cancels-the-edit-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-7aaf3-cel-button-cancels-the-edit-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-7aaf3-cel-button-cancels-the-edit-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/instruction.spec.ts:60:3 › Note Taking App › clicking the 'Delete' button deletes the note
+[1A[2K  5) [chromium] › e2e/instruction.spec.ts:60:3 › Note Taking App › clicking the 'Delete' button deletes the note 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Delete' })[22m
+
+
+      63 |     await page.getByRole("button", { name: "Create Note" }).click()
+      64 |
+    > 65 |     await page.getByRole("button", { name: "Delete" }).click()
+         |                                                        ^
+      66 |
+      67 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).not.toBeVisible()
+      68 |     await expect(page.getByText("Your Notes (0)")).toBeVisible()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:65:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-93b94-ete-button-deletes-the-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-93b94-ete-button-deletes-the-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-93b94-ete-button-deletes-the-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-93b94-ete-button-deletes-the-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek/artefacts/instruction/instruction-Note-Taking-Ap-93b94-ete-button-deletes-the-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  5 failed
+    [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › clicking the 'Copy' button copies the note body to the clipboard 
+    [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › clicking the 'Edit' button allows editing the note 
+    [chromium] › e2e/instruction.spec.ts:33:3 › Note Taking App › clicking the 'Save' button updates the note 
+    [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › clicking the 'Cancel' button cancels the edit 
+    [chromium] › e2e/instruction.spec.ts:60:3 › Note Taking App › clicking the 'Delete' button deletes the note 
+
+
+=== STDERR ===
+

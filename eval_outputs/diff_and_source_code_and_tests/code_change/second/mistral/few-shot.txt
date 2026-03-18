@@ -1,0 +1,4 @@
+test("displays character count", async ({ page }) => {
+  await page.goto("/")
+  await expect(page.getByText(/5000/)).toBeVisible()
+})

@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/instruction.spec.ts:3:1 › should display "Your Notes" with correct count
+[1A[2K[2/3] [chromium] › e2e/instruction.spec.ts:11:1 › should display "No notes yet" when no notes are present
+[1A[2K[3/3] [chromium] › e2e/instruction.spec.ts:19:1 › should display filter input
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:19:1 › should display filter input ───────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"Filter by tag"[39m
+    Received: [31mPromise {}[39m
+
+      23 |   const filterInput = await page.getByRole('textbox', { name: 'Filter by tag' });
+      24 |   expect(filterInput).toBeVisible();
+    > 25 |   expect(filterInput.getAttribute('placeholder')).toBe('Filter by tag');
+         |                                                   ^
+      26 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:25:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/instruction/instruction-should-display-filter-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/instruction/instruction-should-display-filter-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/instruction/instruction-should-display-filter-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/instruction/instruction-should-display-filter-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/instruction/instruction-should-display-filter-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:19:1 › should display filter input ────────────────────────
+  2 passed (1.6s)
+
+
+=== STDERR ===
+

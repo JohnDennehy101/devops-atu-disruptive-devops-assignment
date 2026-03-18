@@ -1,0 +1,94 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/zero-shot.spec.ts:3:1 › displays welcome message
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › displays welcome message ─────────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Create and manage notes. Your notes are stored locally.')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Create and manage notes. Your notes are stored locally.')[22m
+
+
+       5 |   await expect(
+       6 |     page.getByText("Create and manage notes. Your notes are stored locally."),
+    >  7 |   ).toBeVisible();
+         |     ^
+       8 | });
+       9 |
+      10 | test('can clear all notes from sidebar', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:7:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-displays-welcome-message-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-displays-welcome-message-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-displays-welcome-message-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-displays-welcome-message-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-displays-welcome-message-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/zero-shot.spec.ts:10:1 › can clear all notes from sidebar
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:10:1 › can clear all notes from sidebar ────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Title')[22m
+
+
+      10 | test('can clear all notes from sidebar', async ({ page }) => {
+      11 |   await page.goto('/home');
+    > 12 |   await page.getByLabel("Title").fill("To clear");
+         |                                  ^
+      13 |   await page.getByLabel("Body").fill("Body");
+      14 |   await page.getByLabel(/Tags/).fill("x");
+      15 |   await page.getByRole("button", { name: "Create Note" }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:12:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-can-clear-all-notes-from-sidebar-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-can-clear-all-notes-from-sidebar-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-can-clear-all-notes-from-sidebar-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-can-clear-all-notes-from-sidebar-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/first/qwen/artefacts/zero-shot/zero-shot-can-clear-all-notes-from-sidebar-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › displays welcome message ──────────────────────────────
+    [chromium] › e2e/zero-shot.spec.ts:10:1 › can clear all notes from sidebar ─────────────────────
+
+
+=== STDERR ===
+

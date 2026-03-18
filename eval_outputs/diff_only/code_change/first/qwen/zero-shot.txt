@@ -1,0 +1,35 @@
+import { expect, test } from '@playwright/test';
+
+test('Home page displays correct note count and clear all button', async ({ page }) => {
+  await page.goto('/');
+
+  // Check if the note count is displayed correctly
+  const noteCountText = await page.textContent('h3');
+  expect(noteCountText).toContain('Your Notes (0)');
+
+  // Add a note to check the count update
+  await page.fill('input[name="title"]', 'Test Note');
+  await page.fill('textarea[name="body"]', 'This is a test note.');
+  await page.click('button[type="submit"]');
+  
+  // Wait for the note to be added
+  await page.waitForTimeout(1000);
+
+  // Check if the note count is updated
+  const updatedNoteCountText = await page.textContent('h3');
+  expect(updatedNoteCountText).toContain('Your Notes (1)');
+
+  // Check if the clear all button is displayed
+  const clearAllButton = await page.isVisible('button:has-text("Clear all")');
+  expect(clearAllButton).toBe(true);
+
+  // Click the clear all button
+  await page.click('button:has-text("Clear all")');
+
+  // Wait for the notes to be cleared
+  await page.waitForTimeout(1000);
+
+  // Check if the note count is reset to zero
+  const finalNoteCountText = await page.textContent('h3');
+  expect(finalNoteCountText).toContain('Your Notes (0)');
+});

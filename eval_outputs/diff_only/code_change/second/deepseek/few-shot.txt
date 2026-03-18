@@ -1,0 +1,12 @@
+test('displays character count in the footer', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#input-field', 'Hello, world!');
+  await expect(page.getByText('5 / 50')).toBeVisible();
+});
+
+### NEW TEST FILE:
+test('displays character count in the footer with new text', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#input-field', 'Hello, world!');
++  await expect(page.getByText('11 / 5000')).toBeVisible();
+});

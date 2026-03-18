@@ -1,0 +1,24 @@
+test('clear all notes button clears all notes', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('text=Your Notes (0)').isVisible();
+  await page.locator('text=Your Notes (1)').isVisible();
+  await page.locator('text=Your Notes (2)').isVisible();
+  await page.locator('text=Your Notes (3)').isVisible();
+  await page.locator('text=Your Notes (4)').isVisible();
+  await page.locator('text=Your Notes (5)').isVisible();
+  await page.locator('text=Your Notes (6)').isVisible();
+  await page.locator('text=Your Notes (7)').isVisible();
+  await page.locator('text=Your Notes (8)').isVisible();
+  await page.locator('text=Your Notes (9)').isVisible();
+  await page.locator('text=Your Notes (10)').isVisible();
+  await page.locator('text=Your Notes (11)').isVisible();
+  await page.locator('text=Your Notes (12)').isVisible();
+  await page.locator('text=Your Notes (13)').isVisible();
+  await page.locator('text=Your Notes (14)').isVisible();
+  await page.locator('text=Your Notes (15)').isVisible();
+  await page.locator('text=Your Notes (16)').isVisible();
+  await page.locator('text=Your Notes (17)').isVisible();
+  await page.locator('text=Your Notes (18)').isVisible();
+  await page.locator('text=Your Notes (19)').isVisible();
+  await page.locator('text=Your Notes (20)').isVisible();
+});

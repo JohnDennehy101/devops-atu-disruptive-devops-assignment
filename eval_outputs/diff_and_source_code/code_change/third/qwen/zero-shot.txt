@@ -1,0 +1,60 @@
+import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import Home from './Home'
+
+describe('Home Page', () => {
+  it('should render the copy button when a note is selected', () => {
+    // Mock the selectedNote state
+    const mockSelectedNote = {
+      id: 1,
+      title: 'Test Note',
+      body: 'This is a test note.',
+      tags: ['test'],
+      archived: false,
+      created_at: new Date(),
+      updated_at: new Date()
+    }
+
+    // Render the Home component with the mock selectedNote
+    render(<Home />)
+
+    // Simulate selecting a note
+    fireEvent.click(screen.getByText('Note #1'))
+
+    // Check if the copy button is rendered
+    expect(screen.getByText('Copy')).toBeInTheDocument()
+  })
+
+  it('should copy the note body to clipboard when the copy button is clicked', () => {
+    // Mock the selectedNote state
+    const mockSelectedNote = {
+      id: 1,
+      title: 'Test Note',
+      body: 'This is a test note.',
+      tags: ['test'],
+      archived: false,
+      created_at: new Date(),
+      updated_at: new Date()
+    }
+
+    // Mock the navigator.clipboard.writeText function
+    const mockWriteText = jest.fn()
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: mockWriteText
+      }
+    })
+
+    // Render the Home component with the mock selectedNote
+    render(<Home />)
+
+    // Simulate selecting a note
+    fireEvent.click(screen.getByText('Note #1'))
+
+    // Simulate clicking the copy button
+    fireEvent.click(screen.getByText('Copy'))
+
+    // Check if the writeText function was called with the correct note body
+    expect(mockWriteText).toHaveBeenCalledWith(mockSelectedNote.body)
+  })
+})

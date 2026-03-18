@@ -1,0 +1,5 @@
+test('updates the displayed note count when filtering', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#tag-filter', 'test');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+});

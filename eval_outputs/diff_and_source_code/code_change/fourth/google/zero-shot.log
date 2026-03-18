@@ -1,0 +1,29 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Missing semicolon. (2:3)
+
+  1 | ```
+> 2 | ```typescript
+    |    ^
+  3 | import React, { useState, useEffect, useMemo } from "react"
+  4 | import { JSX } from "react"
+  5 | import { api, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
+
+   at zero-shot.spec.ts:2
+
+  1 | ```
+> 2 | ```typescript
+    |   ^
+  3 | import React, { useState, useEffect, useMemo } from "react"
+  4 | import { JSX } from "react"
+  5 | import { api, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

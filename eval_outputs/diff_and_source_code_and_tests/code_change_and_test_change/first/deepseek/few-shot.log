@@ -1,0 +1,27 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (56:2)
+
+  54 | +   await expect(page.getByText("No notes yet")).toBeVisible()
+  55 | +   await expect(page.getByText("Your Notes (0)")).toBeVisible()
+> 56 | + })
+     |   ^
+  57 | })
+
+   at few-shot.spec.ts:56
+
+  54 | +   await expect(page.getByText("No notes yet")).toBeVisible()
+  55 | +   await expect(page.getByText("Your Notes (0)")).toBeVisible()
+> 56 | + })
+     |  ^
+  57 | })
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

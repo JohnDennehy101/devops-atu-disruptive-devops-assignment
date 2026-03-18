@@ -1,0 +1,7 @@
+test('filter by tag', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#tag-filter').fill('test');
+  await expect(page.locator('#note-list')).toContainText('No notes match the filter');
+  await page.locator('#tag-filter').fill('');
+  await expect(page.locator('#note-list')).toContainText('No notes yet');
+});

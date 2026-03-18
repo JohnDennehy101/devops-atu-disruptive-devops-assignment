@@ -1,0 +1,3 @@
+### Test Description:
+
+This test verifies the functionality of the tag filter on the Home page. It checks that the filter correctly displays only notes that contain the specified tag, handles non-existent tags by showing a "No notes match the filter" message, and resets the display to all notes when the filter is cleared.

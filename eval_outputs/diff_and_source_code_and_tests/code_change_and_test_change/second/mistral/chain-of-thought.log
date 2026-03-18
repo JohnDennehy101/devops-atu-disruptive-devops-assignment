@@ -1,0 +1,22 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+ReferenceError: test is not defined
+
+   at chain-of-thought.spec.ts:1
+
+> 1 | test("shows body character count and updates when typing", async ({ page }) => {
+    | ^
+  2 |   await page.goto("/")
+  3 |   await expect(page.getByText("0 / 5000")).toBeVisible()
+  4 |   await page.getByLabel("Body").fill("Hello")
+    at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:1:1
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

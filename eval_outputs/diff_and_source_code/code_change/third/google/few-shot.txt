@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body button copies the body to clipboard', async ({ page }) => {
+  await page.goto('/');
+  // Assuming there's a note loaded and selected
+  await page.locator('#note-1').click(); // Replace with a dynamic locator if needed
+
+  await page.locator('text=Copy').click();
+
+  // Check if the note body is in the clipboard
+  const text = await page.evaluate(() => navigator.clipboard.readText());
+  const noteBody = 'This is a sample note body.'; // Replace with the actual note body
+
+  expect(text).toBe(noteBody);
+});
+```

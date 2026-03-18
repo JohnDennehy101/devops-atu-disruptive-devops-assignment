@@ -1,0 +1,147 @@
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "a");
++                  }}
++                >
++                  Add "a"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "b");
++                  }}
++                >
++                  Add "b"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "c");
++                  }}
++                >
++                  Add "c"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "d");
++                  }}
++                >
++                  Add "d"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "e");
++                  }}
++                >
++                  Add "e"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody("");
++                  }}
++                >
++                  Clear
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + " ");
++                  }}
++                >
++                  Add Space
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "1");
++                  }}
++                >
++                  Add "1"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "2");
++                  }}
++                >
++                  Add "2"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "3");
++                  }}
++                >
++                  Add "3"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
++                <button
++                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
++                  onClick={() => {
++                    setFormBody(formBody + "4");
++                  }}
++                >
++                  Add "4"
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
