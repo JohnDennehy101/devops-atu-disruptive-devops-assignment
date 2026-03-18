@@ -1,0 +1,9 @@
+import { test, expect } from "@playwright/test"
+import { mount } from "enzyme"
+import { Home } from "./Home"
+
+test("should display character count", () => {
+  const wrapper = mount(<Home />)
+  const count = wrapper.find(".text-xs").text()
+  expect(count).toContain("0 / 5000")
+})

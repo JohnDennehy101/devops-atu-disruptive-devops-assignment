@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all button clears all notes and resets form', async ({ page }) => {
+  await page.goto('/');
+  // Assuming there are notes to clear.  Add some dummy notes if needed.
+  // For this test, we'll just check that the button exists and does something.
+  await page.locator('text=Clear all').click();
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+  await expect(page.locator('text=Create New Note')).toBeVisible();
+  await expect(page.locator('text=Edit Note')).toBeVisible();
+});

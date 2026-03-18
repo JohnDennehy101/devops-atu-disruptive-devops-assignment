@@ -1,0 +1,31 @@
+test('displays the correct message when there are no notes', async ({ page }) => {
+  await page.goto('/');
+
+  // Check if the message "No notes yet" is visible
+  await expect(page.getByText('No notes yet')).toBeVisible();
+
+  // Check if the message "Your Notes (0)" is visible
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});
+
+test('can create and clear all notes', async ({ page }) => {
+  await page.goto('/');
+
+  // Fill in the note details
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+
+  // Click the "Create Note" button
+  await page.click('button[name="Create Note"]');
+
+  // Check if the note is created successfully
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.click('button[name="Clear all"]');
+
+  // Check if all notes are cleared
+  await expect(page.getByText('No notes yet')).toBeVisible();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});

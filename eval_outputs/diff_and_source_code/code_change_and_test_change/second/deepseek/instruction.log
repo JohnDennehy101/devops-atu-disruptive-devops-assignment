@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Missing semicolon. (14:58)
+
+  12 | ### EXPLANATION:
+  13 |
+> 14 | 1. **Test Setup**: The test is set up using Playwright's `test` function.
+     |                                                           ^
+  15 | 2. **Assertion**: The `await expect(page.getByText('0 / 5000')).toBeVisible();` line checks if the text "0 / 5000" is visible on the page.
+  16 | 3. **Typing and Updating**: The `await page.getByLabel('Body').fill('Hello');` line fills the body input with "Hello".
+  17 | 4. **Assertion After Update**: The `await expect(page.getByText('5 / 5000')).toBeVisible();` line checks if the text "5 / 5000" is visible after updating the body.
+
+   at instruction.spec.ts:14
+
+  12 | ### EXPLANATION:
+  13 |
+> 14 | 1. **Test Setup**: The test is set up using Playwright's `test` function.
+     |                                                          ^
+  15 | 2. **Assertion**: The `await expect(page.getByText('0 / 5000')).toBeVisible();` line checks if the text "0 / 5000" is visible on the page.
+  16 | 3. **Typing and Updating**: The `await page.getByLabel('Body').fill('Hello');` line fills the body input with "Hello".
+  17 | 4. **Assertion After Update**: The `await expect(page.getByText('5 / 5000')).toBeVisible();` line checks if the text "5 / 5000" is visible after updating the body.
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

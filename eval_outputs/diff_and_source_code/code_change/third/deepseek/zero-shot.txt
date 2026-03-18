@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body button should copy note body to clipboard', async ({ page }) => {
+  // Assuming the app is running and the Home component is loaded
+  await page.goto('http://localhost:3000'); // Adjust the URL if your app runs on a different port or domain
+
+  // Create a new note to have something to copy
+  await page.fill('input[name="note-title"]', 'Test Note');
+  await page.fill('textarea[name="note-body"]', 'This is the body of the test note.');
+  await page.fill('input[name="note-tags"]', 'test, copy');
+  await page.click('button:has-text("Create Note")');
+
+  // Wait for the note to be created and saved
+  await page.waitForSelector('button:has-text("Note #")');
+
+  // Select the newly created note
+  await page.click('button:has-text("Note #")');
+
+  // Click the copy button
+  await page.click('button:has-text("Copy")');
+
+  // Verify that the note body has been copied to the clipboard
+  const noteBody = await page.evaluate(() => navigator.clipboard.readText());
+  expect(noteBody).toBe('This is the body of the test note.');
+});

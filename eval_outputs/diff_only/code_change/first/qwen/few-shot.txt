@@ -1,0 +1,8 @@
+test('displays the correct number of notes', async ({ page }) => {
+  await page.goto('/home');
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.click('#save-note');
+  await expect(page.locator('.note-item')).toHaveCount(1);
+  await expect(page.locator('h3')).toHaveText('Your Notes (1)');
+});

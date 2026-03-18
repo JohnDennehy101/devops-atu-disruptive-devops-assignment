@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Clear all notes functionality
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Clear all notes functionality ─────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Clear all")')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Clear all")')[22m
+
+
+       7 |   // Step 2: Check if the "Clear all" button is present
+       8 |   const clearAllButton = page.locator('button:has-text("Clear all")');
+    >  9 |   await expect(clearAllButton).toBeVisible();
+         |                                ^
+      10 |
+      11 |   // Step 3: Click on the "Clear all" button
+      12 |   await clearAllButton.click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:9:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-Clear-all-notes-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-Clear-all-notes-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-Clear-all-notes-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-Clear-all-notes-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-Clear-all-notes-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Clear all notes functionality ──────────────────
+
+
+=== STDERR ===
+

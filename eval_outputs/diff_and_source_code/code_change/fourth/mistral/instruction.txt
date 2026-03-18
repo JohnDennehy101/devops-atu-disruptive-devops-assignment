@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+import { getByRole, getByText } from '@playwright/test';
+
+test('Test Home Page', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  // Check if the page title is correct
+  await expect(page).toHaveTitle('Note Taking App');
+
+  // Check if the "Your Notes" heading is displayed
+  await expect(getByRole(page, 'heading', { name: 'Your Notes' })).toBeVisible();
+
+  // Check if the "Create New Note" button is displayed
+  await expect(getByRole(page, 'button', { name: 'Create New Note' })).toBeVisible();
+
+  // Check if the "No notes yet" message is displayed
+  await expect(getByText(page, 'No notes yet')).toBeVisible();
+
+  // Check if the "Note Taking App" heading is displayed
+  await expect(getByRole(page, 'heading', { name: 'Note Taking App' })).toBeVisible();
+
+  // Check if the "Title" label is displayed
+  await expect(getByLabelText(page, 'Title')).toBeVisible();
+
+  // Check if the "Body" label is displayed
+  await expect(getByLabelText(page, 'Body')).toBeVisible();
+
+  // Check if the "Tags" label is displayed
+  await expect(getByLabelText(page, 'Tags')).toBeVisible();
+
+  // Check if the "Create Note" button is displayed
+  await expect(getByRole(page, 'button', { name: 'Create Note' })).toBeVisible();
+});

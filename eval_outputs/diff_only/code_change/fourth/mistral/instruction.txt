@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify note filtering functionality', async ({ page }) => {
+  await page.goto('/');
+
+  // Assert initial state
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+
+  // Add some notes and save them
+  await page.locator('[data-testid="add-note-button"]').click();
+  await page.locator('[data-testid="note-title-input"]').fill('Note 1');
+  await page.locator('[data-testid="note-content-input"]').fill('This is note 1');
+  await page.locator('[data-testid="save-note-button"]').click();
+
+  await page.locator('[data-testid="add-note-button"]').click();
+  await page.locator('[data-testid="note-title-input"]').fill('Note 2');
+  await page.locator('[data-testid="note-content-input"]').fill('This is note 2');
+  await page.locator('[data-testid="save-note-button"]').click();
+
+  // Assert notes are displayed
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByText('Note 1')).toBeVisible();
+  await expect(page.getByText('Note 2')).toBeVisible();
+
+  // Filter notes by tag
+  await page.locator('[data-testid="tag-filter-input"]').fill('1');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+  // Clear filter
+  await page.locator('[data-testid="tag-filter-input"]').clear();
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByText('Note 1')).toBeVisible();
+  await expect(page.getByText('Note 2')).toBeVisible());
+});

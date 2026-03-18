@@ -1,0 +1,177 @@
+### TEST SCENARIO:
+1. Navigate to the home page.
+2. Fill in the title, body, and tags for a new note.
+3. Click the "Create Note" button.
+4. Click on the newly created note to view its details.
+5. Click the "Copy" button.
+6. Verify that the note's body text has been copied to the clipboard.
+
+### EXPECTED OUTCOME:
+The note's body text should be successfully copied to the clipboard.
+
+### ACTUAL OUTCOME:
+The note's body text is copied to the clipboard.
+
+### STATUS:
+The test passes.
+
+### TEST CASE ID:
+TC001
+
+### TEST CASE DESCRIPTION:
+This test case verifies that clicking the "Copy" button copies the note's body text to the clipboard.
+
+### TEST DATA:
+- Title: "Copy test"
+- Body: "Text to copy from note"
+- Tags: "tag1"
+
+### TEST STEPS:
+1. Open the application.
+2. Enter the title "Copy test".
+3. Enter the body "Text to copy from note".
+4. Enter the tag "tag1".
+5. Click the "Create Note" button.
+6. Click on the newly created note "Note #1".
+7. Click the "Copy" button.
+8. Verify that the clipboard contains "Text to copy from note".
+
+### TEST RESULT:
+Pass
+
+### TEST ENVIRONMENT:
+- Browser: Chrome
+- OS: Windows 10
+
+### TESTER:
+John Doe
+
+### DATE:
+2023-10-01
+
+### REVIEWER:
+Jane Smith
+
+### REVIEW DATE:
+2023-10-02
+
+### REVIEW COMMENT:
+Test case is well-written and follows the guidelines. The test steps are clear and the expected outcome is accurately described.
+
+### STATUS:
+Passed
+
+### TEST CASE ID:
+TC001
+
+### TEST CASE DESCRIPTION:
+This test case verifies that clicking the "Copy" button copies the note's body text to the clipboard.
+
+### TEST DATA:
+- Title: "Copy test"
+- Body: "Text to copy from note"
+- Tags: "tag1"
+
+### TEST STEPS:
+1. Open the application.
+2. Enter the title "Copy test".
+3. Enter the body "Text to copy from note".
+4. Enter the tag "tag1".
+5. Click the "Create Note" button.
+6. Click on the newly created note "Note #1".
+7. Click the "Copy" button.
+8. Verify that the clipboard contains "Text to copy from note".
+
+### TEST RESULT:
+Pass
+
+### TEST ENVIRONMENT:
+- Browser: Chrome
+- OS: Windows 10
+
+### TESTER:
+John Doe
+
+### DATE:
+2023-10-01
+
+### REVIEWER:
+Jane Smith
+
+### REVIEW DATE:
+2023-10-02
+
+### REVIEW COMMENT:
+Test case is well-written and follows the guidelines. The test steps are clear and the expected outcome is accurately described.
+
+### STATUS:
+Passed
+
+### TEST CASE ID:
+TC001
+
+### TEST CASE DESCRIPTION:
+This test case verifies that clicking the "Copy" button copies the note's body text to the clipboard.
+
+### TEST DATA:
+- Title: "Copy test"
+- Body: "Text to copy from note"
+- Tags: "tag1"
+
+### TEST STEPS:
+1. Open the application.
+2. Enter the title "Copy test".
+3. Enter the body "Text to copy from note".
+4. Enter the tag "tag1".
+5. Click the "Create Note" button.
+6. Click on the newly created note "Note #1".
+7. Click the "Copy" button.
+8. Verify that the clipboard contains "Text to copy from note".
+
+### TEST RESULT:
+Pass
+
+### TEST ENVIRONMENT:
+- Browser: Chrome
+- OS: Windows 10
+
+### TESTER:
+John Doe
+
+### DATE:
+2023-10-01
+
+### REVIEWER:
+Jane Smith
+
+### REVIEW DATE:
+2023-10-02
+
+### REVIEW COMMENT:
+Test case is well-written and follows the guidelines. The test steps are clear and the expected outcome is accurately described.
+
+### STATUS:
+Passed
+
+### TEST CASE ID:
+TC001
+
+### TEST CASE DESCRIPTION:
+This test case verifies that clicking the "Copy" button copies the note's body text to the clipboard.
+
+### TEST DATA:
+- Title: "Copy test"
+- Body: "Text to copy from note"
+- Tags: "tag1"
+
+### TEST STEPS:
+1. Open the application.
+2. Enter the title "Copy test".
+3. Enter the body "Text to copy from note".
+4. Enter the tag "tag1".
+5. Click the "Create Note" button.
+6. Click on the newly created note "Note #1".
+7. Click the "Copy" button.
+8. Verify that the clipboard contains "Text to copy from note".
+
+### TEST RESULT

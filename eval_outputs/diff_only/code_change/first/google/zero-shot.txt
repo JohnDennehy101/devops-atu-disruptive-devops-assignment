@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+ import { HomePage } from '@/app/src/pages/Home';
+ 
+ test('clear all notes', async ({ page }) => {
+   await page.goto('/');
+ 
+   // Add some notes to the page
+   await page.fill('input[placeholder="Note Title"]', 'Note 1');
+   await page.fill('textarea[placeholder="Note Body"]', 'Note body 1');
+   await page.click('button:has-text("Add Note")');
+ 
+   await page.fill('input[placeholder="Note Title"]', 'Note 2');
+   await page.fill('textarea[placeholder="Note Body"]', 'Note body 2');
+   await page.click('button:has-text("Add Note")');
+ 
+   // Verify that the notes are displayed
+   await expect(page.locator('h3')).toContainText('Your Notes (2)');
+ 
+   // Click the "Clear all

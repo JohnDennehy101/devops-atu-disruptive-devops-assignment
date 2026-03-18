@@ -1,0 +1,30 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Clear All Notes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("can create multiple notes and see them in the sidebar", async ({ page }) => {
+    // Create multiple notes
+    for (let i = 1; i <= 5; i++) {
+      await page.getByLabel("Title").fill(`Note ${i}`)
+      await page.getByLabel("Body").fill(`Content for note ${i}`)
+      await page.getByLabel(/Tags/).fill(`tag${i}`)
+      await page.getByRole("button", { name: "Create Note" }).click()
+    }
+
+    // Check that all notes are displayed in the sidebar
+    await expect(page.locator(".note-button")).toHaveCount(5)
+    await expect(page.getByText("Your Notes (5)")).toBeVisible()
+
+    // Click the "Clear all" button
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    // Check that all notes are removed from the sidebar
+    await expect(page.locator(".note-button")).toHaveCount(0)
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+  })
+})

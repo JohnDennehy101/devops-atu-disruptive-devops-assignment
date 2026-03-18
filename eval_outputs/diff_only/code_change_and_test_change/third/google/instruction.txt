@@ -1,0 +1,3 @@
+### Test Description:
+
+This test verifies that the "Copy" button on the Note Details page correctly copies the note's body text to the clipboard. It uses `getByRole` and `getByText` locators for element identification and includes assertions to confirm the copied text matches the expected content. The test also grants clipboard permissions to the page context.

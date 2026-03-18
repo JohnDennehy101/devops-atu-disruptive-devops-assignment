@@ -1,0 +1,29 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  // Existing tests...
+
+  test("can copy note body to clipboard", async ({ page }) => {
+    // Fill out the form to create a note
+    await page.getByLabel("Title").fill("Copy Test")
+    await page.getByLabel("Body").fill("This is the body of the note.")
+    await page.getByLabel(/Tags/).fill("copy, test")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Open the note to view its details
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+
+    // Click the "Copy" button
+    await page.getByRole("button", { name: "Copy" }).click()
+
+    // Verify that the note body was copied to the clipboard
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+    await expect(clipboardText).toBe("This is the body of the note.")
+  })
+})

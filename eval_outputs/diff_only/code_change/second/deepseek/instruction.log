@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › Character count should be displayed correctly
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › Character count should be displayed correctly ──────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test('Character count should be displayed correctly', async ({ page }) => {
+      4 |   // Navigate to the home page
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 |
+      7 |   // Find the input field and type some text
+      8 |   const input = page.getByRole('textbox');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/instruction/instruction-Character-count-should-be-displayed-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/instruction/instruction-Character-count-should-be-displayed-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/instruction/instruction-Character-count-should-be-displayed-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/instruction/instruction-Character-count-should-be-displayed-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › Character count should be displayed correctly ───────
+
+
+=== STDERR ===
+

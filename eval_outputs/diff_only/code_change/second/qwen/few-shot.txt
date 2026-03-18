@@ -1,0 +1,7 @@
+import { test, expect } from '@playwright/test';
+
+test('renders home page correctly', async ({ page }) => {
+  await page.goto('/home');
+  await expect(page).toHaveTitle('Home Page');
+  await expect(page.locator('h1')).toHaveText('Welcome to Our App');
+});

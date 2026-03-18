@@ -1,0 +1,70 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("clicking the 'Copy' button copies the note body to the clipboard", async ({ page }) => {
+    await page.getByLabel("Title").fill("Copy Test")
+    await page.getByLabel("Body").fill("This is the body of the note.")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Copy" }).click()
+
+    // Use Playwright's API to verify clipboard content
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe("This is the body of the note.");
+  })
+
+  test("clicking the 'Edit' button allows editing the note", async ({ page }) => {
+    await page.getByLabel("Title").fill("Edit Test")
+    await page.getByLabel("Body").fill("Original body text.")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Edit" }).click()
+
+    await expect(page.getByLabel("Title")).toBeEditable()
+    await expect(page.getByLabel("Body")).toBeEditable()
+  })
+
+  test("clicking the 'Save' button updates the note", async ({ page }) => {
+    await page.getByLabel("Title").fill("Save Test")
+    await page.getByLabel("Body").fill("Original body text.")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Edit" }).click()
+    await page.getByLabel("Title").fill("Updated title")
+    await page.getByLabel("Body").fill("Updated body text.")
+    await page.getByRole("button", { name: "Save" }).click()
+
+    await expect(page.getByText("Title: Updated title")).toBeVisible()
+    await expect(page.getByText("Body: Updated body text.")).toBeVisible()
+  })
+
+  test("clicking the 'Cancel' button cancels the edit", async ({ page }) => {
+    await page.getByLabel("Title").fill("Cancel Test")
+    await page.getByLabel("Body").fill("Original body text.")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Edit" }).click()
+    await page.getByLabel("Title").fill("Edited title")
+    await page.getByRole("button", { name: "Cancel" }).click()
+
+    await expect(page.getByText("Title: Cancel Test")).toBeVisible()
+    await expect(page.getByText("Body: Original body text.")).toBeVisible()
+  })
+
+  test("clicking the 'Delete' button deletes the note", async ({ page }) => {
+    await page.getByLabel("Title").fill("Delete Test")
+    await page.getByLabel("Body").fill("This note will be deleted.")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Delete" }).click()
+
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).not.toBeVisible()
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+  })
+})

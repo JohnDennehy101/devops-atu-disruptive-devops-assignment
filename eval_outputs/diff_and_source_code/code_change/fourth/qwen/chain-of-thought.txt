@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  // Step 1: Navigate to the Home page
+  await page.goto('/');
+
+  // Step 2: Check that the "Your Notes" section displays the correct count of notes
+  const initialNoteCount = await page.locator('text=Your Notes').textContent();
+  const initialCount = parseInt(initialNoteCount?.match(/\d+/)?.[0] || '0', 10);
+  expect(initialCount).toBeGreaterThan(0);
+
+  // Step 3: Enter a tag in the filter input
+  await page.fill('input[placeholder="Filter by tag"]', 'exampleTag');
+
+  // Step 4: Verify that the displayed notes are filtered based on the entered tag
+  const filteredNoteCount = await page.locator('text=Your Notes').textContent();
+  const filteredCount = parseInt(filteredNoteCount?.match(/\d+/)?.[0] || '0', 10);
+  expect(filteredCount).toBeLessThanOrEqual(initialCount);
+
+  // Step 5: Clear the filter input
+  await page.fill('input[placeholder="Filter by tag"]', '');
+
+  // Step 6: Verify that all notes are displayed again
+  const finalNoteCount = await page.locator('text=Your Notes').textContent();
+  const finalCount = parseInt(finalNoteCount?.match(/\d+/)?.[0] || '0', 10);
+  expect(finalCount).toBe(initialCount);
+});

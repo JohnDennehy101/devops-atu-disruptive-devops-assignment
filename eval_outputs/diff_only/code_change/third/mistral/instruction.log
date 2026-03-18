@@ -1,0 +1,26 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)
+
+> 1 | ### GIT DIFF:
+    | ^
+  2 |
+  3 | --- a/app/src/pages/Note.tsx
+  4 | +++ b/app/src/pages/Note.tsx
+
+   at instruction.spec.ts:1
+
+> 1 | ### GIT DIFF:
+  2 |
+  3 | --- a/app/src/pages/Note.tsx
+  4 | +++ b/app/src/pages/Note.tsx
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

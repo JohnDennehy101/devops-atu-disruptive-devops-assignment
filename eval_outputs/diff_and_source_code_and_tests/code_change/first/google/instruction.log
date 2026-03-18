@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › can clear all notes
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › can clear all notes ─────────────
+
+    TypeError: expect(...).not is not a function
+
+      25 |
+      26 |     // Verify that there are no notes in the sidebar
+    > 27 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).not().toBeVisible();
+         |                                                                   ^
+      28 |
+      29 |     // Verify that the "No notes yet" message is visible
+      30 |     await expect(page.getByText("No notes yet")).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:27:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/google/artefacts/instruction/instruction-Note-Taking-App-can-clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/google/artefacts/instruction/instruction-Note-Taking-App-can-clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/first/google/artefacts/instruction/instruction-Note-Taking-App-can-clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/first/google/artefacts/instruction/instruction-Note-Taking-App-can-clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/first/google/artefacts/instruction/instruction-Note-Taking-App-can-clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › can clear all notes ──────────────
+
+
+=== STDERR ===
+

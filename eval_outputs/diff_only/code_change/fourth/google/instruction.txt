@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('verify that the number of notes displayed updates correctly when filtering by tag', async ({ page }) => {
+  // Seed the database with some notes (replace with your actual seeding method)
+  // For example, you could use an API endpoint to create notes
+  // or manually populate the database.
+  // Assuming the API is running and notes are already present.
+
+  // Navigate to the home page
+  await page.goto('http://localhost:3000');
+
+  // Get the initial number of notes displayed
+  const initialNoteCount = await page.getByRole('heading', { name: 'Your Notes' }).textContent();
+  const initialCountValue = parseInt(initialNoteCount.split('(')[1].split(')')[0]);
+
+  // Enter a tag filter
+  const tagFilter = 'example';
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill(tagFilter);
+
+  // Wait for the notes to update
+  await page.waitForTimeout(500); // Adjust as needed
+
+  // Get the updated number of notes displayed
+  const updatedNoteCount = await page.getByRole('heading', { name: 'Your Notes' }).textContent();
+  const updatedCountValue = parseInt(updatedNoteCount.split('(')[1].split(')')[0]);
+
+  // Assert that the number of notes has changed
+  expect(updatedCountValue).toBeLessThan(initialCountValue);
+});
+```

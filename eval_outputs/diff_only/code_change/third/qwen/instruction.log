@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › Copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › Copy note body to clipboard ────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Sample Note')[22m
+
+
+       8 |   // Assuming there's a note with text "Sample Note"
+       9 |   const note = await page.getByText('Sample Note');
+    > 10 |   await note.click();
+         |              ^
+      11 |
+      12 |   // Step 3: Click on the "Copy" button
+      13 |   const copyButton = await page.getByRole('button', { name: 'Copy' });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:10:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/instruction/instruction-Copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/instruction/instruction-Copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/qwen/artefacts/instruction/instruction-Copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/artefacts/instruction/instruction-Copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/qwen/artefacts/instruction/instruction-Copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › Copy note body to clipboard ─────────────────────────
+
+
+=== STDERR ===
+

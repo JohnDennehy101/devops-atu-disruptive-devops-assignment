@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+import { useNote } from '../src/context/NoteContext';
+
+test('Verify that clicking a note card selects the note and displays its content in the "Copy" button', async ({ page }) => {
+  // Mock the useNote hook to avoid needing a NoteProvider in the test
+  const useNoteMock = jest.fn(() => ({
+    selectedNote: null,
+    setSelectedNote: jest.fn(),
+  }));
+
+  // Replace the actual useNote hook with the mock
+  global.useNote = useNoteMock;
+
+  await page.goto('http://localhost:3000'); // Replace with your app's URL
+
+  // Find a note card by its title
+  const noteCard = page.getByRole('link', { name: 'Note Title' }); // Replace 'Note Title' with an actual note title
+
+  // Click the note card
+  await noteCard.click();
+
+  // Assert that the selected note is updated
+  expect(useNoteMock.mock.calls.length).toBe(1);
+  expect(useNoteMock.mock.calls[0][0].selectedNote).toBe(null);
+
+  // Find the "Copy" button
+  const copyButton = page.getByRole('button', { name: 'Copy' });
+
+  // Assert that the "Copy" button is visible
+  expect(copyButton).toBeVisible();
+});

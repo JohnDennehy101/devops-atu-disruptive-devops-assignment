@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page UI changes', async ({ page }) => {
+  await page.goto('/');
+
+  // Check if the new paragraph is visible
+  await expect(page.getByText("Create and manage notes. Your notes are stored locally.")).toBeVisible();
+
+  // Create a new note
+  await page.getByLabel("Title").fill("To clear");
+  await page.getByLabel("Body").fill("Body");
+  await page.getByLabel(/Tags/).fill("x");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Check if "Your Notes (1)" text is visible
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.getByRole("button", { name: "Clear all" }).click();
+
+  // Check if "No notes yet" and "Your Notes (0)" texts are visible
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});

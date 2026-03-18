@@ -1,0 +1,54 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test copy note body functionality
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test copy note body functionality ─────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveTitle[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/Home/[39m
+    Received string:  [31m"Vite + React"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveTitle" with timeout 5000ms[22m
+    [2m    9 × unexpected value "Vite + React"[22m
+
+
+       5 |
+       6 |   // Step 1: Navigate to the home page
+    >  7 |   await expect(page).toHaveTitle(/Home/);
+         |                      ^
+       8 |
+       9 |   // Step 2: Ensure that the "Copy" button is displayed
+      10 |   await expect(page.locator('button')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:7:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Test-copy-note-body-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Test-copy-note-body-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Test-copy-note-body-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Test-copy-note-body-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mistral/artefacts/chain-of-thought/chain-of-thought-Test-copy-note-body-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › Test copy note body functionality ──────────────
+
+
+=== STDERR ===
+

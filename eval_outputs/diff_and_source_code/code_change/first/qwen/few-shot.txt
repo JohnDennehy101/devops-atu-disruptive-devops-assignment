@@ -1,0 +1,29 @@
+test('clear all notes button is functional', async ({ page }) => {
+  await page.goto('/');
+
+  // Add some notes
+  await page.fill('#note-title', 'Test Note 1');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('button[type="submit"]');
+
+  await page.fill('#note-title', 'Test Note 2');
+  await page.fill('#note-body', 'Another test note.');
+  await page.fill('#note-tags', 'another, test');
+  await page.click('button[type="submit"]');
+
+  // Check that the notes are displayed
+  await expect(page.locator('button:has-text("Note #1")')).toBeVisible();
+  await expect(page.locator('button:has-text("Note #2")')).toBeVisible();
+
+  // Click the clear all button
+  await page.click('button:has-text("Clear all")');
+
+  // Check that the notes are no longer displayed
+  await expect(page.locator('button:has-text("Note #1")')).not.toBeVisible();
+  await expect(page.locator('button:has-text("Note #2")')).not.toBeVisible();
+
+  // Check that the savedIds array is empty in local storage
+  const savedIds = JSON.parse(await page.evaluate(() => localStorage.getItem('noteIds')));
+  expect(savedIds).toEqual([]);
+});

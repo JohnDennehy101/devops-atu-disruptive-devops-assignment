@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes', async ({ page }) => {
+  // Navigate to the Home page
+  await page.goto('http://localhost:3000'); // Replace with your app's URL
+
+  // Check if notes exist. If not, create one.
+  const notesCount = await page.locator('h3').filter({hasText: /Your Notes \(\d+\)/}).count();
+  if (notesCount === 0) {
+    // Create a note (implementation depends on your app's form)
+    // Example:
+    await page.fill('input[name="title"]', 'Test Note');
+    await page.fill('textarea[name="body"]', 'Test Body');
+    await page.click('button:has-text("Save")'); // Adjust selector as needed
+  }
+
+  // Verify the "Clear all" button is visible
+  await expect(page.locator('button:has-text("Clear all")')).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.click('button:has-text("Clear all")');
+
+  // Verify notes are cleared
+  await expect(page.locator('h3')).toContainText('Your Notes (0)');
+
+  // Verify local storage is cleared
+  const [newPage] = page.context().pages();
+  const localStorageValue = await newPage.evaluate(() => localStorage.getItem('noteIds'));
+  expect(localStorageValue).toBe(null); // Or expect(localStorageValue).toBe(JSON.stringify([])) if you want to check for an empty array
+});

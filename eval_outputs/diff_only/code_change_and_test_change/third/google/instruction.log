@@ -1,0 +1,26 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)
+
+> 1 | ### Test Description:
+    | ^
+  2 |
+  3 | This test verifies that the "Copy" button on the Note Details page correctly copies the note's body text to the clipboard. It uses `getByRole` and `getByText` locators for element identification and includes assertions to confirm the copied text matches the expected content. The test also grants clipboard permissions to the page context.
+  4 |
+
+   at instruction.spec.ts:1
+
+> 1 | ### Test Description:
+  2 |
+  3 | This test verifies that the "Copy" button on the Note Details page correctly copies the note's body text to the clipboard. It uses `getByRole` and `getByText` locators for element identification and includes assertions to confirm the copied text matches the expected content. The test also grants clipboard permissions to the page context.
+  4 |
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

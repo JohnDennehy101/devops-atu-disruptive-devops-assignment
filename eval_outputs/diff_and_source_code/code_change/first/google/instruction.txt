@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify "Clear all" button clears all notes', async ({ page }) => {
+  // Go to the home page
+  await page.goto('http://localhost:3000');
+
+  // Verify that the "Clear all" button is visible
+  const clearAllButton = await page.getByRole('button', { name: 'Clear all' });
+  await expect(clearAllButton).toBeVisible();
+
+  // Verify that there are notes to clear
+  const noteCountElement = await page.getByRole('heading', { name: 'Your Notes (0)' });
+  const noteCount = parseInt(await noteCountElement.textContent(), 10);
+  expect(noteCount).toBeGreaterThan(0);
+
+  // Click the "Clear all" button
+  await clearAllButton.click();
+
+  // Verify that the note count is now 0
+  const updatedNoteCountElement = await page.getByRole('heading', { name: 'Your Notes (0)' });
+  const updatedNoteCount = parseInt(await updatedNoteCountElement.textContent(), 10);
+  expect(updatedNoteCount).toBe(0);
+
+  // Verify that there are no notes displayed
+  const noNotesMessage = await page.getByText('No notes yet');
+  await expect(noNotesMessage).toBeVisible();
+});

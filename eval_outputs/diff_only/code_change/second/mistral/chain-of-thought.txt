@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('Test Home page', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('input[name="name"]').fill('John Doe');
+  await page.locator('input[name="email"]').fill('john.doe@example.com');
+  await page.locator('textarea[name="message"]').fill('Hello, World!');
+  await page.locator('button[type="submit"]').click();
+
+  await expect(page.locator('pre')).toHaveText(/{"name":"John Doe","email":"john.doe@example.com","message":"Hello, World!"}/);
+});

@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "can clear all notes from sidebar", first declared in instruction.spec.ts:3
+
+   at instruction.spec.ts:14
+
+  12 | })
+  13 |
+> 14 | test('can clear all notes from sidebar', async ({ page }) => {
+     | ^
+  15 |   await page.getByLabel('Title').fill('To clear')
+  16 |   await page.getByLabel('Body').fill('Body')
+  17 |   await page.getByLabel(/Tags/).fill('x')
+
+[1A[2K
+
+=== STDERR ===
+

@@ -1,0 +1,17 @@
+test("Copy button copies note body to clipboard", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"])
+
+  const bodyText = "Text to copy from note"
+  await page.getByLabel("Title").fill("Copy test")
+  await page.getByLabel("Body").fill(bodyText)
+  await page.getByLabel(/Tags/).fill("tag1")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await page.getByRole("button", { name: /Note #\d+/ }).click()
+  await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+
+  await page.getByRole("button", { name: "Copy" }).click()
+
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+  expect(clipboardText).toBe(bodyText)
+})

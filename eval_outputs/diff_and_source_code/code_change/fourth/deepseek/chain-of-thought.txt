@@ -1,0 +1,53 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:3000');
+  });
+
+  test('should display the correct number of notes', async ({ page }) => {
+    const noteCount = await page.locator('.text-gray-900').first().textContent();
+    expect(noteCount).toBe('Your Notes (0)');
+  });
+
+  test('should filter notes by tag', async ({ page }) => {
+    await page.fill('[placeholder="Filter by tag"]', 'test');
+    await page.waitForSelector('.text-gray-900');
+    const noteCount = await page.locator('.text-gray-900').first().textContent();
+    expect(noteCount).toBe('Your Notes (1)');
+  });
+
+  test('should create a new note', async ({ page }) => {
+    await page.fill('[placeholder="Filter by tag"]', 'test');
+    await page.click('button:has-text("Create Note")');
+    await page.fill('input[name="title"]', 'Test Note');
+    await page.fill('textarea[name="body"]', 'This is a test note.');
+    await page.fill('input[name="tags"]', 'test');
+    await page.click('button:has-text("Save")');
+    await page.waitForSelector('.text-gray-900');
+    const noteCount = await page.locator('.text-gray-900').first().textContent();
+    expect(noteCount).toBe('Your Notes (1)');
+  });
+
+  test('should edit a note', async ({ page }) => {
+    await page.fill('[placeholder="Filter by tag"]', 'test');
+    await page.click('button:has-text("Test Note #1")');
+    await page.click('button:has-text("Edit")');
+    await page.fill('input[name="title"]', 'Edited Note');
+    await page.click('button:has-text("Save")');
+    await page.waitForSelector('.text-gray-900');
+    const noteTitle = await page.locator('.text-gray-900').first().textContent();
+    expect(noteTitle).toBe('Edited Note');
+  });
+
+  test('should delete a note', async ({ page }) => {
+    await page.fill('[placeholder="Filter by tag"]', 'test');
+    await page.click('button:has-text("Test Note #1")');
+    await page.click('button:has-text("Delete")');
+    await page.waitForSelector('.text-gray-900');
+    const noteCount = await page.locator('.text-gray-900').first().textContent();
+    expect(noteCount).toBe('Your Notes (0)');
+  });
+});
+
+```

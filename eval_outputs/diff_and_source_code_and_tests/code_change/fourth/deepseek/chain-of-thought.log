@@ -1,0 +1,60 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/chain-of-thought.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can filter notes by tag
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can filter notes by tag ────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('button', { name: /Note #\d+/ })
+    Expected pattern: [32m/Note #\d+/[39m
+    Error: strict mode violation: getByRole('button', { name: /Note #\d+/ }) resolved to 2 elements:
+        1) <button class="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white">Note #1</button> aka getByRole('button', { name: 'Note #1' })
+        2) <button class="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white">Note #2</button> aka getByRole('button', { name: 'Note #2' })
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /Note #\d+/ })[22m
+
+
+      63 |
+      64 |     await page.getByPlaceholder("Filter by tag").fill("")
+    > 65 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveText(/Note #\d+/)
+         |                                                                   ^
+      66 |     await expect(page.getByText("Your Notes (2)")).toBeVisible()
+      67 |   })
+      68 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:65:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-Note-Taking-App-can-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-Note-Taking-App-can-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-Note-Taking-App-can-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/deepseek/artefacts/chain-of-thought/chain-of-thought-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › can filter notes by tag ─────
+  3 passed (2.3s)
+
+
+=== STDERR ===
+

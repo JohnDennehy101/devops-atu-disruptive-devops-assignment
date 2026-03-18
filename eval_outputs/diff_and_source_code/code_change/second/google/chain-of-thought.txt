@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('displays the number of saved notes', async ({ page }) => {
+  // Start the application (assuming it's running on localhost:3000)
+  await page.goto('http://localhost:3000');
+
+  // Verify that the "Your Notes" section is visible
+  await expect(page.locator('h3')).toContainText('Your Notes');
+
+  // Verify that the paragraph displaying the number of saved notes is present
+  await expect(page.locator('p')).toContainText('/ 5000');
+
+  // Verify that the number displayed in the paragraph is correct
+  const noteCountText = await page.locator('p').textContent();
+  const noteCount = parseInt(noteCountText.split('/')[0]);
+
+  // Create a few notes (replace with your note creation logic)
+  // For example, you might have a function to create a note
+  // await createNote(page, 'Note 1');
+  // await createNote(page, 'Note 2');
+
+  // Assuming you have created 2 notes, the expected count is 2
+  // await expect(page.locator('p')).toContainText('2 / 5000');
+});

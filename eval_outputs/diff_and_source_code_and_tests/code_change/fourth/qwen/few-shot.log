@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App with Tag Filtering › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/few-shot.spec.ts:22:3 › Note Taking App with Tag Filtering › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/few-shot.spec.ts:32:3 › Note Taking App with Tag Filtering › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/few-shot.spec.ts:47:3 › Note Taking App with Tag Filtering › can filter notes by tag
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:47:3 › Note Taking App with Tag Filtering › can filter notes by tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Note with tag1')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Note with tag1')[22m
+
+
+      61 |     await expect(page.getByText("Your Notes (1)")).toBeVisible();
+      62 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1);
+    > 63 |     await expect(page.getByText("Note with tag1")).toBeVisible();
+         |                                                    ^
+      64 |
+      65 |     // Filter by tag2
+      66 |     await page.getByPlaceholder("Filter by tag").fill("tag2");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:63:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/qwen/artefacts/few-shot/few-shot-Note-Taking-App-w-bf140-ing-can-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/qwen/artefacts/few-shot/few-shot-Note-Taking-App-w-bf140-ing-can-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/qwen/artefacts/few-shot/few-shot-Note-Taking-App-w-bf140-ing-can-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/qwen/artefacts/few-shot/few-shot-Note-Taking-App-w-bf140-ing-can-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/qwen/artefacts/few-shot/few-shot-Note-Taking-App-w-bf140-ing-can-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/few-shot.spec.ts:47:3 › Note Taking App with Tag Filtering › can filter notes by tag 
+  3 passed (7.3s)
+
+
+=== STDERR ===
+

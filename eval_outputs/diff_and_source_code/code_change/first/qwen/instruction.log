@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes functionality
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes functionality ──────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+       9 |   const notesCountText = await notesCountElement.textContent();
+      10 |   const notesCount = parseInt(notesCountText?.match(/\d+/)?.[0] || '0', 10);
+    > 11 |   expect(notesCount).toBeGreaterThan(0);
+         |                      ^
+      12 |
+      13 |   // Step 3: If there are notes, verify that the "Clear all" button is present
+      14 |   const clearAllButton = await page.getByRole('button', { name: 'Clear all' });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:11:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/instruction/instruction-Clear-all-notes-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/instruction/instruction-Clear-all-notes-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/instruction/instruction-Clear-all-notes-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/instruction/instruction-Clear-all-notes-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/qwen/artefacts/instruction/instruction-Clear-all-notes-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › Clear all notes functionality ───────────────────────
+
+
+=== STDERR ===
+

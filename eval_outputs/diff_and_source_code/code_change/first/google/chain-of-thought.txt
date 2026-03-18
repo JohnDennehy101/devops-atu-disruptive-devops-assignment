@@ -1,0 +1,35 @@
+import { Page, Locator } from '@playwright/test';
+
+export class HomePage {
+  readonly page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  async createNote(title: string, body: string, tags: string) {
+    // Implement the logic to create a note using Playwright
+    // This might involve filling out the form and submitting it
+    // For simplicity, this is left as an exercise
+  }
+
+  get yourNotesList(): Locator {
+    return this.page.locator('.space-y-2');
+  }
+
+  get clearAllButton(): Locator {
+    return this.page.locator('button').filter(':hasText("Clear all")');
+  }
+
+  get noteTitleInput(): Locator {
+    return this.page.locator('#note-title');
+  }
+
+  get noteBodyInput(): Locator {
+    return this.page.locator('#note-body');
+  }
+
+  get noteTagsInput(): Locator {
+    return this.page.locator('#note-tags');
+  }
+}

@@ -1,0 +1,107 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:4:1 › should display "No notes yet" when no notes are saved
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:4:1 › should display "No notes yet" when no notes are saved 
+
+    TypeError: page.setLocalStorage is not a function
+
+      4 | test('should display "No notes yet" when no notes are saved', async ({ page }) => {
+      5 |   await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [] }));
+    > 6 |   await page.setLocalStorage('noteIds', JSON.stringify([]));
+        |              ^
+      7 |   await page.setContent('<Home />');
+      8 |   await page.waitForSelector('text/No notes yet');
+      9 |   expect(await page.textContent('text/No notes yet')).toBe('No notes yet');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:6:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-e2f19-yet-when-no-notes-are-saved-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-e2f19-yet-when-no-notes-are-saved-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-e2f19-yet-when-no-notes-are-saved-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-e2f19-yet-when-no-notes-are-saved-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:12:1 › should display "Your Notes (1)" and "Note #1" when one note is saved
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:12:1 › should display "Your Notes (1)" and "Note #1" when one note is saved 
+
+    TypeError: page.setLocalStorage is not a function
+
+      12 | test('should display "Your Notes (1)" and "Note #1" when one note is saved', async ({ page }) => {
+      13 |   await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [{ id: 1, title: 'Test Note', body: 'This is a test note.', tags: [], archived: false, updated_at: new Date().toISOString() }] }));
+    > 14 |   await page.setLocalStorage('noteIds', JSON.stringify([1]));
+         |              ^
+      15 |   await page.setContent('<Home />');
+      16 |   await page.waitForSelector('text/Your Notes (1)');
+      17 |   expect(await page.textContent('text/Your Notes (1)')).toBe('Your Notes (1)');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:14:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-Y-e3cc3-te-1-when-one-note-is-saved-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-Y-e3cc3-te-1-when-one-note-is-saved-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-Y-e3cc3-te-1-when-one-note-is-saved-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-Y-e3cc3-te-1-when-one-note-is-saved-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:22:1 › should display "No notes match the filter" when filtering by tag with no matching notes
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:22:1 › should display "No notes match the filter" when filtering by tag with no matching notes 
+
+    TypeError: page.setLocalStorage is not a function
+
+      22 | test('should display "No notes match the filter" when filtering by tag with no matching notes', async ({ page }) => {
+      23 |   await page.route('**/api/notes', route => route.fulfill({ status: 200, json: [{ id: 1, title: 'Test Note', body: 'This is a test note.', tags: [], archived: false, updated_at: new Date().toISOString() }] }));
+    > 24 |   await page.setLocalStorage('noteIds', JSON.stringify([1]));
+         |              ^
+      25 |   await page.setContent('<Home />');
+      26 |   await page.locator('input[placeholder="Filter by tag"]').fill('nonexistent_tag');
+      27 |   await page.waitForSelector('text/No notes match the filter');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:24:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-a1129--tag-with-no-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-a1129--tag-with-no-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-a1129--tag-with-no-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/zero-shot/zero-shot-should-display-N-a1129--tag-with-no-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/zero-shot.spec.ts:4:1 › should display "No notes yet" when no notes are saved ─
+    [chromium] › e2e/zero-shot.spec.ts:12:1 › should display "Your Notes (1)" and "Note #1" when one note is saved 
+    [chromium] › e2e/zero-shot.spec.ts:22:1 › should display "No notes match the filter" when filtering by tag with no matching notes 
+
+
+=== STDERR ===
+

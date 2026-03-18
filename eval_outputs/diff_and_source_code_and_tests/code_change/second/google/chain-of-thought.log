@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar and the note count
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar and the note count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('1 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('1 / 5000')[22m
+
+
+      32 |     await expect(
+      33 |       page.getByText(`1 / 5000`),
+    > 34 |     ).toBeVisible()
+         |       ^
+      35 |   })
+      36 |
+      37 |   test("can open a note and see its details", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:34:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-6936c--sidebar-and-the-note-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-6936c--sidebar-and-the-note-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-6936c--sidebar-and-the-note-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-6936c--sidebar-and-the-note-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-Note-Taki-6936c--sidebar-and-the-note-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/chain-of-thought.spec.ts:37:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/chain-of-thought.spec.ts:52:3 › Note Taking App › displays 'No notes yet' when no notes are saved
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar and the note count 
+  3 passed (8.3s)
+
+
+=== STDERR ===
+

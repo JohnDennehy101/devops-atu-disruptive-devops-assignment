@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/instruction.spec.ts:12:3 › Note Taking App › can filter notes by tag
+[1A[2K[2/2] [chromium] › e2e/instruction.spec.ts:35:3 › Note Taking App › displays 'No notes match the filter' when no notes match
+[1A[2K  2 passed (1.7s)
+
+
+=== STDERR ===
+

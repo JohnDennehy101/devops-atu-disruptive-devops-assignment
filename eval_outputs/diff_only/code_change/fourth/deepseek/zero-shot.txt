@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test('should display notes based on filter', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Add initial notes
+  await page.evaluate(() => {
+    api.getNotes = jest.fn().mockResolvedValue([
+      { id: 1, tags: ['work', 'personal'] },
+      { id: 2, tags: ['work'] },
+      { id: 3, tags: ['personal'] },
+    ]);
+  });
+
+  // Wait for notes to load
+  await page.waitForSelector('text=Your Notes (3)');
+
+  // Filter by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'work');
+  await page.waitForSelector('text=Your Notes (2)');
+
+  // Check if only notes with 'work' tag are displayed
+  const notes = await page.evaluate(() => {
+    return Array.from(document.querySelectorAll('.note')).map(el => ({
+      id: parseInt(el.getAttribute('data-note-id')),
+      tags: Array.from(el.querySelectorAll('.tag')).map(tagEl => tagEl.textContent.trim()),
+    }));
+  });
+
+  expect(notes).toEqual([
+    { id: 1, tags: ['work', 'personal'] },
+    { id: 2, tags: ['work'] },
+  ]);
+});

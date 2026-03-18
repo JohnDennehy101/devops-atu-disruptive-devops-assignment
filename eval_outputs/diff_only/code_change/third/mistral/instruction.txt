@@ -1,0 +1,148 @@
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++                  type="button"
++                  onClick={copyNoteBody}
++                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline">
++                  Copy
++                </button>
+
+### GIT DIFF:
+
+--- a/app/src/pages/Note.tsx
++++ b/app/src/pages/Note.tsx
++  const copyNoteBody = () => {
++    if (selectedNote && navigator.clipboard) {
++      navigator.clipboard.writeText(selectedNote.body)
++    }
++  }
++
++                <button
++

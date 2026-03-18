@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('should display notes based on filter', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Add a note to trigger the notes display
+  await page.getByText('Create Note').click();
+  await page.getByPlaceholder('Title').fill('Test Note');
+  await page.getByPlaceholder('Body').fill('This is a test note.');
+  await page.getByPlaceholder('tag1, tag2, tag3').fill('test, note');
+  await page.getByText('Create Note').click();
+
+  // Filter the notes by tag
+  await page.getByPlaceholder('Filter by tag').fill('test');
+
+  // Check if the note is displayed
+  await expect(page.getByText('Note #1')).toBeVisible();
+});
+```

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › filter notes by tag
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › filter notes by tag ─────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Filter by tag')[22m
+
+
+      20 |     await page.getByRole("button", { name: "Create Note" }).click();
+      21 |
+    > 22 |     await page.getByLabel("Filter by tag").fill("tag1");
+         |                                            ^
+      23 |
+      24 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toBeVisible();
+      25 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).not().toHaveText("Note #2");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:22:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/instruction/instruction-Note-Taking-App-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/instruction/instruction-Note-Taking-App-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/instruction/instruction-Note-Taking-App-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/instruction/instruction-Note-Taking-App-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/instruction/instruction-Note-Taking-App-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › filter notes by tag ──────────────
+
+
+=== STDERR ===
+

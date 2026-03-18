@@ -1,0 +1,68 @@
+```json
+{
+  "test_file": "app/e2e/Home.spec.ts",
+  "test_name": "Copy button copies note body to clipboard",
+  "steps": [
+    {
+      "action": "grant clipboard permissions",
+      "locator": "context",
+      "method": "grantPermissions",
+      "args": ["clipboard-read", "clipboard-write"]
+    },
+    {
+      "action": "fill title",
+      "locator": "page",
+      "method": "fill",
+      "args": ["Title", "Copy test"]
+    },
+    {
+      "action": "fill body",
+      "locator": "page",
+      "method": "fill",
+      "args": ["Body", "Text to copy from note"]
+    },
+    {
+      "action": "fill tag",
+      "locator": "page",
+      "method": "fill",
+      "args": ["Tags", "tag1"]
+    },
+    {
+      "action": "create note",
+      "locator": "page",
+      "method": "click",
+      "args": ["Create Note"]
+    },
+    {
+      "action": "click on note",
+      "locator": "page",
+      "method": "click",
+      "args": ["Note #\\d+"]
+    },
+    {
+      "action": "expect note details to be visible",
+      "locator": "page",
+      "method": "toBeVisible",
+      "args": ["Note Details"]
+    },
+    {
+      "action": "click copy button",
+      "locator": "page",
+      "method": "click",
+      "args": ["Copy"]
+    },
+    {
+      "action": "verify clipboard content",
+      "locator": "page",
+      "method": "evaluate",
+      "args": [() => navigator.clipboard.readText()]
+    },
+    {
+      "action": "expect clipboard text to match note body",
+      "locator": "clipboardText",
+      "method": "toBe",
+      "args": ["Text to copy from note"]
+    }
+  ]
+}
+```

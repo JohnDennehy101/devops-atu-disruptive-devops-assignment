@@ -1,0 +1,43 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "copy note body button functionality with selected note", first declared in few-shot.spec.ts:21
+
+   at few-shot.spec.ts:40
+
+  38 | });
+  39 |
+> 40 | test('copy note body button functionality with selected note', async ({ page }) => {
+     | ^
+  41 |   await page.goto('/');
+  42 |
+  43 |   // Select a note to trigger the copy functionality
+
+Error: duplicate test title "copy note body button functionality with selected note", first declared in few-shot.spec.ts:40
+
+   at few-shot.spec.ts:59
+
+  57 | });
+  58 |
+> 59 | test('copy note body button functionality with selected note', async ({ page }) => {
+     | ^
+  60 |   await page.goto('/');
+  61 |
+  62 |   // Select a note to trigger the copy functionality
+
+Error: duplicate test title "copy note body button functionality with selected note", first declared in few-shot.spec.ts:59
+
+   at few-shot.spec.ts:78
+
+  76 | });
+  77 |
+> 78 | test('copy note body button functionality with selected note', async ({ page }) => {
+     | ^
+  79 |   await page.goto('/');
+  80 |
+  81 |   // Select a note to trigger the copy functionality
+
+[1A[2K
+
+=== STDERR ===
+

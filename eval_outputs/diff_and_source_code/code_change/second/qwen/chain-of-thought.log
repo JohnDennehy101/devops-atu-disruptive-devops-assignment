@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › character count updates correctly
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › character count updates correctly ─────────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test('character count updates correctly', async ({ page }) => {
+      4 |   // Step 1: Open the application
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 |
+      7 |   // Step 2: Navigate to the Home page
+      8 |   // Assuming the Home page is the default page
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/qwen/artefacts/chain-of-thought/chain-of-thought-character-count-updates-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/qwen/artefacts/chain-of-thought/chain-of-thought-character-count-updates-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/qwen/artefacts/chain-of-thought/chain-of-thought-character-count-updates-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/qwen/artefacts/chain-of-thought/chain-of-thought-character-count-updates-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › character count updates correctly ──────────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App › updates the number of notes displayed
+[1A[2K[2/2] [chromium] › e2e/few-shot.spec.ts:26:3 › Note Taking App › can filter notes by tag
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:26:3 › Note Taking App › can filter notes by tag ────────────
+
+    Error: page.fill: Unknown engine "placeholder" while parsing selector placeholder="Filter by tag"
+    Call log:
+    [2m  - waiting for locator('placeholder="Filter by tag"')[22m
+
+
+      35 |     await page.getByRole("button", { name: "Create Note" }).click()
+      36 |
+    > 37 |     await page.fill("placeholder=\"Filter by tag\"", "tag1")
+         |                ^
+      38 |     await expect(page.getByText("Your Notes (1)")).toBeVisible()
+      39 |     await expect(page.getByText("Note with tag2")).toBeHidden()
+      40 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:37:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/few-shot/few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/few-shot/few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/few-shot/few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/few-shot/few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/few-shot/few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/few-shot.spec.ts:26:3 › Note Taking App › can filter notes by tag ─────────────
+  1 passed (1.8s)
+
+
+=== STDERR ===
+

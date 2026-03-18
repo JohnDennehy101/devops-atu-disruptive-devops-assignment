@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('should display "Your Notes" with correct count', async ({ page }) => {
+  await page.goto('/');
+
+  // Get the "Your Notes" heading and verify its text content
+  const yourNotesHeading = await page.getByRole('heading', { name: 'Your Notes' });
+  expect(await yourNotesHeading.textContent()).toBe('Your Notes (0)');
+});
+
+test('should display "No notes yet" when no notes are present', async ({ page }) => {
+  await page.goto('/');
+
+  // Get the paragraph with "No notes yet" and verify its text content
+  const noNotesYetParagraph = await page.getByText('No notes yet');
+  expect(noNotesYetParagraph).toBeVisible();
+});
+
+test('should display filter input', async ({ page }) => {
+  await page.goto('/');
+
+  // Get the filter input and verify its placeholder text
+  const filterInput = await page.getByRole('textbox', { name: 'Filter by tag' });
+  expect(filterInput).toBeVisible();
+  expect(filterInput.getAttribute('placeholder')).toBe('Filter by tag');
+});

@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page functionality', async ({ page }) => {
+  // Step 1: Navigate to the Home page
+  await page.goto('/');
+
+  // Step 2: Check if the "Your Notes" heading is displayed
+  const yourNotesHeading = await page.getByRole('heading', { name: 'Your Notes' });
+  await expect(yourNotesHeading).toBeVisible();
+
+  // Step 3: Check if the "Clear all" button is displayed if there are notes
+  const clearAllButton = await page.getByText('Clear all');
+  const isClearAllButtonVisible = await clearAllButton.isVisible();
+  if (isClearAllButtonVisible) {
+    // Step 4: Click the "Clear all" button
+    await clearAllButton.click();
+  }
+
+  // Step 5: Verify that the "Your Notes" heading updates to show zero notes
+  const updatedYourNotesHeading = await page.getByRole('heading', { name: 'Your Notes (0)' });
+  await expect(updatedYourNotesHeading).toBeVisible();
+});

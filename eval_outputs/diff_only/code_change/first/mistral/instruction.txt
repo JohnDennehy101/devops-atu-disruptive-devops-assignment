@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes button', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Test case 1: Verify that the "Clear all" button is visible when there are notes
+  await page.locator('getByText("Your Notes (1)")').click();
+  await expect(page.locator('getByText("Clear all")')).toBeVisible();
+
+  // Test case 2: Verify that the "Clear all" button is hidden when there are no notes
+  await page.locator('getByText("Clear all")').click();
+  await expect(page.locator('getByText("Clear all")')).toBeHidden();
+
+  // Test case 3: Verify that clicking the "Clear all" button clears all notes and resets the form
+  await page.locator('getByText("Your Notes (1)")').click();
+  await page.locator('getByText("Clear all")').click();
+  await expect(page.locator('getByText("Your Notes (0)")')).toBeVisible();
+  await expect(page.locator('getByText("Clear all")')).toBeHidden();
+  await expect(page.locator('getByText("Form Title")')).toBeVisible();
+  await expect(page.locator('getByText("Form Body")')).toBeVisible();
+  await expect(page.locator('getByText("Form Tags")')).toBeVisible();
+  await expect(page.locator('getByText("Save Note")')).toBeVisible();
+});

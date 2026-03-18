@@ -1,0 +1,21 @@
+test('clear all button is functional', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Create a note
+  await page.getByLabel('Title').fill('Test Note');
+  await page.getByLabel('Body').fill('This is a test note.');
+  await page.getByLabel(/Tags/).fill('test, e2e');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Verify that the note is created and displayed
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toBeVisible();
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+  // Click on the "Clear all" button
+  await page.getByRole('button', { name: 'Clear all' }).click();
+
+  // Verify that all notes are cleared and the message updates
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).not.toBeVisible();
+});

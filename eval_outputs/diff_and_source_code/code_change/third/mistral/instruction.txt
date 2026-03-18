@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+import { getByRole, getByText } from '@playwright/test';
+
+test('Copy button should copy note body', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('http://localhost:3000/');
+
+  // Click on the "Create New Note" button
+  await page.locator(getByRole('button', { name: 'Create New Note' })).click();
+
+  // Fill in the note form
+  await page.locator(getByLabel('Title')).fill('Test Note');
+  await page.locator(getByLabel('Body')).fill('This is a test note.');
+  await page.locator(getByLabel('Tags (comma-separated)')).fill('tag1, tag2');
+
+  // Click on the "Create Note" button
+  await page.locator(getByRole('button', { name: 'Create Note' })).click();
+
+  // Wait for the note to be created
+  await page.waitForSelector(getByRole('button', { name: /Note \d+/ }));
+
+  // Click on the created note
+  await page.locator(getByRole('button', { name: /Note \d+/ })).click();
+
+  // Check if the "Copy" button is visible
+  const copyButton = page.locator(getByRole('button', { name: 'Copy' }));
+  expect(await copyButton.isVisible()).toBe(true);
+
+  // Click on the "Copy" button
+  await copyButton.click();
+
+  // Check if the note body was copied to the clipboard
+  const clipboardText = await navigator.clipboard.readText();
+  expect(clipboardText).toBe('This is a test note.');
+});

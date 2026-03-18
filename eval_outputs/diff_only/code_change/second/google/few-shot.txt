@@ -1,0 +1,4 @@
+test('displays form body length', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('1 / 5000')).toBeVisible();
+});

@@ -1,0 +1,11 @@
+test('displays character count in the note form', async ({ page }) => {
+  await page.goto('/');
+
+  // Fill the note body with some text
+  await page.fill('#note-body', 'This is a test note.');
+
+  // Check if the character count is displayed correctly
+  const charCountElement = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  const charCountText = await charCountElement.textContent();
+  expect(charCountText).toBe('21 / 5000');
+});

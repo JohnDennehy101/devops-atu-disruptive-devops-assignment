@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+import { HomePage } from '../../pages/Home';
+
+test('should display character count', async ({ page }) => {
+  await page.goto('/');
+  const homePage = new HomePage(page);
+  await homePage.fillFormBody('a'.repeat(5000));
+  await expect(homePage.getCharacterCount()).toHaveText('5000 / 5000');
+});

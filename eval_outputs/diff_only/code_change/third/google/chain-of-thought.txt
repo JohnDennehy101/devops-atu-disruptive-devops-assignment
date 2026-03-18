@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('copies note body to clipboard', async ({ page }) => {
+  // Mount the Home page (assuming your app has a way to mount the page)
+  await page.goto('/'); // Or whatever URL your Home page is at
+
+  // Find the note list and select a note.  This part needs to be adapted
+  // to your specific application's structure.  This is a placeholder.
+  // Assuming there's a note with a specific ID that you can click.
+  await page.click('[data-testid="note-1"]'); // Replace with your selector
+
+  // Find the "Copy" button and click it
+  await page.click('[data-testid="copy-button"]'); // Replace with your selector
+
+  // Get the body of the selected note.  Again, this needs to be adapted
+  // to your application's structure.  This is a placeholder.
+  const noteBody = await page.locator('[data-testid="note-body"]').innerText();
+
+  // Read the clipboard content
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+
+  // Assert that the clipboard content matches the note body
+  expect(clipboardText).toBe(noteBody);
+});

@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test('should display notes based on filter', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  // Check initial state with no notes
+  const noNotesElement = page.getByText('No notes yet');
+  await expect(noNotesElement).toBeVisible();
+
+  // Add a note to simulate having notes
+  await page.evaluate(() => {
+    // Assuming you have an API call to add a note
+    // This is a mock evaluation, replace with actual API call in your app
+    api.addNote({ id: 1, tags: ['test'], text: 'Test Note' });
+  });
+
+  // Refresh the page to see the added note
+  await page.reload();
+
+  // Check if the note is displayed
+  const noteElement = page.getByText('Test Note');
+  await expect(noteElement).toBeVisible();
+
+  // Filter by tag
+  const filterInput = page.getByPlaceholder('Filter by tag');
+  await filterInput.fill('test');
+
+  // Check if the note is still displayed after filtering
+  await expect(noteElement).toBeVisible();
+
+  // Clear the filter and check if no notes are displayed
+  await filterInput.fill('');
+  await expect(noNotesElement).toBeVisible();
+});

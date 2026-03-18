@@ -1,0 +1,55 @@
+import { render, screen, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import Home from './Home'
+
+describe('Home Page', () => {
+  it('renders the clear all button when there are notes', () => {
+    // Mock localStorage to simulate saved note IDs
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => JSON.stringify([1, 2, 3])),
+        setItem: jest.fn(),
+      },
+      writable: true,
+    })
+
+    render(<Home />)
+
+    expect(screen.getByText('Clear all')).toBeInTheDocument()
+  })
+
+  it('does not render the clear all button when there are no notes', () => {
+    // Mock localStorage to simulate no saved note IDs
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => JSON.stringify([])),
+        setItem: jest.fn(),
+      },
+      writable: true,
+    })
+
+    render(<Home />)
+
+    expect(screen.queryByText('Clear all')).not.toBeInTheDocument()
+  })
+
+  it('calls clearAllNotes when clear all button is clicked', () => {
+    // Mock localStorage to simulate saved note IDs
+    Object.defineProperty(window, 'localStorage', {
+      value: {
+        getItem: jest.fn(() => JSON.stringify([1, 2, 3])),
+        setItem: jest.fn(),
+      },
+      writable: true,
+    })
+
+    const { rerender } = render(<Home />)
+
+    const clearAllButton = screen.getByText('Clear all')
+    fireEvent.click(clearAllButton)
+
+    rerender(<Home />)
+
+    expect(screen.queryByText('Clear all')).not.toBeInTheDocument()
+  })
+})

@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › displays the number of saved notes
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › displays the number of saved notes ────────────
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test('displays the number of saved notes', async ({ page }) => {
+      4 |   // Start the application (assuming it's running on localhost:3000)
+    > 5 |   await page.goto('http://localhost:3000');
+        |              ^
+      6 |
+      7 |   // Verify that the "Your Notes" section is visible
+      8 |   await expect(page.locator('h3')).toContainText('Your Notes');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-displays-the-number-of-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-displays-the-number-of-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-displays-the-number-of-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/chain-of-thought/chain-of-thought-displays-the-number-of-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › displays the number of saved notes ─────────────
+
+
+=== STDERR ===
+

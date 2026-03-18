@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('displays correct number of notes after filtering', async ({ page }) => {
+  await page.goto('/');
+
+  // Assuming there are initially 5 notes
+  const initialNotesCount = 5;
+  await expect(page.locator('text=Your Notes (5)')).toHaveText(`Your Notes (${initialNotesCount})`);
+
+  // Add a note with a tag
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'testtag');
+  await page.click('button:has-text("Create Note")');
+
+  // Filter by the tag
+  await page.fill('#tag-filter', 'testtag');
+
+  // Check that the filtered count is correct
+  const filteredNotesCount = 1; // Assuming only one note matches the filter
+  await expect(page.locator('text=Your Notes (1)')).toHaveText(`Your Notes (${filteredNotesCount})`);
+});
+
+test('displays no notes message when no notes match the filter', async ({ page }) => {
+  await page.goto('/');
+
+  // Assuming there are initially 5 notes
+  const initialNotesCount = 5;
+  await expect(page.locator('text=Your Notes (5)')).toHaveText(`Your Notes (${initialNotesCount})`);
+
+  // Filter by a non-existent tag
+  await page.fill('#tag-filter', 'nonexistenttag');
+
+  // Check that the no notes message is displayed
+  await expect(page.locator('text=No notes match the filter')).toBeVisible();
+});

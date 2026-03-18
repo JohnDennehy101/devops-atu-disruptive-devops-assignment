@@ -1,0 +1,15 @@
+test('displays correct note count and filter input', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+  await page.locator('#note-title').fill('Test Note');
+  await page.locator('#note-body').fill('This is a test note.');
+  await page.locator('#note-tags').fill('tag1, tag2');
+  await page.locator('button').click();
+  await expect(page.locator('h3')).toHaveText('Your Notes (1)');
+  await page.locator('input[placeholder="Filter by tag"]').fill('tag1');
+  await expect(page.locator('button')).toHaveText('Note #1');
+  await page.locator('input[placeholder="Filter by tag"]').fill('');
+  await expect(page.locator('button')).toHaveText('Note #1');
+  await page.locator('input[placeholder="Filter by tag"]').fill('tag3');
+  await expect(page.locator('button')).toHaveText('No notes match the filter');
+});

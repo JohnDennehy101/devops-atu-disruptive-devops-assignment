@@ -1,0 +1,30 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (62:0)
+
+  60 |
+  61 |
+> 62 | ### Explanation:
+     | ^
+  63 |
+  64 | 1. **Test Description**: This test checks if the note body can be copied using the "Copy" button.
+  65 | 2. **Steps**:
+
+   at few-shot.spec.ts:62
+
+  60 |
+  61 |
+> 62 | ### Explanation:
+  63 |
+  64 | 1. **Test Description**: This test checks if the note body can be copied using the "Copy" button.
+  65 | 2. **Steps**:
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

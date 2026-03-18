@@ -1,0 +1,5 @@
+test('clear all button is functional', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#clear-all-button').click();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});

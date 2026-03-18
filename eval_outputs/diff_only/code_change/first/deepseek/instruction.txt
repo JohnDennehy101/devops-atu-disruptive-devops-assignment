@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes functionality', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('http://localhost:3000');
+
+  // Ensure the "Clear all" button is not displayed when there are no saved notes
+  const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+  await expect(clearAllButton).not.toBeVisible();
+
+  // Add a note
+  await page.getByPlaceholder('Title').fill('Test Note');
+  await page.getByPlaceholder('Body').fill('This is a test note.');
+  await page.getByRole('button', { name: 'Add Note' }).click();
+
+  // Ensure the "Clear all" button is displayed
+  await expect(clearAllButton).toBeVisible();
+
+  // Click the "Clear all" button and verify that all notes are cleared and the form is reset
+  await clearAllButton.click();
+  await expect(clearAllButton).not.toBeVisible();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByPlaceholder('Title')).toBeEmpty();
+  await expect(page.getByPlaceholder('Body')).toBeEmpty();
+  await expect(page.getByPlaceholder('Tags')).toBeEmpty();
+});

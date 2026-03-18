@@ -1,0 +1,116 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display "Clear all" button when there are saved notes
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display "Clear all" button when there are saved notes 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test.describe('Home Page', () => {
+      4 |   test.beforeEach(async ({ page }) => {
+    > 5 |     await page.goto('http://localhost:3000'); // Adjust the URL if your app runs on a different port or domain
+        |                ^
+      6 |   });
+      7 |
+      8 |   test('should display "Clear all" button when there are saved notes', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-700f0--when-there-are-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-700f0--when-there-are-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-700f0--when-there-are-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-700f0--when-there-are-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should not display "Clear all" button when there are no saved notes
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should not display "Clear all" button when there are no saved notes 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test.describe('Home Page', () => {
+      4 |   test.beforeEach(async ({ page }) => {
+    > 5 |     await page.goto('http://localhost:3000'); // Adjust the URL if your app runs on a different port or domain
+        |                ^
+      6 |   });
+      7 |
+      8 |   test('should display "Clear all" button when there are saved notes', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-8e151-en-there-are-no-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-8e151-en-there-are-no-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-8e151-en-there-are-no-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-8e151-en-there-are-no-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:31:3 › Home Page › should clear all notes, reset the form, and update local storage when "Clear all" button is clicked
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:31:3 › Home Page › should clear all notes, reset the form, and update local storage when "Clear all" button is clicked 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      3 | test.describe('Home Page', () => {
+      4 |   test.beforeEach(async ({ page }) => {
+    > 5 |     await page.goto('http://localhost:3000'); // Adjust the URL if your app runs on a different port or domain
+        |                ^
+      6 |   });
+      7 |
+      8 |   test('should display "Clear all" button when there are saved notes', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-ab084-Clear-all-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-ab084-Clear-all-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-ab084-Clear-all-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/zero-shot/zero-shot-Home-Page-should-ab084-Clear-all-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display "Clear all" button when there are saved notes 
+    [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should not display "Clear all" button when there are no saved notes 
+    [chromium] › e2e/zero-shot.spec.ts:31:3 › Home Page › should clear all notes, reset the form, and update local storage when "Clear all" button is clicked 
+
+
+=== STDERR ===
+

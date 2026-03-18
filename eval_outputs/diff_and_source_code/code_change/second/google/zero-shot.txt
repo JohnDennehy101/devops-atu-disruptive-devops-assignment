@@ -1,0 +1,15 @@
+import { test, expect } from "@playwright/test";
+
+test("form body length is displayed correctly", async ({ page }) => {
+  await page.goto("/");
+
+  // Wait for the form body length to be displayed
+  await page.locator(".text-xs").waitFor();
+
+  // Get the form body length
+  const formBodyLength = await page.locator(".text-xs").textContent();
+
+  // Check that the form body length is correct
+  expect(formBodyLength).toBe("0 / 5000");
+});
+```

@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/zero-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/zero-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/zero-shot.spec.ts:47:3 › Note Taking App › form body counter is visible and correct
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:47:3 › Note Taking App › form body counter is visible and correct 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/^\s*(\d+)\/\s*5000\s*$/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/^\s*(\d+)\/\s*5000\s*$/)[22m
+
+
+      48 |     await expect(
+      49 |       page.getByText(/^\s*(\d+)\/\s*5000\s*$/),
+    > 50 |     ).toBeVisible()
+         |       ^
+      51 |     await expect(
+      52 |       page.getByText(/^\s*0\/\s*5000\s*$/),
+      53 |     ).toBeVisible()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:50:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/zero-shot/zero-shot-Note-Taking-App--3b085-nter-is-visible-and-correct-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/zero-shot/zero-shot-Note-Taking-App--3b085-nter-is-visible-and-correct-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/zero-shot/zero-shot-Note-Taking-App--3b085-nter-is-visible-and-correct-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/zero-shot/zero-shot-Note-Taking-App--3b085-nter-is-visible-and-correct-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/zero-shot/zero-shot-Note-Taking-App--3b085-nter-is-visible-and-correct-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:47:3 › Note Taking App › form body counter is visible and correct 
+  3 passed (7.4s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Missing semicolon. (52:117)
+
+  50 | ### Explanation:
+  51 |
+> 52 | 1. **UI Change**: The UI change is the addition of a new paragraph element that displays the character count of the `formBody` (note body) with a limit of 5000 characters.
+     |                                                                                                                      ^
+  53 |
+  54 | 2. **Implementation**: The change is implemented in the `Home` component's JSX, specifically in the form section where the note is being created or updated. The new paragraph element is added to display the character count of `formBody`.
+  55 |
+
+   at chain-of-thought.spec.ts:52
+
+  50 | ### Explanation:
+  51 |
+> 52 | 1. **UI Change**: The UI change is the addition of a new paragraph element that displays the character count of the `formBody` (note body) with a limit of 5000 characters.
+     |                                                                                                                     ^
+  53 |
+  54 | 2. **Implementation**: The change is implemented in the `Home` component's JSX, specifically in the form section where the note is being created or updated. The new paragraph element is added to display the character count of `formBody`.
+  55 |
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

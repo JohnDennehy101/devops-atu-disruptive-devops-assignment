@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test("shows body character count and updates when typing", async ({ page }) => {
+  // Step 2: Verify that the initial character count is "0 / 5000".
+  await expect(page.getByText("0 / 5000")).toBeVisible();
+
+  // Step 3: Enter "Hello" into the "Body" text area.
+  await page.getByLabel("Body").fill("Hello");
+
+  // Step 4: Verify that the character count updates to "5 / 5000".
+  await expect(page.getByText("5 / 5000")).toBeVisible();
+
+  // Step 5: Enter " world" after the existing text in the "Body" text area.
+  await page.getByLabel("Body").fill(" world");
+
+  // Step 6: Verify that the character count updates to "11 / 5000".
+  await expect(page.getByText("11 / 5000")).toBeVisible();
+});

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › can clear all notes from sidebar
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › can clear all notes from sidebar ──────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button[name="Create Note"]')[22m
+
+
+      11 |
+      12 |   // Step 3: Click on the "Create Note" button
+    > 13 |   await page.click('button[name="Create Note"]');
+         |              ^
+      14 |
+      15 |   // Step 4: Verify that the note count is displayed correctly
+      16 |   await expect(page.locator('text="Your Notes (1)"')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:13:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-can-clear-all-notes-from-sidebar-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-can-clear-all-notes-from-sidebar-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-can-clear-all-notes-from-sidebar-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-can-clear-all-notes-from-sidebar-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/first/qwen/artefacts/chain-of-thought/chain-of-thought-can-clear-all-notes-from-sidebar-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › can clear all notes from sidebar ───────────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,6 @@
+test('formBody length is displayed', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+  await page.fill('#formBody', 'Hello, world!');
+  await expect(page.getByText('12 / 5000')).toBeVisible();
+});

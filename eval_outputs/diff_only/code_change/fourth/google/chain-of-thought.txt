@@ -1,0 +1,39 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify note filtering functionality', async ({ page }) => {
+  // Assuming you have a way to populate notes with tags.  This is a placeholder.
+  // You'll need to adapt this to your application's setup.
+  await page.goto('http://localhost:3000'); // Replace with your app's URL
+
+  // Wait for the page to load and the notes to be displayed.
+  await page.waitForSelector('text=Your Notes');
+
+  // 1. Initial Load - Verify correct number of notes
+  const initialNoteCount = await page.textContent('text=Your Notes');
+  const match = initialNoteCount?.match(/Your Notes\s*\(\s*(\d+)\s*\)/);
+  expect(match).toBeDefined();
+  const initialCount = parseInt(match![1], 10);
+
+  // 2. No Notes Yet - Test case when no notes exist
+  if (initialCount === 0) {
+    const noNotesText = await page.textContent('text=No notes yet');
+    expect(noNotesText).toBe('No notes yet');
+    return; // Skip further tests if no notes exist
+  }
+
+  // 3. Filter Applied - Notes Found
+  await page.fill('placeholder=Filter by tag', 'testTag'); // Replace 'testTag' with an actual tag
+  await page.waitForSelector('text=Your Notes');
+  const filteredNoteCount = await page.textContent('text=Your Notes');
+  const filteredMatch = filteredNoteCount?.match(/Your Notes\s*\(\s*(\d+)\s*\)/);
+  expect(filteredMatch).toBeDefined();
+  const filteredCount = parseInt(filteredMatch![1], 10);
+  expect(filteredCount).toBeGreaterThan(0); // Expect at least one note to be found
+
+  // 4. Filter Applied - No Notes Found
+  await page.fill('placeholder=Filter by tag', 'nonExistentTag'); // Replace 'nonExistentTag' with a tag that doesn't exist
+  await page.waitForSelector('text=Your Notes');
+  const noMatchText = await page.textContent('text=Your Notes');
+  const noMatch = noMatchText?.match(/Your Notes\s*\(\s*(\d+)\s*\)/);
+  expect(noMatch).toBeDefined();
+  const noMatchCount =

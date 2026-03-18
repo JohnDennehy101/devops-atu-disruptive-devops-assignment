@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+import { getByRole, getByText } from '@playwright/test';
+
+test('Clear all notes button', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  // Check initial state
+  await expect(getByRole(page, 'button', { name: 'Clear all' })).toBeVisible();
+  await expect(getByRole(page, 'button', { name: 'Clear all' })).toHaveText('Clear all');
+
+  // Click clear all button
+  await getByRole(page, 'button', { name: 'Clear all' }).click();
+
+  // Check after clicking clear all button
+  await expect(getByRole(page, 'button', { name: 'Clear all' })).not.toBeVisible();
+  await expect(getByRole(page, 'button', { name: 'Clear all' })).toHaveText('');
+});

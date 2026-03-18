@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('Character Count Validation', async ({ page }) => {
+  await page.goto('http://localhost:3000'); // Adjust the URL if necessary
+
+  // Fill the form with a long body exceeding 5000 characters
+  const longBody = 'a'.repeat(5001); // 5001 characters
+  await page.fill('input[name="note-body"]', longBody);
+
+  // Attempt to create a new note
+  await page.click('button:has-text("Create Note")');
+
+  // Verify that an error message is displayed
+  const errorMessage = await page.locator('.mb-4 p-4.bg-red-100.dark\\:bg-red-900.border.border-red-400.text-red-700.dark\\:text-red-200.rounded').innerText();
+  expect(errorMessage).toContain('Failed to create note');
+
+  // Clear the long body and attempt to update the note
+  await page.fill('input[name="note-body"]', '');
+  await page.click('button:has-text("Save")');
+
+  // Verify that an error message is displayed
+  const updateErrorMessage = await page.locator('.mb-4 p-4.bg-red-100.dark\\:bg-red-900.border.border-red-400.text-red-700.dark\\:text-red-200.rounded').innerText();
+  expect(updateErrorMessage).toContain('Failed to update note');
+});
+
+```

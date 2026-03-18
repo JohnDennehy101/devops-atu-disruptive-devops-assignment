@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+import { api } from '../services/api';
+
+test('should copy note body to clipboard', async ({ page }) => {
+  // Create a note via API
+  const createNoteInput = {
+    title: 'Test Note',
+    body: 'This is a test note body.',
+    tags: [],
+  };
+  const createdNote = await api.createNote(createNoteInput);
+
+  // Navigate to the Home page
+  await page.goto('http://localhost:3000/');
+
+  // Find the "Copy" button for the created note and click it
+  const copyButton = page.getByRole('button', { name: 'Copy' });
+  await copyButton.click();
+
+  // Get the copied text from the clipboard
+  const copiedText = await page.evaluate(() => {
+    return navigator.clipboard.readText();
+  });
+
+  // Assert that the copied text matches the note body
+  expect(copiedText).toBe(createdNote.body);
+
+  // Clean up: Delete the test note
+  await api.deleteNote(createdNote.id);
+});

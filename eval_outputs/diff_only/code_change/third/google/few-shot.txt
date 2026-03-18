@@ -1,0 +1,5 @@
+test('copy note body', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Copy' }).click();
+  await page.getByDisplayValue('Copied!').toBeVisible();
+});

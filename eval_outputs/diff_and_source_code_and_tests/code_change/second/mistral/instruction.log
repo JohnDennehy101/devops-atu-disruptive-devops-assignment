@@ -1,0 +1,79 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App - Character Count › displays character count in the form
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App - Character Count › displays character count in the form 
+
+    Error: locator.fill: value: expected string, got number
+
+       9 |
+      10 |   test("displays character count in the form", async ({ page }) => {
+    > 11 |     await page.getByLabel("Title").fill("A" * 5000)
+         |                                    ^
+      12 |     await page.getByLabel("Body").fill("B" * 5000)
+      13 |
+      14 |     await expect(page.getByText("5000 / 5000")).toBeVisible()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:11:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-063c1-character-count-in-the-form-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-063c1-character-count-in-the-form-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-063c1-character-count-in-the-form-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-063c1-character-count-in-the-form-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-063c1-character-count-in-the-form-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/instruction.spec.ts:17:3 › Note Taking App - Character Count › does not display character count when under limit
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:17:3 › Note Taking App - Character Count › does not display character count when under limit 
+
+    Error: locator.fill: value: expected string, got number
+
+      16 |
+      17 |   test("does not display character count when under limit", async ({ page }) => {
+    > 18 |     await page.getByLabel("Title").fill("A" * 4999)
+         |                                    ^
+      19 |     await page.getByLabel("Body").fill("B" * 4999)
+      20 |
+      21 |     await expect(page.queryByText("4999 / 5000")).not.toBeVisible()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:18:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-70f42-cter-count-when-under-limit-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-70f42-cter-count-when-under-limit-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-70f42-cter-count-when-under-limit-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-70f42-cter-count-when-under-limit-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/instruction/instruction-Note-Taking-Ap-70f42-cter-count-when-under-limit-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App - Character Count › displays character count in the form 
+    [chromium] › e2e/instruction.spec.ts:17:3 › Note Taking App - Character Count › does not display character count when under limit 
+
+
+=== STDERR ===
+

@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected "," (6:30)
+
+  4 |
+  5 | test("should display character count", () => {
+> 6 |   const wrapper = mount(<Home />)
+    |                               ^
+  7 |   const count = wrapper.find(".text-xs").text()
+  8 |   expect(count).toContain("0 / 5000")
+  9 | })
+
+   at zero-shot.spec.ts:6
+
+  4 |
+  5 | test("should display character count", () => {
+> 6 |   const wrapper = mount(<Home />)
+    |                              ^
+  7 |   const count = wrapper.find(".text-xs").text()
+  8 |   expect(count).toContain("0 / 5000")
+  9 | })
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

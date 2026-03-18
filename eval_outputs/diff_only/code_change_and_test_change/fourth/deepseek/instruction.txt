@@ -1,0 +1,90 @@
+```json
+{
+  "test": {
+    "title": "filter by tag shows only matching notes",
+    "steps": [
+      {
+        "action": "fill",
+        "locator": "input[aria-label='Title']",
+        "text": "Work note"
+      },
+      {
+        "action": "fill",
+        "locator": "textarea[aria-label='Body']",
+        "text": "Body one"
+      },
+      {
+        "action": "fill",
+        "locator": "input[aria-label=/Tags/]",
+        "text": "work, urgent"
+      },
+      {
+        "action": "click",
+        "locator": "button[role='button'][name='Create Note']"
+      },
+      {
+        "action": "fill",
+        "locator": "input[aria-label='Title']",
+        "text": "Personal note"
+      },
+      {
+        "action": "fill",
+        "locator": "textarea[aria-label='Body']",
+        "text": "Body two"
+      },
+      {
+        "action": "fill",
+        "locator": "input[aria-label=/Tags/]",
+        "text": "personal"
+      },
+      {
+        "action": "click",
+        "locator": "button[role='button'][name='Create Note']"
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "text=Your Notes (2)"
+      },
+      {
+        "action": "fill",
+        "locator": "input[placeholder='Filter by tag']",
+        "text": "work"
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "text=Your Notes (1)"
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "button[role='button'][name='Note #1']"
+      },
+      {
+        "assertion": "not.toBeVisible",
+        "locator": "button[role='button'][name='Note #2']"
+      },
+      {
+        "action": "fill",
+        "locator": "input[placeholder='Filter by tag']",
+        "text": "nonexistent"
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "text=No notes match the filter"
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "text=Your Notes (0)"
+      },
+      {
+        "action": "fill",
+        "locator": "input[placeholder='Filter by tag']",
+        "text": ""
+      },
+      {
+        "assertion": "toBeVisible",
+        "locator": "text=Your Notes (2)"
+      }
+    ]
+  }
+}
+```

@@ -1,0 +1,22 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+ReferenceError: require is not defined in ES module scope, you can use import instead
+
+   at chain-of-thought.spec.ts:1
+
+> 1 | const { test, expect } = require('@playwright/test');
+    |                          ^
+  2 |
+  3 | test.describe('Home Page Tests', () => {
+  4 |   test.beforeEach(async ({ page }) => {
+    at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:1:26
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

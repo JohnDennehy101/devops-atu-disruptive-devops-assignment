@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+import { Home } from '../src/pages/Home'; // Adjust path as needed
+import { FormBody } from '../src/types/form';
+
+test('displays form body length', async ({ mount }) => {
+  const mockFormBody: FormBody[] = Array.from({ length: 100 }, (_, i) => ({
+    id: `form-${i}`,
+    name: `Form ${i}`,
+    description: `Description ${i}`,
+  }));
+
+  await mount(<Home formBody={mockFormBody} />);
+
+  const paragraph = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+
+  await expect(paragraph).toHaveText('0.02');
+});

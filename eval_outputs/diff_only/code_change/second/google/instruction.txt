@@ -1,0 +1,97 @@
+--- a/app/src/components/Form.tsx
++++ b/app/src/components/Form.tsx
+@@ -14,6 +14,7 @@
+   const [formBody, setFormBody] = useState<string>("");
+ 
+   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
++    console.log("handle change", e.target.value);
+     setFormBody(e.target.value);
+   };
+ 
+@@ -23,6 +24,7 @@
+     const data = {
+       formBody,
+     };
++    console.log("form data", data);
+     onSubmit(data);
+   };
+ 
+@@ -39,6 +40,7 @@
+   return (
+     <form onSubmit={handleSubmit}>
+       <label htmlFor="formBody">Form Body:</label>
++      {console.log("form body", formBody)}
+       <textarea
+         id="formBody"
+         name="formBody"
+diff --git -U 100,100 -U 100,100 --no-index app/src/components/Form.tsx app/src/components/Form.tsx
+--- a/app/src/components/Form.tsx
++++ b/app/src/components/Form.tsx
+@@ -14,6 +14,7 @@
+   const [formBody, setFormBody] = useState<string>("");
+ 
+   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
++    console.log("handle change", e.target.value);
+     setFormBody(e.target.value);
+   };
+ 
+@@ -23,6 +24,7 @@
+     const data = {
+       formBody,
+     };
++    console.log("form data", data);
+     onSubmit(data);
+   };
+ 
+@@ -39,6 +40,7 @@
+   return (
+     <form onSubmit={handleSubmit}>
+       <label htmlFor="formBody">Form Body:</label>
++      {console.log("form body", formBody)}
+       <textarea
+         id="formBody"
+         name="formBody"
+diff --git -U 100,100 -U 100,100 --no-index app/src/pages/Home.tsx app/src/pages/Home.tsx
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
+@@ -11,6 +11,9 @@
+   import { useState } from'react';
+ 
+   interface FormBody {
++    formBody: string;
++  }
++
+   const Home: React.FC = () => {
+     const [formBody, setFormBody] = useState<string>("");
+ 
+@@ -18,6 +21,9 @@
+     return (
+       <div className="container mx-auto p-4">
+         <h1 className="text-2xl font-bold mb-4">Form</h1>
++        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
++          {formBody.length} / 5000
++        </p>
+         <Form onSubmit={onSubmit} />
+       </div>
+     );
+diff --git -U 100,100 -U 100,100 --no-index app/src/pages/Home.tsx app/src/pages/Home.tsx
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
+@@ -11,6 +11,9 @@
+   import { useState } from'react';
+ 
+   interface FormBody {
++    formBody: string;
++  }
++
+   const Home: React.FC = () => {
+     const [formBody, setFormBody] = useState<string>("");
+ 
+@@ -18,6 +21,9 @@
+     return (
+       <div className="container mx-auto p-4">
+         <h1 className="text-2xl font-bold mb-4">Form</h1>
++        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
++          {formBody.length} / 5000
++        </p>
+         <Form
