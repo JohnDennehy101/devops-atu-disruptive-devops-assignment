@@ -384,9 +384,7 @@ def main() -> None:
                 # Loop over the records
                 for i, r in enumerate(records, 1):
                     # Extract this info for logging and output dir creation purposes
-                    label = (
-                        f"{r['model_short']} / {r['prompt_type']} / {r['iteration']} / {r['scenario']} / {r.get('change_type', '')}"
-                    )
+                    label = f"{r['model_short']} / {r['prompt_type']} / {r['iteration']} / {r['scenario']} / {r.get('change_type', '')}"
                     print(f"  [{i}/{len(records)}] {label}", end=" ", flush=True)
 
                     # Determine prompt type and output dir for this test

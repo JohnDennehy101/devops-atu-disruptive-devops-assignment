@@ -83,7 +83,6 @@ def main():
 
     # Loop over prompts and call claude code cli for each
     for i, p in enumerate(prompts, 1):
-
         # Debug label to show progress in UI
         label = f"{p['scenario']} / {p['change_type']} / {p['iteration']} / {p['prompt_type']}"
         print(f"[{i}/{len(prompts)}] {label}", end=" ", flush=True)

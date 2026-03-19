@@ -84,11 +84,9 @@ def collect_unique_prompts() -> list[dict]:
 
     # Extract all model output JSON files
     for json_file in sorted(MODEL_OUTPUTS_PATH.rglob("*.json")):
-
         # Load the JSON file
         with open(json_file) as f:
             entries = json.load(f)
-
 
         # Extract scenario_dir, change_type, iteration from the file path structure
         parts = json_file.relative_to(MODEL_OUTPUTS_PATH).parts
@@ -128,14 +126,16 @@ def collect_unique_prompts() -> list[dict]:
             seen.add(key)
 
             # Append dict with list of relevant info for target prompt
-            prompts.append({
-                "prompt": prompt_text,
-                "prompt_type": prompt_type,
-                "scenario": scenario,
-                "scenario_dir": scenario_directory,
-                "change_type": change_type,
-                "iteration": iteration,
-            })
+            prompts.append(
+                {
+                    "prompt": prompt_text,
+                    "prompt_type": prompt_type,
+                    "scenario": scenario,
+                    "scenario_dir": scenario_directory,
+                    "change_type": change_type,
+                    "iteration": iteration,
+                }
+            )
 
     # Return the list of unique prompts
     return prompts
