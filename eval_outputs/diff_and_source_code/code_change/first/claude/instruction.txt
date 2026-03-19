@@ -1,0 +1,63 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    // Seed localStorage with some note IDs before navigating
+    await page.addInitScript(() => {
+      localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+    });
+    await page.goto('/');
+  });
+
+  test('should display "Clear all" button when notes exist', async ({ page }) => {
+    const clearButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearButton).toBeVisible();
+  });
+
+  test('should not display "Clear all" button when no notes exist', async ({ page }) => {
+    // Override with empty notes
+    await page.addInitScript(() => {
+      localStorage.setItem('noteIds', JSON.stringify([]));
+    });
+    await page.goto('/');
+
+    const clearButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearButton).not.toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" is clicked', async ({ page }) => {
+    // Verify notes are displayed before clearing
+    await expect(page.getByText('Your Notes (3)')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // Verify notes count is now 0
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // Verify "No notes yet" message appears
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // Verify "Clear all" button is no longer visible
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('should clear localStorage when "Clear all" is clicked', async ({ page }) => {
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    const storedIds = await page.evaluate(() => {
+      return JSON.parse(localStorage.getItem('noteIds') || '[]');
+    });
+
+    expect(storedIds).toEqual([]);
+  });
+
+  test('should display descriptive subtitle text', async ({ page }) => {
+    await expect(
+      page.getByText('Create and manage notes. Your notes are stored locally.')
+    ).toBeVisible();
+  });
+
+  test('should show note count in heading', async ({ page }) => {
+    await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  });
+});

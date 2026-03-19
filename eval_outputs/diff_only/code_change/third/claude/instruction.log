@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › copy note body to clipboard when Copy button is clicked
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › copy note body to clipboard when Copy button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+       9 |   const noteBody = 'This is a test note body for clipboard copy.';
+      10 |   await page.getByRole('textbox', { name: /body/i }).fill(noteBody);
+    > 11 |   await page.getByRole('button', { name: /save/i }).click();
+         |                                                     ^
+      12 |
+      13 |   // Select the note to ensure selectedNote is set
+      14 |   await page.getByText(noteBody).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:11:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/instruction/instruction-copy-note-body-81f44-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/instruction/instruction-copy-note-body-81f44-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/instruction/instruction-copy-note-body-81f44-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/instruction/instruction-copy-note-body-81f44-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/instruction/instruction-copy-note-body-81f44-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › copy note body to clipboard when Copy button is clicked 
+
+
+=== STDERR ===
+

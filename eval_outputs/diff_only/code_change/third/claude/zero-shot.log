@@ -1,0 +1,138 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:4:3 › Copy note body › should display a Copy button when a note is selected
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:4:3 › Copy note body › should display a Copy button when a note is selected 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Copy' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+       9 |     // Select/save the note
+      10 |     await page.keyboard.press('Enter');
+    > 11 |     await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+         |                                                              ^
+      12 |   });
+      13 |
+      14 |   test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:11:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-e4a99-ton-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-e4a99-ton-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-e4a99-ton-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-e4a99-ton-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-e4a99-ton-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:14:3 › Copy note body › should copy note body to clipboard when Copy button is clicked
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:14:3 › Copy note body › should copy note body to clipboard when Copy button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      19 |     await page.locator('textarea, [contenteditable="true"], input[type="text"]').first().fill(noteBody);
+      20 |     await page.keyboard.press('Enter');
+    > 21 |     await page.getByRole('button', { name: 'Copy' }).click();
+         |                                                      ^
+      22 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+      23 |     expect(clipboardText).toBe(noteBody);
+      24 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:21:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-89d81-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-89d81-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-89d81-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-89d81-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-s-89d81-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:26:3 › Copy note body › Copy button should have correct styling
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:26:3 › Copy note body › Copy button should have correct styling 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveClass[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Copy' })
+    Expected pattern: [32m/text-sm/[39m
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toHaveClass" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      30 |     await page.keyboard.press('Enter');
+      31 |     const copyButton = page.getByRole('button', { name: 'Copy' });
+    > 32 |     await expect(copyButton).toHaveClass(/text-sm/);
+         |                              ^
+      33 |     await expect(copyButton).toHaveClass(/text-blue-600/);
+      34 |   });
+      35 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:32:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-C-17a62-should-have-correct-styling-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-C-17a62-should-have-correct-styling-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-C-17a62-should-have-correct-styling-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-C-17a62-should-have-correct-styling-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-C-17a62-should-have-correct-styling-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/zero-shot.spec.ts:4:3 › Copy note body › should display a Copy button when a note is selected 
+    [chromium] › e2e/zero-shot.spec.ts:14:3 › Copy note body › should copy note body to clipboard when Copy button is clicked 
+    [chromium] › e2e/zero-shot.spec.ts:26:3 › Copy note body › Copy button should have correct styling 
+
+
+=== STDERR ===
+

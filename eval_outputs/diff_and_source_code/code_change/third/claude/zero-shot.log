@@ -1,0 +1,135 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/zero-shot.spec.ts:23:3 › Copy note body functionality › should display a Copy button when a note is selected
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:23:3 › Copy note body functionality › should display a Copy button when a note is selected 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Copy' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      30 |
+      31 |     await page.getByText("Note #1").click();
+    > 32 |     await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+         |                                                              ^
+      33 |   });
+      34 |
+      35 |   test("should copy note body to clipboard when Copy button is clicked", async ({
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:32:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-1e505-ton-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-1e505-ton-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-1e505-ton-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-1e505-ton-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-1e505-ton-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/zero-shot.spec.ts:35:3 › Copy note body functionality › should copy note body to clipboard when Copy button is clicked
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:35:3 › Copy note body functionality › should copy note body to clipboard when Copy button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      45 |
+      46 |     await page.getByText("Note #1").click();
+    > 47 |     await page.getByRole("button", { name: "Copy" }).click();
+         |                                                      ^
+      48 |
+      49 |     const clipboardText = await page.evaluate(() =>
+      50 |       navigator.clipboard.readText()
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:47:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-b13e7-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-b13e7-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-b13e7-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-b13e7-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-b13e7-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/zero-shot.spec.ts:55:3 › Copy note body functionality › should not show Copy button when no note is selected
+[1A[2K[4/4] [chromium] › e2e/zero-shot.spec.ts:61:3 › Copy note body functionality › should not show Copy button when in editing mode
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:61:3 › Copy note body functionality › should not show Copy button when in editing mode 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Edit' })[22m
+
+
+      68 |
+      69 |     await page.getByText("Note #1").click();
+    > 70 |     await page.getByRole("button", { name: "Edit" }).click();
+         |                                                      ^
+      71 |
+      72 |     await expect(page.getByRole("button", { name: "Copy" })).not.toBeVisible();
+      73 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:70:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-e266d-button-when-in-editing-mode-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-e266d-button-when-in-editing-mode-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-e266d-button-when-in-editing-mode-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-e266d-button-when-in-editing-mode-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/zero-shot/zero-shot-Copy-note-body-f-e266d-button-when-in-editing-mode-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/zero-shot.spec.ts:23:3 › Copy note body functionality › should display a Copy button when a note is selected 
+    [chromium] › e2e/zero-shot.spec.ts:35:3 › Copy note body functionality › should copy note body to clipboard when Copy button is clicked 
+    [chromium] › e2e/zero-shot.spec.ts:61:3 › Copy note body functionality › should not show Copy button when in editing mode 
+  1 passed (49.7s)
+
+
+=== STDERR ===
+

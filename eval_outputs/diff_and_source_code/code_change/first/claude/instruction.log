@@ -1,0 +1,17 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/instruction.spec.ts:12:3 › Clear All Notes functionality › should display "Clear all" button when notes exist
+[1A[2K[2/6] [chromium] › e2e/instruction.spec.ts:17:3 › Clear All Notes functionality › should not display "Clear all" button when no notes exist
+[1A[2K[3/6] [chromium] › e2e/instruction.spec.ts:28:3 › Clear All Notes functionality › should clear all notes when "Clear all" is clicked
+[1A[2K[4/6] [chromium] › e2e/instruction.spec.ts:44:3 › Clear All Notes functionality › should clear localStorage when "Clear all" is clicked
+[1A[2K[5/6] [chromium] › e2e/instruction.spec.ts:54:3 › Clear All Notes functionality › should display descriptive subtitle text
+[1A[2K[6/6] [chromium] › e2e/instruction.spec.ts:60:3 › Clear All Notes functionality › should show note count in heading
+[1A[2K  6 passed (2.5s)
+
+
+=== STDERR ===
+

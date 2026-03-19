@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character count for note body field', async ({ page }) => {
+  await page.goto('/');
+
+  const bodyTextbox = page.getByRole('textbox', { name: 'Body' });
+  await expect(bodyTextbox).toBeVisible();
+
+  // Initially the counter should show 0 / 5000
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  // Type some text and verify the counter updates
+  await bodyTextbox.fill('Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+
+  // Clear and type longer text to verify dynamic update
+  await bodyTextbox.fill('Test');
+  await expect(page.getByText('4 / 5000')).toBeVisible();
+});

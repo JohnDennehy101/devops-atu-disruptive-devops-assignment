@@ -1,0 +1,37 @@
+test('clear all notes button removes all saved notes', async ({ page }) => {
+  await page.goto('/');
+  
+  // Seed localStorage with some note IDs so "Clear all" button appears
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+  });
+  await page.reload();
+
+  // Verify notes are listed and "Clear all" is visible
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeVisible();
+
+  // Click "Clear all"
+  await page.getByText('Clear all').click();
+
+  // Verify all notes are removed
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeHidden();
+});
+
+test('clear all button is hidden when there are no notes', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify([]));
+  });
+  await page.reload();
+
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeHidden();
+});
+
+test('subtitle text is displayed on the page', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+});

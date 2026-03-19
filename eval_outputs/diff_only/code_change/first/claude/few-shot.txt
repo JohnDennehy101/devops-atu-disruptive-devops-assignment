@@ -1,0 +1,9 @@
+test('clear all notes button removes all notes', async ({ page }) => {
+  await page.goto('/');
+  await page.fill('#title', 'Test Note');
+  await page.fill('#body', 'Test Body');
+  await page.click('#save-note');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await page.getByRole('button', { name: 'Clear all' }).click();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});

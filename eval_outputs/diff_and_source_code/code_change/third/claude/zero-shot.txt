@@ -1,0 +1,74 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Copy note body functionality", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route("**/api/notes/*", (route) => {
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          id: 1,
+          title: "Test Note",
+          body: "This is the note body to copy",
+          tags: ["test"],
+          archived: false,
+          updated_at: new Date().toISOString(),
+        }),
+      });
+    });
+
+    await page.goto("/");
+  });
+
+  test("should display a Copy button when a note is selected", async ({
+    page,
+  }) => {
+    await page.evaluate(() => {
+      localStorage.setItem("noteIds", JSON.stringify([1]));
+    });
+    await page.reload();
+
+    await page.getByText("Note #1").click();
+    await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+  });
+
+  test("should copy note body to clipboard when Copy button is clicked", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+    await page.evaluate(() => {
+      localStorage.setItem("noteIds", JSON.stringify([1]));
+    });
+    await page.reload();
+
+    await page.getByText("Note #1").click();
+    await page.getByRole("button", { name: "Copy" }).click();
+
+    const clipboardText = await page.evaluate(() =>
+      navigator.clipboard.readText()
+    );
+    expect(clipboardText).toBe("This is the note body to copy");
+  });
+
+  test("should not show Copy button when no note is selected", async ({
+    page,
+  }) => {
+    await expect(page.getByRole("button", { name: "Copy" })).not.toBeVisible();
+  });
+
+  test("should not show Copy button when in editing mode", async ({
+    page,
+  }) => {
+    await page.evaluate(() => {
+      localStorage.setItem("noteIds", JSON.stringify([1]));
+    });
+    await page.reload();
+
+    await page.getByText("Note #1").click();
+    await page.getByRole("button", { name: "Edit" }).click();
+
+    await expect(page.getByRole("button", { name: "Copy" })).not.toBeVisible();
+  });
+});

@@ -1,0 +1,51 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Tag filter on Your Notes sidebar", () => {
+  test("filters notes by tag and shows appropriate empty state", async ({ page }) => {
+    await page.goto("/");
+
+    // Create first note with tag "work"
+    await page.fill("#note-title", "Work Note");
+    await page.fill("#note-body", "This is a work note");
+    await page.fill("#note-tags", "work");
+    await page.click('button:has-text("Create Note")');
+
+    // Create second note with tag "personal"
+    await page.fill("#note-title", "Personal Note");
+    await page.fill("#note-body", "This is a personal note");
+    await page.fill("#note-tags", "personal");
+    await page.click('button:has-text("Create Note")');
+
+    // Both notes should be listed; count should be 2
+    const heading = page.locator("h3", { hasText: "Your Notes" });
+    await expect(heading).toContainText("Your Notes (2)");
+
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await expect(filterInput).toBeVisible();
+
+    // Filter by "work" — only one note should match
+    await filterInput.fill("work");
+    await expect(heading).toContainText("Your Notes (1)");
+    const noteButtons = page.locator("button", { hasText: /^Note #/ });
+    await expect(noteButtons).toHaveCount(1);
+
+    // Filter by a tag that matches nothing
+    await filterInput.fill("nonexistent");
+    await expect(heading).toContainText("Your Notes (0)");
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+
+    // Clear filter — all notes should reappear
+    await filterInput.fill("");
+    await expect(heading).toContainText("Your Notes (2)");
+    await expect(noteButtons).toHaveCount(2);
+  });
+
+  test("shows 'No notes yet' when there are no saved notes", async ({ page }) => {
+    // Clear localStorage so no notes exist
+    await page.goto("/");
+    await page.evaluate(() => localStorage.removeItem("noteIds"));
+    await page.reload();
+
+    await expect(page.getByText("No notes yet")).toBeVisible();
+  });
+});

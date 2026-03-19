@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › copy button copies note body to clipboard
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › copy button copies note body to clipboard ─────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.note-item').first()[22m
+
+
+       8 |
+       9 |   // Select a note (adjust selector based on actual UI)
+    > 10 |   await page.locator('.note-item').first().click();
+         |                                            ^
+      11 |
+      12 |   // Get the note body text displayed in the UI
+      13 |   const noteBodyText = await page.locator('.note-body').innerText();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:10:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/chain-of-thought/chain-of-thought-copy-button-copies-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/chain-of-thought/chain-of-thought-copy-button-copies-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/chain-of-thought/chain-of-thought-copy-button-copies-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/chain-of-thought/chain-of-thought-copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/chain-of-thought/chain-of-thought-copy-button-copies-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › copy button copies note body to clipboard ──────
+
+
+=== STDERR ===
+

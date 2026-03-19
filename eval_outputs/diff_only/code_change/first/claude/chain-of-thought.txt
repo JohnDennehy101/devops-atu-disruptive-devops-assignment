@@ -1,0 +1,40 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Clear All Notes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+  });
+
+  test("displays subtitle text", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally.")
+    ).toBeVisible();
+  });
+
+  test("does not show Clear all button when no notes exist", async ({ page }) => {
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("shows Clear all button after creating a note and clears all notes when clicked", async ({ page }) => {
+    // Create a note
+    await page.getByPlaceholder("Note title").fill("Test Note");
+    await page.getByPlaceholder("Note body").fill("Test Body");
+    await page.getByRole("button", { name: /save/i }).click();
+
+    // Verify note exists and Clear all is visible
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    const clearAllButton = page.getByRole("button", { name: "Clear all" });
+    await expect(clearAllButton).toBeVisible();
+
+    // Click Clear all
+    await clearAllButton.click();
+
+    // Verify notes are cleared
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(clearAllButton).not.toBeVisible();
+
+    // Verify localStorage is cleared
+    const noteIds = await page.evaluate(() => localStorage.getItem("noteIds"));
+    expect(JSON.parse(noteIds!)).toEqual([]);
+  });
+});

@@ -1,0 +1,36 @@
+test.describe("Tag filter in sidebar", () => {
+  test("filters notes by tag", async ({ page }) => {
+    // Create first note with "work" tag
+    await page.getByLabel("Title").fill("Work note")
+    await page.getByLabel("Body").fill("Work body")
+    await page.getByLabel(/Tags/).fill("work")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Create second note with "personal" tag
+    await page.getByLabel("Title").fill("Personal note")
+    await page.getByLabel("Body").fill("Personal body")
+    await page.getByLabel(/Tags/).fill("personal")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    // Verify filter input exists
+    const filterInput = page.getByPlaceholder("Filter by tag")
+    await expect(filterInput).toBeVisible()
+
+    // Filter by "work" — only one note should match
+    await filterInput.fill("work")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+
+    // Filter by non-existent tag — no matches
+    await filterInput.fill("nonexistent")
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+
+    // Clear filter — all notes reappear
+    await filterInput.fill("")
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2)
+  })
+})

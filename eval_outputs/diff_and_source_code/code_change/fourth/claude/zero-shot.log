@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/zero-shot.spec.ts:8:3 › Tag filter on Home page › should display a tag filter input
+[1A[2K[2/7] [chromium] › e2e/zero-shot.spec.ts:13:3 › Tag filter on Home page › should show 'No notes yet' when no notes exist
+[1A[2K[3/7] [chromium] › e2e/zero-shot.spec.ts:19:3 › Tag filter on Home page › should filter notes by tag and show count
+[1A[2K[4/7] [chromium] › e2e/zero-shot.spec.ts:43:3 › Tag filter on Home page › should show 'No notes match the filter' when filter has no matches
+[1A[2K[5/7] [chromium] › e2e/zero-shot.spec.ts:60:3 › Tag filter on Home page › should show all notes when filter is cleared
+[1A[2K[6/7] [chromium] › e2e/zero-shot.spec.ts:78:3 › Tag filter on Home page › should filter case-insensitively
+[1A[2K[7/7] [chromium] › e2e/zero-shot.spec.ts:92:3 › Tag filter on Home page › should filter by partial tag match
+[1A[2K  7 passed (2.9s)
+
+
+=== STDERR ===
+

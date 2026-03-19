@@ -1,0 +1,22 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+ReferenceError: test is not defined
+
+   at chain-of-thought.spec.ts:1
+
+> 1 | test("can copy note body to clipboard", async ({ page, context }) => {
+    | ^
+  2 |   // Grant clipboard permissions
+  3 |   await context.grantPermissions(["clipboard-read", "clipboard-write"])
+  4 |
+    at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:1:1
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

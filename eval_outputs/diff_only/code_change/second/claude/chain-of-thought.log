@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Character counter for form body › displays initial character count of 0 / 5000
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:13:3 › Character counter for form body › updates character count as user types
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:21:3 › Character counter for form body › resets character count when textarea is cleared
+[1A[2K  3 passed (1.6s)
+
+
+=== STDERR ===
+

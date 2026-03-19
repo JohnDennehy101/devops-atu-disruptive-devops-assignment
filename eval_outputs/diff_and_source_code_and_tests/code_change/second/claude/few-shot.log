@@ -1,0 +1,22 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+ReferenceError: test is not defined
+
+   at few-shot.spec.ts:1
+
+> 1 | test("displays character count for body field", async ({ page }) => {
+    | ^
+  2 |   await expect(page.getByText("0 / 5000")).toBeVisible();
+  3 |   await page.getByLabel("Body").fill("Hello");
+  4 |   await expect(page.getByText("5 / 5000")).toBeVisible();
+    at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:1:1
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

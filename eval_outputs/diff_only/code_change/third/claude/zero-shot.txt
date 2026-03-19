@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy note body', () => {
+  test('should display a Copy button when a note is selected', async ({ page }) => {
+    await page.goto('/');
+    // Create a note first
+    await page.getByRole('button', { name: /new|add|create/i }).click();
+    await page.locator('textarea, [contenteditable="true"], input[type="text"]').first().fill('Test note body content');
+    // Select/save the note
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+
+  test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('/');
+    const noteBody = 'This is the note body to copy';
+    await page.getByRole('button', { name: /new|add|create/i }).click();
+    await page.locator('textarea, [contenteditable="true"], input[type="text"]').first().fill(noteBody);
+    await page.keyboard.press('Enter');
+    await page.getByRole('button', { name: 'Copy' }).click();
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(noteBody);
+  });
+
+  test('Copy button should have correct styling', async ({ page }) => {
+    await page.goto('/');
+    await page.getByRole('button', { name: /new|add|create/i }).click();
+    await page.locator('textarea, [contenteditable="true"], input[type="text"]').first().fill('Some content');
+    await page.keyboard.press('Enter');
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).toHaveClass(/text-sm/);
+    await expect(copyButton).toHaveClass(/text-blue-600/);
+  });
+});

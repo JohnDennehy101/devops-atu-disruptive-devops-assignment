@@ -1,0 +1,7 @@
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('input[placeholder="Filter by tag"]').fill('nonexistent-tag');
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  await page.locator('input[placeholder="Filter by tag"]').clear();
+  await expect(page.getByText('No notes match the filter')).toBeHidden();
+});

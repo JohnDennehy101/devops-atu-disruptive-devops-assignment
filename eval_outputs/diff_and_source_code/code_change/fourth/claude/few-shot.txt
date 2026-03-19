@@ -1,0 +1,33 @@
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('/');
+
+  // Create a note with a specific tag
+  await page.fill('#note-title', 'Tagged Note');
+  await page.fill('#note-body', 'This note has a tag');
+  await page.fill('#note-tags', 'important');
+  await page.click('button:has-text("Create Note")');
+
+  // Create another note with a different tag
+  await page.fill('#note-title', 'Other Note');
+  await page.fill('#note-body', 'This note has a different tag');
+  await page.fill('#note-tags', 'misc');
+  await page.click('button:has-text("Create Note")');
+
+  // Both notes should be visible in the sidebar
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+  // Filter by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'important');
+
+  // Only the matching note should be counted
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+  // Filter with no matches
+  await page.fill('input[placeholder="Filter by tag"]', 'nonexistent');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+  // Clear filter to show all notes again
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+});
