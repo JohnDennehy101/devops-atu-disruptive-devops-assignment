@@ -9,68 +9,19 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-
-# For best practice, defining these at top for readability
-REPO_ROOT_PATH = Path(__file__).parent.parent
-MODEL_OUTPUTS_PATH = REPO_ROOT_PATH / "model_outputs"
-VERSIONS_ROOT_PATH = REPO_ROOT_PATH / "versions"
-APP_DIR_PATH = REPO_ROOT_PATH / "app"
-HOME_TSX_PATH = APP_DIR_PATH / "src" / "pages" / "Home.tsx"
-E2E_DIR_PATH = APP_DIR_PATH / "e2e"
-EVAL_OUTPUTS_DIR_PATH = REPO_ROOT_PATH / "eval_outputs"
-DEV_SERVER_URL = "http://localhost:5175"
-
-
-# Mapping from change_type (MODEL_OUTPUTS_PATH path segment) to versions/ subdirectory
-CHANGE_TYPE_MAP = {
-    "code_change_and_test_change": "code_change_and_tests",
-    "code_change": "code_change_only",
-}
-
-# Mapping from iteration keyword to target directory in versions/
-ITERATION_MAP = {
-    "first": "changes_1",
-    "second": "changes_2",
-    "third": "changes_3",
-    "fourth": "changes_4",
-}
-
-
-def extract_typescript(raw: str) -> str:
-    """
-    Try extract the Playwright test code from a model response that may contain
-    multiple code blocks and chain-of-thought reasoning.
-    Prioritises ```typescript blocks containing test() over other blocks.
-    """
-    # Try extract all typescript / ts blocks in the model output (as models tend to include other text)
-    blocks = re.findall(r"```(\w*)\s*\n(.*?)```", raw, re.DOTALL)
-
-    # If code block found and test within it, return immediately
-    for language, content in blocks:
-        if language in ("typescript", "ts") and re.search(r"\btest\s*\(", content):
-            return content.strip()
-
-    # No test block found but typescript or ts block found - returned as should be able to run
-    for language, content in blocks:
-        if language in ("typescript", "ts"):
-            return content.strip()
-
-    # No typescript block found but test block found so again should be usable
-    for language, content in blocks:
-        if re.search(r"\btest\s*\(", content):
-            return content.strip()
-
-    # If no match for others, revert to regex scans for import statements, test blocks, test defintions
-    for item in [
-        r"(import\s+\{[^}]*test[^}]*\}.*)",
-        r"(test\.describe\s*\(.*)",
-        r"(test\s*\(.*)",
-    ]:
-        match = re.search(item, raw, re.DOTALL)
-        if match:
-            return match.group(1).strip()
-
-    return raw
+from shared import (
+    APP_DIR_PATH,
+    CHANGE_TYPE_MAP,
+    DEV_SERVER_URL,
+    E2E_DIR_PATH,
+    EVAL_OUTPUTS_DIR_PATH,
+    HOME_TSX_PATH,
+    ITERATION_MAP,
+    MODEL_OUTPUTS_PATH,
+    REPO_ROOT_PATH,
+    VERSIONS_ROOT_PATH,
+    extract_typescript,
+)
 
 
 def generate_output_directory(record: dict) -> Path:

@@ -1,0 +1,19 @@
+[
+    {
+        "timestamp": "2026-03-19T08:09:05.234985",
+        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 8.729
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n  await page.goto('/');\n\n  // Create a note with known body content\n  const noteBody = 'This is a test note body for clipboard copy.';\n  await page.getByRole('textbox', { name: /body/i }).fill(noteBody);\n  await page.getByRole('button', { name: /save/i }).click();\n\n  // Select the note to ensure selectedNote is set\n  await page.getByText(noteBody).click();\n\n  // Click the Copy button\n  await page.getByRole('button', { name: /copy/i }).click();\n\n  // Assert clipboard contains the note body\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  expect(clipboardText).toBe(noteBody);\n});\n```",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n  await page.goto('/');\n\n  // Create a note with known body content\n  const noteBody = 'This is a test note body for clipboard copy.';\n  await page.getByRole('textbox', { name: /body/i }).fill(noteBody);\n  await page.getByRole('button', { name: /save/i }).click();\n\n  // Select the note to ensure selectedNote is set\n  await page.getByText(noteBody).click();\n\n  // Click the Copy button\n  await page.getByRole('button', { name: /copy/i }).click();\n\n  // Assert clipboard contains the note body\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  expect(clipboardText).toBe(noteBody);\n});"
+        },
+        "hyperparameters": {
+            "note": "Claude Code CLI (claude -p), Max subscription"
+        }
+    }
+]
