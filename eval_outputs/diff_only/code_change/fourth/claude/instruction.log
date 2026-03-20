@@ -53,7 +53,7 @@ Running 5 tests using 1 worker
 [1A[2K[5/5] [chromium] › e2e/instruction.spec.ts:40:3 › Home page tag filter › should clear filter and show all notes again
 [1A[2K  1 failed
     [chromium] › e2e/instruction.spec.ts:13:3 › Home page tag filter › should show 'No notes match the filter' when filter has no matches 
-  4 passed (8.0s)
+  4 passed (9.1s)
 
 
 === STDERR ===

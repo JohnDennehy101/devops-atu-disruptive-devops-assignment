@@ -184,7 +184,7 @@ Running 5 tests using 1 worker
     [chromium] › e2e/chain-of-thought.spec.ts:18:3 › Tag filter on Your Notes sidebar › filters notes by matching tag 
     [chromium] › e2e/chain-of-thought.spec.ts:25:3 › Tag filter on Your Notes sidebar › shows 'No notes match the filter' when no tags match 
     [chromium] › e2e/chain-of-thought.spec.ts:33:3 › Tag filter on Your Notes sidebar › restores full list when filter is cleared 
-  1 passed (25.8s)
+  1 passed (27.9s)
 
 
 === STDERR ===

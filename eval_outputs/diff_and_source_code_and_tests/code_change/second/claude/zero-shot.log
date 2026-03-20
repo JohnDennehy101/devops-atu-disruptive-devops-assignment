@@ -8,7 +8,7 @@ Running 4 tests using 1 worker
 [1A[2K[2/4] [chromium] › e2e/zero-shot.spec.ts:14:3 › Character count display › updates character count when typing in body
 [1A[2K[3/4] [chromium] › e2e/zero-shot.spec.ts:19:3 › Character count display › updates character count for longer text
 [1A[2K[4/4] [chromium] › e2e/zero-shot.spec.ts:25:3 › Character count display › resets character count after creating a note
-[1A[2K  4 passed (2.0s)
+[1A[2K  4 passed (2.9s)
 
 
 === STDERR ===

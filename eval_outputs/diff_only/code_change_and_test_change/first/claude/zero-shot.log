@@ -6,7 +6,7 @@ Running 2 tests using 1 worker
 
 [1A[2K[1/2] [chromium] › e2e/zero-shot.spec.ts:3:1 › displays subtitle text
 [1A[2K[2/2] [chromium] › e2e/zero-shot.spec.ts:10:1 › can clear all notes from sidebar
-[1A[2K  2 passed (1.5s)
+[1A[2K  2 passed (2.1s)
 
 
 === STDERR ===

@@ -46,7 +46,7 @@ Running 3 tests using 1 worker
 
 [1A[2K  1 failed
     [chromium] › e2e/chain-of-thought.spec.ts:18:3 › Clear All Notes › shows Clear all button after creating a note and clears all notes when clicked 
-  2 passed (22.0s)
+  2 passed (22.8s)
 
 
 === STDERR ===

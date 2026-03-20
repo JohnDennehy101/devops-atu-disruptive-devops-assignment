@@ -11,7 +11,7 @@ Running 7 tests using 1 worker
 [1A[2K[5/7] [chromium] › e2e/zero-shot.spec.ts:38:3 › Clear All Notes functionality › should clear all notes when 'Clear all' button is clicked
 [1A[2K[6/7] [chromium] › e2e/zero-shot.spec.ts:57:3 › Clear All Notes functionality › should reset form state when clearing all notes
 [1A[2K[7/7] [chromium] › e2e/zero-shot.spec.ts:68:3 › Clear All Notes functionality › should show 'Create New Note' heading after clearing all notes
-[1A[2K  7 passed (2.8s)
+[1A[2K  7 passed (4.0s)
 
 
 === STDERR ===

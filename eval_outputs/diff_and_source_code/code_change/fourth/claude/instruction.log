@@ -102,7 +102,7 @@ Running 4 tests using 1 worker
     [chromium] › e2e/instruction.spec.ts:4:3 › Tag filter on Home page › should filter saved notes by tag 
     [chromium] › e2e/instruction.spec.ts:48:3 › Tag filter on Home page › should show 'No notes match the filter' when filter matches nothing 
     [chromium] › e2e/instruction.spec.ts:89:3 › Tag filter on Home page › should restore full list when filter is cleared 
-  1 passed (3.3s)
+  1 passed (4.5s)
 
 
 === STDERR ===

@@ -5,7 +5,7 @@
 Running 1 test using 1 worker
 
 [1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › shows body character count and updates when typing
-[1A[2K  1 passed (1.2s)
+[1A[2K  1 passed (2.2s)
 
 
 === STDERR ===

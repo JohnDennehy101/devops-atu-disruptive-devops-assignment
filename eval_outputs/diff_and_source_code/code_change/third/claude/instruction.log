@@ -94,7 +94,7 @@ Running 3 tests using 1 worker
 [1A[2K  2 failed
     [chromium] › e2e/instruction.spec.ts:4:3 › Copy note body functionality › should display a Copy button when a note is selected and copy the note body to clipboard 
     [chromium] › e2e/instruction.spec.ts:64:3 › Copy note body functionality › should not show Copy button when in editing mode 
-  1 passed (13.0s)
+  1 passed (14.1s)
 
 
 === STDERR ===

@@ -13,7 +13,7 @@ Running 9 tests using 1 worker
 [1A[2K[7/9] [chromium] › e2e/zero-shot.spec.ts:71:3 › Note Taking App › clear all removes all notes and resets state
 [1A[2K[8/9] [chromium] › e2e/zero-shot.spec.ts:94:3 › Note Taking App › clear all clears localStorage
 [1A[2K[9/9] [chromium] › e2e/zero-shot.spec.ts:112:3 › Note Taking App › clear all resets selected note and form fields
-[1A[2K  9 passed (3.8s)
+[1A[2K  9 passed (5.3s)
 
 
 === STDERR ===

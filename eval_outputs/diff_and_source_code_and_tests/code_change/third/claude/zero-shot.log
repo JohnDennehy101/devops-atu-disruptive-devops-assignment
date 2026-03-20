@@ -7,7 +7,7 @@ Running 3 tests using 1 worker
 [1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:11:3 › Copy Note Body › copy button is visible when viewing note details
 [1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:27:3 › Copy Note Body › clicking copy button copies note body to clipboard
 [1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:47:3 › Copy Note Body › copy button is not visible when editing a note
-[1A[2K  3 passed (2.1s)
+[1A[2K  3 passed (2.7s)
 
 
 === STDERR ===

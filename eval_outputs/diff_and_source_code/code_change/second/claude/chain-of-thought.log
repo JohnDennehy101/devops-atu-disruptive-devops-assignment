@@ -5,7 +5,7 @@
 Running 1 test using 1 worker
 
 [1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Body character counter › displays character count that updates as user types
-[1A[2K  1 passed (1.2s)
+[1A[2K  1 passed (1.6s)
 
 
 === STDERR ===

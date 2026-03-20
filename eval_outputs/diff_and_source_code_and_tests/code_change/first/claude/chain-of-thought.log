@@ -11,7 +11,7 @@ Running 7 tests using 1 worker
 [1A[2K[5/7] [chromium] › e2e/chain-of-thought.spec.ts:53:3 › Note Taking App › does not show clear all button when no notes exist
 [1A[2K[6/7] [chromium] › e2e/chain-of-thought.spec.ts:57:3 › Note Taking App › shows clear all button when notes exist
 [1A[2K[7/7] [chromium] › e2e/chain-of-thought.spec.ts:65:3 › Note Taking App › clear all button removes all notes
-[1A[2K  7 passed (3.1s)
+[1A[2K  7 passed (4.2s)
 
 
 === STDERR ===

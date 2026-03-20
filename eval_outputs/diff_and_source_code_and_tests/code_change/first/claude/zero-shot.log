@@ -53,7 +53,7 @@ Running 7 tests using 1 worker
 
 [1A[2K  1 failed
     [chromium] › e2e/zero-shot.spec.ts:75:3 › Clear All Notes › clear all during edit mode resets to create mode 
-  6 passed (3.4s)
+  6 passed (4.9s)
 
 
 === STDERR ===

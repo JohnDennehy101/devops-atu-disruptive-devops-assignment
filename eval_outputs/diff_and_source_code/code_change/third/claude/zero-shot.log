@@ -128,7 +128,7 @@ Running 4 tests using 1 worker
     [chromium] › e2e/zero-shot.spec.ts:23:3 › Copy note body functionality › should display a Copy button when a note is selected 
     [chromium] › e2e/zero-shot.spec.ts:35:3 › Copy note body functionality › should copy note body to clipboard when Copy button is clicked 
     [chromium] › e2e/zero-shot.spec.ts:61:3 › Copy note body functionality › should not show Copy button when in editing mode 
-  1 passed (49.7s)
+  1 passed (51.2s)
 
 
 === STDERR ===

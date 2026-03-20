@@ -10,7 +10,7 @@ Running 6 tests using 1 worker
 [1A[2K[4/6] [chromium] › e2e/instruction.spec.ts:44:3 › Clear All Notes functionality › should clear localStorage when "Clear all" is clicked
 [1A[2K[5/6] [chromium] › e2e/instruction.spec.ts:54:3 › Clear All Notes functionality › should display descriptive subtitle text
 [1A[2K[6/6] [chromium] › e2e/instruction.spec.ts:60:3 › Clear All Notes functionality › should show note count in heading
-[1A[2K  6 passed (2.5s)
+[1A[2K  6 passed (3.2s)
 
 
 === STDERR ===
