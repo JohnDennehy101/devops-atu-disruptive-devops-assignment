@@ -1,0 +1,116 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:12:3 › Home Page - Clear All Notes Feature › should display the new paragraph text
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:12:3 › Home Page - Clear All Notes Feature › should display the new paragraph text 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test.beforeEach(async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+        |                ^
+      7 |
+      8 |     // Clear localStorage before each test
+      9 |     await page.evaluate(() => localStorage.clear());
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-0bbf0-play-the-new-paragraph-text-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-0bbf0-play-the-new-paragraph-text-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-0bbf0-play-the-new-paragraph-text-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-0bbf0-play-the-new-paragraph-text-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:17:3 › Home Page - Clear All Notes Feature › should display "Clear all" button only when there are saved notes
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:17:3 › Home Page - Clear All Notes Feature › should display "Clear all" button only when there are saved notes 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test.beforeEach(async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+        |                ^
+      7 |
+      8 |     // Clear localStorage before each test
+      9 |     await page.evaluate(() => localStorage.clear());
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-42a2d--when-there-are-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-42a2d--when-there-are-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-42a2d--when-there-are-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-42a2d--when-there-are-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:30:3 › Home Page - Clear All Notes Feature › should clear all notes when "Clear all" button is clicked
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:30:3 › Home Page - Clear All Notes Feature › should clear all notes when "Clear all" button is clicked 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test.beforeEach(async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+        |                ^
+      7 |
+      8 |     // Clear localStorage before each test
+      9 |     await page.evaluate(() => localStorage.clear());
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-10247-Clear-all-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-10247-Clear-all-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-10247-Clear-all-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page---Clea-10247-Clear-all-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/zero-shot.spec.ts:12:3 › Home Page - Clear All Notes Feature › should display the new paragraph text 
+    [chromium] › e2e/zero-shot.spec.ts:17:3 › Home Page - Clear All Notes Feature › should display "Clear all" button only when there are saved notes 
+    [chromium] › e2e/zero-shot.spec.ts:30:3 › Home Page - Clear All Notes Feature › should clear all notes when "Clear all" button is clicked 
+
+
+=== STDERR ===
+

@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('should display character count for note body', async ({ page }) => {
+    await page.goto('/');
+
+    // Locate the textarea for the note body
+    const noteBodyTextarea = page.locator('#note-body');
+    const charCountText = page.locator('p.text-xs.text-gray-500');
+
+    // Verify initial character count
+    await expect(charCountText).toHaveText('0 / 5000');
+
+    // Type some text into the textarea
+    const testText = 'This is a test note body.';
+    await noteBodyTextarea.fill(testText);
+
+    // Verify updated character count
+    await expect(charCountText).toHaveText(`${testText.length} / 5000`);
+
+    // Clear the textarea
+    await noteBodyTextarea.fill('');
+
+    // Verify character count resets to 0
+    await expect(charCountText).toHaveText('0 / 5000');
+  });
+});

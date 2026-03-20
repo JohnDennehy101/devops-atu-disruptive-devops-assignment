@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Clear All Notes Feature', () => {
+  test('should display "Clear all" button only when there are saved notes', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Verify "Clear all" button is not visible when there are no saved notes
+    await expect(page.locator('text=Clear all')).not.toBeVisible();
+
+    // Add a new note (simulate adding a note)
+    await page.fill('textarea[name="noteTitle"]', 'Test Note');
+    await page.fill('textarea[name="noteBody"]', 'This is a test note.');
+    await page.click('button:has-text("Save")');
+
+    // Verify "Clear all" button is now visible
+    await expect(page.locator('text=Clear all')).toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Add multiple notes (simulate adding notes)
+    await page.fill('textarea[name="noteTitle"]', 'Note 1');
+    await page.fill('textarea[name="noteBody"]', 'This is the first note.');
+    await page.click('button:has-text("Save")');
+
+    await page.fill('

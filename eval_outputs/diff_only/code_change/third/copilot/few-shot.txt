@@ -1,0 +1,22 @@
+test('copy note body button copies the note content to clipboard', async ({ page, context }) => {
+  // Mock the clipboard API
+  await context.grantPermissions(['clipboard-write']);
+  const clipboard = await context.newCDPSession(page);
+  await clipboard.send('Browser.setClipboardText', { text: '' });
+
+  // Navigate to the page
+  await page.goto('/');
+
+  // Assume there's a note already selected with some content
+  const noteContent = 'This is the body of the selected note';
+  await page.evaluate((content) => {
+    window.selectedNote = { body: content };
+  }, noteContent);
+
+  // Click the "Copy" button
+  await page.locator('button:has-text("Copy")').click();
+
+  // Verify the clipboard content
+  const clipboardText = await clipboard.send('Browser.getClipboardText');
+  expect(clipboardText).toBe(noteContent);
+});

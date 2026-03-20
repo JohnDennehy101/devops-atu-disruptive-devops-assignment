@@ -1,0 +1,22 @@
+test('copy note body button copies the selected note body to clipboard', async ({ page, context }) => {
+  // Mock the clipboard API
+  const clipboard = await context.grantPermissions(['clipboard-write']);
+  const mockClipboard = await page.evaluateHandle(() => navigator.clipboard);
+  await page.exposeFunction('writeText', (text) => mockClipboard.writeText(text));
+
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Mock a selected note
+  const noteBody = 'This is a test note body.';
+  await page.evaluate((noteBody) => {
+    window.selectedNote = { body: noteBody };
+  }, noteBody);
+
+  // Click the "Copy" button
+  await page.locator('button:has-text("Copy")').click();
+
+  // Verify that the clipboard contains the note body
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe(noteBody);
+});

@@ -1,0 +1,36 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Home Page - Note Management", () => {
+  test("should display the introductory text", async ({ page }) => {
+    // Navigate to the home page
+    await page.goto("/");
+
+    // Assert that the introductory text is visible
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally.")
+    ).toBeVisible();
+  });
+
+  test("can create a note and clear all notes from the sidebar", async ({ page }) => {
+    // Navigate to the home page
+    await page.goto("/");
+
+    // Fill out the form to create a new note
+    await page.getByLabel("Title").fill("To clear");
+    await page.getByLabel("Body").fill("Body");
+    await page.getByLabel(/Tags/).fill("x");
+
+    // Click the "Create Note" button
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Assert that the note count is updated in the sidebar
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Click the "Clear all" button
+    await page.getByRole("button", { name: "Clear all" }).click();
+
+    // Assert that the notes are cleared
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+});

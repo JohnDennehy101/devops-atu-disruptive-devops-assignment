@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag Filter Functionality on Home Page', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/home');
+
+    // Ensure there are notes in the system
+    await page.evaluate(() => {
+      localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+    });
+
+    // Mock API response for notes
+    await page.route('**/api/notes', async route => {
+      await route.fulfill({
+        status: 200,
+        body: JSON.stringify([
+          { id: 1, tags: ['work', 'urgent'], title: 'Work Note', body: 'Complete the report' },
+          { id: 2, tags: ['personal', 'shopping'], title: 'Shopping List', body: 'Buy groceries' },
+          { id: 3, tags: ['work', 'meeting'], title: 'Team Meeting', body: 'Discuss project updates' },
+        ]),
+      });
+    });
+
+    // Reload the page to apply mock data
+    await page.reload();
+  });
+
+  test('should display all notes when no filter is applied', async ({ page }) => {
+    // Verify the initial note count
+    const noteCount = await page.locator('h3:has-text("Your Notes")').textContent();
+    expect(noteCount).toContain('3');
+
+    //

@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy the selected note body to the clipboard', async ({ page }) => {
+  // Step 1: Navigate to the Home page
+  await page.goto('/home');
+
+  // Step 2: Mock the selectedNote object (if necessary)
+  // Assuming the app allows mocking or preloading data for testing
+  const mockNoteBody = 'This is a test note body.';
+  await page.evaluate((body) => {
+    window.selectedNote = { body }; // Mock the selectedNote object
+  }, mockNoteBody);
+
+  // Step 3: Locate the "Copy" button and verify its presence
+  const copyButton = page.locator('button:has-text("Copy")');
+  await expect(copyButton).toBeVisible();
+
+  // Step 4: Click the "Copy" button
+  await copyButton.click();
+
+  // Step 5: Verify the clipboard contains the selected note body
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe(mockNoteBody);
+});

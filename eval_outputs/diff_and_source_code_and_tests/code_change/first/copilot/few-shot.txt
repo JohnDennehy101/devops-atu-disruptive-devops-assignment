@@ -1,0 +1,54 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Clear All Notes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("shows 'Clear all' button only when there are notes", async ({ page }) => {
+    // Initially, the "Clear all" button should not be visible
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeHidden()
+
+    // Create a note
+    await page.getByLabel("Title").fill("Test Note")
+    await page.getByLabel("Body").fill("This is a test note")
+    await page.getByLabel(/Tags/).fill("test, playwright")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Verify the "Clear all" button is now visible
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible()
+  })
+
+  test("clears all notes when 'Clear all' button is clicked", async ({ page }) => {
+    // Create multiple notes
+    await page.getByLabel("Title").fill("Note 1")
+    await page.getByLabel("Body").fill("Body of Note 1")
+    await page.getByLabel(/Tags/).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByLabel("Title").fill("Note 2")
+    await page.getByLabel("Body").fill("Body of Note 2")
+    await page.getByLabel(/Tags/).fill("tag2")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Verify notes are listed in the sidebar
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(2)
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    // Click the "Clear all" button
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    // Verify all notes are cleared
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toBeHidden()
+
+    // Verify localStorage is cleared
+    const savedNotes = await page.evaluate(() =>
+      JSON.parse(localStorage.getItem("noteIds") || "[]"),
+    )
+    expect(savedNotes).toEqual([])
+  })
+})

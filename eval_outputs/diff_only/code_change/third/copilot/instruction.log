@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Button › should copy the selected note body to the clipboard when clicked
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Button › should copy the selected note body to the clipboard when clicked 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Copy' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      30 |     // Locate the "Copy" button and click it
+      31 |     const copyButton = page.getByRole('button', { name: 'Copy' });
+    > 32 |     await expect(copyButton).toBeVisible();
+         |                              ^
+      33 |     await copyButton.click();
+      34 |
+      35 |     // Assert that the clipboard contains the correct text
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:32:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-274c6--the-clipboard-when-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-274c6--the-clipboard-when-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-274c6--the-clipboard-when-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-274c6--the-clipboard-when-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-274c6--the-clipboard-when-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Button › should copy the selected note body to the clipboard when clicked 
+
+
+=== STDERR ===
+

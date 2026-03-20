@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Character Counter in Form', () => {
+  test('should display and update the character counter correctly', async ({ page }) => {
+    // Step 1: Navigate to the Home page
+    await page.goto('/');
+
+    // Step 2: Locate the form input and character counter
+    const formInput = page.locator('textarea'); // Assuming the input is a <textarea>
+    const charCounter = page.locator('p.text-xs.text-gray-500');
+
+    // Step 3: Verify the initial state of the character counter
+    await expect(charCounter).toHaveText('0 / 5000');
+
+    // Step 4: Type text into the form input and verify the counter updates
+    const sampleText = 'Hello, world!';
+    await formInput.fill(sampleText);
+    await expect(charCounter).toHaveText(`${sampleText.length} / 5000`);
+
+    // Step 5: Type exactly 5000 characters and verify the counter
+    const maxText = 'a'.repeat(5000);
+    await formInput.fill(maxText);
+    await expect(charCounter).toHaveText('5000 / 5000');
+
+    // Optional Step 6: Verify the counter in dark mode (if applicable)
+    // Assuming there's a button or toggle to switch themes
+    const themeToggle = page.locator('button#theme-toggle'); // Replace with actual selector
+    await themeToggle.click();
+    await expect(charCounter).toHaveClass(/dark:text-gray-400/);
+  });
+});

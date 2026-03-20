@@ -1,0 +1,15 @@
+test('displays character count for formBody input', async ({ page }) => {
+  await page.goto('/');
+
+  // Locate the formBody input field and type some text
+  const formBodyInput = page.locator('#form-body-input');
+  await formBodyInput.fill('Hello, world!');
+
+  // Verify that the character count is displayed correctly
+  const charCountDisplay = page.locator('text=13 / 5000');
+  await expect(charCountDisplay).toBeVisible();
+
+  // Update the input and verify the updated character count
+  await formBodyInput.fill('This is a longer input to test the character count.');
+  await expect(page.locator('text=47 / 5000')).toBeVisible();
+});

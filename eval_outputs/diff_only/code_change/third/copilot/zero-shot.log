@@ -1,0 +1,43 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy note body button functionality
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy note body button functionality ──────────────────
+
+    Error: page.evaluate: ReferenceError: jest is not defined
+        at eval (eval at evaluate (:290:30), <anonymous>:6:18)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:290:30), <anonymous>:6:18)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:11:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/zero-shot/zero-shot-Copy-note-body-button-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/zero-shot/zero-shot-Copy-note-body-button-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/copilot/artefacts/zero-shot/zero-shot-Copy-note-body-button-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/zero-shot/zero-shot-Copy-note-body-button-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/copilot/artefacts/zero-shot/zero-shot-Copy-note-body-button-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › Copy note body button functionality ───────────────────
+
+
+=== STDERR ===
+

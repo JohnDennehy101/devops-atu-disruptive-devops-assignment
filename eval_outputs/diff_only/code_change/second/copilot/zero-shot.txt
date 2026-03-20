@@ -1,0 +1,14 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for formBody', async ({ page }) => {
+  // Navigate to the Home page
+  await page.goto('/');
+
+  // Locate the formBody input field and type some text
+  const formBodyInput = page.locator('textarea[name="formBody"]');
+  await formBodyInput.fill('Hello, Playwright!');
+
+  // Verify the character count is displayed correctly
+  const charCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(charCount).toHaveText('18 / 5000');
+});

@@ -1,0 +1,27 @@
+import { test, expect } from "@playwright/test";
+
+test("Verify 'Clear All' button functionality", async ({ page }) => {
+  // Step 1: Navigate to the home page
+  await page.goto("/");
+
+  // Step 2: Verify the paragraph text is visible
+  await expect(
+    page.getByText("Create and manage notes. Your notes are stored locally.")
+  ).toBeVisible();
+
+  // Step 3: Create a new note
+  await page.getByLabel("Title").fill("To clear");
+  await page.getByLabel("Body").fill("Body");
+  await page.getByLabel(/Tags/).fill("x");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Step 4: Verify the note is created
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Step 5: Clear all notes
+  await page.getByRole("button", { name: "Clear all" }).click();
+
+  // Step 6: Verify notes are cleared
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});

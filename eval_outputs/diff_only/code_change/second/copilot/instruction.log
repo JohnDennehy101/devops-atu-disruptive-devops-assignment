@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:4:3 › Character Count Display › should display the correct character count as the user types
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:3 › Character Count Display › should display the correct character count as the user types 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: /form body/i })[22m
+
+
+      17 |     // Type some text into the input field
+      18 |     const inputText = 'Hello, Playwright!';
+    > 19 |     await inputField.fill(inputText);
+         |                      ^
+      20 |
+      21 |     // Assert that the character count updates correctly
+      22 |     await expect(charCountDisplay).toHaveText(`${inputText.length} / 5000`);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:19:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-0488b-ter-count-as-the-user-types-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-0488b-ter-count-as-the-user-types-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-0488b-ter-count-as-the-user-types-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-0488b-ter-count-as-the-user-types-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-0488b-ter-count-as-the-user-types-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:4:3 › Character Count Display › should display the correct character count as the user types 
+
+
+=== STDERR ===
+

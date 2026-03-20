@@ -1,0 +1,68 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Tag Filter Functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the Home page before each test
+    await page.goto('/home');
+  });
+
+  test('should display all notes when no filter is applied', async ({ page }) => {
+    // Assert that the "Your Notes" count matches the total number of saved notes
+    const notesCount = await page.locator('text=Your Notes (').textContent();
+    const count = parseInt(notesCount?.match(/\d+/)?.[0] || '0', 10);
+
+    // Ensure all notes are displayed
+    const displayedNotes = await page.locator('role=listitem').count();
+    expect(displayedNotes).toBe(count);
+  });
+
+  test('should filter notes by tag', async ({ page }) => {
+    // Type a tag into the filter input
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('work');
+
+    // Assert that the "Your Notes" count updates correctly
+    const notesCount = await page.locator('text=Your Notes (').textContent();
+    const count = parseInt(notesCount?.match(/\d+/)?.[0] || '0', 10);
+
+    // Ensure only filtered notes are displayed
+    const displayedNotes = await page.locator('role=listitem').count();
+    expect(displayedNotes).toBe(count);
+
+    // Optionally, verify that each displayed note contains the filter tag
+    const notes = await page.locator('role=listitem').allTextContents();
+    for (const note of notes) {
+      expect(note.toLowerCase()).toContain('work');
+    }
+  });
+
+  test('should display "No notes match the filter" when no notes match', async ({ page }) => {
+    // Type a non-matching tag into the filter input
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistenttag');
+
+    // Assert that the "Your Notes" count is 0
+    const notesCount = await page.locator('text=Your Notes (0)').isVisible();
+    expect(notesCount).toBeTruthy();
+
+    // Assert that the "No notes match the filter" message is displayed
+    const noNotesMessage = page.getByText('No notes match the filter');
+    await expect(noNotesMessage).toBeVisible();
+  });
+
+  test('should display "No notes yet" when there are no saved notes', async ({ page }) => {
+    // Simulate a scenario where there are no saved notes
+    await page.evaluate(() => {
+      window.localStorage.setItem('savedIds', JSON.stringify([]));
+      window.location.reload();
+    });
+
+    // Assert that the "Your Notes" count is 0
+    const notesCount = await page.locator('text=Your Notes (0)').isVisible();
+    expect(notesCount).toBeTruthy();
+
+    // Assert that the "No notes yet" message is displayed
+    const noNotesMessage = page.getByText('No notes yet');
+    await expect(noNotesMessage).toBeVisible();
+  });
+});

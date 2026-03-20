@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy note body button functionality', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Assume there's a note with a specific body text
+  const noteBody = 'This is a sample note body';
+  
+  // Mock the selected note and clipboard API
+  await page.evaluate((body) => {
+    window.selectedNote = { body };
+    navigator.clipboard = {
+      writeText: jest.fn(),
+    };
+  }, noteBody);
+
+  // Click the "Copy" button
+  const copyButton = page.locator('button:has-text("Copy")');
+  await copyButton.click();
+
+  // Verify that the clipboard's writeText method was called with the correct text
+  const clipboardText = await page.evaluate(() => navigator.clipboard.writeText.mock.calls[0][0]);
+  expect(clipboardText).toBe(noteBody);
+});

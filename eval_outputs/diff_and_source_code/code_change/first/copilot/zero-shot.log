@@ -1,0 +1,102 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI ────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected: [32m"Create and manage notes. Your notes are stored locally."[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+       9 |
+      10 |     // Check for the description paragraph
+    > 11 |     await expect(page.locator('p.text-gray-500')).toHaveText(
+         |                                                   ^
+      12 |       'Create and manage notes. Your notes are stored locally.'
+      13 |     );
+      14 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:11:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-display-the-correct-initial-UI-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-display-the-correct-initial-UI-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-display-the-correct-initial-UI-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-display-the-correct-initial-UI-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-display-the-correct-initial-UI-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should create a new note
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:36:3 › Home Page › should clear all notes
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:36:3 › Home Page › should clear all notes ──────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected: [32m"No notes yet"[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+      51 |     // Verify the notes list is empty
+      52 |     await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+    > 53 |     await expect(page.locator('p.text-gray-500')).toHaveText('No notes yet');
+         |                                                   ^
+      54 |   });
+      55 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:53:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI ─────
+    [chromium] › e2e/zero-shot.spec.ts:36:3 › Home Page › should clear all notes ───────────────────
+  1 passed (3.6s)
+
+
+=== STDERR ===
+

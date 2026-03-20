@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Tag Filter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/home');
+  });
+
+  test('should display all notes when no filter is applied', async ({ page }) => {
+    const noteCount = await page.locator('[data-testid="note-item"]').count();
+    const displayedCount = await page.locator('text=Your Notes').textContent();
+    expect(displayedCount).toContain(`Your Notes (${noteCount})`);
+  });
+
+  test('should filter notes by tag', async ({ page }) => {
+    await page.fill('input[placeholder="Filter by tag"]', 'work');
+    const filteredNotes = await page.locator('[data-testid="note-item"]').count();
+    const displayedCount = await page.locator('text=Your Notes').textContent();
+    expect(displayedCount).toContain(`Your Notes (${filteredNotes})`);
+  });
+
+  test('should show "No notes match the filter" when no notes match', async ({ page }) => {
+    await page.fill('input[placeholder="Filter by tag"]', 'nonexistenttag');
+    const noNotesMessage = await page.locator('text=No notes match the filter').isVisible();
+    expect(noNotesMessage).toBeTruthy();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    // Simulate no saved notes
+    await page.evaluate(() => {
+      window.localStorage.setItem('savedIds', JSON.stringify([]));
+      window.location.reload();
+    });
+    const noNotesMessage = await page.locator('text=No notes yet').isVisible();
+    expect(noNotesMessage).toBeTruthy();
+  });
+});

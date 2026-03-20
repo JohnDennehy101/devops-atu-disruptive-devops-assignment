@@ -1,0 +1,34 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Home Page UI Tests", () => {
+  test("should display introductory text", async ({ page }) => {
+    // Navigate to the home page
+    await page.goto("/")
+
+    // Verify the introductory text is visible
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally.")
+    ).toBeVisible()
+  })
+
+  test("can clear all notes from sidebar", async ({ page }) => {
+    // Navigate to the home page
+    await page.goto("/")
+
+    // Create a new note
+    await page.getByLabel("Title").fill("To clear")
+    await page.getByLabel("Body").fill("Body")
+    await page.getByLabel(/Tags/).fill("x")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Verify the note count updates to "Your Notes (1)"
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Click the "Clear all" button
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    // Verify the UI updates correctly
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+  })
+})

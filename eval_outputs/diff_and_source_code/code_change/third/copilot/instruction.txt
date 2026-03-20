@@ -1,0 +1,43 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body Functionality', () => {
+  test('should copy the body of the selected note to the clipboard', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+
+    // Mock a note to simulate the presence of a note
+    const mockNote = {
+      id: 1,
+      title: 'Test Note',
+      body: 'This is the body of the test note.',
+      tags: ['test', 'note'],
+      archived: false,
+      updated_at: new Date().toISOString(),
+    };
+
+    // Simulate adding a note (this step depends on your app's behavior)
+    await page.evaluate((note) => {
+      localStorage.setItem('noteIds', JSON.stringify([note.id]));
+      localStorage.setItem(`note-${note.id}`, JSON.stringify(note));
+    }, mockNote);
+
+    // Reload the page to reflect the mocked note
+    await page.reload();
+
+    // Click on the note to select it
+    await page.getByRole('button', { name: `Note #${mockNote.id}` }).click();
+
+    // Verify that the note details are displayed
+    await expect(page.getByText('Note Details')).toBeVisible();
+    await expect(page.getByText(`ID: ${mockNote.id}`)).toBeVisible();
+    await expect(page.getByText(`Title: ${mockNote.title}`)).toBeVisible();
+    await expect(page.getByText(`Body: ${mockNote.body}`)).toBeVisible();
+
+    // Click the "Copy" button
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    // Verify that the clipboard contains the note body
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(mockNote.body);
+  });
+});

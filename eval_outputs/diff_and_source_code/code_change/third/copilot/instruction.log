@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Functionality › should copy the body of the selected note to the clipboard
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Functionality › should copy the body of the selected note to the clipboard 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test('should copy the body of the selected note to the clipboard', async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+        |                ^
+      7 |
+      8 |     // Mock a note to simulate the presence of a note
+      9 |     const mockNote = {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-7430c-ected-note-to-the-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-7430c-ected-note-to-the-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-7430c-ected-note-to-the-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/instruction/instruction-Copy-Note-Body-7430c-ected-note-to-the-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:4:3 › Copy Note Body Functionality › should copy the body of the selected note to the clipboard 
+
+
+=== STDERR ===
+

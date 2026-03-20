@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:4:3 › Home Page › should display character count for note body
+[1A[2K  1 passed (1.6s)
+
+
+=== STDERR ===
+

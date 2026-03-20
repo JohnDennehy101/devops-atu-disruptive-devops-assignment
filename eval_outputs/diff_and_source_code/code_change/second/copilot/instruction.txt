@@ -1,0 +1,54 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Character Counter in Note Body', () => {
+  test('should display the correct character count when typing in the note body', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+
+    // Verify the page title
+    await expect(page).toHaveTitle(/Note Taking App/);
+
+    // Locate the "Body" textarea and type some text
+    const bodyTextarea = page.getByRole('textbox', { name: /Body/i });
+    await bodyTextarea.fill('This is a test note body.');
+
+    // Verify the character counter updates correctly
+    const characterCounter = page.getByText('24 / 5000'); // 24 characters in "This is a test note body."
+    await expect(characterCounter).toBeVisible();
+
+    // Add more text and verify the counter updates
+    await bodyTextarea.type(' Adding more text to the body.');
+    const updatedCharacterCounter = page.getByText('54 / 5000'); // 54 characters in total
+    await expect(updatedCharacterCounter).toBeVisible();
+
+    // Clear the textarea and verify the counter resets
+    await bodyTextarea.fill('');
+    const resetCharacterCounter = page.getByText('0 / 5000');
+    await expect(resetCharacterCounter).toBeVisible();
+  });
+
+  test('should not exceed the maximum character limit in the note body', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+
+    // Locate the "Body" textarea
+    const bodyTextarea = page.getByRole('textbox', { name: /Body/i });
+
+    // Fill the textarea with 5000 characters
+    const longText = 'a'.repeat(5000);
+    await bodyTextarea.fill(longText);
+
+    // Verify the character counter shows 5000 / 5000
+    const maxCharacterCounter = page.getByText('5000 / 5000');
+    await expect(maxCharacterCounter).toBeVisible();
+
+    // Attempt to add more characters and verify the counter doesn't exceed 5000
+    await bodyTextarea.type('extra text');
+    const stillMaxCharacterCounter = page.getByText('5000 / 5000');
+    await expect(stillMaxCharacterCounter).toBeVisible();
+
+    // Verify the textarea value is still 5000 characters long
+    const textareaValue = await bodyTextarea.inputValue();
+    expect(textareaValue.length).toBe(5000);
+  });
+});

@@ -1,0 +1,40 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Note Taking App - Character Counter", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("displays character count for note body", async ({ page }) => {
+    const bodyInput = page.getByLabel("Body");
+    const charCounter = page.locator("p.text-xs.text-gray-500");
+
+    // Initially, the counter should show 0 / 5000
+    await expect(charCounter).toHaveText("0 / 5000");
+
+    // Type into the body input and verify the counter updates
+    await bodyInput.fill("Hello, world!");
+    await expect(charCounter).toHaveText("13 / 5000");
+
+    // Add more text and verify the counter again
+    await bodyInput.fill("This is a longer body text for testing.");
+    await expect(charCounter).toHaveText("38 / 5000");
+  });
+
+  test("does not exceed 5000 characters in the body", async ({ page }) => {
+    const bodyInput = page.getByLabel("Body");
+    const charCounter = page.locator("p.text-xs.text-gray-500");
+
+    // Fill the body with exactly 5000 characters
+    const longText = "a".repeat(5000);
+    await bodyInput.fill(longText);
+    await expect(charCounter).toHaveText("5000 / 5000");
+
+    // Try to add more characters and verify it doesn't exceed 5000
+    await bodyInput.type("extra");
+    await expect(bodyInput).toHaveValue(longText);
+    await expect(charCounter).toHaveText("5000 / 5000");
+  });
+});

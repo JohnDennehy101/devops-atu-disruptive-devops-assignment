@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Character Counter in Form › should display and update the character counter correctly
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Character Counter in Form › should display and update the character counter correctly 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button#theme-toggle')[22m
+
+
+      26 |     // Assuming there's a button or toggle to switch themes
+      27 |     const themeToggle = page.locator('button#theme-toggle'); // Replace with actual selector
+    > 28 |     await themeToggle.click();
+         |                       ^
+      29 |     await expect(charCounter).toHaveClass(/dark:text-gray-400/);
+      30 |   });
+      31 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:28:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/chain-of-thought/chain-of-thought-Character-cb1fe-character-counter-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/chain-of-thought/chain-of-thought-Character-cb1fe-character-counter-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/copilot/artefacts/chain-of-thought/chain-of-thought-Character-cb1fe-character-counter-correctly-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/chain-of-thought/chain-of-thought-Character-cb1fe-character-counter-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/copilot/artefacts/chain-of-thought/chain-of-thought-Character-cb1fe-character-counter-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Character Counter in Form › should display and update the character counter correctly 
+
+
+=== STDERR ===
+

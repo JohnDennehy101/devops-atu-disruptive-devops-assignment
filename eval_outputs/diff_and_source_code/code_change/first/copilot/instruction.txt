@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Clear All Notes', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+
+    // Add some notes to simulate existing notes
+    await page.getByRole('textbox', { name: 'Title' }).fill('Test Note 1');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is the body of Test Note 1');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag1, tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Test Note 2');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is the body of Test Note 2');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag3, tag4');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+  });
+
+  test('should display "Clear all" button when notes exist', async ({ page }) => {
+    // Assert that the "Clear all" button is visible
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    // Click the "Clear all" button
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await clearAllButton.click();
+
+    // Assert that the notes list is empty
+    const notesList = page.getByText('No notes yet');
+    await expect(notesList).toBeVisible();
+
+    // Assert that the "Clear all" button is no longer visible
+    await expect(clearAllButton).not.toBeVisible();
+
+    // Assert that localStorage is updated
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(noteIds).toBe(JSON.stringify([]));
+  });
+});

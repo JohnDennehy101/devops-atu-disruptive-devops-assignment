@@ -1,0 +1,50 @@
+test('filters notes by tag and updates displayed count', async ({ page }) => {
+  // Mock API response for notes
+  const notes = [
+    { id: '1', tags: ['work', 'urgent'] },
+    { id: '2', tags: ['personal', 'important'] },
+    { id: '3', tags: ['work', 'important'] },
+  ];
+  await page.route('**/api/notes', route => {
+    route.fulfill({
+      status: 200,
+      body: JSON.stringify(notes),
+    });
+  });
+
+  // Mock savedIds
+  const savedIds = ['1', '2', '3'];
+  await page.route('**/api/savedIds', route => {
+    route.fulfill({
+      status: 200,
+      body: JSON.stringify(savedIds),
+    });
+  });
+
+  // Navigate to the page
+  await page.goto('/');
+
+  // Verify initial state
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).not.toBeVisible();
+
+  // Apply a tag filter that matches one note
+  await page.fill('input[placeholder="Filter by tag"]', 'urgent');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).not.toBeVisible();
+
+  // Apply a tag filter that matches multiple notes
+  await page.fill('input[placeholder="Filter by tag"]', 'work');
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).not.toBeVisible();
+
+  // Apply a tag filter that matches no notes
+  await page.fill('input[placeholder="Filter by tag"]', 'nonexistent');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+  // Clear the filter
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).not.toBeVisible();
+});

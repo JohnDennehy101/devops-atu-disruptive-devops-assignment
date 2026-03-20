@@ -1,0 +1,54 @@
+test.describe('Tag Filter Functionality', () => {
+  test('filters notes by tag and updates displayed count', async ({ page }) => {
+    // Mock API response for notes
+    const notes = [
+      { id: 1, title: 'Note 1', body: 'Body 1', tags: ['work', 'urgent'] },
+      { id: 2, title: 'Note 2', body: 'Body 2', tags: ['personal', 'important'] },
+      { id: 3, title: 'Note 3', body: 'Body 3', tags: ['work', 'important'] },
+    ];
+
+    // Mock saved IDs
+    const savedIds = [1, 2, 3];
+
+    // Intercept API call to return mock notes
+    await page.route('**/api/notes', route => {
+      route.fulfill({
+        status: 200,
+        body: JSON.stringify(notes),
+      });
+    });
+
+    // Mock localStorage for saved note IDs
+    await page.addInitScript(savedIds => {
+      window.localStorage.setItem('noteIds', JSON.stringify(savedIds));
+    }, savedIds);
+
+    // Navigate to the page
+    await page.goto('/');
+
+    // Verify initial state
+    await expect(page.locator('text=Your Notes (3)')).toBeVisible();
+    await expect(page.locator('text=Note #1')).toBeVisible();
+    await expect(page.locator('text=Note #2')).toBeVisible();
+    await expect(page.locator('text=Note #3')).toBeVisible();
+
+    // Filter by a tag that matches some notes
+    await page.fill('input[placeholder="Filter by tag"]', 'work');
+    await expect(page.locator('text=Your Notes (2)')).toBeVisible();
+    await expect(page.locator('text=Note #1')).toBeVisible();
+    await expect(page.locator('text=Note #3')).toBeVisible();
+    await expect(page.locator('text=Note #2')).not.toBeVisible();
+
+    // Filter by a tag that matches no notes
+    await page.fill('input[placeholder="Filter by tag"]', 'nonexistent');
+    await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+    await expect(page.locator('text=No notes match the filter')).toBeVisible();
+
+    // Clear the filter
+    await page.fill('input[placeholder="Filter by tag"]', '');
+    await expect(page.locator('text=Your Notes (3)')).toBeVisible();
+    await expect(page.locator('text=Note #1')).toBeVisible();
+    await expect(page.locator('text=Note #2')).toBeVisible();
+    await expect(page.locator('text=Note #3')).toBeVisible();
+  });
+});

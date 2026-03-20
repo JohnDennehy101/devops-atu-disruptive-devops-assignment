@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/instruction.spec.ts:4:3 › Home Page - Clear All Notes Feature › should display "Clear all" button when there are saved notes and clear notes on click
+[1A[2K[2/2] [chromium] › e2e/instruction.spec.ts:40:3 › Home Page - Clear All Notes Feature › should not display "Clear all" button when there are no saved notes
+[1A[2K  2 passed (2.2s)
+
+
+=== STDERR ===
+

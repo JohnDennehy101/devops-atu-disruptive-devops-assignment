@@ -1,0 +1,60 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Clear All Notes Feature', () => {
+  test('should display "Clear all" button when there are saved notes and clear notes on click', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Mock localStorage to simulate saved notes
+    const savedNotes = ['note1', 'note2', 'note3'];
+    await page.evaluate((notes) => {
+      localStorage.setItem('noteIds', JSON.stringify(notes));
+    }, savedNotes);
+
+    // Reload the page to reflect the mocked localStorage data
+    await page.reload();
+
+    // Assert that the "Your Notes" header displays the correct count
+    const notesHeader = await page.getByRole('heading', { name: `Your Notes (${savedNotes.length})` });
+    await expect(notesHeader).toBeVisible();
+
+    // Assert that the "Clear all" button is visible
+    const clearAllButton = await page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).toBeVisible();
+
+    // Click the "Clear all" button
+    await clearAllButton.click();
+
+    // Assert that the "Your Notes" header updates to show 0 notes
+    const updatedNotesHeader = await page.getByRole('heading', { name: 'Your Notes (0)' });
+    await expect(updatedNotesHeader).toBeVisible();
+
+    // Assert that the "Clear all" button is no longer visible
+    await expect(clearAllButton).not.toBeVisible();
+
+    // Assert that localStorage is cleared
+    const localStorageNoteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(localStorageNoteIds).toBe(JSON.stringify([]));
+  });
+
+  test('should not display "Clear all" button when there are no saved notes', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Mock localStorage to simulate no saved notes
+    await page.evaluate(() => {
+      localStorage.setItem('noteIds', JSON.stringify([]));
+    });
+
+    // Reload the page to reflect the mocked localStorage data
+    await page.reload();
+
+    // Assert that the "Your Notes" header displays 0 notes
+    const notesHeader = await page.getByRole('heading', { name: 'Your Notes (0)' });
+    await expect(notesHeader).toBeVisible();
+
+    // Assert that the "Clear all" button is not visible
+    const clearAllButton = await page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).not.toBeVisible();
+  });
+});

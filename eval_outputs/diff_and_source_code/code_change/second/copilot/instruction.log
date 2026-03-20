@@ -1,0 +1,81 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/instruction.spec.ts:4:3 › Character Counter in Note Body › should display the correct character count when typing in the note body
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:3 › Character Counter in Note Body › should display the correct character count when typing in the note body 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test('should display the correct character count when typing in the note body', async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+        |                ^
+      7 |
+      8 |     // Verify the page title
+      9 |     await expect(page).toHaveTitle(/Note Taking App/);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-a035f-hen-typing-in-the-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-a035f-hen-typing-in-the-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-a035f-hen-typing-in-the-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-a035f-hen-typing-in-the-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/instruction.spec.ts:30:3 › Character Counter in Note Body › should not exceed the maximum character limit in the note body
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:30:3 › Character Counter in Note Body › should not exceed the maximum character limit in the note body 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      30 |   test('should not exceed the maximum character limit in the note body', async ({ page }) => {
+      31 |     // Navigate to the Home page
+    > 32 |     await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+         |                ^
+      33 |
+      34 |     // Locate the "Body" textarea
+      35 |     const bodyTextarea = page.getByRole('textbox', { name: /Body/i });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:32:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-399f5-cter-limit-in-the-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-399f5-cter-limit-in-the-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-399f5-cter-limit-in-the-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/instruction/instruction-Character-Coun-399f5-cter-limit-in-the-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/instruction.spec.ts:4:3 › Character Counter in Note Body › should display the correct character count when typing in the note body 
+    [chromium] › e2e/instruction.spec.ts:30:3 › Character Counter in Note Body › should not exceed the maximum character limit in the note body 
+
+
+=== STDERR ===
+
