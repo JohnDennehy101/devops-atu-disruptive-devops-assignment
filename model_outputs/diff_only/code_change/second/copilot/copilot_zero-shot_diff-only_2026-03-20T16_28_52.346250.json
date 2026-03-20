@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-20T16:28:52.346250",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 1.791,
+            "input_token_count": 94,
+            "output_token_count": 144,
+            "total_token_count": 238,
+            "tokens_per_sec": 80.4
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should display character count for formBody', async ({ page }) => {\n  // Navigate to the Home page\n  await page.goto('/');\n\n  // Locate the formBody input field and type some text\n  const formBodyInput = page.locator('textarea[name=\"formBody\"]');\n  await formBodyInput.fill('Hello, Playwright!');\n\n  // Verify the character count is displayed correctly\n  const charCount = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(charCount).toHaveText('18 / 5000');\n});\n```",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should display character count for formBody', async ({ page }) => {\n  // Navigate to the Home page\n  await page.goto('/');\n\n  // Locate the formBody input field and type some text\n  const formBodyInput = page.locator('textarea[name=\"formBody\"]');\n  await formBodyInput.fill('Hello, Playwright!');\n\n  // Verify the character count is displayed correctly\n  const charCount = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(charCount).toHaveText('18 / 5000');\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

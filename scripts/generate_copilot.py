@@ -207,7 +207,7 @@ def main():
         status = "ok" if re.search(r"\btest\s*\(", extracted) else "no test() found"
         print(f"({duration}s) [{status}]")
 
-        time.sleep(1)
+        time.sleep(2)
 
     print("\nDone.")
 
