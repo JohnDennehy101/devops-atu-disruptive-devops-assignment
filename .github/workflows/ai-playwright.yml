@@ -22,8 +22,8 @@ jobs:
           llm-api-key: ${{ secrets.LLM_API_KEY }}
           llm-host: ${{ secrets.LLM_HOST }}
           model-id: ${{ secrets.MODEL_NAME }}
-          exclude-pattern: ^(versions|model_outputs)/.*
-          include-existing-tests: 'true' 
-          include-source-files: 'true'
-          test-file-suffixes: '.spec'
-          test-file-roots: 'app/e2e'
+          exclude-pattern: ^(versions|model_outputs|eval_outputs|scripts)/.*
+          include-existing-tests: "true"
+          include-source-files: "true"
+          test-file-suffixes: ".spec"
+          test-file-roots: "app/e2e"
