@@ -1,0 +1,129 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Tag Filter on Your Notes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+  });
+
+  test("should display the tag filter input", async ({ page }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute("placeholder", "Filter by tag");
+    await expect(filterInput).toHaveValue("");
+  });
+
+  test("should show all notes when filter is empty", async ({ page }) => {
+    const heading = page.getByRole("heading", { name: /Your Notes \(\d+\)/ });
+    await expect(heading).toBeVisible();
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toHaveValue("");
+
+    const noteButtons = page.getByRole("button", { name: /Note #/ });
+    const count = await noteButtons.count();
+    expect(count).toBeGreaterThan(0);
+
+    const headingText = await heading.textContent();
+    const match = headingText?.match(/Your Notes \((\d+)\)/);
+    expect(match).toBeTruthy();
+    expect(Number(match![1])).toBe(count);
+  });
+
+  test("should filter notes by matching tag", async ({ page }) => {
+    const noteButtons = page.getByRole("button", { name: /Note #/ });
+    const initialCount = await noteButtons.count();
+    expect(initialCount).toBeGreaterThanOrEqual(2);
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("javascript");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toHaveText("Your Notes (1)");
+
+    const filteredButtons = page.getByRole("button", { name: /Note #/ });
+    await expect(filteredButtons).toHaveCount(1);
+  });
+
+  test("should show 'No notes match the filter' when no tags match", async ({
+    page,
+  }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("nonexistenttag");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toHaveText("Your Notes (0)");
+
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+
+    const noteButtons = page.getByRole("button", { name: /Note #/ });
+    await expect(noteButtons).toHaveCount(0);
+  });
+
+  test("should restore all notes when filter is cleared", async ({ page }) => {
+    const noteButtons = page.getByRole("button", { name: /Note #/ });
+    const initialCount = await noteButtons.count();
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("javascript");
+
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    await filterInput.clear();
+
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(
+      initialCount
+    );
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toHaveText(`Your Notes (${initialCount})`);
+  });
+
+  test("should filter with case-insensitive matching", async ({ page }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+
+    await filterInput.fill("JAVASCRIPT");
+    const upperResult = page.getByRole("button", { name: /Note #/ });
+    const upperCount = await upperResult.count();
+
+    await filterInput.clear();
+    await filterInput.fill("javascript");
+    const lowerResult = page.getByRole("button", { name: /Note #/ });
+    const lowerCount = await lowerResult.count();
+
+    expect(upperCount).toBe(lowerCount);
+    expect(upperCount).toBeGreaterThan(0);
+  });
+
+  test("should filter with partial tag match", async ({ page }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("java");
+
+    const filteredButtons = page.getByRole("button", { name: /Note #/ });
+    const count = await filteredButtons.count();
+    expect(count).toBeGreaterThan(0);
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    const headingText = await heading.textContent();
+    const match = headingText?.match(/Your Notes \((\d+)\)/);
+    expect(Number(match![1])).toBe(count);
+  });
+
+  test("should update displayed count in heading when filtering", async ({
+    page,
+  }) => {
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    const initialText = await heading.textContent();
+    const initialMatch = initialText?.match(/Your Notes \((\d+)\)/);
+    const initialCount = Number(initialMatch![1]);
+    expect(initialCount).toBeGreaterThanOrEqual(2);
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("python");
+
+    await expect(heading).not.toHaveText(`Your Notes (${initialCount})`);
+    const filteredText = await heading.textContent();
+    const filteredMatch = filteredText?.match(/Your Notes \((\d+)\)/);
+    const filteredCount = Number(filteredMatch![1]);
+    expect(filteredCount).toBeLessThan(initialCount);
+  });
+});

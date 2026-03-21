@@ -1,0 +1,60 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Copy Note Body Feature › should display Copy button when a note is selected
+[1A[2K[2/5] [chromium] › e2e/chain-of-thought.spec.ts:29:3 › Copy Note Body Feature › should not display Copy button when no note is selected
+[1A[2K[3/5] [chromium] › e2e/chain-of-thought.spec.ts:36:3 › Copy Note Body Feature › should copy note body to clipboard when Copy button is clicked
+[1A[2K[4/5] [chromium] › e2e/chain-of-thought.spec.ts:69:3 › Copy Note Body Feature › should copy correct body when switching between notes
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:69:3 › Copy Note Body Feature › should copy correct body when switching between notes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Body: First note body content')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Body: First note body content')[22m
+
+
+      105 |     await expect(
+      106 |       page.getByText(`Body: ${firstBody}`)
+    > 107 |     ).toBeVisible();
+          |       ^
+      108 |     await page.getByRole("button", { name: "Copy" }).click();
+      109 |
+      110 |     clipboardContent = await page.evaluate(() =>
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:107:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-fe27f-hen-switching-between-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-fe27f-hen-switching-between-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-fe27f-hen-switching-between-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-fe27f-hen-switching-between-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-fe27f-hen-switching-between-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/chain-of-thought.spec.ts:116:3 › Copy Note Body Feature › Copy button should not be visible in edit mode
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:69:3 › Copy Note Body Feature › should copy correct body when switching between notes 
+  4 passed (8.5s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,95 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Tag Filter", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("shows filter by tag input in sidebar", async ({ page }) => {
+    await expect(
+      page.getByPlaceholder("Filter by tag"),
+    ).toBeVisible()
+  })
+
+  test("filters notes by tag", async ({ page }) => {
+    // Create a note with specific tags
+    await page.getByLabel("Title").fill("JavaScript note")
+    await page.getByLabel("Body").fill("About JS")
+    await page.getByLabel(/Tags/).fill("javascript, frontend")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Create a second note with different tags
+    await page.getByLabel("Title").fill("Python note")
+    await page.getByLabel("Body").fill("About Python")
+    await page.getByLabel(/Tags/).fill("python, backend")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    // Filter by "javascript" — only first note should match
+    await page.getByPlaceholder("Filter by tag").fill("javascript")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+
+    // Filter by "python" — only second note should match
+    await page.getByPlaceholder("Filter by tag").fill("python")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+
+    // Clear filter — both notes should show
+    await page.getByPlaceholder("Filter by tag").fill("")
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2)
+  })
+
+  test("shows 'No notes match the filter' when no tags match", async ({ page }) => {
+    // Create a note first
+    await page.getByLabel("Title").fill("Some note")
+    await page.getByLabel("Body").fill("Some body")
+    await page.getByLabel(/Tags/).fill("existingtag")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Filter by a non-existent tag
+    await page.getByPlaceholder("Filter by tag").fill("nonexistenttag")
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+  })
+
+  test("shows 'No notes yet' when there are no saved notes", async ({ page }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible()
+  })
+
+  test("filter is case-insensitive", async ({ page }) => {
+    await page.getByLabel("Title").fill("Case test")
+    await page.getByLabel("Body").fill("Body text")
+    await page.getByLabel(/Tags/).fill("JavaScript")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Filter with lowercase should still match
+    await page.getByPlaceholder("Filter by tag").fill("javascript")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+
+    // Filter with uppercase should also match
+    await page.getByPlaceholder("Filter by tag").fill("JAVASCRIPT")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+  })
+
+  test("filter matches partial tag names", async ({ page }) => {
+    await page.getByLabel("Title").fill("Partial test")
+    await page.getByLabel("Body").fill("Body text")
+    await page.getByLabel(/Tags/).fill("javascript")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Partial match should work since code uses .includes()
+    await page.getByPlaceholder("Filter by tag").fill("java")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1)
+  })
+})

@@ -1,0 +1,42 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Body character counter", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("displays 0 / 5000 when body is empty", async ({ page }) => {
+    await expect(page.getByText("0 / 5000")).toBeVisible()
+  })
+
+  test("updates character count as user types in the body field", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Body" }).fill("Hello world")
+    await expect(page.getByText("11 / 5000")).toBeVisible()
+  })
+
+  test("updates character count when body text is cleared", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Body" }).fill("Some text")
+    await expect(page.getByText("9 / 5000")).toBeVisible()
+
+    await page.getByRole("textbox", { name: "Body" }).fill("")
+    await expect(page.getByText("0 / 5000")).toBeVisible()
+  })
+
+  test("shows correct count for longer text", async ({ page }) => {
+    const longText = "a".repeat(500)
+    await page.getByRole("textbox", { name: "Body" }).fill(longText)
+    await expect(page.getByText("500 / 5000")).toBeVisible()
+  })
+
+  test("character count resets after creating a note", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Test note")
+    await page.getByRole("textbox", { name: "Body" }).fill("Note body content")
+    await expect(page.getByText("17 / 5000")).toBeVisible()
+
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("0 / 5000")).toBeVisible()
+  })
+})

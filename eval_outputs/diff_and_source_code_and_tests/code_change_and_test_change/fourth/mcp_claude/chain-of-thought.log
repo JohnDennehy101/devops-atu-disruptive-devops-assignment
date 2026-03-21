@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App - Tag Filter › filter by tag shows only matching notes
+[1A[2K[2/7] [chromium] › e2e/chain-of-thought.spec.ts:35:3 › Note Taking App - Tag Filter › filter input is visible in the sidebar
+[1A[2K[3/7] [chromium] › e2e/chain-of-thought.spec.ts:39:3 › Note Taking App - Tag Filter › filter is case-insensitive
+[1A[2K[4/7] [chromium] › e2e/chain-of-thought.spec.ts:54:3 › Note Taking App - Tag Filter › filter matches partial tag text
+[1A[2K[5/7] [chromium] › e2e/chain-of-thought.spec.ts:66:3 › Note Taking App - Tag Filter › shows 'No notes yet' when no notes exist and filter is empty
+[1A[2K[6/7] [chromium] › e2e/chain-of-thought.spec.ts:71:3 › Note Taking App - Tag Filter › shows 'No notes match the filter' not 'No notes yet' when filter excludes all notes
+[1A[2K[7/7] [chromium] › e2e/chain-of-thought.spec.ts:84:3 › Note Taking App - Tag Filter › filter updates note count correctly with multiple tags
+[1A[2K  7 passed (3.2s)
+
+
+=== STDERR ===
+

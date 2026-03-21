@@ -1,0 +1,116 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Copy Note Body Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+  });
+
+  test("should display Copy button when a note is selected", async ({
+    page,
+  }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Copy Test Note");
+    await page
+      .getByRole("textbox", { name: "Body" })
+      .fill("Body content to copy");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Click the newly created note in the sidebar
+    const noteButtons = page.getByRole("button", { name: /^Note #/ });
+    await noteButtons.last().click();
+
+    // Verify Note Details section appears with the Copy button
+    await expect(
+      page.getByRole("heading", { name: "Note Details" })
+    ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+  });
+
+  test("should show Copy button alongside Edit button in note details", async ({
+    page,
+  }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Button Test Note");
+    await page
+      .getByRole("textbox", { name: "Body" })
+      .fill("Some body text");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Select the note
+    const noteButtons = page.getByRole("button", { name: /^Note #/ });
+    await noteButtons.last().click();
+
+    // Both Edit and Copy buttons should be visible
+    await expect(page.getByRole("button", { name: "Edit" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+  });
+
+  test("should copy note body to clipboard when Copy button is clicked", async ({
+    page,
+    context,
+  }) => {
+    // Grant clipboard permissions
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+    const bodyText = "This is the body text that should be copied to clipboard";
+
+    // Create a note with specific body text
+    await page.getByRole("textbox", { name: "Title" }).fill("Clipboard Test");
+    await page.getByRole("textbox", { name: "Body" }).fill(bodyText);
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Select the note
+    const noteButtons = page.getByRole("button", { name: /^Note #/ });
+    await noteButtons.last().click();
+
+    // Wait for note details to load
+    await expect(
+      page.getByRole("heading", { name: "Note Details" })
+    ).toBeVisible();
+    await expect(page.getByText(`Body: ${bodyText}`)).toBeVisible();
+
+    // Click the Copy button
+    await page.getByRole("button", { name: "Copy" }).click();
+
+    // Verify clipboard contents
+    const clipboardContent = await page.evaluate(() =>
+      navigator.clipboard.readText()
+    );
+    expect(clipboardContent).toBe(bodyText);
+  });
+
+  test("should not show Copy button when no note is selected", async ({
+    page,
+  }) => {
+    // On initial load, no note is selected
+    await expect(
+      page.getByRole("heading", { name: "Note Details" })
+    ).not.toBeVisible();
+    await expect(page.getByRole("button", { name: "Copy" })).not.toBeVisible();
+  });
+
+  test("should not show Copy button when in edit mode", async ({ page }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Edit Mode Test");
+    await page
+      .getByRole("textbox", { name: "Body" })
+      .fill("Edit mode body");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Select the note
+    const noteButtons = page.getByRole("button", { name: /^Note #/ });
+    await noteButtons.last().click();
+
+    // Verify Copy button is visible in view mode
+    await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+
+    // Click Edit to enter edit mode
+    await page.getByRole("button", { name: "Edit" }).click();
+
+    // In edit mode, the Note Details panel (with Copy) should not be visible
+    await expect(
+      page.getByRole("heading", { name: "Note Details" })
+    ).not.toBeVisible();
+    await expect(page.getByRole("button", { name: "Copy" })).not.toBeVisible();
+  });
+});

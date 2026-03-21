@@ -1,7 +1,7 @@
 [
     {
         "timestamp": "2026-03-21T16:31:04.523760",
-        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "model_id": "anthropic/mcp-claude-sonnet-4-20250514",
         "prompt_type": "few-shot",
         "scenario": "diff-only",
         "metrics": {

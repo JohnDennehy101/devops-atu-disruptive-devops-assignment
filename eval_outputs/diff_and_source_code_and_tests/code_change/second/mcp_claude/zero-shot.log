@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/zero-shot.spec.ts:10:3 › Body character counter › displays 0 / 5000 when body is empty
+[1A[2K[2/5] [chromium] › e2e/zero-shot.spec.ts:14:3 › Body character counter › updates character count as user types in body
+[1A[2K[3/5] [chromium] › e2e/zero-shot.spec.ts:19:3 › Body character counter › shows correct count for longer text
+[1A[2K[4/5] [chromium] › e2e/zero-shot.spec.ts:25:3 › Body character counter › resets character count after creating a note
+[1A[2K[5/5] [chromium] › e2e/zero-shot.spec.ts:35:3 › Body character counter › character count updates when editing an existing note
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:35:3 › Body character counter › character count updates when editing an existing note 
+
+    Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Edit' }).or(getByText('Edit')) resolved to 2 elements:
+        1) <button class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Edit</button> aka getByRole('button', { name: 'Edit' })
+        2) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Title: Edit test')
+
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Edit' }).or(getByText('Edit'))[22m
+
+
+      41 |     await expect(page.getByText("Note Details")).toBeVisible()
+      42 |
+    > 43 |     await page.getByRole("link", { name: "Edit" }).or(page.getByText("Edit")).click()
+         |                                                                               ^
+      44 |     await expect(page.getByText("13 / 5000")).toBeVisible()
+      45 |
+      46 |     await page.getByLabel("Body").fill("Updated body content here")
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:43:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/zero-shot/zero-shot-Body-character-c-da173-en-editing-an-existing-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/zero-shot/zero-shot-Body-character-c-da173-en-editing-an-existing-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/zero-shot/zero-shot-Body-character-c-da173-en-editing-an-existing-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/zero-shot/zero-shot-Body-character-c-da173-en-editing-an-existing-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/zero-shot/zero-shot-Body-character-c-da173-en-editing-an-existing-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:35:3 › Body character counter › character count updates when editing an existing note 
+  4 passed (2.4s)
+
+
+=== STDERR ===
+

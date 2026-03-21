@@ -1,0 +1,135 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/few-shot.spec.ts:8:3 › Tag filter functionality › displays the filter by tag input field
+[1A[2K[2/8] [chromium] › e2e/few-shot.spec.ts:14:3 › Tag filter functionality › shows all saved notes when filter is empty
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:14:3 › Tag filter functionality › shows all saved notes when filter is empty 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      21 |     const noteCount = await heading.textContent();
+      22 |     const match = noteCount?.match(/\((\d+)\)/);
+    > 23 |     expect(Number(match?.[1])).toBeGreaterThan(0);
+         |                                ^
+      24 |   });
+      25 |
+      26 |   test('filters notes by tag and updates the count', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:23:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-f9639--notes-when-filter-is-empty-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-f9639--notes-when-filter-is-empty-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-f9639--notes-when-filter-is-empty-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-f9639--notes-when-filter-is-empty-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-f9639--notes-when-filter-is-empty-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/8] [chromium] › e2e/few-shot.spec.ts:26:3 › Tag filter functionality › filters notes by tag and updates the count
+[1A[2K[4/8] [chromium] › e2e/few-shot.spec.ts:39:3 › Tag filter functionality › shows "No notes match the filter" when filter has no matches
+[1A[2K  2) [chromium] › e2e/few-shot.spec.ts:39:3 › Tag filter functionality › shows "No notes match the filter" when filter has no matches 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      42 |     await filterInput.fill('nonexistenttag');
+      43 |
+    > 44 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      45 |   });
+      46 |
+      47 |   test('restores all notes when filter is cleared', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:44:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-538d5--when-filter-has-no-matches-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-538d5--when-filter-has-no-matches-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-538d5--when-filter-has-no-matches-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-538d5--when-filter-has-no-matches-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-538d5--when-filter-has-no-matches-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/8] [chromium] › e2e/few-shot.spec.ts:47:3 › Tag filter functionality › restores all notes when filter is cleared
+[1A[2K[6/8] [chromium] › e2e/few-shot.spec.ts:60:3 › Tag filter functionality › creates a note with tags and filters by that tag
+[1A[2K  3) [chromium] › e2e/few-shot.spec.ts:60:3 › Tag filter functionality › creates a note with tags and filters by that tag 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m1[39m
+    Received:   [31m1[39m
+
+      77 |     const text = await heading.textContent();
+      78 |     const match = text?.match(/\((\d+)\)/);
+    > 79 |     expect(Number(match?.[1])).toBeGreaterThan(1);
+         |                                ^
+      80 |   });
+      81 |
+      82 |   test('tag filter is case-insensitive', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:79:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-dcff2-ags-and-filters-by-that-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-dcff2-ags-and-filters-by-that-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-dcff2-ags-and-filters-by-that-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-dcff2-ags-and-filters-by-that-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/few-shot/few-shot-Tag-filter-functi-dcff2-ags-and-filters-by-that-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/8] [chromium] › e2e/few-shot.spec.ts:82:3 › Tag filter functionality › tag filter is case-insensitive
+[1A[2K[8/8] [chromium] › e2e/few-shot.spec.ts:101:3 › Tag filter functionality › shows "No notes yet" when there are no saved notes
+[1A[2K  3 failed
+    [chromium] › e2e/few-shot.spec.ts:14:3 › Tag filter functionality › shows all saved notes when filter is empty 
+    [chromium] › e2e/few-shot.spec.ts:39:3 › Tag filter functionality › shows "No notes match the filter" when filter has no matches 
+    [chromium] › e2e/few-shot.spec.ts:60:3 › Tag filter functionality › creates a note with tags and filters by that tag 
+  5 passed (10.4s)
+
+
+=== STDERR ===
+

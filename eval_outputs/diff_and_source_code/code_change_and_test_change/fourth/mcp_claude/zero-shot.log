@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/zero-shot.spec.ts:10:3 › Tag filtering › filter by tag shows only matching notes
+[1A[2K[2/7] [chromium] › e2e/zero-shot.spec.ts:35:3 › Tag filtering › filter is case-insensitive
+[1A[2K[3/7] [chromium] › e2e/zero-shot.spec.ts:50:3 › Tag filtering › filter matches partial tag names
+[1A[2K[4/7] [chromium] › e2e/zero-shot.spec.ts:62:3 › Tag filtering › filter input is visible in sidebar
+[1A[2K[5/7] [chromium] › e2e/zero-shot.spec.ts:66:3 › Tag filtering › shows 'No notes yet' when no notes exist and no filter
+[1A[2K[6/7] [chromium] › e2e/zero-shot.spec.ts:71:3 › Tag filtering › filter with whitespace-only input shows all notes
+[1A[2K[7/7] [chromium] › e2e/zero-shot.spec.ts:83:3 › Tag filtering › filter updates count correctly with multiple tagged notes
+[1A[2K  7 passed (3.2s)
+
+
+=== STDERR ===
+

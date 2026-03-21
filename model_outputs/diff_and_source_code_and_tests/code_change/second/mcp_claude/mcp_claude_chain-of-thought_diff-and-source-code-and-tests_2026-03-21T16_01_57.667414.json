@@ -1,7 +1,7 @@
 [
     {
         "timestamp": "2026-03-21T16:01:57.667414",
-        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "model_id": "anthropic/mcp-claude-sonnet-4-20250514",
         "prompt_type": "chain-of-thought",
         "scenario": "diff-and-source-code-and-tests",
         "metrics": {

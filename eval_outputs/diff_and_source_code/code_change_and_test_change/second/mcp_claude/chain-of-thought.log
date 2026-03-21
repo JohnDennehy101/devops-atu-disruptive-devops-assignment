@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Body character count › shows initial character count of zero
+[1A[2K[2/4] [chromium] › e2e/chain-of-thought.spec.ts:12:3 › Body character count › shows body character count and updates when typing
+[1A[2K[3/4] [chromium] › e2e/chain-of-thought.spec.ts:20:3 › Body character count › resets character count when body is cleared
+[1A[2K[4/4] [chromium] › e2e/chain-of-thought.spec.ts:27:3 › Body character count › displays correct count for longer text
+[1A[2K  4 passed (1.9s)
+
+
+=== STDERR ===
+

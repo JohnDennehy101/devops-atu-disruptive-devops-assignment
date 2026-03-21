@@ -1,0 +1,105 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Copy Note Body", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+  });
+
+  test("should display Copy button when a note is selected", async ({
+    page,
+  }) => {
+    // Select a note
+    await page.getByRole("button", { name: /Note #/ }).first().click();
+
+    // Verify Note Details section appears with Copy button
+    await expect(
+      page.getByRole("heading", { name: "Note Details" })
+    ).toBeVisible();
+    await expect(page.getByRole("button", { name: "Copy" })).toBeVisible();
+  });
+
+  test("should not display Copy button when no note is selected", async ({
+    page,
+  }) => {
+    // No note selected initially
+    await expect(
+      page.getByRole("button", { name: "Copy" })
+    ).not.toBeVisible();
+  });
+
+  test("should copy the note body to clipboard when Copy is clicked", async ({
+    page,
+    context,
+  }) => {
+    // Grant clipboard permissions
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+    // Select a note
+    await page.getByRole("button", { name: /Note #/ }).first().click();
+
+    // Get the note body text
+    const bodyText = await page
+      .locator("text=Body:")
+      .first()
+      .textContent();
+    const expectedBody = bodyText?.replace("Body: ", "") ?? "";
+
+    // Click Copy button
+    await page.getByRole("button", { name: "Copy" }).click();
+
+    // Read clipboard and verify
+    const clipboardContent = await page.evaluate(() =>
+      navigator.clipboard.readText()
+    );
+    expect(clipboardContent).toBe(expectedBody);
+  });
+
+  test("should copy correct body when switching between notes", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+    const noteButtons = page.getByRole("button", { name: /Note #/ });
+    const count = await noteButtons.count();
+
+    if (count >= 2) {
+      // Select first note and copy
+      await noteButtons.nth(0).click();
+      const firstBody = await page
+        .locator("text=Body:")
+        .first()
+        .textContent();
+      const expectedFirstBody = firstBody?.replace("Body: ", "") ?? "";
+
+      await page.getByRole("button", { name: "Copy" }).click();
+      let clipboardContent = await page.evaluate(() =>
+        navigator.clipboard.readText()
+      );
+      expect(clipboardContent).toBe(expectedFirstBody);
+
+      // Select second note and copy
+      await noteButtons.nth(1).click();
+      const secondBody = await page
+        .locator("text=Body:")
+        .first()
+        .textContent();
+      const expectedSecondBody = secondBody?.replace("Body: ", "") ?? "";
+
+      await page.getByRole("button", { name: "Copy" }).click();
+      clipboardContent = await page.evaluate(() =>
+        navigator.clipboard.readText()
+      );
+      expect(clipboardContent).toBe(expectedSecondBody);
+    }
+  });
+
+  test("Copy button should have correct styling", async ({ page }) => {
+    await page.getByRole("button", { name: /Note #/ }).first().click();
+
+    const copyButton = page.getByRole("button", { name: "Copy" });
+    await expect(copyButton).toBeVisible();
+    await expect(copyButton).toHaveClass(/text-blue-600/);
+    await expect(copyButton).toHaveClass(/text-sm/);
+  });
+});

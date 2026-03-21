@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App › displays subtitle description text
+[1A[2K[2/7] [chromium] › e2e/zero-shot.spec.ts:16:3 › Note Taking App › does not show clear all button when no notes exist
+[1A[2K[3/7] [chromium] › e2e/zero-shot.spec.ts:21:3 › Note Taking App › shows clear all button when notes exist
+[1A[2K[4/7] [chromium] › e2e/zero-shot.spec.ts:31:3 › Note Taking App › can clear all notes from sidebar
+[1A[2K[5/7] [chromium] › e2e/zero-shot.spec.ts:42:3 › Note Taking App › clear all removes multiple notes
+[1A[2K[6/7] [chromium] › e2e/zero-shot.spec.ts:61:3 › Note Taking App › clear all resets form and editing state
+[1A[2K[7/7] [chromium] › e2e/zero-shot.spec.ts:76:3 › Note Taking App › clear all persists after page reload
+[1A[2K  7 passed (3.2s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,67 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Copy Note Body", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("copy button is visible when viewing note details", async ({ page }) => {
+    await page.getByLabel("Title").fill("Copy test note")
+    await page.getByLabel("Body").fill("Body to copy")
+    await page.getByLabel(/Tags/).fill("test")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+
+    await expect(
+      page.getByRole("heading", { name: "Note Details" }),
+    ).toBeVisible()
+    await expect(
+      page.getByRole("button", { name: "Copy" }),
+    ).toBeVisible()
+  })
+
+  test("copy button copies note body to clipboard", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"])
+
+    await page.getByLabel("Title").fill("Clipboard note")
+    await page.getByLabel("Body").fill("This text should be copied")
+    await page.getByLabel(/Tags/).fill("clipboard")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+    await expect(
+      page.getByRole("heading", { name: "Note Details" }),
+    ).toBeVisible()
+
+    await page.getByRole("button", { name: "Copy" }).click()
+
+    const clipboardText = await page.evaluate(() =>
+      navigator.clipboard.readText(),
+    )
+    expect(clipboardText).toBe("This text should be copied")
+  })
+
+  test("copy button is not visible when in edit mode", async ({ page }) => {
+    await page.getByLabel("Title").fill("Edit mode note")
+    await page.getByLabel("Body").fill("Some body")
+    await page.getByLabel(/Tags/).fill("test")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+    await expect(
+      page.getByRole("heading", { name: "Note Details" }),
+    ).toBeVisible()
+
+    await page.getByRole("button", { name: "Edit" }).click()
+
+    await expect(
+      page.getByRole("button", { name: "Copy" }),
+    ).not.toBeVisible()
+  })
+})

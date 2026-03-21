@@ -1,0 +1,149 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Tag Filter Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    // Clear localStorage to start fresh
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  async function createNote(
+    page: import("@playwright/test").Page,
+    title: string,
+    body: string,
+    tags: string
+  ) {
+    await page.getByRole("textbox", { name: "Title" }).fill(title);
+    await page.getByRole("textbox", { name: "Body" }).fill(body);
+    await page.getByRole("textbox", { name: "Tags (comma-separated)" }).fill(tags);
+    await page.getByRole("button", { name: "Create Note" }).click();
+    // Wait for the note to appear in the sidebar
+    await expect(page.getByRole("textbox", { name: "Title" })).toHaveValue("");
+  }
+
+  test("should display the tag filter input", async ({ page }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute("placeholder", "Filter by tag");
+  });
+
+  test("should show all notes when filter is empty", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "javascript, react");
+    await createNote(page, "Note B", "Body B", "python, django");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toHaveValue("");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (2)");
+  });
+
+  test("should filter notes by matching tag", async ({ page }) => {
+    await createNote(page, "JS Note", "Body", "javascript, react");
+    await createNote(page, "Python Note", "Body", "python, django");
+    await createNote(page, "Another JS Note", "Body", "javascript, node");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (3)");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("python");
+
+    await expect(heading).toContainText("Your Notes (1)");
+  });
+
+  test("should show 'No notes match the filter' when no tags match", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "javascript");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("nonexistenttag");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (0)");
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+  });
+
+  test("should show 'No notes yet' when there are no saved notes", async ({ page }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible();
+  });
+
+  test("should restore all notes when filter is cleared", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "javascript");
+    await createNote(page, "Note B", "Body B", "python");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+
+    await filterInput.fill("javascript");
+    await expect(heading).toContainText("Your Notes (1)");
+
+    await filterInput.fill("");
+    await expect(heading).toContainText("Your Notes (2)");
+  });
+
+  test("should filter case-insensitively", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "JavaScript");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("javascript");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (1)");
+  });
+
+  test("should support partial tag matching", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "javascript, testing");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("java");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (1)");
+  });
+
+  test("should update count in heading to match filtered results", async ({ page }) => {
+    await createNote(page, "Note 1", "Body", "alpha");
+    await createNote(page, "Note 2", "Body", "alpha, beta");
+    await createNote(page, "Note 3", "Body", "beta");
+    await createNote(page, "Note 4", "Body", "gamma");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (4)");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+
+    await filterInput.fill("alpha");
+    await expect(heading).toContainText("Your Notes (2)");
+
+    await filterInput.fill("beta");
+    await expect(heading).toContainText("Your Notes (2)");
+
+    await filterInput.fill("gamma");
+    await expect(heading).toContainText("Your Notes (1)");
+  });
+
+  test("should hide note buttons that do not match the filter", async ({ page }) => {
+    await createNote(page, "JS Note", "Body", "javascript");
+    await createNote(page, "PY Note", "Body", "python");
+
+    // Both note buttons should be visible initially
+    const noteButtons = page.locator("button").filter({ hasText: /Note #/ });
+    await expect(noteButtons).toHaveCount(2);
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("python");
+
+    await expect(noteButtons).toHaveCount(1);
+  });
+
+  test("should trim whitespace from filter input", async ({ page }) => {
+    await createNote(page, "Note A", "Body A", "javascript");
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await filterInput.fill("  javascript  ");
+
+    const heading = page.getByRole("heading", { name: /Your Notes/ });
+    await expect(heading).toContainText("Your Notes (1)");
+  });
+});

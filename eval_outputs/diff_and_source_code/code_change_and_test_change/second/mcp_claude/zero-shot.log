@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/zero-shot.spec.ts:8:3 › Body character count › shows body character count and updates when typing
+[1A[2K[2/4] [chromium] › e2e/zero-shot.spec.ts:16:3 › Body character count › character count resets to zero when body is cleared
+[1A[2K[3/4] [chromium] › e2e/zero-shot.spec.ts:23:3 › Body character count › character count reflects long text accurately
+[1A[2K[4/4] [chromium] › e2e/zero-shot.spec.ts:29:3 › Body character count › character count updates on each keystroke
+[1A[2K  4 passed (1.9s)
+
+
+=== STDERR ===
+

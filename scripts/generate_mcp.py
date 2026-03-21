@@ -217,7 +217,7 @@ def main():
                 record = [
                     {
                         "timestamp": timestamp,
-                        "model_id": "anthropic/claude-sonnet-4-20250514",
+                        "model_id": "anthropic/mcp-claude-sonnet-4-20250514",
                         "prompt_type": p["prompt_type"],
                         "scenario": p["scenario"],
                         "metrics": {

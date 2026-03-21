@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/8] [chromium] › e2e/chain-of-thought.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/8] [chromium] › e2e/chain-of-thought.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/8] [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Note Taking App › displays character counter showing 0 / 5000 when body is empty
+[1A[2K[5/8] [chromium] › e2e/chain-of-thought.spec.ts:51:3 › Note Taking App › character counter updates as text is typed in body field
+[1A[2K[6/8] [chromium] › e2e/chain-of-thought.spec.ts:58:3 › Note Taking App › character counter reflects exact length of body content
+[1A[2K[7/8] [chromium] › e2e/chain-of-thought.spec.ts:64:3 › Note Taking App › character counter resets to 0 after creating a note
+[1A[2K[8/8] [chromium] › e2e/chain-of-thought.spec.ts:75:3 › Note Taking App › character counter is positioned below the body textarea
+[1A[2K  8 passed (3.3s)
+
+
+=== STDERR ===
+

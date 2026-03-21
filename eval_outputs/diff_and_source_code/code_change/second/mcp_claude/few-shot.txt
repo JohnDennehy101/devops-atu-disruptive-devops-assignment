@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character counter', () => {
+  test('displays 0 / 5000 when body is empty', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('updates character count as user types in body', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#note-body').fill('Hello world');
+    await expect(page.getByText('11 / 5000')).toBeVisible();
+  });
+
+  test('shows correct count for longer text', async ({ page }) => {
+    await page.goto('/');
+    const text = 'a'.repeat(100);
+    await page.locator('#note-body').fill(text);
+    await expect(page.getByText('100 / 5000')).toBeVisible();
+  });
+
+  test('resets character count when body is cleared', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#note-body').fill('Some text');
+    await expect(page.getByText('9 / 5000')).toBeVisible();
+    await page.locator('#note-body').fill('');
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+});

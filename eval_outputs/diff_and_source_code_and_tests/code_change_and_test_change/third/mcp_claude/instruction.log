@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/8] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/8] [chromium] › e2e/instruction.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/8] [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › Copy button copies note body to clipboard
+[1A[2K[5/8] [chromium] › e2e/instruction.spec.ts:65:3 › Note Taking App › Copy button is visible in note details panel
+[1A[2K[6/8] [chromium] › e2e/instruction.spec.ts:78:3 › Note Taking App › Copy button is not visible when no note is selected
+[1A[2K[7/8] [chromium] › e2e/instruction.spec.ts:82:3 › Note Taking App › Copy button copies correct body after selecting different notes
+[1A[2K[8/8] [chromium] › e2e/instruction.spec.ts:115:3 › Note Taking App › Copy button disappears when entering edit mode
+[1A[2K  8 passed (3.7s)
+
+
+=== STDERR ===
+

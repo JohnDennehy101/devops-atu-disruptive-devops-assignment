@@ -1,0 +1,22 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 11 tests using 1 worker
+
+[1A[2K[1/11] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/11] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › shows app description text
+[1A[2K[3/11] [chromium] › e2e/instruction.spec.ts:28:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[4/11] [chromium] › e2e/instruction.spec.ts:38:3 › Note Taking App › can open a note and see its details
+[1A[2K[5/11] [chromium] › e2e/instruction.spec.ts:53:3 › Note Taking App › does not show Clear all button when no notes exist
+[1A[2K[6/11] [chromium] › e2e/instruction.spec.ts:59:3 › Note Taking App › shows Clear all button after creating a note
+[1A[2K[7/11] [chromium] › e2e/instruction.spec.ts:69:3 › Note Taking App › can clear all notes from sidebar
+[1A[2K[8/11] [chromium] › e2e/instruction.spec.ts:80:3 › Note Taking App › Clear all button disappears after clearing notes
+[1A[2K[9/11] [chromium] › e2e/instruction.spec.ts:93:3 › Note Taking App › can clear multiple notes at once
+[1A[2K[10/11] [chromium] › e2e/instruction.spec.ts:109:3 › Note Taking App › clearing notes resets form fields
+[1A[2K[11/11] [chromium] › e2e/instruction.spec.ts:124:3 › Note Taking App › clearing notes removes them from localStorage
+[1A[2K  11 passed (4.6s)
+
+
+=== STDERR ===
+

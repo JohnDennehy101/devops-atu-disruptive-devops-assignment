@@ -1,0 +1,22 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 11 tests using 1 worker
+
+[1A[2K[1/11] [chromium] › e2e/zero-shot.spec.ts:25:3 › Tag Filter Feature › should display the tag filter input
+[1A[2K[2/11] [chromium] › e2e/zero-shot.spec.ts:31:3 › Tag Filter Feature › should show all notes when filter is empty
+[1A[2K[3/11] [chromium] › e2e/zero-shot.spec.ts:42:3 › Tag Filter Feature › should filter notes by matching tag
+[1A[2K[4/11] [chromium] › e2e/zero-shot.spec.ts:56:3 › Tag Filter Feature › should show 'No notes match the filter' when no tags match
+[1A[2K[5/11] [chromium] › e2e/zero-shot.spec.ts:67:3 › Tag Filter Feature › should show 'No notes yet' when there are no saved notes
+[1A[2K[6/11] [chromium] › e2e/zero-shot.spec.ts:71:3 › Tag Filter Feature › should restore all notes when filter is cleared
+[1A[2K[7/11] [chromium] › e2e/zero-shot.spec.ts:85:3 › Tag Filter Feature › should filter case-insensitively
+[1A[2K[8/11] [chromium] › e2e/zero-shot.spec.ts:95:3 › Tag Filter Feature › should support partial tag matching
+[1A[2K[9/11] [chromium] › e2e/zero-shot.spec.ts:105:3 › Tag Filter Feature › should update count in heading to match filtered results
+[1A[2K[10/11] [chromium] › e2e/zero-shot.spec.ts:126:3 › Tag Filter Feature › should hide note buttons that do not match the filter
+[1A[2K[11/11] [chromium] › e2e/zero-shot.spec.ts:140:3 › Tag Filter Feature › should trim whitespace from filter input
+[1A[2K  11 passed (4.6s)
+
+
+=== STDERR ===
+

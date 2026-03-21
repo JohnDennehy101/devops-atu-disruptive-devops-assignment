@@ -1,0 +1,108 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag filter functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('displays the filter by tag input field', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveValue('');
+  });
+
+  test('shows all saved notes when filter is empty', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toHaveValue('');
+
+    const heading = page.getByRole('heading', { name: /Your Notes \(\d+\)/ });
+    await expect(heading).toBeVisible();
+
+    const noteCount = await heading.textContent();
+    const match = noteCount?.match(/\((\d+)\)/);
+    expect(Number(match?.[1])).toBeGreaterThan(0);
+  });
+
+  test('filters notes by tag and updates the count', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    const heading = page.getByRole('heading', { name: /Your Notes/ });
+
+    const initialText = await heading.textContent();
+    const initialMatch = initialText?.match(/\((\d+)\)/);
+    const initialCount = Number(initialMatch?.[1]);
+
+    await filterInput.fill('nonexistenttag');
+
+    await expect(heading).toHaveText('Your Notes (0)');
+  });
+
+  test('shows "No notes match the filter" when filter has no matches', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+
+    await filterInput.fill('nonexistenttag');
+
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('restores all notes when filter is cleared', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    const heading = page.getByRole('heading', { name: /Your Notes/ });
+
+    const initialText = await heading.textContent();
+
+    await filterInput.fill('nonexistenttag');
+    await expect(heading).toHaveText('Your Notes (0)');
+
+    await filterInput.fill('');
+    await expect(heading).toHaveText(initialText!);
+  });
+
+  test('creates a note with tags and filters by that tag', async ({ page }) => {
+    const uniqueTag = `testtag-${Date.now()}`;
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Tag Filter Test Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This note tests tag filtering');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill(uniqueTag);
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByRole('heading', { name: /Your Notes/ })).toBeVisible();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill(uniqueTag);
+
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+
+    await filterInput.fill('');
+    const heading = page.getByRole('heading', { name: /Your Notes/ });
+    const text = await heading.textContent();
+    const match = text?.match(/\((\d+)\)/);
+    expect(Number(match?.[1])).toBeGreaterThan(1);
+  });
+
+  test('tag filter is case-insensitive', async ({ page }) => {
+    const uniqueTag = `CasETest-${Date.now()}`;
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Case Test Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Testing case insensitivity');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill(uniqueTag);
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByRole('heading', { name: /Your Notes/ })).toBeVisible();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+
+    await filterInput.fill(uniqueTag.toLowerCase());
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+
+    await filterInput.fill(uniqueTag.toUpperCase());
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+  });
+
+  test('shows "No notes yet" when there are no saved notes', async ({ page }) => {
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+  });
+});
