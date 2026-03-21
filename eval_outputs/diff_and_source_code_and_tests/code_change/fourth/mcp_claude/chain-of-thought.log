@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/chain-of-thought.spec.ts:10:3 › Tag Filter Feature › displays the tag filter input in the sidebar
+[1A[2K[2/8] [chromium] › e2e/chain-of-thought.spec.ts:16:3 › Tag Filter Feature › shows 'No notes yet' when there are no notes and no filter
+[1A[2K[3/8] [chromium] › e2e/chain-of-thought.spec.ts:21:3 › Tag Filter Feature › filters notes by tag
+[1A[2K[4/8] [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Tag Filter Feature › shows 'No notes match the filter' when filter has no results
+[1A[2K[5/8] [chromium] › e2e/chain-of-thought.spec.ts:61:3 › Tag Filter Feature › shows all notes when filter is cleared
+[1A[2K[6/8] [chromium] › e2e/chain-of-thought.spec.ts:85:3 › Tag Filter Feature › tag filter is case-insensitive
+[1A[2K[7/8] [chromium] › e2e/chain-of-thought.spec.ts:103:3 › Tag Filter Feature › tag filter supports partial tag matching
+[1A[2K[8/8] [chromium] › e2e/chain-of-thought.spec.ts:116:3 › Tag Filter Feature › note count updates dynamically as filter text changes
+[1A[2K  8 passed (3.6s)
+
+
+=== STDERR ===
+

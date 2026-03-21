@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App - Clear All & Description › displays description text below the heading
+[1A[2K[2/7] [chromium] › e2e/zero-shot.spec.ts:16:3 › Note Taking App - Clear All & Description › does not show Clear all button when there are no notes
+[1A[2K[3/7] [chromium] › e2e/zero-shot.spec.ts:21:3 › Note Taking App - Clear All & Description › shows Clear all button after creating a note
+[1A[2K[4/7] [chromium] › e2e/zero-shot.spec.ts:31:3 › Note Taking App - Clear All & Description › Clear all removes all notes and resets the UI
+[1A[2K[5/7] [chromium] › e2e/zero-shot.spec.ts:55:3 › Note Taking App - Clear All & Description › Clear all clears the form fields
+[1A[2K[6/7] [chromium] › e2e/zero-shot.spec.ts:74:3 › Note Taking App - Clear All & Description › Clear all clears localStorage noteIds
+[1A[2K[7/7] [chromium] › e2e/zero-shot.spec.ts:95:3 › Note Taking App - Clear All & Description › Your Notes heading and Clear all button are on the same row
+[1A[2K  7 passed (3.2s)
+
+
+=== STDERR ===
+

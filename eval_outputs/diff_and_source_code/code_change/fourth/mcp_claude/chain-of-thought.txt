@@ -1,0 +1,155 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Tag Filter Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    // Clear localStorage to start fresh
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("should display the tag filter input", async ({ page }) => {
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveValue("");
+  });
+
+  test("should show 'No notes yet' when there are no saved notes", async ({
+    page,
+  }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("should filter notes by tag and update the displayed count", async ({
+    page,
+  }) => {
+    // Create first note with "javascript" tag
+    await page.getByRole("textbox", { name: "Title" }).fill("JS Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("A JS note");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("javascript, frontend");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Create second note with "python" tag
+    await page.getByRole("textbox", { name: "Title" }).fill("Python Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("A Python note");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("python, backend");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Both notes should be visible
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    // Filter by "javascript"
+    await page.getByPlaceholder("Filter by tag").fill("javascript");
+
+    // Only one note should be displayed
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+
+  test("should show 'No notes match the filter' when filter matches nothing", async ({
+    page,
+  }) => {
+    // Create a note first
+    await page.getByRole("textbox", { name: "Title" }).fill("Some Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Some body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("existingtag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Type a non-matching filter
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+  });
+
+  test("should show all notes when the filter is cleared", async ({
+    page,
+  }) => {
+    // Create two notes with different tags
+    await page.getByRole("textbox", { name: "Title" }).fill("Note A");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body A");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("alpha");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await page.getByRole("textbox", { name: "Title" }).fill("Note B");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body B");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("beta");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Filter to show only one
+    await page.getByPlaceholder("Filter by tag").fill("alpha");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Clear filter — all notes should reappear
+    await page.getByPlaceholder("Filter by tag").fill("");
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2);
+  });
+
+  test("should filter with case-insensitive matching", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Case Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("JavaScript");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Filter with lowercase — should still match
+    await page.getByPlaceholder("Filter by tag").fill("javascript");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+
+  test("should support partial tag matching", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Partial Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("javascript");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Type partial tag — "java" should match "javascript"
+    await page.getByPlaceholder("Filter by tag").fill("java");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+
+  test("should still allow clicking a filtered note to view details", async ({
+    page,
+  }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Clickable Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Clickable body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("urgent");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Filter and click the note
+    await page.getByPlaceholder("Filter by tag").fill("urgent");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByRole("button", { name: /Note #/ }).click();
+
+    // Note details should appear
+    await expect(page.getByText("Note Details")).toBeVisible();
+    await expect(page.getByText("Clickable Note")).toBeVisible();
+    await expect(page.getByText("urgent")).toBeVisible();
+  });
+});

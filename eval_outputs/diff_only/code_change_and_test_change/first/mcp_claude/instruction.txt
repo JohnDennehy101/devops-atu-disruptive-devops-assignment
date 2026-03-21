@@ -1,0 +1,73 @@
+import { test, expect } from "@playwright/test"
+
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:5175")
+})
+
+test.describe("Note Taking App - Clear All & Description", () => {
+  test("displays the app description text", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally."),
+    ).toBeVisible()
+  })
+
+  test("displays note count as zero initially", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Your Notes (0)" })).toBeVisible()
+  })
+
+  test("does not show Clear all button when there are no notes", async ({ page }) => {
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("shows Clear all button after creating a note", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Test Note")
+    await page.getByRole("textbox", { name: "Body" }).fill("Some body")
+    await page.getByRole("textbox", { name: /Tags/ }).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByRole("heading", { name: "Your Notes (1)" })).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible()
+  })
+
+  test("can clear all notes from sidebar", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("To clear")
+    await page.getByRole("textbox", { name: "Body" }).fill("Body")
+    await page.getByRole("textbox", { name: /Tags/ }).fill("x")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByRole("heading", { name: "Your Notes (1)" })).toBeVisible()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "Your Notes (0)" })).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("can clear all notes after creating multiple notes", async ({ page }) => {
+    for (let i = 1; i <= 3; i++) {
+      await page.getByRole("textbox", { name: "Title" }).fill(`Note ${i}`)
+      await page.getByRole("textbox", { name: "Body" }).fill(`Body ${i}`)
+      await page.getByRole("textbox", { name: /Tags/ }).fill(`tag${i}`)
+      await page.getByRole("button", { name: "Create Note" }).click()
+    }
+
+    await expect(page.getByRole("heading", { name: "Your Notes (3)" })).toBeVisible()
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "Your Notes (0)" })).toBeVisible()
+  })
+
+  test("clears form fields and editing state when clearing all notes", async ({ page }) => {
+    await page.getByRole("textbox", { name: "Title" }).fill("Edit me")
+    await page.getByRole("textbox", { name: "Body" }).fill("Body text")
+    await page.getByRole("textbox", { name: /Tags/ }).fill("t1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    await expect(page.getByRole("textbox", { name: "Title" })).toHaveValue("")
+    await expect(page.getByRole("textbox", { name: "Body" })).toHaveValue("")
+    await expect(page.getByRole("textbox", { name: /Tags/ })).toHaveValue("")
+  })
+})

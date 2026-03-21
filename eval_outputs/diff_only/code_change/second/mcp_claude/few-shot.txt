@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character counter below body field showing 0 / 5000 initially', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+});
+
+test('character counter updates as user types in the body field', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('textbox', { name: 'Body' }).fill('Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+});
+
+test('character counter resets to 0 when body field is cleared', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('textbox', { name: 'Body' }).fill('Some text');
+  await expect(page.getByText('9 / 5000')).toBeVisible();
+  await page.getByRole('textbox', { name: 'Body' }).fill('');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+});
+
+test('character counter reflects exact length for longer text', async ({ page }) => {
+  await page.goto('/');
+  const longText = 'a'.repeat(500);
+  await page.getByRole('textbox', { name: 'Body' }).fill(longText);
+  await expect(page.getByText('500 / 5000')).toBeVisible();
+});

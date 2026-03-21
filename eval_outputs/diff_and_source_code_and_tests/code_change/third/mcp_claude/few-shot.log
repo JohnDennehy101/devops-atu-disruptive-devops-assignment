@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Copy Note Body › copy button is visible when viewing note details
+[1A[2K[2/3] [chromium] › e2e/few-shot.spec.ts:26:3 › Note Taking App - Copy Note Body › copy button copies note body to clipboard
+[1A[2K[3/3] [chromium] › e2e/few-shot.spec.ts:50:3 › Note Taking App - Copy Note Body › copy button is not visible when in edit mode
+[1A[2K  3 passed (2.0s)
+
+
+=== STDERR ===
+

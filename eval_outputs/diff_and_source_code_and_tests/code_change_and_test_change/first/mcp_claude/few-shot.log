@@ -1,0 +1,21 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 10 tests using 1 worker
+
+[1A[2K[1/10] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/10] [chromium] › e2e/few-shot.spec.ts:22:3 › Note Taking App › shows app description text
+[1A[2K[3/10] [chromium] › e2e/few-shot.spec.ts:28:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[4/10] [chromium] › e2e/few-shot.spec.ts:38:3 › Note Taking App › can open a note and see its details
+[1A[2K[5/10] [chromium] › e2e/few-shot.spec.ts:53:3 › Note Taking App › does not show Clear all button when no notes exist
+[1A[2K[6/10] [chromium] › e2e/few-shot.spec.ts:59:3 › Note Taking App › shows Clear all button after creating a note
+[1A[2K[7/10] [chromium] › e2e/few-shot.spec.ts:69:3 › Note Taking App › can clear all notes from sidebar
+[1A[2K[8/10] [chromium] › e2e/few-shot.spec.ts:80:3 › Note Taking App › Clear all removes multiple notes and hides the button
+[1A[2K[9/10] [chromium] › e2e/few-shot.spec.ts:96:3 › Note Taking App › Clear all clears localStorage noteIds
+[1A[2K[10/10] [chromium] › e2e/few-shot.spec.ts:114:3 › Note Taking App › Clear all resets form and deselects note
+[1A[2K  10 passed (4.2s)
+
+
+=== STDERR ===
+

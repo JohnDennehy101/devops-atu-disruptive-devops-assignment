@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/few-shot.spec.ts:8:3 › Body character count › shows body character count and updates when typing
+[1A[2K[2/3] [chromium] › e2e/few-shot.spec.ts:16:3 › Body character count › resets character count when body is cleared
+[1A[2K[3/3] [chromium] › e2e/few-shot.spec.ts:23:3 › Body character count › character count is displayed near the body field
+[1A[2K  3 passed (1.6s)
+
+
+=== STDERR ===
+

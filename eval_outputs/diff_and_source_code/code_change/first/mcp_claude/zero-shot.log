@@ -1,0 +1,17 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/zero-shot.spec.ts:11:3 › Clear All Notes functionality › should not show Clear all button when there are no notes
+[1A[2K[2/6] [chromium] › e2e/zero-shot.spec.ts:18:3 › Clear All Notes functionality › should show Clear all button when notes exist
+[1A[2K[3/6] [chromium] › e2e/zero-shot.spec.ts:28:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked
+[1A[2K[4/6] [chromium] › e2e/zero-shot.spec.ts:49:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked
+[1A[2K[5/6] [chromium] › e2e/zero-shot.spec.ts:70:3 › Clear All Notes functionality › should reset form fields and selected note when Clear all is clicked
+[1A[2K[6/6] [chromium] › e2e/zero-shot.spec.ts:99:3 › Clear All Notes functionality › should display subtitle text about local storage
+[1A[2K  6 passed (2.9s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,51 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('displays initial character count as 0 / 5000 when body is empty', async ({ page }) => {
+    const counter = page.getByText('0 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('updates character count as user types in the body field', async ({ page }) => {
+    const bodyTextbox = page.getByRole('textbox', { name: 'Body' });
+    await bodyTextbox.fill('Hello world test');
+
+    const counter = page.getByText('16 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('updates character count for longer text input', async ({ page }) => {
+    const bodyTextbox = page.getByRole('textbox', { name: 'Body' });
+    const longText = 'A'.repeat(100);
+    await bodyTextbox.fill(longText);
+
+    const counter = page.getByText('100 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('resets character count when body is cleared', async ({ page }) => {
+    const bodyTextbox = page.getByRole('textbox', { name: 'Body' });
+
+    await bodyTextbox.fill('Some text');
+    await expect(page.getByText('9 / 5000')).toBeVisible();
+
+    await bodyTextbox.fill('');
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('character counter is positioned below the body textarea', async ({ page }) => {
+    const bodyTextbox = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.getByText('0 / 5000');
+
+    const textboxBox = await bodyTextbox.boundingBox();
+    const counterBox = await counter.boundingBox();
+
+    expect(textboxBox).not.toBeNull();
+    expect(counterBox).not.toBeNull();
+    expect(counterBox!.y).toBeGreaterThan(textboxBox!.y);
+  });
+});

@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/few-shot.spec.ts:3:1 › Copy button copies note body to clipboard
+[1A[2K[2/4] [chromium] › e2e/few-shot.spec.ts:23:1 › Copy button is visible in note details view
+[1A[2K[3/4] [chromium] › e2e/few-shot.spec.ts:38:1 › Copy button is not visible when no note is selected
+[1A[2K[4/4] [chromium] › e2e/few-shot.spec.ts:44:1 › Copy button copies correct body when switching between notes
+[1A[2K  4 passed (2.1s)
+
+
+=== STDERR ===
+

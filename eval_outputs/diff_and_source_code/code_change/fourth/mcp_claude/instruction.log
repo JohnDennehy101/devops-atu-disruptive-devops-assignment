@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/instruction.spec.ts:8:3 › Tag Filter Functionality › should display the filter by tag input field
+[1A[2K[2/8] [chromium] › e2e/instruction.spec.ts:15:3 › Tag Filter Functionality › should show all notes when filter is empty
+[1A[2K[3/8] [chromium] › e2e/instruction.spec.ts:36:3 › Tag Filter Functionality › should filter notes by matching tag
+[1A[2K[4/8] [chromium] › e2e/instruction.spec.ts:72:3 › Tag Filter Functionality › should show 'No notes match the filter' when no tags match
+[1A[2K[5/8] [chromium] › e2e/instruction.spec.ts:101:3 › Tag Filter Functionality › should restore all notes when filter is cleared
+[1A[2K[6/8] [chromium] › e2e/instruction.spec.ts:132:3 › Tag Filter Functionality › should filter notes case-insensitively
+[1A[2K[7/8] [chromium] › e2e/instruction.spec.ts:156:3 › Tag Filter Functionality › should support partial tag matching
+[1A[2K[8/8] [chromium] › e2e/instruction.spec.ts:176:3 › Tag Filter Functionality › should update displayed count in heading when filtering
+[1A[2K  8 passed (3.2s)
+
+
+=== STDERR ===
+

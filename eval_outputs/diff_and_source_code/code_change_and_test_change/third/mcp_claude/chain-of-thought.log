@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Copy note body to clipboard › Copy button copies note body to clipboard
+[1A[2K[2/5] [chromium] › e2e/chain-of-thought.spec.ts:26:3 › Copy note body to clipboard › Copy button is visible in note details panel
+[1A[2K[3/5] [chromium] › e2e/chain-of-thought.spec.ts:38:3 › Copy note body to clipboard › Copy button is not visible when no note is selected
+[1A[2K[4/5] [chromium] › e2e/chain-of-thought.spec.ts:42:3 › Copy note body to clipboard › Copy button disappears when entering edit mode
+[1A[2K[5/5] [chromium] › e2e/chain-of-thought.spec.ts:55:3 › Copy note body to clipboard › Copy button copies correct body after switching between notes
+[1A[2K  5 passed (2.5s)
+
+
+=== STDERR ===
+

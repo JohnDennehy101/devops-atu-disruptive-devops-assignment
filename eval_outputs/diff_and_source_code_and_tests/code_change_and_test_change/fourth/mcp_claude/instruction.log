@@ -1,0 +1,20 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 9 tests using 1 worker
+
+[1A[2K[1/9] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/9] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/9] [chromium] › e2e/instruction.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/9] [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › filter by tag shows only matching notes
+[1A[2K[5/9] [chromium] › e2e/instruction.spec.ts:73:3 › Note Taking App › filter by tag input is visible when notes exist
+[1A[2K[6/9] [chromium] › e2e/instruction.spec.ts:84:3 › Note Taking App › filter is case insensitive
+[1A[2K[7/9] [chromium] › e2e/instruction.spec.ts:100:3 › Note Taking App › filter matches partial tag names
+[1A[2K[8/9] [chromium] › e2e/instruction.spec.ts:113:3 › Note Taking App › clearing filter restores all notes
+[1A[2K[9/9] [chromium] › e2e/instruction.spec.ts:133:3 › Note Taking App › no notes yet message shows when sidebar is empty
+[1A[2K  9 passed (3.8s)
+
+
+=== STDERR ===
+

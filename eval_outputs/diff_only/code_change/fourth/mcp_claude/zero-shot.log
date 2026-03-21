@@ -1,0 +1,462 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 11 tests using 1 worker
+
+[1A[2K[1/11] [chromium] › e2e/zero-shot.spec.ts:8:3 › Tag Filter on Your Notes › should display the tag filter input
+[1A[2K[2/11] [chromium] › e2e/zero-shot.spec.ts:14:3 › Tag Filter on Your Notes › should show all notes when filter is empty
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:14:3 › Tag Filter on Your Notes › should show all notes when filter is empty 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      17 |     const count = await heading.textContent();
+      18 |     const match = count?.match(/\((\d+)\)/);
+    > 19 |     expect(Number(match?.[1])).toBeGreaterThan(0);
+         |                                ^
+      20 |   });
+      21 |
+      22 |   test("should filter notes by matching tag", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:19:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-30861--notes-when-filter-is-empty-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-30861--notes-when-filter-is-empty-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-30861--notes-when-filter-is-empty-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-30861--notes-when-filter-is-empty-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-30861--notes-when-filter-is-empty-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/11] [chromium] › e2e/zero-shot.spec.ts:22:3 › Tag Filter on Your Notes › should filter notes by matching tag
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:22:3 › Tag Filter on Your Notes › should filter notes by matching tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m2[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      25 |
+      26 |     // Get initial count
+    > 27 |     await expect(heading).toContainText("Your Notes (2)");
+         |                           ^
+      28 |
+      29 |     // Filter by a tag that only one note has
+      30 |     await filterInput.fill("javascript");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-45bb7-ilter-notes-by-matching-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-45bb7-ilter-notes-by-matching-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-45bb7-ilter-notes-by-matching-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-45bb7-ilter-notes-by-matching-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-45bb7-ilter-notes-by-matching-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/11] [chromium] › e2e/zero-shot.spec.ts:39:3 › Tag Filter on Your Notes › should filter notes by a different tag
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:39:3 › Tag Filter on Your Notes › should filter notes by a different tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m1[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      43 |     await filterInput.fill("python");
+      44 |
+    > 45 |     await expect(heading).toContainText("Your Notes (1)");
+         |                           ^
+      46 |     await expect(
+      47 |       page.getByRole("button", { name: "Note #18" })
+      48 |     ).not.toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:45:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-7c41e-er-notes-by-a-different-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-7c41e-er-notes-by-a-different-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-7c41e-er-notes-by-a-different-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-7c41e-er-notes-by-a-different-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-7c41e-er-notes-by-a-different-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/11] [chromium] › e2e/zero-shot.spec.ts:52:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match
+[1A[2K  4) [chromium] › e2e/zero-shot.spec.ts:52:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      59 |
+      60 |     await expect(heading).toContainText("Your Notes (0)");
+    > 61 |     await expect(page.getByText("No notes match the filter")).toBeVisible();
+         |                                                               ^
+      62 |   });
+      63 |
+      64 |   test("should restore all notes when filter is cleared", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:61:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-dc774-e-filter-when-no-tags-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-dc774-e-filter-when-no-tags-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-dc774-e-filter-when-no-tags-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-dc774-e-filter-when-no-tags-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-dc774-e-filter-when-no-tags-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/11] [chromium] › e2e/zero-shot.spec.ts:64:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared
+[1A[2K  5) [chromium] › e2e/zero-shot.spec.ts:64:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m1[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      67 |
+      68 |     await filterInput.fill("javascript");
+    > 69 |     await expect(heading).toContainText("Your Notes (1)");
+         |                           ^
+      70 |
+      71 |     await filterInput.fill("");
+      72 |     await expect(heading).toContainText("Your Notes (2)");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:69:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-8a1dd-otes-when-filter-is-cleared-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-8a1dd-otes-when-filter-is-cleared-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-8a1dd-otes-when-filter-is-cleared-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-8a1dd-otes-when-filter-is-cleared-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-8a1dd-otes-when-filter-is-cleared-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/11] [chromium] › e2e/zero-shot.spec.ts:77:3 › Tag Filter on Your Notes › should perform case-insensitive tag filtering
+[1A[2K  6) [chromium] › e2e/zero-shot.spec.ts:77:3 › Tag Filter on Your Notes › should perform case-insensitive tag filtering 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m1[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      80 |
+      81 |     await filterInput.fill("JAVASCRIPT");
+    > 82 |     await expect(heading).toContainText("Your Notes (1)");
+         |                           ^
+      83 |     await expect(page.getByRole("button", { name: "Note #18" })).toBeVisible();
+      84 |   });
+      85 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:82:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-653b3-e-insensitive-tag-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-653b3-e-insensitive-tag-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-653b3-e-insensitive-tag-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-653b3-e-insensitive-tag-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-653b3-e-insensitive-tag-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[8/11] [chromium] › e2e/zero-shot.spec.ts:86:3 › Tag Filter on Your Notes › should support partial tag matching
+[1A[2K  7) [chromium] › e2e/zero-shot.spec.ts:86:3 › Tag Filter on Your Notes › should support partial tag matching 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m1[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      90 |     // "test" should partially match "testing" tag on Note #18
+      91 |     await filterInput.fill("test");
+    > 92 |     await expect(heading).toContainText("Your Notes (1)");
+         |                           ^
+      93 |     await expect(page.getByRole("button", { name: "Note #18" })).toBeVisible();
+      94 |   });
+      95 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:92:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-d94ef-upport-partial-tag-matching-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-d94ef-upport-partial-tag-matching-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-d94ef-upport-partial-tag-matching-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-d94ef-upport-partial-tag-matching-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-d94ef-upport-partial-tag-matching-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[9/11] [chromium] › e2e/zero-shot.spec.ts:96:3 › Tag Filter on Your Notes › should trim whitespace in filter input
+[1A[2K  8) [chromium] › e2e/zero-shot.spec.ts:96:3 › Tag Filter on Your Notes › should trim whitespace in filter input 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m1[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+       99 |
+      100 |     await filterInput.fill("  javascript  ");
+    > 101 |     await expect(heading).toContainText("Your Notes (1)");
+          |                           ^
+      102 |     await expect(page.getByRole("button", { name: "Note #18" })).toBeVisible();
+      103 |   });
+      104 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:101:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-9f2eb--whitespace-in-filter-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-9f2eb--whitespace-in-filter-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-9f2eb--whitespace-in-filter-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-9f2eb--whitespace-in-filter-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-9f2eb--whitespace-in-filter-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[10/11] [chromium] › e2e/zero-shot.spec.ts:105:3 › Tag Filter on Your Notes › should treat whitespace-only filter as empty and show all notes
+[1A[2K  9) [chromium] › e2e/zero-shot.spec.ts:105:3 › Tag Filter on Your Notes › should treat whitespace-only filter as empty and show all notes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m2[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      110 |
+      111 |     await filterInput.fill("   ");
+    > 112 |     await expect(heading).toContainText("Your Notes (2)");
+          |                           ^
+      113 |   });
+      114 |
+      115 |   test("should update displayed count in heading as filter changes", async ({
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:112:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-c2b2f-as-empty-and-show-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-c2b2f-as-empty-and-show-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-c2b2f-as-empty-and-show-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-c2b2f-as-empty-and-show-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-c2b2f-as-empty-and-show-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[11/11] [chromium] › e2e/zero-shot.spec.ts:115:3 › Tag Filter on Your Notes › should update displayed count in heading as filter changes
+[1A[2K  10) [chromium] › e2e/zero-shot.spec.ts:115:3 › Tag Filter on Your Notes › should update displayed count in heading as filter changes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /Your Notes/ })
+    Expected substring: [32m"Your Notes ([7m2[27m)"[39m
+    Received string:    [31m"Your Notes ([7m0[27m)"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      119 |     const heading = page.getByRole("heading", { name: /Your Notes/ });
+      120 |
+    > 121 |     await expect(heading).toContainText("Your Notes (2)");
+          |                           ^
+      122 |
+      123 |     await filterInput.fill("devops");
+      124 |     await expect(heading).toContainText("Your Notes (1)");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:121:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-f0878-n-heading-as-filter-changes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-f0878-n-heading-as-filter-changes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-f0878-n-heading-as-filter-changes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-f0878-n-heading-as-filter-changes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/zero-shot/zero-shot-Tag-Filter-on-Yo-f0878-n-heading-as-filter-changes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  10 failed
+    [chromium] › e2e/zero-shot.spec.ts:14:3 › Tag Filter on Your Notes › should show all notes when filter is empty 
+    [chromium] › e2e/zero-shot.spec.ts:22:3 › Tag Filter on Your Notes › should filter notes by matching tag 
+    [chromium] › e2e/zero-shot.spec.ts:39:3 › Tag Filter on Your Notes › should filter notes by a different tag 
+    [chromium] › e2e/zero-shot.spec.ts:52:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match 
+    [chromium] › e2e/zero-shot.spec.ts:64:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared 
+    [chromium] › e2e/zero-shot.spec.ts:77:3 › Tag Filter on Your Notes › should perform case-insensitive tag filtering 
+    [chromium] › e2e/zero-shot.spec.ts:86:3 › Tag Filter on Your Notes › should support partial tag matching 
+    [chromium] › e2e/zero-shot.spec.ts:96:3 › Tag Filter on Your Notes › should trim whitespace in filter input 
+    [chromium] › e2e/zero-shot.spec.ts:105:3 › Tag Filter on Your Notes › should treat whitespace-only filter as empty and show all notes 
+    [chromium] › e2e/zero-shot.spec.ts:115:3 › Tag Filter on Your Notes › should update displayed count in heading as filter changes 
+  1 passed (56.7s)
+
+
+=== STDERR ===
+

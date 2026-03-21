@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/few-shot.spec.ts:3:1 › displays character counter below body field showing 0 / 5000 initially
+[1A[2K[2/4] [chromium] › e2e/few-shot.spec.ts:8:1 › character counter updates as user types in the body field
+[1A[2K[3/4] [chromium] › e2e/few-shot.spec.ts:14:1 › character counter resets to 0 when body field is cleared
+[1A[2K[4/4] [chromium] › e2e/few-shot.spec.ts:22:1 › character counter reflects exact length for longer text
+[1A[2K  4 passed (1.8s)
+
+
+=== STDERR ===
+

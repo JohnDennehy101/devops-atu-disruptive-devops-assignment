@@ -1,0 +1,22 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 11 tests using 1 worker
+
+[1A[2K[1/11] [chromium] › e2e/zero-shot.spec.ts:10:3 › Tag Filter Feature › shows filter by tag input in sidebar
+[1A[2K[2/11] [chromium] › e2e/zero-shot.spec.ts:14:3 › Tag Filter Feature › shows 'No notes yet' when there are no notes and no filter
+[1A[2K[3/11] [chromium] › e2e/zero-shot.spec.ts:19:3 › Tag Filter Feature › filter input does not affect empty notes list
+[1A[2K[4/11] [chromium] › e2e/zero-shot.spec.ts:24:3 › Tag Filter Feature › shows all notes when filter is empty
+[1A[2K[5/11] [chromium] › e2e/zero-shot.spec.ts:39:3 › Tag Filter Feature › filters notes by matching tag
+[1A[2K[6/11] [chromium] › e2e/zero-shot.spec.ts:57:3 › Tag Filter Feature › shows 'No notes match the filter' when filter matches nothing
+[1A[2K[7/11] [chromium] › e2e/zero-shot.spec.ts:70:3 › Tag Filter Feature › clearing filter restores all notes
+[1A[2K[8/11] [chromium] › e2e/zero-shot.spec.ts:91:3 › Tag Filter Feature › filter is case-insensitive
+[1A[2K[9/11] [chromium] › e2e/zero-shot.spec.ts:107:3 › Tag Filter Feature › filter matches partial tag names
+[1A[2K[10/11] [chromium] › e2e/zero-shot.spec.ts:120:3 › Tag Filter Feature › filter updates count correctly with multiple matching notes
+[1A[2K[11/11] [chromium] › e2e/zero-shot.spec.ts:147:3 › Tag Filter Feature › filtered notes are still clickable to view details
+[1A[2K  11 passed (4.6s)
+
+
+=== STDERR ===
+

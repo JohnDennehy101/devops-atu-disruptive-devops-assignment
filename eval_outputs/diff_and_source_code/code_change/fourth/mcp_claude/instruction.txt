@@ -1,0 +1,216 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Tag Filter Functionality", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+  });
+
+  test("should display the filter by tag input field", async ({ page }) => {
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute("placeholder", "Filter by tag");
+    await expect(filterInput).toHaveValue("");
+  });
+
+  test("should show all notes when filter is empty", async ({ page }) => {
+    // Create a note to ensure at least one exists
+    await page.getByRole("textbox", { name: "Title" }).fill("Unfiltered Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body content");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("alpha");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+    await expect(filterInput).toHaveValue("");
+
+    // The heading count should match the number of note buttons
+    const noteButtons = page.getByRole("button", { name: /^Note #\d+$/ });
+    const count = await noteButtons.count();
+    expect(count).toBeGreaterThan(0);
+
+    const heading = page.getByRole("heading", { name: /Your Notes \(\d+\)/ });
+    await expect(heading).toHaveText(`Your Notes (${count})`);
+  });
+
+  test("should filter notes by matching tag", async ({ page }) => {
+    // Create two notes with different tags
+    await page.getByRole("textbox", { name: "Title" }).fill("Note With UniqueTagA");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body A");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("uniquetagA");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await page.getByRole("textbox", { name: "Title" }).fill("Note With UniqueTagB");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body B");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("uniquetagB");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Get total notes count before filtering
+    const allNotesBefore = page.getByRole("button", { name: /^Note #\d+$/ });
+    const totalBefore = await allNotesBefore.count();
+    expect(totalBefore).toBeGreaterThanOrEqual(2);
+
+    // Filter by uniquetagA
+    await page
+      .getByRole("textbox", { name: "Filter by tag" })
+      .fill("uniquetagA");
+
+    // Wait for the heading to update to show filtered count
+    await expect(
+      page.getByRole("heading", { name: "Your Notes (1)" })
+    ).toBeVisible();
+
+    // Only one note button should be visible
+    const filteredNotes = page.getByRole("button", { name: /^Note #\d+$/ });
+    await expect(filteredNotes).toHaveCount(1);
+  });
+
+  test("should show 'No notes match the filter' when no tags match", async ({
+    page,
+  }) => {
+    // Ensure at least one note exists
+    await page.getByRole("textbox", { name: "Title" }).fill("Some Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Some body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("sometag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Type a non-matching filter
+    await page
+      .getByRole("textbox", { name: "Filter by tag" })
+      .fill("zzz_nonexistent_tag_zzz");
+
+    // Should display the empty state message
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+
+    // Heading should show 0 count
+    await expect(
+      page.getByRole("heading", { name: "Your Notes (0)" })
+    ).toBeVisible();
+
+    // No note buttons should be visible
+    const noteButtons = page.getByRole("button", { name: /^Note #\d+$/ });
+    await expect(noteButtons).toHaveCount(0);
+  });
+
+  test("should restore all notes when filter is cleared", async ({ page }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Clearable Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("cleartest");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Get the total count before filtering
+    const notesBefore = page.getByRole("button", { name: /^Note #\d+$/ });
+    const countBefore = await notesBefore.count();
+
+    // Apply a non-matching filter
+    await page
+      .getByRole("textbox", { name: "Filter by tag" })
+      .fill("zzz_no_match_zzz");
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+
+    // Clear the filter
+    await page.getByRole("textbox", { name: "Filter by tag" }).fill("");
+
+    // All notes should be back
+    const notesAfter = page.getByRole("button", { name: /^Note #\d+$/ });
+    await expect(notesAfter).toHaveCount(countBefore);
+
+    await expect(
+      page.getByRole("heading", { name: `Your Notes (${countBefore})` })
+    ).toBeVisible();
+  });
+
+  test("should filter notes case-insensitively", async ({ page }) => {
+    // Create a note with a mixed-case tag
+    await page.getByRole("textbox", { name: "Title" }).fill("Case Test Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("CamelCaseTag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Filter with lowercase version
+    await page
+      .getByRole("textbox", { name: "Filter by tag" })
+      .fill("camelcasetag");
+
+    // Should find the note (case-insensitive match)
+    const filteredNotes = page.getByRole("button", { name: /^Note #\d+$/ });
+    const count = await filteredNotes.count();
+    expect(count).toBeGreaterThanOrEqual(1);
+
+    await expect(
+      page.getByRole("heading", { name: /Your Notes \([1-9]\d*\)/ })
+    ).toBeVisible();
+  });
+
+  test("should support partial tag matching", async ({ page }) => {
+    // Create a note with a specific tag
+    await page
+      .getByRole("textbox", { name: "Title" })
+      .fill("Partial Match Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("programming");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Filter with partial tag text
+    await page.getByRole("textbox", { name: "Filter by tag" }).fill("program");
+
+    // Should find the note via partial match
+    const filteredNotes = page.getByRole("button", { name: /^Note #\d+$/ });
+    const count = await filteredNotes.count();
+    expect(count).toBeGreaterThanOrEqual(1);
+  });
+
+  test("should update displayed count in heading when filtering", async ({
+    page,
+  }) => {
+    // Create two notes with different tags
+    await page.getByRole("textbox", { name: "Title" }).fill("Count Test A");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("counttest");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await page.getByRole("textbox", { name: "Title" }).fill("Count Test B");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body");
+    await page
+      .getByRole("textbox", { name: "Tags (comma-separated)" })
+      .fill("othertag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Get total before filter
+    const headingBefore = page.getByRole("heading", {
+      name: /Your Notes \(\d+\)/,
+    });
+    const textBefore = await headingBefore.textContent();
+    const totalCount = parseInt(textBefore!.match(/\((\d+)\)/)![1]);
+
+    // Apply filter for "counttest"
+    await page
+      .getByRole("textbox", { name: "Filter by tag" })
+      .fill("counttest");
+
+    // The heading count should be less than total
+    const headingAfter = page.getByRole("heading", {
+      name: /Your Notes \(\d+\)/,
+    });
+    const textAfter = await headingAfter.textContent();
+    const filteredCount = parseInt(textAfter!.match(/\((\d+)\)/)![1]);
+
+    expect(filteredCount).toBeLessThan(totalCount);
+    expect(filteredCount).toBeGreaterThanOrEqual(1);
+  });
+});

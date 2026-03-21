@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App › Copy button copies note body to clipboard
+[1A[2K[2/5] [chromium] › e2e/few-shot.spec.ts:28:3 › Note Taking App › Copy button is visible in note details view
+[1A[2K[3/5] [chromium] › e2e/few-shot.spec.ts:39:3 › Note Taking App › Copy button is not visible before selecting a note
+[1A[2K[4/5] [chromium] › e2e/few-shot.spec.ts:43:3 › Note Taking App › Copy button copies correct body when switching between notes
+[1A[2K[5/5] [chromium] › e2e/few-shot.spec.ts:75:3 › Note Taking App › Copy button disappears when entering edit mode
+[1A[2K  5 passed (3.0s)
+
+
+=== STDERR ===
+

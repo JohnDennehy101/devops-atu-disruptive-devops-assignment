@@ -1,0 +1,288 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/instruction.spec.ts:8:3 › Tag Filter on Your Notes › should display the tag filter input
+[1A[2K[2/8] [chromium] › e2e/instruction.spec.ts:15:3 › Tag Filter on Your Notes › should show all notes when filter is empty
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:15:3 › Tag Filter on Your Notes › should show all notes when filter is empty 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      22 |     const noteButtons = page.getByRole("button", { name: /Note #/ });
+      23 |     const count = await noteButtons.count();
+    > 24 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      25 |
+      26 |     const headingText = await heading.textContent();
+      27 |     const match = headingText?.match(/Your Notes \((\d+)\)/);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:24:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c9f56--notes-when-filter-is-empty-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c9f56--notes-when-filter-is-empty-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c9f56--notes-when-filter-is-empty-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c9f56--notes-when-filter-is-empty-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c9f56--notes-when-filter-is-empty-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/8] [chromium] › e2e/instruction.spec.ts:32:3 › Tag Filter on Your Notes › should filter notes by matching tag
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:32:3 › Tag Filter on Your Notes › should filter notes by matching tag 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m2[39m
+    Received:    [31m0[39m
+
+      33 |     const noteButtons = page.getByRole("button", { name: /Note #/ });
+      34 |     const initialCount = await noteButtons.count();
+    > 35 |     expect(initialCount).toBeGreaterThanOrEqual(2);
+         |                          ^
+      36 |
+      37 |     const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+      38 |     await filterInput.fill("javascript");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:35:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--826a4-ilter-notes-by-matching-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--826a4-ilter-notes-by-matching-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--826a4-ilter-notes-by-matching-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--826a4-ilter-notes-by-matching-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--826a4-ilter-notes-by-matching-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/8] [chromium] › e2e/instruction.spec.ts:47:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match
+[1A[2K  3) [chromium] › e2e/instruction.spec.ts:47:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      54 |     await expect(heading).toHaveText("Your Notes (0)");
+      55 |
+    > 56 |     await expect(page.getByText("No notes match the filter")).toBeVisible();
+         |                                                               ^
+      57 |
+      58 |     const noteButtons = page.getByRole("button", { name: /Note #/ });
+      59 |     await expect(noteButtons).toHaveCount(0);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:56:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--a5834-e-filter-when-no-tags-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--a5834-e-filter-when-no-tags-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--a5834-e-filter-when-no-tags-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--a5834-e-filter-when-no-tags-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--a5834-e-filter-when-no-tags-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/8] [chromium] › e2e/instruction.spec.ts:62:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared
+[1A[2K  4) [chromium] › e2e/instruction.spec.ts:62:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('button', { name: /Note #/ })
+    Expected: [32m1[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /Note #/ })[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      67 |     await filterInput.fill("javascript");
+      68 |
+    > 69 |     await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+         |                                                                ^
+      70 |
+      71 |     await filterInput.clear();
+      72 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:69:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--53e05-otes-when-filter-is-cleared-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--53e05-otes-when-filter-is-cleared-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--53e05-otes-when-filter-is-cleared-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--53e05-otes-when-filter-is-cleared-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--53e05-otes-when-filter-is-cleared-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/8] [chromium] › e2e/instruction.spec.ts:81:3 › Tag Filter on Your Notes › should filter with case-insensitive matching
+[1A[2K  5) [chromium] › e2e/instruction.spec.ts:81:3 › Tag Filter on Your Notes › should filter with case-insensitive matching 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      92 |
+      93 |     expect(upperCount).toBe(lowerCount);
+    > 94 |     expect(upperCount).toBeGreaterThan(0);
+         |                        ^
+      95 |   });
+      96 |
+      97 |   test("should filter with partial tag match", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:94:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9b34a-h-case-insensitive-matching-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9b34a-h-case-insensitive-matching-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9b34a-h-case-insensitive-matching-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9b34a-h-case-insensitive-matching-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9b34a-h-case-insensitive-matching-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/8] [chromium] › e2e/instruction.spec.ts:97:3 › Tag Filter on Your Notes › should filter with partial tag match
+[1A[2K  6) [chromium] › e2e/instruction.spec.ts:97:3 › Tag Filter on Your Notes › should filter with partial tag match 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      101 |     const filteredButtons = page.getByRole("button", { name: /Note #/ });
+      102 |     const count = await filteredButtons.count();
+    > 103 |     expect(count).toBeGreaterThan(0);
+          |                   ^
+      104 |
+      105 |     const heading = page.getByRole("heading", { name: /Your Notes/ });
+      106 |     const headingText = await heading.textContent();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:103:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9e94f-lter-with-partial-tag-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9e94f-lter-with-partial-tag-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9e94f-lter-with-partial-tag-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9e94f-lter-with-partial-tag-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--9e94f-lter-with-partial-tag-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[8/8] [chromium] › e2e/instruction.spec.ts:111:3 › Tag Filter on Your Notes › should update displayed count in heading when filtering
+[1A[2K  7) [chromium] › e2e/instruction.spec.ts:111:3 › Tag Filter on Your Notes › should update displayed count in heading when filtering 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m2[39m
+    Received:    [31m0[39m
+
+      116 |     const initialMatch = initialText?.match(/Your Notes \((\d+)\)/);
+      117 |     const initialCount = Number(initialMatch![1]);
+    > 118 |     expect(initialCount).toBeGreaterThanOrEqual(2);
+          |                          ^
+      119 |
+      120 |     const filterInput = page.getByRole("textbox", { name: "Filter by tag" });
+      121 |     await filterInput.fill("python");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:118:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c7b49-t-in-heading-when-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c7b49-t-in-heading-when-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c7b49-t-in-heading-when-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c7b49-t-in-heading-when-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/instruction/instruction-Tag-Filter-on--c7b49-t-in-heading-when-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  7 failed
+    [chromium] › e2e/instruction.spec.ts:15:3 › Tag Filter on Your Notes › should show all notes when filter is empty 
+    [chromium] › e2e/instruction.spec.ts:32:3 › Tag Filter on Your Notes › should filter notes by matching tag 
+    [chromium] › e2e/instruction.spec.ts:47:3 › Tag Filter on Your Notes › should show 'No notes match the filter' when no tags match 
+    [chromium] › e2e/instruction.spec.ts:62:3 › Tag Filter on Your Notes › should restore all notes when filter is cleared 
+    [chromium] › e2e/instruction.spec.ts:81:3 › Tag Filter on Your Notes › should filter with case-insensitive matching 
+    [chromium] › e2e/instruction.spec.ts:97:3 › Tag Filter on Your Notes › should filter with partial tag match 
+    [chromium] › e2e/instruction.spec.ts:111:3 › Tag Filter on Your Notes › should update displayed count in heading when filtering 
+  1 passed (18.1s)
+
+
+=== STDERR ===
+

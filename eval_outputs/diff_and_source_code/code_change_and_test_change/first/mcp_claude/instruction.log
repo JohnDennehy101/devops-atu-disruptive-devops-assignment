@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App - Clear All & Description › displays app description text
+[1A[2K[2/7] [chromium] › e2e/instruction.spec.ts:16:3 › Note Taking App - Clear All & Description › does not show Clear all button when no notes exist
+[1A[2K[3/7] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App - Clear All & Description › shows Clear all button after creating a note
+[1A[2K[4/7] [chromium] › e2e/instruction.spec.ts:32:3 › Note Taking App - Clear All & Description › can clear all notes from sidebar
+[1A[2K[5/7] [chromium] › e2e/instruction.spec.ts:43:3 › Note Taking App - Clear All & Description › Clear all removes multiple notes from sidebar
+[1A[2K[6/7] [chromium] › e2e/instruction.spec.ts:63:3 › Note Taking App - Clear All & Description › Clear all resets the form fields
+[1A[2K[7/7] [chromium] › e2e/instruction.spec.ts:81:3 › Note Taking App - Clear All & Description › Clear all clears localStorage noteIds
+[1A[2K  7 passed (3.3s)
+
+
+=== STDERR ===
+

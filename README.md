@@ -25,3 +25,17 @@ python scripts/generate_claude.py
 ```
 python scripts/generate_copilot.py
 ```
+
+## Using Model Context Protocol (MCP) for test generation
+
+```
+npm install -g @playwright/mcp
+```
+
+```
+@playwright/mcp
+```
+
+```
+python scripts/generate_mcp.py
+```

@@ -5,22 +5,21 @@ import shutil
 import subprocess
 import sys
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
 
 from shared import (
     APP_DIR_PATH,
-    CHANGE_TYPE_MAP,
-    DEV_SERVER_URL,
     E2E_DIR_PATH,
     EVAL_OUTPUTS_DIR_PATH,
     HOME_TSX_PATH,
     ITERATION_MAP,
     MODEL_OUTPUTS_PATH,
     REPO_ROOT_PATH,
-    VERSIONS_ROOT_PATH,
     extract_typescript,
+    resolve_file_path_for_code_change,
+    start_dev_server,
+    stop_dev_server,
+    uncomment_file,
 )
 
 
@@ -37,69 +36,6 @@ def generate_output_directory(record: dict) -> Path:
 def get_prompt_type(record: dict) -> str:
     """Extract prompt type"""
     return record["prompt_type"]
-
-
-def uncomment_file(src: Path, dst: Path) -> None:
-    """
-    To avoid linting errors in version specific tsx files, they are commented out with '//'.
-    This function removes the leading '// ' from every line and writes to the destination path
-    I.E so that the version specific file is written to actual Home.tsx file for the Playwright test run
-    """
-
-    # Read the source file
-    raw = src.read_text()
-
-    # Regex check to remove the comments
-    lines = [re.sub(r"^// ?", "", line) for line in raw.splitlines()]
-
-    # Write the uncommented content to the destination file
-    dst.write_text("\n".join(lines))
-
-
-def start_dev_server() -> subprocess.Popen:
-    """
-    Start the Vite dev server and block until it responds on DEV_SERVER_URL.
-    This is necessary to ensure the app is running, ready to serve the test page
-    against which the Playwright tests will run.
-    """
-    # Use a sub process to start the actual web app
-    proc = subprocess.Popen(
-        ["npm", "run", "dev"],
-        cwd=APP_DIR_PATH,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-    # Debug statement
-    print(f"Starting dev server (pid {proc.pid})...", end=" ", flush=True)
-
-    # Allow up to 30 seconds for the dev server to be up and responsive
-    for _ in range(30):
-        try:
-            urllib.request.urlopen(DEV_SERVER_URL, timeout=2)
-            print("ready.")
-            return proc
-        except (urllib.error.URLError, OSError):
-            time.sleep(1)
-
-    # If not running within 30 seconds, terminate the process and raise an error
-    proc.terminate()
-    raise RuntimeError(
-        f"Dev server did not become ready at {DEV_SERVER_URL} within 30s"
-    )
-
-
-def stop_dev_server(proc: subprocess.Popen) -> None:
-    """
-    This function ensures server stops after each test finishes to ensure clean state
-    for next test.
-    """
-
-    proc.terminate()
-    try:
-        proc.wait(timeout=5)
-    except subprocess.TimeoutExpired:
-        proc.kill()
-    print("Dev server stopped.")
 
 
 def run_playwright(
@@ -125,22 +61,11 @@ def run_playwright(
     out_spec = output_directory / f"{prompt_type}.txt"
     out_log = output_directory / f"{prompt_type}.log"
 
-    # Construct path to the version specific Home.tsx file based on iteration and change type
-    changes_dir = ITERATION_MAP.get(iteration)
-    versions_dir = CHANGE_TYPE_MAP.get(change_type)
-    version_home = (
-        VERSIONS_ROOT_PATH / versions_dir / changes_dir / "Home.tsx"
-        if (changes_dir and versions_dir)
-        else None
-    )
+    # Resolve path to the version specific Home.tsx file based on iteration and change type
+    version_home_file_path = resolve_file_path_for_code_change(iteration, change_type)
 
     # Validation check to ensure that Home.tsx file exists for given iteration and change type
-    if (
-        not changes_dir
-        or not versions_dir
-        or not version_home
-        or not version_home.exists()
-    ):
+    if not version_home_file_path:
         out_log.write_text("ERROR: missing version Home.tsx\n")
         return {
             "playwright_passed": False,
@@ -164,7 +89,7 @@ def run_playwright(
 
     try:
         # Uncomment the specific version into the target Home.tsx location which Playwright will run
-        uncomment_file(version_home, HOME_TSX_PATH)
+        uncomment_file(version_home_file_path, HOME_TSX_PATH)
 
         # Extract test code from the model output
         extracted = extract_typescript(code)

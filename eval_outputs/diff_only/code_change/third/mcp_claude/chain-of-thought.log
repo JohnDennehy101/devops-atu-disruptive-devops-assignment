@@ -1,0 +1,131 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Copy Note Body › should display Copy button when a note is selected
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Copy Note Body › should display Copy button when a note is selected 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /Note #/ }).first()[22m
+
+
+      10 |   }) => {
+      11 |     // Select a note
+    > 12 |     await page.getByRole("button", { name: /Note #/ }).first().click();
+         |                                                                ^
+      13 |
+      14 |     // Verify Note Details section appears with Copy button
+      15 |     await expect(
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:12:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-13233-ton-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-13233-ton-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-13233-ton-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-13233-ton-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-13233-ton-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/5] [chromium] › e2e/chain-of-thought.spec.ts:21:3 › Copy Note Body › should not display Copy button when no note is selected
+[1A[2K[3/5] [chromium] › e2e/chain-of-thought.spec.ts:30:3 › Copy Note Body › should copy the note body to clipboard when Copy is clicked
+[1A[2K  2) [chromium] › e2e/chain-of-thought.spec.ts:30:3 › Copy Note Body › should copy the note body to clipboard when Copy is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /Note #/ }).first()[22m
+
+
+      36 |
+      37 |     // Select a note
+    > 38 |     await page.getByRole("button", { name: /Note #/ }).first().click();
+         |                                                                ^
+      39 |
+      40 |     // Get the note body text
+      41 |     const bodyText = await page
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:38:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-f9e18-pboard-when-Copy-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-f9e18-pboard-when-Copy-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-f9e18-pboard-when-Copy-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-f9e18-pboard-when-Copy-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-f9e18-pboard-when-Copy-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/chain-of-thought.spec.ts:57:3 › Copy Note Body › should copy correct body when switching between notes
+[1A[2K[5/5] [chromium] › e2e/chain-of-thought.spec.ts:97:3 › Copy Note Body › Copy button should have correct styling
+[1A[2K  3) [chromium] › e2e/chain-of-thought.spec.ts:97:3 › Copy Note Body › Copy button should have correct styling 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /Note #/ }).first()[22m
+
+
+       96 |
+       97 |   test("Copy button should have correct styling", async ({ page }) => {
+    >  98 |     await page.getByRole("button", { name: /Note #/ }).first().click();
+          |                                                                ^
+       99 |
+      100 |     const copyButton = page.getByRole("button", { name: "Copy" });
+      101 |     await expect(copyButton).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:98:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-ee5ef-should-have-correct-styling-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-ee5ef-should-have-correct-styling-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-ee5ef-should-have-correct-styling-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-ee5ef-should-have-correct-styling-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mcp_claude/artefacts/chain-of-thought/chain-of-thought-Copy-Note-ee5ef-should-have-correct-styling-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:8:3 › Copy Note Body › should display Copy button when a note is selected 
+    [chromium] › e2e/chain-of-thought.spec.ts:30:3 › Copy Note Body › should copy the note body to clipboard when Copy is clicked 
+    [chromium] › e2e/chain-of-thought.spec.ts:97:3 › Copy Note Body › Copy button should have correct styling 
+  2 passed (1.1m)
+
+
+=== STDERR ===
+

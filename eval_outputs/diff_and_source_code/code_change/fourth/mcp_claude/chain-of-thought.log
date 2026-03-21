@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/chain-of-thought.spec.ts:11:3 › Tag Filter Feature › should display the tag filter input
+[1A[2K[2/8] [chromium] › e2e/chain-of-thought.spec.ts:17:3 › Tag Filter Feature › should show 'No notes yet' when there are no saved notes
+[1A[2K[3/8] [chromium] › e2e/chain-of-thought.spec.ts:24:3 › Tag Filter Feature › should filter notes by tag and update the displayed count
+[1A[2K[4/8] [chromium] › e2e/chain-of-thought.spec.ts:54:3 › Tag Filter Feature › should show 'No notes match the filter' when filter matches nothing
+[1A[2K[5/8] [chromium] › e2e/chain-of-thought.spec.ts:74:3 › Tag Filter Feature › should show all notes when the filter is cleared
+[1A[2K[6/8] [chromium] › e2e/chain-of-thought.spec.ts:102:3 › Tag Filter Feature › should filter with case-insensitive matching
+[1A[2K[7/8] [chromium] › e2e/chain-of-thought.spec.ts:118:3 › Tag Filter Feature › should support partial tag matching
+[1A[2K[8/8] [chromium] › e2e/chain-of-thought.spec.ts:134:3 › Tag Filter Feature › should still allow clicking a filtered note to view details
+[1A[2K  8 passed (3.5s)
+
+
+=== STDERR ===
+

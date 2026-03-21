@@ -1,0 +1,104 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Clear All Notes functionality", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    // Clear any existing localStorage state
+    await page.evaluate(() => localStorage.removeItem("noteIds"));
+    await page.reload();
+  });
+
+  test("should not show Clear all button when there are no notes", async ({
+    page,
+  }) => {
+    await expect(page.getByRole("heading", { name: /Your Notes \(0\)/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("should show Clear all button when notes exist", async ({ page }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Test Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Test body");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByRole("heading", { name: /Your Notes \(1\)/ })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible();
+  });
+
+  test("should clear all notes when Clear all is clicked", async ({ page }) => {
+    // Create two notes
+    await page.getByRole("textbox", { name: "Title" }).fill("Note 1");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body 1");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByRole("heading", { name: /Your Notes \(1\)/ })).toBeVisible();
+
+    await page.getByRole("textbox", { name: "Title" }).fill("Note 2");
+    await page.getByRole("textbox", { name: "Body" }).fill("Body 2");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByRole("heading", { name: /Your Notes \(2\)/ })).toBeVisible();
+
+    // Click Clear all
+    await page.getByRole("button", { name: "Clear all" }).click();
+
+    // Verify all notes are cleared
+    await expect(page.getByRole("heading", { name: /Your Notes \(0\)/ })).toBeVisible();
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("should clear localStorage when Clear all is clicked", async ({
+    page,
+  }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Test Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Test body");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByRole("heading", { name: /Your Notes \(1\)/ })).toBeVisible();
+
+    // Verify localStorage has the note
+    let storedIds = await page.evaluate(() => localStorage.getItem("noteIds"));
+    expect(JSON.parse(storedIds!)).toHaveLength(1);
+
+    // Click Clear all
+    await page.getByRole("button", { name: "Clear all" }).click();
+
+    // Verify localStorage is cleared
+    storedIds = await page.evaluate(() => localStorage.getItem("noteIds"));
+    expect(JSON.parse(storedIds!)).toEqual([]);
+  });
+
+  test("should reset form fields and selected note when Clear all is clicked", async ({
+    page,
+  }) => {
+    // Create a note
+    await page.getByRole("textbox", { name: "Title" }).fill("Test Note");
+    await page.getByRole("textbox", { name: "Body" }).fill("Test body");
+    await page.getByRole("textbox", { name: "Tags (comma-separated)" }).fill("tag1, tag2");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByRole("heading", { name: /Your Notes \(1\)/ })).toBeVisible();
+
+    // Load the note to select it
+    await page.getByRole("button", { name: /Note #/ }).click();
+    await expect(page.getByText("Note Details")).toBeVisible();
+
+    // Click Clear all
+    await page.getByRole("button", { name: "Clear all" }).click();
+
+    // Verify form is reset
+    await expect(page.getByRole("textbox", { name: "Title" })).toHaveValue("");
+    await expect(page.getByRole("textbox", { name: "Body" })).toHaveValue("");
+    await expect(page.getByRole("textbox", { name: "Tags (comma-separated)" })).toHaveValue("");
+
+    // Verify Note Details panel is gone
+    await expect(page.getByText("Note Details")).not.toBeVisible();
+
+    // Verify heading shows "Create New Note" (not "Edit Note")
+    await expect(page.getByRole("heading", { name: "Create New Note" })).toBeVisible();
+  });
+
+  test("should display subtitle text about local storage", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally.")
+    ).toBeVisible();
+  });
+});
