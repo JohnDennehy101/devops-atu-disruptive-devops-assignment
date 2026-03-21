@@ -1,0 +1,50 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Clear All Notes Feature', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000'); // Replace with the actual URL of your app
+
+    // Clear localStorage before each test
+    await page.evaluate(() => localStorage.clear());
+  });
+
+  test('should display the new paragraph text', async ({ page }) => {
+    const paragraphText = await page.locator('p.text-gray-500').textContent();
+    expect(paragraphText).toBe('Create and manage notes. Your notes are stored locally.');
+  });
+
+  test('should display "Clear all" button only when there are saved notes', async ({ page }) => {
+    // Initially, there should be no notes, so the "Clear all" button should not be visible
+    await expect(page.locator('button:text("Clear all")')).toBeHidden();
+
+    // Add a note to simulate saved notes
+    await page.fill('input[name="title"]', 'Test Note');
+    await page.fill('textarea[name="body"]', 'This is a test note.');
+    await page.click('button:text("Save")');
+
+    // Now the "Clear all" button should be visible
+    await expect(page.locator('button:text("Clear all")')).toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    // Add a note to simulate saved notes
+    await page.fill('input[name="title"]', 'Test Note');
+    await page.fill('textarea[name="body"]', 'This is a test note.');
+    await page.click('button:text("Save")');
+
+    // Verify the note is added
+    const noteCount = await page.locator('h3:text("Your Notes (1)")').count();
+    expect(noteCount).toBe(1);
+
+    // Click the "Clear all" button
+    await page.click('button:text("Clear all")');
+
+    // Verify all notes are cleared
+    await expect(page.locator('h3:text("Your Notes (0)")')).toBeVisible();
+
+    // Verify localStorage is updated
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(noteIds).toBe(JSON.stringify([]));
+  });
+});

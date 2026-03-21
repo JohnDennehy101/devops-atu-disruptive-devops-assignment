@@ -1,0 +1,166 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display the correct number of notes
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display the correct number of notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes').locator('span')[22m
+
+
+       7 |
+       8 |   test('should display the correct number of notes', async ({ page }) => {
+    >  9 |     const notesCount = await page.locator('text=Your Notes').locator('span').textContent();
+         |                                                                              ^
+      10 |     expect(notesCount).toBeDefined();
+      11 |   });
+      12 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:9:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-6e15f-the-correct-number-of-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-6e15f-the-correct-number-of-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-6e15f-the-correct-number-of-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-6e15f-the-correct-number-of-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-6e15f-the-correct-number-of-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/5] [chromium] › e2e/zero-shot.spec.ts:13:3 › Home Page › should filter notes by tag
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:13:3 › Home Page › should filter notes by tag ──────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes').locator('span')[22m
+
+
+      14 |     const filterInput = page.locator('input[placeholder="Filter by tag"]');
+      15 |     await filterInput.fill('tag1');
+    > 16 |     const filteredNotesCount = await page.locator('text=Your Notes').locator('span').textContent();
+         |                                                                                      ^
+      17 |     expect(filteredNotesCount).toBeDefined();
+      18 |   });
+      19 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:16:86
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should display "No notes match the filter" when no notes match
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should display "No notes match the filter" when no notes match 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      22 |     await filterInput.fill('nonexistenttag');
+      23 |     const noNotesMessage = await page.locator('text=No notes match the filter').isVisible();
+    > 24 |     expect(noNotesMessage).toBeTruthy();
+         |                            ^
+      25 |   });
+      26 |
+      27 |   test('should display "No notes yet" when there are no saved notes', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:24:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-c7104--filter-when-no-notes-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-c7104--filter-when-no-notes-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-c7104--filter-when-no-notes-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-c7104--filter-when-no-notes-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-c7104--filter-when-no-notes-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/zero-shot.spec.ts:27:3 › Home Page › should display "No notes yet" when there are no saved notes
+[1A[2K[5/5] [chromium] › e2e/zero-shot.spec.ts:32:3 › Home Page › should update the displayed notes count when a new note is added
+[1A[2K  4) [chromium] › e2e/zero-shot.spec.ts:32:3 › Home Page › should update the displayed notes count when a new note is added 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes').locator('span')[22m
+
+
+      31 |
+      32 |   test('should update the displayed notes count when a new note is added', async ({ page }) => {
+    > 33 |     const initialCount = await page.locator('text=Your Notes').locator('span').textContent();
+         |                                                                                ^
+      34 |     await page.fill('#note-title', 'New Note');
+      35 |     await page.fill('#note-body', 'This is a new note.');
+      36 |     await page.fill('#note-tags', 'tag1, tag2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:33:80
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-a7f7b-nt-when-a-new-note-is-added-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-a7f7b-nt-when-a-new-note-is-added-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-a7f7b-nt-when-a-new-note-is-added-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-a7f7b-nt-when-a-new-note-is-added-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page-should-a7f7b-nt-when-a-new-note-is-added-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page › should display the correct number of notes 
+    [chromium] › e2e/zero-shot.spec.ts:13:3 › Home Page › should filter notes by tag ───────────────
+    [chromium] › e2e/zero-shot.spec.ts:20:3 › Home Page › should display "No notes match the filter" when no notes match 
+    [chromium] › e2e/zero-shot.spec.ts:32:3 › Home Page › should update the displayed notes count when a new note is added 
+  1 passed (1.1m)
+
+
+=== STDERR ===
+

@@ -1,0 +1,46 @@
+test.describe('Home Page - Clear All Notes Button', () => {
+  test('should display "Clear all" button when there are saved notes and clear all notes when clicked', async ({ page }) => {
+    // Mock localStorage with saved notes
+    const savedNotes = [1, 2, 3];
+    await page.addInitScript((notes) => {
+      window.localStorage.setItem('noteIds', JSON.stringify(notes));
+    }, savedNotes);
+
+    // Navigate to the home page
+    await page.goto('/');
+
+    // Verify that the "Clear all" button is visible
+    const clearAllButton = page.locator('button:text("Clear all")');
+    await expect(clearAllButton).toBeVisible();
+
+    // Click the "Clear all" button
+    await clearAllButton.click();
+
+    // Verify that the notes list is cleared
+    await expect(page.locator('text=No notes yet')).toBeVisible();
+
+    // Verify that the "Clear all" button is no longer visible
+    await expect(clearAllButton).toBeHidden();
+
+    // Verify that localStorage is cleared
+    const noteIds = await page.evaluate(() => JSON.parse(localStorage.getItem('noteIds')));
+    expect(noteIds).toEqual([]);
+  });
+
+  test('should not display "Clear all" button when there are no saved notes', async ({ page }) => {
+    // Mock localStorage with no saved notes
+    await page.addInitScript(() => {
+      window.localStorage.setItem('noteIds', JSON.stringify([]));
+    });
+
+    // Navigate to the home page
+    await page.goto('/');
+
+    // Verify that the "Clear all" button is not visible
+    const clearAllButton = page.locator('button:text("Clear all")');
+    await expect(clearAllButton).toBeHidden();
+
+    // Verify that the "No notes yet" message is displayed
+    await expect(page.locator('text=No notes yet')).toBeVisible();
+  });
+});

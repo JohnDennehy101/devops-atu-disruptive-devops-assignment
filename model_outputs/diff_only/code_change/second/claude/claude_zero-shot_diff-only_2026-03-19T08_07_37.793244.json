@@ -1,0 +1,19 @@
+[
+    {
+        "timestamp": "2026-03-19T08:07:37.793244",
+        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 60.311
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript. Output ONLY the code block. No explanations. Tests for the following changes:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from \"@playwright/test\";\n\ntest.describe(\"Character counter for note body\", () => {\n  test.beforeEach(async ({ page }) => {\n    await page.goto(\"/\");\n    await page.evaluate(() => localStorage.clear());\n    await page.reload();\n  });\n\n  test(\"should display character counter with 0 / 5000 initially\", async ({ page }) => {\n    await expect(page.getByText(\"0 / 5000\")).toBeVisible();\n  });\n\n  test(\"should update character count as user types in body\", async ({ page }) => {\n    const body = page.getByLabel(\"Body\");\n    await body.fill(\"Hello\");\n    await expect(page.getByText(\"5 / 5000\")).toBeVisible();\n  });\n\n  test(\"should update character count for longer text\", async ({ page }) => {\n    const body = page.getByLabel(\"Body\");\n    const text = \"a\".repeat(100);\n    await body.fill(text);\n    await expect(page.getByText(\"100 / 5000\")).toBeVisible();\n  });\n});\n```",
+            "extracted_code": "import { test, expect } from \"@playwright/test\";\n\ntest.describe(\"Character counter for note body\", () => {\n  test.beforeEach(async ({ page }) => {\n    await page.goto(\"/\");\n    await page.evaluate(() => localStorage.clear());\n    await page.reload();\n  });\n\n  test(\"should display character counter with 0 / 5000 initially\", async ({ page }) => {\n    await expect(page.getByText(\"0 / 5000\")).toBeVisible();\n  });\n\n  test(\"should update character count as user types in body\", async ({ page }) => {\n    const body = page.getByLabel(\"Body\");\n    await body.fill(\"Hello\");\n    await expect(page.getByText(\"5 / 5000\")).toBeVisible();\n  });\n\n  test(\"should update character count for longer text\", async ({ page }) => {\n    const body = page.getByLabel(\"Body\");\n    const text = \"a\".repeat(100);\n    await body.fill(text);\n    await expect(page.getByText(\"100 / 5000\")).toBeVisible();\n  });\n});"
+        },
+        "hyperparameters": {
+            "note": "Claude Code CLI (claude -p), Max subscription"
+        }
+    }
+]

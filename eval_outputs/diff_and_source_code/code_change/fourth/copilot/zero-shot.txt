@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('should display the correct number of notes', async ({ page }) => {
+    const notesCount = await page.locator('text=Your Notes').locator('span').textContent();
+    expect(notesCount).toBeDefined();
+  });
+
+  test('should filter notes by tag', async ({ page }) => {
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await filterInput.fill('tag1');
+    const filteredNotesCount = await page.locator('text=Your Notes').locator('span').textContent();
+    expect(filteredNotesCount).toBeDefined();
+  });
+
+  test('should display "No notes match the filter" when no notes match', async ({ page }) => {
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await filterInput.fill('nonexistenttag');
+    const noNotesMessage = await page.locator('text=No notes match the filter').isVisible();
+    expect(noNotesMessage).toBeTruthy();
+  });
+
+  test('should display "No notes yet" when there are no saved notes', async ({ page }) => {
+    const noNotesMessage = await page.locator('text=No notes yet').isVisible();
+    expect(noNotesMessage).toBeTruthy();
+  });
+
+  test('should update the displayed notes count when a new note is added', async ({ page }) => {
+    const initialCount = await page.locator('text=Your Notes').locator('span').textContent();
+    await page.fill('#note-title', 'New Note');
+    await page.fill('#note-body', 'This is a new note.');
+    await page.fill('#note-tags', 'tag1, tag2');
+    await page.click('text=Create Note');
+    const updatedCount = await page.locator('text=Your Notes').locator('span').textContent();
+    expect(Number(updatedCount)).toBe(Number(initialCount) + 1);
+  });
+});

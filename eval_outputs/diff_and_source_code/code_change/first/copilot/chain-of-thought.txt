@@ -1,0 +1,47 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Clear All Notes Feature', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the home page
+    await page.goto('http://localhost:3000');
+  });
+
+  test('should display helper text', async ({ page }) => {
+    // Verify the helper text is displayed
+    const helperText = await page.locator('p.text-gray-500');
+    await expect(helperText).toHaveText('Create and manage notes. Your notes are stored locally.');
+  });
+
+  test('should display "Clear all" button only when notes exist', async ({ page }) => {
+    // Initially, there should be no notes
+    const clearAllButton = page.locator('button:text("Clear all")');
+    await expect(clearAllButton).not.toBeVisible();
+
+    // Add a new note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.click('button:text("Create Note")');
+
+    // Verify the "Clear all" button is now visible
+    await expect(clearAllButton).toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    // Add a new note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.click('button:text("Create Note")');
+
+    // Verify the note is added
+    const noteList = page.locator('div.space-y-2 button');
+    await expect(noteList).toHaveCount(1);
+
+    // Click the "Clear all" button
+    const clearAllButton = page.locator('button:text("Clear all")');
+    await clearAllButton.click();
+
+    // Verify all notes are cleared
+    await expect(noteList).toHaveCount(0);
+
+    // Verify the localStorage is updated
+    const localStorageNoteIds =

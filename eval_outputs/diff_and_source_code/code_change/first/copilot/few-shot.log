@@ -1,0 +1,22 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+ReferenceError: test is not defined
+
+   at few-shot.spec.ts:1
+
+> 1 | test.describe('Home Page - Clear All Notes Button', () => {
+    | ^
+  2 |   test('should display "Clear all" button when there are saved notes and clear all notes when clicked', async ({ page }) => {
+  3 |     // Mock localStorage with saved notes
+  4 |     const savedNotes = [1, 2, 3];
+    at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:1:1
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

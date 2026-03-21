@@ -1,0 +1,49 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Character Count in Note Body', () => {
+  test('should display initial character count as 0 / 5000', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Verify the initial character count
+    const charCount = await page.locator('p.text-xs.text-gray-500');
+    await expect(charCount).toHaveText('0 / 5000');
+  });
+
+  test('should update character count as user types', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Type into the "Body" textarea
+    const textarea = await page.locator('#note-body');
+    await textarea.type('Hello, world!');
+
+    // Verify the updated character count
+    const charCount = await page.locator('p.text-xs.text-gray-500');
+    await expect(charCount).toHaveText('13 / 5000'); // "Hello, world!" has 13 characters
+  });
+
+  test('should not exceed maximum character count of 5000', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Type 6000 characters into the "Body" textarea
+    const textarea = await page.locator('#note-body');
+    const longText = 'a'.repeat(6000); // Generate a string with 6000 'a' characters
+    await textarea.type(longText);
+
+    // Verify the character count is capped at 5000
+    const charCount = await page.locator('p.text-xs.text-gray-500');
+    await expect(charCount).toHaveText('5000 / 5000');
+  });
+
+  test('should display correct text color in dark mode', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Enable dark mode (assuming a toggle exists)
+    const darkModeToggle = await page.locator('button#dark-mode-toggle');
+    await darkModeToggle.click();
+
+    // Verify the text color in dark mode
+    const char

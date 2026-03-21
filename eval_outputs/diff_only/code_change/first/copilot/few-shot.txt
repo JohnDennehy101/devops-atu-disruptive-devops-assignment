@@ -1,0 +1,35 @@
+test('clear all notes button functionality', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Verify the "Your Notes" header is displayed with the correct count
+  const notesHeader = page.locator('h3:has-text("Your Notes (0)")');
+  await expect(notesHeader).toBeVisible();
+
+  // Add a note to ensure the "Clear all" button appears
+  await page.fill('#note-title-input', 'Test Note');
+  await page.fill('#note-body-input', 'This is a test note.');
+  await page.click('#save-note-button');
+
+  // Verify the "Your Notes" header updates with the new count
+  const updatedNotesHeader = page.locator('h3:has-text("Your Notes (1)")');
+  await expect(updatedNotesHeader).toBeVisible();
+
+  // Verify the "Clear all" button is visible
+  const clearAllButton = page.locator('button:has-text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+
+  // Click the "Clear all" button
+  await clearAllButton.click();
+
+  // Verify all notes are cleared and the header updates
+  await expect(page.locator('h3:has-text("Your Notes (0)")')).toBeVisible();
+
+  // Verify the form fields are reset
+  await expect(page.locator('#note-title-input')).toHaveValue('');
+  await expect(page.locator('#note-body-input')).toHaveValue('');
+  await expect(page.locator('#note-tags-input')).toHaveValue('');
+
+  // Verify the "Clear all" button is no longer visible
+  await expect(clearAllButton).toBeHidden();
+});

@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Filter Notes by Tag › should display the correct number of notes based on the tag filter
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Filter Notes by Tag › should display the correct number of notes based on the tag filter 
+
+    Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/
+    Call log:
+    [2m  - navigating to "http://localhost:3000/", waiting until "load"[22m
+
+
+      4 |   test.beforeEach(async ({ page }) => {
+      5 |     // Navigate to the Home page
+    > 6 |     await page.goto('http://localhost:3000');
+        |                ^
+      7 |   });
+      8 |
+      9 |   test('should display the correct number of notes based on the tag filter', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Fi-46437-tes-based-on-the-tag-filter-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Fi-46437-tes-based-on-the-tag-filter-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Fi-46437-tes-based-on-the-tag-filter-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Fi-46437-tes-based-on-the-tag-filter-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Filter Notes by Tag › should display the correct number of notes based on the tag filter 
+
+
+=== STDERR ===
+

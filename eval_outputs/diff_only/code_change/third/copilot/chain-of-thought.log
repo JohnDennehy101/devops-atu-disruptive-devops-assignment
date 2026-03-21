@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/chain-of-thought.spec.ts:3:1 › should copy the selected note body to the clipboard
+[1A[2K  1) [chromium] › e2e/chain-of-thought.spec.ts:3:1 › should copy the selected note body to the clipboard 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button:has-text("Copy")')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button:has-text("Copy")')[22m
+
+
+      14 |   // Step 3: Locate the "Copy" button and verify its presence
+      15 |   const copyButton = page.locator('button:has-text("Copy")');
+    > 16 |   await expect(copyButton).toBeVisible();
+         |                            ^
+      17 |
+      18 |   // Step 4: Click the "Copy" button
+      19 |   await copyButton.click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts:16:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/chain-of-thought/chain-of-thought-should-co-cb13c--note-body-to-the-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/chain-of-thought/chain-of-thought-should-co-cb13c--note-body-to-the-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/copilot/artefacts/chain-of-thought/chain-of-thought-should-co-cb13c--note-body-to-the-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/artefacts/chain-of-thought/chain-of-thought-should-co-cb13c--note-body-to-the-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/copilot/artefacts/chain-of-thought/chain-of-thought-should-co-cb13c--note-body-to-the-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/chain-of-thought.spec.ts:3:1 › should copy the selected note body to the clipboard 
+
+
+=== STDERR ===
+

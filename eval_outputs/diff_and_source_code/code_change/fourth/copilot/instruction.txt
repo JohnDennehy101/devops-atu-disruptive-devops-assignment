@@ -1,0 +1,56 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Filter Notes by Tag', () => {
+  test.beforeEach(async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000');
+  });
+
+  test('should display the correct number of notes based on the tag filter', async ({ page }) => {
+    // Assert the initial state of the notes list
+    const notesHeader = await page.getByRole('heading', { name: /Your Notes/i });
+    await expect(notesHeader).toContainText('Your Notes (0)');
+
+    // Simulate adding notes (mock API or pre-seed data)
+    // Assuming the app has a way to add notes programmatically or via UI
+    await page.evaluate(() => {
+      localStorage.setItem(
+        'noteIds',
+        JSON.stringify([1, 2, 3])
+      );
+      localStorage.setItem(
+        'notes',
+        JSON.stringify([
+          { id: 1, title: 'Note 1', tags: ['work', 'urgent'] },
+          { id: 2, title: 'Note 2', tags: ['personal', 'important'] },
+          { id: 3, title: 'Note 3', tags: ['work', 'important'] },
+        ])
+      );
+    });
+
+    // Reload the page to reflect the seeded data
+    await page.reload();
+
+    // Assert the updated state of the notes list
+    await expect(notesHeader).toContainText('Your Notes (3)');
+
+    // Locate the filter input and type a tag to filter notes
+    const filterInput = page.getByRole('textbox', { name: /Filter by tag/i });
+    await filterInput.fill('work');
+
+    // Assert the filtered notes count
+    await expect(notesHeader).toContainText('Your Notes (2)');
+
+    // Clear the filter and assert all notes are displayed again
+    await filterInput.fill('');
+    await expect(notesHeader).toContainText('Your Notes (3)');
+
+    // Apply a filter that matches no notes
+    await filterInput.fill('nonexistent');
+    await expect(notesHeader).toContainText('Your Notes (0)');
+
+    // Assert the "No notes match the filter" message is displayed
+    const noNotesMessage = page.getByText('No notes match the filter');
+    await expect(noNotesMessage).toBeVisible();
+  });
+});

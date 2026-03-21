@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › should display character count for formBody
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › should display character count for formBody ──────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('textarea[name="formBody"]')[22m
+
+
+       7 |   // Locate the formBody input field and type some text
+       8 |   const formBodyInput = page.locator('textarea[name="formBody"]');
+    >  9 |   await formBodyInput.fill('Hello, Playwright!');
+         |                       ^
+      10 |
+      11 |   // Verify the character count is displayed correctly
+      12 |   const charCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:9:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/zero-shot/zero-shot-should-display-character-count-for-formBody-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/zero-shot/zero-shot-should-display-character-count-for-formBody-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/copilot/artefacts/zero-shot/zero-shot-should-display-character-count-for-formBody-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/copilot/artefacts/zero-shot/zero-shot-should-display-character-count-for-formBody-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/copilot/artefacts/zero-shot/zero-shot-should-display-character-count-for-formBody-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › should display character count for formBody ───────────
+
+
+=== STDERR ===
+

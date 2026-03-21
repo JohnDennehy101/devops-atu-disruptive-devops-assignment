@@ -1,0 +1,39 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body Button', () => {
+  test('should copy the selected note body to the clipboard when clicked', async ({ page }) => {
+    // Mock data for the selected note
+    const selectedNote = {
+      body: 'This is the body of the selected note.',
+    };
+
+    // Mock the clipboard API
+    await page.route('**/*', (route) => {
+      if (route.request().url().includes('clipboard')) {
+        route.fulfill({
+          status: 200,
+          body: '',
+        });
+      } else {
+        route.continue();
+      }
+    });
+
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Simulate the selected note being set
+    await page.evaluate((note) => {
+      (window as any).selectedNote = note;
+    }, selectedNote);
+
+    // Locate the "Copy" button and click it
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).toBeVisible();
+    await copyButton.click();
+
+    // Assert that the clipboard contains the correct text
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(selectedNote.body);
+  });
+});

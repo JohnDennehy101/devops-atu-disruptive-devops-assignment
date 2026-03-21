@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/instruction.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › shows body character count and updates when typing
+[1A[2K  4 passed (2.9s)
+
+
+=== STDERR ===
+

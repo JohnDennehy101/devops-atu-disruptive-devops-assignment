@@ -1,0 +1,23 @@
+test('displays character count for formBody input', async ({ page }) => {
+  // Navigate to the home page
+  await page.goto('/');
+
+  // Locate the textarea for the note body
+  const noteBodyTextarea = page.locator('#note-body');
+
+  // Type into the textarea
+  const inputText = 'This is a test note body.';
+  await noteBodyTextarea.fill(inputText);
+
+  // Verify that the character count is displayed correctly
+  const characterCount = `${inputText.length} / 5000`;
+  await expect(page.locator('p.text-xs.text-gray-500')).toHaveText(characterCount);
+
+  // Add more text to the textarea
+  const additionalText = ' Adding more text.';
+  await noteBodyTextarea.type(additionalText);
+
+  // Verify the updated character count
+  const updatedCharacterCount = `${inputText.length + additionalText.length} / 5000`;
+  await expect(page.locator('p.text-xs.text-gray-500')).toHaveText(updatedCharacterCount);
+});

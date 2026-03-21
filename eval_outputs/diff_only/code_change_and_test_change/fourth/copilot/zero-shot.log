@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/zero-shot.spec.ts:3:1 › filter by tag shows only matching notes
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:3:1 › filter by tag shows only matching notes ──────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Title')[22m
+
+
+      3 | test("filter by tag shows only matching notes", async ({ page }) => {
+      4 |   // Create the first note
+    > 5 |   await page.getByLabel("Title").fill("Work note");
+        |                                  ^
+      6 |   await page.getByLabel("Body").fill("Body one");
+      7 |   await page.getByLabel(/Tags/).fill("work, urgent");
+      8 |   await page.getByRole("button", { name: "Create Note" }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:5:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/artefacts/zero-shot/zero-shot-filter-by-tag-shows-only-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/artefacts/zero-shot/zero-shot-filter-by-tag-shows-only-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/artefacts/zero-shot/zero-shot-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/artefacts/zero-shot/zero-shot-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:3:1 › filter by tag shows only matching notes ───────────────
+
+
+=== STDERR ===
+

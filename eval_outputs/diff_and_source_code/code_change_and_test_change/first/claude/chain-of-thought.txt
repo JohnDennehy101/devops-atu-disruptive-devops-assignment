@@ -1,0 +1,26 @@
+import { test, expect } from "@playwright/test";
+
+test("can clear all notes from sidebar", async ({ page }) => {
+  await page.goto("/");
+
+  // Verify subtitle is visible
+  await expect(
+    page.getByText("Create and manage notes. Your notes are stored locally.")
+  ).toBeVisible();
+
+  // Create a note
+  await page.getByLabel("Title").fill("To clear");
+  await page.getByLabel("Body").fill("Body");
+  await page.getByLabel(/Tags/).fill("x");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Verify note count incremented
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Clear all notes
+  await page.getByRole("button", { name: "Clear all" }).click();
+
+  // Verify notes were cleared
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});

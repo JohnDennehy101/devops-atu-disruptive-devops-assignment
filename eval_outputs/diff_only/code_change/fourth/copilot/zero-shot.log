@@ -1,0 +1,163 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page - Tag Filter › should display all notes when no filter is applied
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page - Tag Filter › should display all notes when no filter is applied 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes')[22m
+
+
+       8 |   test('should display all notes when no filter is applied', async ({ page }) => {
+       9 |     const noteCount = await page.locator('[data-testid="note-item"]').count();
+    > 10 |     const displayedCount = await page.locator('text=Your Notes').textContent();
+         |                                                                  ^
+      11 |     expect(displayedCount).toContain(`Your Notes (${noteCount})`);
+      12 |   });
+      13 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:10:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--fa388-s-when-no-filter-is-applied-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--fa388-s-when-no-filter-is-applied-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--fa388-s-when-no-filter-is-applied-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--fa388-s-when-no-filter-is-applied-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--fa388-s-when-no-filter-is-applied-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/zero-shot.spec.ts:14:3 › Home Page - Tag Filter › should filter notes by tag
+[1A[2K  2) [chromium] › e2e/zero-shot.spec.ts:14:3 › Home Page - Tag Filter › should filter notes by tag ─
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Filter by tag"]')[22m
+
+
+      13 |
+      14 |   test('should filter notes by tag', async ({ page }) => {
+    > 15 |     await page.fill('input[placeholder="Filter by tag"]', 'work');
+         |                ^
+      16 |     const filteredNotes = await page.locator('[data-testid="note-item"]').count();
+      17 |     const displayedCount = await page.locator('text=Your Notes').textContent();
+      18 |     expect(displayedCount).toContain(`Your Notes (${filteredNotes})`);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:15:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag-Filter-should-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag-Filter-should-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag-Filter-should-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag-Filter-should-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag-Filter-should-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/zero-shot.spec.ts:21:3 › Home Page - Tag Filter › should show "No notes match the filter" when no notes match
+[1A[2K  3) [chromium] › e2e/zero-shot.spec.ts:21:3 › Home Page - Tag Filter › should show "No notes match the filter" when no notes match 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Filter by tag"]')[22m
+
+
+      20 |
+      21 |   test('should show "No notes match the filter" when no notes match', async ({ page }) => {
+    > 22 |     await page.fill('input[placeholder="Filter by tag"]', 'nonexistenttag');
+         |                ^
+      23 |     const noNotesMessage = await page.locator('text=No notes match the filter').isVisible();
+      24 |     expect(noNotesMessage).toBeTruthy();
+      25 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:22:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--ec485--filter-when-no-notes-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--ec485--filter-when-no-notes-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--ec485--filter-when-no-notes-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--ec485--filter-when-no-notes-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--ec485--filter-when-no-notes-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/zero-shot.spec.ts:27:3 › Home Page - Tag Filter › should show "No notes yet" when there are no saved notes
+[1A[2K  4) [chromium] › e2e/zero-shot.spec.ts:27:3 › Home Page - Tag Filter › should show "No notes yet" when there are no saved notes 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      32 |     });
+      33 |     const noNotesMessage = await page.locator('text=No notes yet').isVisible();
+    > 34 |     expect(noNotesMessage).toBeTruthy();
+         |                            ^
+      35 |   });
+      36 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:34:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--93288-en-there-are-no-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--93288-en-there-are-no-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--93288-en-there-are-no-saved-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--93288-en-there-are-no-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Home-Page---Tag--93288-en-there-are-no-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/zero-shot.spec.ts:8:3 › Home Page - Tag Filter › should display all notes when no filter is applied 
+    [chromium] › e2e/zero-shot.spec.ts:14:3 › Home Page - Tag Filter › should filter notes by tag ──
+    [chromium] › e2e/zero-shot.spec.ts:21:3 › Home Page - Tag Filter › should show "No notes match the filter" when no notes match 
+    [chromium] › e2e/zero-shot.spec.ts:27:3 › Home Page - Tag Filter › should show "No notes yet" when there are no saved notes 
+
+
+=== STDERR ===
+

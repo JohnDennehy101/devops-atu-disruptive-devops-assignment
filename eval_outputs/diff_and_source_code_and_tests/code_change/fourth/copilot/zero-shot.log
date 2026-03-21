@@ -1,0 +1,58 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App - Tag Filter › displays filtered notes based on tag input
+[1A[2K  1) [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App - Tag Filter › displays filtered notes based on tag input 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: /First Note/ })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /First Note/ })[22m
+
+
+      29 |     await expect(page.getByText("Your Notes (1)")).toBeVisible();
+      30 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1);
+    > 31 |     await expect(page.getByRole("button", { name: /First Note/ })).toBeVisible();
+         |                                                                    ^
+      32 |
+      33 |     // Filter by "personal" tag
+      34 |     await page.getByPlaceholder("Filter by tag").fill("personal");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts:31:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Note-Taking-App--6a567-ed-notes-based-on-tag-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Note-Taking-App--6a567-ed-notes-based-on-tag-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Note-Taking-App--6a567-ed-notes-based-on-tag-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Note-Taking-App--6a567-ed-notes-based-on-tag-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/zero-shot/zero-shot-Note-Taking-App--6a567-ed-notes-based-on-tag-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:49:3 › Note Taking App - Tag Filter › displays 'No notes yet' when no notes exist
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:54:3 › Note Taking App - Tag Filter › displays 'No notes match the filter' when filter has no matches
+[1A[2K  1 failed
+    [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App - Tag Filter › displays filtered notes based on tag input 
+  2 passed (8.8s)
+
+
+=== STDERR ===
+

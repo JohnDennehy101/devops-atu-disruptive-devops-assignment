@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page - Copy Note Body Button', () => {
+  test('should copy the selected note body to clipboard when "Copy" button is clicked', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('http://localhost:3000');
+
+    // Simulate selecting a note
+    const noteButton = page.locator('button:has-text("Note #1")');
+    await noteButton.click();
+
+    // Verify the note details are displayed
+    await expect(page.locator('text=Note Details')).toBeVisible();
+
+    // Click the "Copy" button
+    const copyButton = page.locator('button:has-text("Copy")');
+    await copyButton.click();
+
+    // Verify the clipboard contains the note body
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    await expect(clipboardText).toBe('Expected note body text here');
+  });
+});

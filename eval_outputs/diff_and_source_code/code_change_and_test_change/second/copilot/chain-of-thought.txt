@@ -1,0 +1,24 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Body Character Count", () => {
+  test("shows body character count and updates when typing", async ({ page }) => {
+    // Step 1: Navigate to the Home page
+    await page.goto("/");
+
+    // Step 2: Verify initial character count is "0 / 5000"
+    await expect(page.getByText("0 / 5000")).toBeVisible();
+
+    // Step 3: Type "Hello" into the Body field and verify the count updates
+    const bodyField = page.getByLabel("Body");
+    await bodyField.fill("Hello");
+    await expect(page.getByText("5 / 5000")).toBeVisible();
+
+    // Step 4: Type "Hello world" into the Body field and verify the count updates
+    await bodyField.fill("Hello world");
+    await expect(page.getByText("11 / 5000")).toBeVisible();
+
+    // Step 5: Clear the Body field and verify the count resets
+    await bodyField.fill("");
+    await expect(page.getByText("0 / 5000")).toBeVisible();
+  });
+});

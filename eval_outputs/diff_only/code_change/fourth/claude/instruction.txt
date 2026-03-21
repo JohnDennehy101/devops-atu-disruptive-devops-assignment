@@ -1,0 +1,50 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Home page tag filter", () => {
+  test("should display tag filter input and filter notes by tag", async ({ page }) => {
+    await page.goto("/")
+
+    const filterInput = page.getByRole("textbox", { name: /filter by tag/i })
+    await expect(filterInput).toBeVisible()
+
+    await expect(page.getByText(/Your Notes/)).toBeVisible()
+  })
+
+  test("should show 'No notes match the filter' when filter has no matches", async ({ page }) => {
+    await page.goto("/")
+
+    const filterInput = page.getByRole("textbox", { name: /filter by tag/i })
+    await filterInput.fill("nonexistenttag12345")
+
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+  })
+
+  test("should show 'No notes yet' when there are no saved notes", async ({ page }) => {
+    await page.goto("/")
+
+    await expect(page.getByText("No notes yet")).toBeVisible()
+  })
+
+  test("should update displayed count when filtering by tag", async ({ page }) => {
+    await page.goto("/")
+
+    const countBefore = page.getByText(/Your Notes \(\d+\)/)
+    await expect(countBefore).toBeVisible()
+
+    const filterInput = page.getByRole("textbox", { name: /filter by tag/i })
+    await filterInput.fill("sometag")
+
+    await expect(page.getByText(/Your Notes \(\d+\)/)).toBeVisible()
+  })
+
+  test("should clear filter and show all notes again", async ({ page }) => {
+    await page.goto("/")
+
+    const filterInput = page.getByRole("textbox", { name: /filter by tag/i })
+    await filterInput.fill("sometag")
+    await filterInput.clear()
+
+    await expect(page.getByText(/Your Notes/)).toBeVisible()
+    await expect(page.getByText("No notes match the filter")).not.toBeVisible()
+  })
+})

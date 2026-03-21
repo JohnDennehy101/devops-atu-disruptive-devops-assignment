@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Copy Note Body › can copy the note body to clipboard
+[1A[2K  1) [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Copy Note Body › can copy the note body to clipboard 
+
+    TypeError: Cannot read properties of undefined (reading 'readText')
+
+      26 |
+      27 |     // Step 4: Verify the clipboard contains the note body
+    > 28 |     const clipboardText = await context.clipboard.readText()
+         |                                                   ^
+      29 |     expect(clipboardText).toBe(noteBody)
+      30 |   })
+      31 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts:28:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/few-shot/few-shot-Note-Taking-App---22524--the-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/few-shot/few-shot-Note-Taking-App---22524--the-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/few-shot/few-shot-Note-Taking-App---22524--the-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/few-shot/few-shot-Note-Taking-App---22524--the-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/few-shot/few-shot-Note-Taking-App---22524--the-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Copy Note Body › can copy the note body to clipboard 
+
+
+=== STDERR ===
+

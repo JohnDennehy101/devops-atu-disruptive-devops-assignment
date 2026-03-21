@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-20T16:29:13.481537",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 7.093,
+            "input_token_count": 166,
+            "output_token_count": 592,
+            "total_token_count": 758,
+            "tokens_per_sec": 83.46
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "Here is a Playwright test written in TypeScript that tests the new \"Copy\" button functionality added in the `Home.tsx` file. The test ensures that the button copies the `selectedNote.body` to the clipboard.\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest.describe('Copy Note Body Button', () => {\n  test('should copy the selected note body to the clipboard when clicked', async ({ page }) => {\n    // Mock data for the selected note\n    const selectedNote = {\n      body: 'This is the body of the selected note.',\n    };\n\n    // Mock the clipboard API\n    await page.route('**/*', (route) => {\n      if (route.request().url().includes('clipboard')) {\n        route.fulfill({\n          status: 200,\n          body: '',\n        });\n      } else {\n        route.continue();\n      }\n    });\n\n    // Navigate to the Home page\n    await page.goto('/');\n\n    // Simulate the selected note being set\n    await page.evaluate((note) => {\n      (window as any).selectedNote = note;\n    }, selectedNote);\n\n    // Locate the \"Copy\" button and click it\n    const copyButton = page.getByRole('button', { name: 'Copy' });\n    await expect(copyButton).toBeVisible();\n    await copyButton.click();\n\n    // Assert that the clipboard contains the correct text\n    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n    expect(clipboardText).toBe(selectedNote.body);\n  });\n});\n```\n\n### Explanation of the Test:\n1. **Mock Data**: The test uses a mock `selectedNote` object to simulate the note that would be selected in the application.\n2. **Clipboard API Mocking**: The test ensures that the clipboard API is mocked to handle the `writeText` operation.\n3. **Navigation**: The test navigates to the `/` route, assuming this is where the `Home` component is rendered.\n4. **Simulating State**: The test sets the `selectedNote` in the browser's global scope to simulate the application state.\n5. **Locators**: The `getByRole` locator is used to find the \"Copy\" button by its role and accessible name.\n6. **Assertions**: The test asserts that the button is visible and that the clipboard contains the correct text after the button is clicked.\n\n### Notes:\n- Ensure that the `navigator.clipboard` API is available in the test environment. If not, you may need to mock it explicitly.\n- Replace `/` in `page.goto('/')` with the actual route to the `Home` page if it's different.\n- If the `selectedNote` is managed differently in your application (e.g., via a state management library), you may need to adjust the test to reflect that.",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest.describe('Copy Note Body Button', () => {\n  test('should copy the selected note body to the clipboard when clicked', async ({ page }) => {\n    // Mock data for the selected note\n    const selectedNote = {\n      body: 'This is the body of the selected note.',\n    };\n\n    // Mock the clipboard API\n    await page.route('**/*', (route) => {\n      if (route.request().url().includes('clipboard')) {\n        route.fulfill({\n          status: 200,\n          body: '',\n        });\n      } else {\n        route.continue();\n      }\n    });\n\n    // Navigate to the Home page\n    await page.goto('/');\n\n    // Simulate the selected note being set\n    await page.evaluate((note) => {\n      (window as any).selectedNote = note;\n    }, selectedNote);\n\n    // Locate the \"Copy\" button and click it\n    const copyButton = page.getByRole('button', { name: 'Copy' });\n    await expect(copyButton).toBeVisible();\n    await copyButton.click();\n\n    // Assert that the clipboard contains the correct text\n    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n    expect(clipboardText).toBe(selectedNote.body);\n  });\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

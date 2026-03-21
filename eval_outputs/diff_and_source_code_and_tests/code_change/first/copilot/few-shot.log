@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Clear All Notes › shows 'Clear all' button only when there are notes
+[1A[2K[2/2] [chromium] › e2e/few-shot.spec.ts:24:3 › Note Taking App - Clear All Notes › clears all notes when 'Clear all' button is clicked
+[1A[2K  2 passed (2.2s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,60 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/instruction.spec.ts:4:3 › Home page tag filter › should display tag filter input and filter notes by tag
+[1A[2K[2/5] [chromium] › e2e/instruction.spec.ts:13:3 › Home page tag filter › should show 'No notes match the filter' when filter has no matches
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:13:3 › Home page tag filter › should show 'No notes match the filter' when filter has no matches 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      17 |     await filterInput.fill("nonexistenttag12345")
+      18 |
+    > 19 |     await expect(page.getByText("No notes match the filter")).toBeVisible()
+         |                                                               ^
+      20 |   })
+      21 |
+      22 |   test("should show 'No notes yet' when there are no saved notes", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:19:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/instruction/instruction-Home-page-tag--9e03f--when-filter-has-no-matches-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/instruction/instruction-Home-page-tag--9e03f--when-filter-has-no-matches-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/instruction/instruction-Home-page-tag--9e03f--when-filter-has-no-matches-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/instruction/instruction-Home-page-tag--9e03f--when-filter-has-no-matches-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/instruction/instruction-Home-page-tag--9e03f--when-filter-has-no-matches-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/instruction.spec.ts:22:3 › Home page tag filter › should show 'No notes yet' when there are no saved notes
+[1A[2K[4/5] [chromium] › e2e/instruction.spec.ts:28:3 › Home page tag filter › should update displayed count when filtering by tag
+[1A[2K[5/5] [chromium] › e2e/instruction.spec.ts:40:3 › Home page tag filter › should clear filter and show all notes again
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:13:3 › Home page tag filter › should show 'No notes match the filter' when filter has no matches 
+  4 passed (9.1s)
+
+
+=== STDERR ===
+

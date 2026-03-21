@@ -1,0 +1,164 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Tag Filter Functionality › should display all notes when no filter is applied
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Tag Filter Functionality › should display all notes when no filter is applied 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes (')[22m
+
+
+       9 |   test('should display all notes when no filter is applied', async ({ page }) => {
+      10 |     // Assert that the "Your Notes" count matches the total number of saved notes
+    > 11 |     const notesCount = await page.locator('text=Your Notes (').textContent();
+         |                                                                ^
+      12 |     const count = parseInt(notesCount?.match(/\d+/)?.[0] || '0', 10);
+      13 |
+      14 |     // Ensure all notes are displayed
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:11:64
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-82bb1-s-when-no-filter-is-applied-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-82bb1-s-when-no-filter-is-applied-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-82bb1-s-when-no-filter-is-applied-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-82bb1-s-when-no-filter-is-applied-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-82bb1-s-when-no-filter-is-applied-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/instruction.spec.ts:19:3 › Home Page - Tag Filter Functionality › should filter notes by tag
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:19:3 › Home Page - Tag Filter Functionality › should filter notes by tag 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Filter by tag' })[22m
+
+
+      20 |     // Type a tag into the filter input
+      21 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    > 22 |     await filterInput.fill('work');
+         |                       ^
+      23 |
+      24 |     // Assert that the "Your Notes" count updates correctly
+      25 |     const notesCount = await page.locator('text=Your Notes (').textContent();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:22:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-6c989--should-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-6c989--should-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-6c989--should-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-6c989--should-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-6c989--should-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/instruction.spec.ts:39:3 › Home Page - Tag Filter Functionality › should display "No notes match the filter" when no notes match
+[1A[2K  3) [chromium] › e2e/instruction.spec.ts:39:3 › Home Page - Tag Filter Functionality › should display "No notes match the filter" when no notes match 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textbox', { name: 'Filter by tag' })[22m
+
+
+      40 |     // Type a non-matching tag into the filter input
+      41 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    > 42 |     await filterInput.fill('nonexistenttag');
+         |                       ^
+      43 |
+      44 |     // Assert that the "Your Notes" count is 0
+      45 |     const notesCount = await page.locator('text=Your Notes (0)').isVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:42:23
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-32603--filter-when-no-notes-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-32603--filter-when-no-notes-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-32603--filter-when-no-notes-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-32603--filter-when-no-notes-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-32603--filter-when-no-notes-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/instruction.spec.ts:53:3 › Home Page - Tag Filter Functionality › should display "No notes yet" when there are no saved notes
+[1A[2K  4) [chromium] › e2e/instruction.spec.ts:53:3 › Home Page - Tag Filter Functionality › should display "No notes yet" when there are no saved notes 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeTruthy[2m()[22m
+
+    Received: [31mfalse[39m
+
+      60 |     // Assert that the "Your Notes" count is 0
+      61 |     const notesCount = await page.locator('text=Your Notes (0)').isVisible();
+    > 62 |     expect(notesCount).toBeTruthy();
+         |                        ^
+      63 |
+      64 |     // Assert that the "No notes yet" message is displayed
+      65 |     const noNotesMessage = page.getByText('No notes yet');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:62:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-dc754-en-there-are-no-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-dc754-en-there-are-no-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-dc754-en-there-are-no-saved-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-dc754-en-there-are-no-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/instruction/instruction-Home-Page---Ta-dc754-en-there-are-no-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/instruction.spec.ts:9:3 › Home Page - Tag Filter Functionality › should display all notes when no filter is applied 
+    [chromium] › e2e/instruction.spec.ts:19:3 › Home Page - Tag Filter Functionality › should filter notes by tag 
+    [chromium] › e2e/instruction.spec.ts:39:3 › Home Page - Tag Filter Functionality › should display "No notes match the filter" when no notes match 
+    [chromium] › e2e/instruction.spec.ts:53:3 › Home Page - Tag Filter Functionality › should display "No notes yet" when there are no saved notes 
+
+
+=== STDERR ===
+

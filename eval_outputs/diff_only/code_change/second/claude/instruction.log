@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/instruction.spec.ts:3:1 › displays character count for form body
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:3:1 › displays character count for form body ─────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('textbox')
+    Expected: visible
+    Error: strict mode violation: getByRole('textbox') resolved to 3 elements:
+        1) <input value="" required="" type="text" id="note-title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"/> aka getByRole('textbox', { name: 'Title' })
+        2) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"></textarea> aka getByRole('textbox', { name: 'Body' })
+        3) <input value="" type="text" id="note-tags" placeholder="tag1, tag2, tag3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"/> aka getByRole('textbox', { name: 'Tags (comma-separated)' })
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('textbox')[22m
+
+
+       5 |
+       6 |   const textbox = page.getByRole('textbox');
+    >  7 |   await expect(textbox).toBeVisible();
+         |                         ^
+       8 |
+       9 |   await expect(page.getByText('0 / 5000')).toBeVisible();
+      10 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:7:25
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/claude/artefacts/instruction/instruction-displays-character-count-for-form-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/claude/artefacts/instruction/instruction-displays-character-count-for-form-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/claude/artefacts/instruction/instruction-displays-character-count-for-form-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/claude/artefacts/instruction/instruction-displays-character-count-for-form-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/claude/artefacts/instruction/instruction-displays-character-count-for-form-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:3:1 › displays character count for form body ──────────────
+
+
+=== STDERR ===
+

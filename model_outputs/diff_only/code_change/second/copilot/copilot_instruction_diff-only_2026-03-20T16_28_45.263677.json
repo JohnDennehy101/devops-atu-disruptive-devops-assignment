@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-20T16:28:45.263677",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 5.076,
+            "input_token_count": 116,
+            "output_token_count": 544,
+            "total_token_count": 660,
+            "tokens_per_sec": 107.17
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "Here\u2019s a Playwright test in TypeScript that validates the new functionality added in the `Home.tsx` file. The test will ensure that the character count is displayed correctly and updates dynamically as the user types into the form.\n\n### Playwright Test Code\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest.describe('Character Count Display', () => {\n  test('should display the correct character count as the user types', async ({ page }) => {\n    // Navigate to the Home page\n    await page.goto('/');\n\n    // Locate the input field (assuming it's a textarea or input element)\n    const inputField = await page.getByRole('textbox', { name: /form body/i });\n\n    // Locate the character count display\n    const charCountDisplay = await page.getByText(/\\/ 5000/);\n\n    // Assert that the initial character count is 0 / 5000\n    await expect(charCountDisplay).toHaveText('0 / 5000');\n\n    // Type some text into the input field\n    const inputText = 'Hello, Playwright!';\n    await inputField.fill(inputText);\n\n    // Assert that the character count updates correctly\n    await expect(charCountDisplay).toHaveText(`${inputText.length} / 5000`);\n\n    // Clear the input field\n    await inputField.fill('');\n\n    // Assert that the character count resets to 0 / 5000\n    await expect(charCountDisplay).toHaveText('0 / 5000');\n  });\n});\n```\n\n### Explanation of the Test\n1. **Navigation**: The test navigates to the home page (`/`).\n2. **Locators**: \n   - The `getByRole` locator is used to find the input field (assuming it's a `textbox` role).\n   - The `getByText` locator is used to find the character count display (matching the `/ 5000` text).\n3. **Assertions**:\n   - The test asserts that the initial character count is `0 / 5000`.\n   - After typing text into the input field, it asserts that the character count updates dynamically.\n   - Finally, it clears the input field and asserts that the character count resets to `0 / 5000`.\n\n### Assumptions\n- The input field has an accessible name or label that can be matched with `getByRole`.\n- The character count display always includes `/ 5000` in its text, making it easy to locate with `getByText`.\n\nIf the input field or character count display has specific attributes or labels, you may need to adjust the locators accordingly.",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest.describe('Character Count Display', () => {\n  test('should display the correct character count as the user types', async ({ page }) => {\n    // Navigate to the Home page\n    await page.goto('/');\n\n    // Locate the input field (assuming it's a textarea or input element)\n    const inputField = await page.getByRole('textbox', { name: /form body/i });\n\n    // Locate the character count display\n    const charCountDisplay = await page.getByText(/\\/ 5000/);\n\n    // Assert that the initial character count is 0 / 5000\n    await expect(charCountDisplay).toHaveText('0 / 5000');\n\n    // Type some text into the input field\n    const inputText = 'Hello, Playwright!';\n    await inputField.fill(inputText);\n\n    // Assert that the character count updates correctly\n    await expect(charCountDisplay).toHaveText(`${inputText.length} / 5000`);\n\n    // Clear the input field\n    await inputField.fill('');\n\n    // Assert that the character count resets to 0 / 5000\n    await expect(charCountDisplay).toHaveText('0 / 5000');\n  });\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

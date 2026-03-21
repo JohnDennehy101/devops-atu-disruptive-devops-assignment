@@ -1,0 +1,109 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/instruction.spec.ts:4:3 › Tag filter on Home page › should filter saved notes by tag
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:4:3 › Tag filter on Home page › should filter saved notes by tag 
+
+    SyntaxError: Unexpected end of JSON input
+
+      4 |   test("should filter saved notes by tag", async ({ page }) => {
+      5 |     // Seed two notes via API
+    > 6 |     const note1 = await (
+        |                   ^
+      7 |       await page.request.post("/api/notes", {
+      8 |         data: { title: "Work Note", body: "Body 1", tags: ["work", "urgent"] },
+      9 |       })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:6:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--7c606-d-filter-saved-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--7c606-d-filter-saved-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--7c606-d-filter-saved-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--7c606-d-filter-saved-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/instruction.spec.ts:48:3 › Tag filter on Home page › should show 'No notes match the filter' when filter matches nothing
+[1A[2K  2) [chromium] › e2e/instruction.spec.ts:48:3 › Tag filter on Home page › should show 'No notes match the filter' when filter matches nothing 
+
+    SyntaxError: Unexpected end of JSON input
+
+      48 |   test("should show 'No notes match the filter' when filter matches nothing", async ({ page }) => {
+      49 |     // Seed a note
+    > 50 |     const note = await (
+         |                  ^
+      51 |       await page.request.post("/api/notes", {
+      52 |         data: { title: "Some Note", body: "Body", tags: ["alpha"] },
+      53 |       })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:50:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--3149d-when-filter-matches-nothing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--3149d-when-filter-matches-nothing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--3149d-when-filter-matches-nothing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--3149d-when-filter-matches-nothing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/instruction.spec.ts:78:3 › Tag filter on Home page › should show 'No notes yet' when there are no saved notes
+[1A[2K[4/4] [chromium] › e2e/instruction.spec.ts:89:3 › Tag filter on Home page › should restore full list when filter is cleared
+[1A[2K  3) [chromium] › e2e/instruction.spec.ts:89:3 › Tag filter on Home page › should restore full list when filter is cleared 
+
+    SyntaxError: Unexpected end of JSON input
+
+      88 |
+      89 |   test("should restore full list when filter is cleared", async ({ page }) => {
+    > 90 |     const note1 = await (
+         |                   ^
+      91 |       await page.request.post("/api/notes", {
+      92 |         data: { title: "Note A", body: "A", tags: ["frontend"] },
+      93 |       })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:90:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--6e4f6-list-when-filter-is-cleared-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--6e4f6-list-when-filter-is-cleared-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--6e4f6-list-when-filter-is-cleared-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/claude/artefacts/instruction/instruction-Tag-filter-on--6e4f6-list-when-filter-is-cleared-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/instruction.spec.ts:4:3 › Tag filter on Home page › should filter saved notes by tag 
+    [chromium] › e2e/instruction.spec.ts:48:3 › Tag filter on Home page › should show 'No notes match the filter' when filter matches nothing 
+    [chromium] › e2e/instruction.spec.ts:89:3 › Tag filter on Home page › should restore full list when filter is cleared 
+  1 passed (4.5s)
+
+
+=== STDERR ===
+

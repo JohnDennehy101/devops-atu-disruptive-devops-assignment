@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/few-shot.spec.ts:10:3 › Note Taking App - Tag Filter › displays filtered notes based on tag input
+[1A[2K  1 passed (1.9s)
+
+
+=== STDERR ===
+

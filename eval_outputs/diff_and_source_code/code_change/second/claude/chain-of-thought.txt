@@ -1,0 +1,27 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Body character counter", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+  });
+
+  test("displays character count that updates as user types", async ({ page }) => {
+    const bodyTextarea = page.locator("#note-body");
+    const counter = page.locator("text=/\\d+ \\/ 5000/");
+
+    // Initially shows 0 / 5000
+    await expect(counter).toHaveText("0 / 5000");
+
+    // Type text and verify count updates
+    await bodyTextarea.fill("Hello");
+    await expect(counter).toHaveText("5 / 5000");
+
+    // Type longer text
+    await bodyTextarea.fill("Hello, World!");
+    await expect(counter).toHaveText("13 / 5000");
+
+    // Clear and verify reset
+    await bodyTextarea.fill("");
+    await expect(counter).toHaveText("0 / 5000");
+  });
+});

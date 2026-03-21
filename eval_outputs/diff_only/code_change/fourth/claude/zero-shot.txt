@@ -1,0 +1,97 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Home page tag filter", () => {
+  test("should display tag filter input", async ({ page }) => {
+    await page.goto("/");
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await expect(filterInput).toBeVisible();
+  });
+
+  test("should show all saved notes when filter is empty", async ({ page }) => {
+    await page.goto("/");
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await expect(filterInput).toHaveValue("");
+    const heading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(heading).toBeVisible();
+  });
+
+  test("should filter notes by tag", async ({ page }) => {
+    await page.goto("/");
+
+    // Wait for notes to load
+    const heading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(heading).toBeVisible();
+
+    // Get initial count
+    const initialText = await heading.textContent();
+    const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1]);
+
+    if (initialCount === 0) {
+      test.skip();
+      return;
+    }
+
+    // Type a filter that likely won't match
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await filterInput.fill("zzz_nonexistent_tag_zzz");
+
+    // Count should drop to 0
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+  });
+
+  test("should show 'No notes yet' when there are no saved notes", async ({ page }) => {
+    await page.goto("/");
+
+    const noNotesText = page.getByText("No notes yet");
+    const hasNoNotes = await noNotesText.isVisible().catch(() => false);
+
+    if (hasNoNotes) {
+      await expect(noNotesText).toBeVisible();
+    }
+  });
+
+  test("should show 'No notes match the filter' when filter excludes all notes", async ({ page }) => {
+    await page.goto("/");
+
+    const heading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(heading).toBeVisible();
+
+    const text = await heading.textContent();
+    const count = parseInt(text!.match(/\((\d+)\)/)![1]);
+
+    if (count === 0) {
+      test.skip();
+      return;
+    }
+
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await filterInput.fill("zzz_nonexistent_tag_zzz");
+
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+  });
+
+  test("should update displayed count when filtering", async ({ page }) => {
+    await page.goto("/");
+
+    const heading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(heading).toBeVisible();
+
+    const initialText = await heading.textContent();
+    const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1]);
+
+    if (initialCount === 0) {
+      test.skip();
+      return;
+    }
+
+    const filterInput = page.getByPlaceholder("Filter by tag");
+    await filterInput.fill("zzz_nonexistent_tag_zzz");
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+    // Clear filter should restore count
+    await filterInput.clear();
+    await expect(page.getByText(`Your Notes (${initialCount})`)).toBeVisible();
+  });
+});

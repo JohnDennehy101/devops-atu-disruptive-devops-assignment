@@ -1,0 +1,20 @@
+test('copy button copies note body to clipboard', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('/');
+  
+  // Create a note first
+  await page.fill('#note-title', 'Clipboard Test');
+  await page.fill('#note-body', 'Body to copy');
+  await page.click('button:has-text("Create Note")');
+  
+  // Load the note to see details
+  await page.click('button:has-text("Note #")');
+  await expect(page.getByText('Body to copy')).toBeVisible();
+  
+  // Click Copy button
+  await page.click('button:has-text("Copy")');
+  
+  // Verify clipboard contents
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('Body to copy');
+});

@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body Functionality', () => {
+  test('should copy the note body to clipboard when "Copy" button is clicked', async ({ page }) => {
+    // Step 1: Navigate to the Home page
+    await page.goto('/');
+
+    // Step 2: Ensure there is at least one note available
+    const noteButton = page.locator('button:has-text("Note #1")');
+    await expect(noteButton).toBeVisible();
+
+    // Step 3: Select the first note
+    await noteButton.click();
+
+    // Step 4: Verify the "Copy" button is visible
+    const copyButton = page.locator('button:has-text("Copy")');
+    await expect(copyButton).toBeVisible();
+
+    // Step 5: Mock the clipboard API
+    await page.evaluate(() => {
+      navigator.clipboard.writeText = jest.fn();
+    });
+
+    // Step 6: Click the "Copy" button
+    await copyButton.click();
+
+    // Step 7: Verify the clipboard contains the note body
+    const noteBody = await page.locator('p:has-text("Body:")').textContent();
+    const extractedBody = noteBody?.replace('Body:', '').trim();
+    const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardContent).toBe(extractedBody);
+
+    // Step 8: Test edge case - "Copy" button should not be visible when no note is selected
+    const cancelButton = page.locator('button:has-text("Cancel")');
+    await cancelButton.click();
+    await expect(copyButton).not.toBeVisible();
+  });
+});

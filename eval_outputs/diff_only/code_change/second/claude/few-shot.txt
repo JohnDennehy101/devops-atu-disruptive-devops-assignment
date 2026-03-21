@@ -1,0 +1,6 @@
+test('displays character count for form body', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+  await page.locator('textarea').fill('Hello');
+  await expect(page.getByText('5 / 5000')).toBeVisible();
+});

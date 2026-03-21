@@ -1,0 +1,105 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Copy note body functionality", () => {
+  test("should display a Copy button when a note is selected and copy the note body to clipboard", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+
+    // Mock the API to return a note
+    await page.route("**/api/notes/1", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          id: 1,
+          title: "Test Note",
+          body: "This is the note body to copy",
+          tags: ["test"],
+          archived: false,
+          updated_at: new Date().toISOString(),
+        }),
+      })
+    );
+
+    await page.goto("/");
+
+    // Set a saved note ID in localStorage so the note appears in the sidebar
+    await page.evaluate(() => {
+      localStorage.setItem("noteIds", JSON.stringify([1]));
+    });
+    await page.reload();
+
+    // Click on the note to load it
+    await page.getByRole("button", { name: "Note #1" }).click();
+
+    // Wait for note details to appear
+    await expect(page.getByText("Note Details")).toBeVisible();
+
+    // Verify the Copy button is visible
+    const copyButton = page.getByRole("button", { name: "Copy" });
+    await expect(copyButton).toBeVisible();
+
+    // Click the Copy button
+    await copyButton.click();
+
+    // Verify clipboard contents
+    const clipboardText = await page.evaluate(() =>
+      navigator.clipboard.readText()
+    );
+    expect(clipboardText).toBe("This is the note body to copy");
+  });
+
+  test("should not show Copy button when no note is selected", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    await expect(
+      page.getByRole("button", { name: "Copy" })
+    ).not.toBeVisible();
+  });
+
+  test("should not show Copy button when in editing mode", async ({
+    page,
+  }) => {
+    await page.route("**/api/notes/1", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          id: 1,
+          title: "Test Note",
+          body: "Some body",
+          tags: [],
+          archived: false,
+          updated_at: new Date().toISOString(),
+        }),
+      })
+    );
+
+    await page.goto("/");
+
+    await page.evaluate(() => {
+      localStorage.setItem("noteIds", JSON.stringify([1]));
+    });
+    await page.reload();
+
+    await page.getByRole("button", { name: "Note #1" }).click();
+    await expect(page.getByText("Note Details")).toBeVisible();
+
+    // Click Edit to enter editing mode
+    await page.getByRole("button", { name: "Edit" }).click();
+
+    // Verify the heading changes to "Edit Note"
+    await expect(
+      page.getByRole("heading", { name: "Edit Note" })
+    ).toBeVisible();
+
+    // Copy button should not be visible in edit mode
+    await expect(
+      page.getByRole("button", { name: "Copy" })
+    ).not.toBeVisible();
+  });
+});

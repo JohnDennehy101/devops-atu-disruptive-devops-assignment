@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/zero-shot.spec.ts:10:3 › Note Taking App - Clear All Notes › displays 'Clear all' button when notes exist
+[1A[2K[2/3] [chromium] › e2e/zero-shot.spec.ts:19:3 › Note Taking App - Clear All Notes › clears all notes when 'Clear all' button is clicked
+[1A[2K[3/3] [chromium] › e2e/zero-shot.spec.ts:39:3 › Note Taking App - Clear All Notes › does not display 'Clear all' button when no notes exist
+[1A[2K  3 passed (2.6s)
+
+
+=== STDERR ===
+

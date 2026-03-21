@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Character Count Display', () => {
+  test('should display the correct character count as the user types', async ({ page }) => {
+    // Navigate to the Home page
+    await page.goto('/');
+
+    // Locate the input field (assuming it's a textarea or input element)
+    const inputField = await page.getByRole('textbox', { name: /form body/i });
+
+    // Locate the character count display
+    const charCountDisplay = await page.getByText(/\/ 5000/);
+
+    // Assert that the initial character count is 0 / 5000
+    await expect(charCountDisplay).toHaveText('0 / 5000');
+
+    // Type some text into the input field
+    const inputText = 'Hello, Playwright!';
+    await inputField.fill(inputText);
+
+    // Assert that the character count updates correctly
+    await expect(charCountDisplay).toHaveText(`${inputText.length} / 5000`);
+
+    // Clear the input field
+    await inputField.fill('');
+
+    // Assert that the character count resets to 0 / 5000
+    await expect(charCountDisplay).toHaveText('0 / 5000');
+  });
+});

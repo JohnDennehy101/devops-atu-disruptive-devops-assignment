@@ -1,0 +1,19 @@
+[
+    {
+        "timestamp": "2026-03-19T08:07:27.767630",
+        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 8.019
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Use getByRole or getByText locators.\n2. Ensure assertions are included.\n3. Use TypeScript.\n\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('displays character count for form body', async ({ page }) => {\n  await page.goto('/');\n\n  const textbox = page.getByRole('textbox');\n  await expect(textbox).toBeVisible();\n\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  await textbox.fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n});\n```\n\nThe test verifies:\n- The character counter is visible and starts at `0 / 5000`\n- After typing, the counter updates to reflect the current length (`5 / 5000`)",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('displays character count for form body', async ({ page }) => {\n  await page.goto('/');\n\n  const textbox = page.getByRole('textbox');\n  await expect(textbox).toBeVisible();\n\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  await textbox.fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "note": "Claude Code CLI (claude -p), Max subscription"
+        }
+    }
+]

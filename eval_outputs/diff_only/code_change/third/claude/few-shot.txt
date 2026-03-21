@@ -1,0 +1,9 @@
+test('copy button copies note body to clipboard', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('/');
+  const noteItem = page.locator('.note-item').first();
+  await noteItem.click();
+  await page.locator('button:has-text("Copy")').click();
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBeTruthy();
+});

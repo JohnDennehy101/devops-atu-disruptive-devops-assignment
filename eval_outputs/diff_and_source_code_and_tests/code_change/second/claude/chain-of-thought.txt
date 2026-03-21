@@ -1,0 +1,10 @@
+test("displays character count for body field", async ({ page }) => {
+  const counter = page.locator("text=/\\d+ \\/ 5000/")
+
+  await expect(counter).toBeVisible()
+  await expect(counter).toHaveText("0 / 5000")
+
+  await page.getByLabel("Body").fill("Hello World")
+
+  await expect(counter).toHaveText("11 / 5000")
+})

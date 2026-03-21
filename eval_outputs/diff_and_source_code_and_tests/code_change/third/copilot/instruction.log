@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/instruction.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/instruction.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › can copy the note body to the clipboard
+[1A[2K  1) [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › can copy the note body to the clipboard 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      64 |
+      65 |     // Verify clipboard content
+    > 66 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+         |                                      ^
+      67 |     expect(clipboardText).toBe("This is the body to copy")
+      68 |   })
+      69 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts:66:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/instruction/instruction-Note-Taking-Ap-78b70--note-body-to-the-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/instruction/instruction-Note-Taking-Ap-78b70--note-body-to-the-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/instruction/instruction-Note-Taking-Ap-78b70--note-body-to-the-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/instruction/instruction-Note-Taking-Ap-78b70--note-body-to-the-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/copilot/artefacts/instruction/instruction-Note-Taking-Ap-78b70--note-body-to-the-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/instruction.spec.ts:47:3 › Note Taking App › can copy the note body to the clipboard 
+  3 passed (3.1s)
+
+
+=== STDERR ===
+
