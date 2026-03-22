@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Character Count Display › should show zero character count on initial page load
+[1A[2K[2/2] [chromium] › e2e/chain-of-thought.spec.ts:29:3 › Character Count Display › should update character count in real-time as text is typed into the body
+[1A[2K  2 passed (1.5s)
+
+
+=== STDERR ===
+

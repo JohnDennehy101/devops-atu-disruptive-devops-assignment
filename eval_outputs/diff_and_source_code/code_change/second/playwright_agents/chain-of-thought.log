@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Character Count Display › should display accurate count at and beyond the 5000 character boundary
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:40:3 › Character Count Display › should display initial character count of 0 / 5000 on page load
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:66:3 › Character Count Display › should update character count in real-time as text is typed and deleted
+[1A[2K  3 passed (1.8s)
+
+
+=== STDERR ===
+

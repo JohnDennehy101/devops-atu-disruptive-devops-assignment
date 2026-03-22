@@ -1,0 +1,13 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/seed' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

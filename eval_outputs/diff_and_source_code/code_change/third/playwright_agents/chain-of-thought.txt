@@ -1,0 +1,134 @@
+import { test, expect } from '@playwright/test';
+import seed from '../seed';
+
+test.describe('Copy Note', () => {
+  test.beforeEach(async ({ page }) => {
+    await seed(page);
+  });
+
+  test('should display Copy button in Note Details view when a note is selected', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage so the app starts with no notes
+    await expect(page.getByText('Note Taking App')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // 2. Fill in the Title field with 'My Note', the Body field with 'Hello World', and click the 'Create Note' button
+    await page.getByRole('textbox', { name: 'Title' }).fill('My Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Hello World');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: A button labelled 'Note #1' appears in the sidebar under 'Your Notes (1)'
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // 3. Click the 'Note #1' button in the sidebar to select the note
+    await page.getByRole('button', { name: 'Note #' }).click();
+
+    // expect: The 'Note Details' heading becomes visible
+    await expect(page.getByText('Note Details')).toBeVisible();
+
+    // expect: An 'Edit' button is visible in the Note Details panel
+    await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+
+    // expect: A 'Copy' button is visible in the Note Details panel alongside the Edit button
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/copy-note-copies-body.spec.ts
+// spec: app/specs/copy-note.plan.md
+// seed: app/e2e/seed-generator.spec.ts
+
+
+test.describe('Copy Note', () => {
+  test.beforeEach(async ({ page }) => {
+    await seed(page);
+  });
+
+  test('should copy note body text to clipboard when Copy button is clicked', async ({ page, context }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage so the app starts with no notes
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Clipboard Test', fill in the Body field with 'Body text to be copied', and click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Clipboard Test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body text to be copied');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The note appears in the sidebar as 'Note #1'
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // 3. Click the 'Note #1' button in the sidebar to open its Note Details panel
+    await page.getByRole('button', { name: 'Note #' }).click();
+
+    // expect: The 'Note Details' panel is visible with the body text 'Body: Body text to be copied'
+    await expect(page.getByText('Body: Body text to be copied')).toBeVisible();
+
+    // expect: The 'Copy' button is visible
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+    // 4. Grant clipboard-write permission via the browser context, then click the 'Copy' button
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    // 5. Read the clipboard content using page.evaluate(() => navigator.clipboard.readText())
+    // expect: The clipboard content exactly equals 'Body text to be copied'
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe('Body text to be copied');
+  });
+});
+
+
+// File: app/e2e/generated/copy-note-empty-body.spec.ts
+// spec: app/specs/copy-note.plan.md
+// seed: app/e2e/seed-generator.spec.ts
+// NOTE: The Body field has a `required` attribute in the app. This test documents
+// the intended behaviour (creating a note with an empty body and copying an empty
+// string to the clipboard). It will fail unless the `required` constraint is removed.
+
+
+test.describe('Copy Note', () => {
+  test.beforeEach(async ({ page }) => {
+    await seed(page);
+  });
+
+  test.fixme('should copy an empty string to clipboard when note body is empty', async ({ page, context }) => {
+    // FIXME: The Body field has a `required` attribute in the app. Clicking "Create Note"
+    // without a body triggers browser-level HTML validation, silently preventing form
+    // submission. The note is never created so "Note #1" never appears in the sidebar.
+    // This test documents intended behaviour and will pass only once the `required`
+    // constraint is removed from the Body field.
+    // 1. Navigate to http://localhost:5175 and clear localStorage so the app starts with no notes
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Empty Body Note' but leave the Body field blank, then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Empty Body Note');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The note is created and appears in the sidebar as 'Note #1'
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // expect: The notes count shows 'Your Notes (1)'
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // 3. Click the 'Note #1' button in the sidebar to open its Note Details panel
+    await page.getByRole('button', { name: 'Note #' }).click();
+
+    // expect: The 'Note Details' panel is visible
+    await expect(page.getByText('Note Details')).toBeVisible();
+
+    // expect: The 'Copy' button is visible
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+    // expect: The body field shows 'Body: ' with no content following the label
+    await expect(page.getByText('Body:')).toBeVisible();
+
+    // 4. Grant clipboard-write permission via the browser context, then click the 'Copy' button
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    // 5. Read the clipboard content using page.evaluate(() => navigator.clipboard.readText())
+    // expect: The clipboard content is an empty string ''
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe('');
+  });
+});

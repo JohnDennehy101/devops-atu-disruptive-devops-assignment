@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Filter Note by Tag — Edit View › should restore all notes when filter is cleared in Edit view
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:63:3 › Filter Note by Tag — Edit View › should filter the notes list by a matching tag while in Edit view
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:126:3 › Filter Note by Tag — Edit View › should show 'No notes match the filter' message when tag has no matches in Edit view
+[1A[2K  3 passed (2.3s)
+
+
+=== STDERR ===
+

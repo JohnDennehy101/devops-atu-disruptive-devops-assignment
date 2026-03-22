@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Clear All Notes › should not show Clear all button when no notes exist
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:48:3 › Clear All Notes › should clear all notes when Clear all button is clicked
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:104:3 › Subtitle Display › should display subtitle on page load with no notes
+[1A[2K  3 passed (1.9s)
+
+
+=== STDERR ===
+

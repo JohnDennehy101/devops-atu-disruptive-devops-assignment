@@ -1,0 +1,53 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Character Count Display', () => {
+  test('should show zero character count on initial page load', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage (fresh state)
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The page loads showing the 'Create New Note' form
+    await expect(page.getByRole('heading', { name: 'Create New Note' })).toBeVisible();
+
+    // 2. Locate the character count element displayed beneath the Body textarea
+    // expect: The character count reads '0 / 5000'
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+
+    // expect: The Body textarea is empty
+    await expect(page.getByRole('textbox', { name: 'Body' })).toHaveValue('');
+  });
+});
+
+
+// File: app/e2e/generated/character-count-realtime.spec.ts
+// spec: app/specs/character-count.plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Character Count Display', () => {
+  test('should update character count in real-time as text is typed into the body', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage (fresh state)
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The page loads showing the 'Create New Note' form with character count '0 / 5000'
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+
+    const body = page.getByRole('textbox', { name: 'Body' });
+
+    // 2. Click into the Body textarea and type 'Hello World' (11 characters)
+    await body.click();
+    await body.fill('Hello World');
+
+    // expect: The character count updates to '11 / 5000'
+    await expect(page.getByText('11 / 5000')).toBeVisible();
+
+    // 3. Clear the Body textarea so it is empty
+    await body.fill('');
+
+    // expect: The character count resets back to '0 / 5000'
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+});
