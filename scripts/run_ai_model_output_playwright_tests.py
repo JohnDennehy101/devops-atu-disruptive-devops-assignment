@@ -15,6 +15,7 @@ from shared import (
     ITERATION_MAP,
     MODEL_OUTPUTS_PATH,
     REPO_ROOT_PATH,
+    ensure_unique_imports,
     extract_typescript,
     resolve_file_path_for_code_change,
     start_dev_server,
@@ -93,6 +94,10 @@ def run_playwright(
 
         # Extract test code from the model output
         extracted = extract_typescript(code)
+
+        # Remove duplicate imports from multi file outputs
+        # Issue seen when running agent generated outputs (tended to generated multiple files)
+        extracted = ensure_unique_imports(extracted)
 
         # Write extracted test code to a temp spec file that Playwright will run against
         temp_spec.write_text(extracted)

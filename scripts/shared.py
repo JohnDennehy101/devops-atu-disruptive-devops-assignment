@@ -37,6 +37,39 @@ ITERATION_MAP = {
 }
 
 
+def ensure_unique_imports(code: str) -> str:
+    """
+    As Playwright agents tend to generate multiple test files.
+    This function is needed to ensure that duplicate imports are removed
+    from the combined test file.
+    """
+
+    # Use a set for uniqueness
+    seen_imports = set()
+
+    # List to store final code with duplicates
+    # taken out
+    lines = []
+
+    # Loop over the lines
+    for line in code.splitlines():
+        # Check if it is an import line
+        if re.match(r"^\s*import\s+", line):
+            # If already seen, skip
+            if line.strip() in seen_imports:
+                continue
+
+            # Otherwise, add to seen imports
+            seen_imports.add(line.strip())
+
+        # Append the line to the final code
+        lines.append(line)
+
+    # Join back into single string using new lines separator
+    # and return
+    return "\n".join(lines)
+
+
 def extract_typescript(raw: str) -> str:
     """
     Try extract the Playwright test code from a model response.

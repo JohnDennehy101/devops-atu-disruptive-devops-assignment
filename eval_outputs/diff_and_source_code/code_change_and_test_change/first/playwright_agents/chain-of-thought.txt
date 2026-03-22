@@ -1,0 +1,86 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes Functionality', () => {
+  test('should remove all notes from the sidebar and reset localStorage when Clear all is clicked', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage (seed resets state)
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // 2. Create a first note: fill Title with 'Note One', fill Body with 'Body one', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Note One');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body one');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+
+    // 3. Create a second note: fill Title with 'Note Two', fill Body with 'Body two', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Note Two');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body two');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByRole('heading', { name: 'Your Notes (2)' })).toBeVisible();
+
+    // 4. Click the 'Clear all' button in the 'Your Notes' sidebar panel
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // 5. Verify the sidebar heading now reads 'Your Notes (0)'
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+
+    // 6. Verify the 'No notes yet' placeholder message is visible
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // 7. Verify the 'Clear all' button is no longer visible
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // 8. Evaluate localStorage in the browser and read the 'noteIds' key
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(noteIds === null || noteIds === '[]').toBeTruthy();
+  });
+});
+
+
+// File: app/e2e/generated/clear-all-visibility.spec.ts
+// spec: app/specs/clear-all-and-subtitle.plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Clear All Notes Button Visibility', () => {
+  test('should show Clear all button only when notes exist and hide it when no notes are present', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage (seed resets state)
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // 2. Confirm the 'Clear all' button is NOT visible in the 'Your Notes' sidebar panel
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // 3. Fill in the Title field with 'Visibility Test Note' and the Body field with 'Some content', then click the 'Create Note' button
+    await page.getByRole('textbox', { name: 'Title' }).fill('Visibility Test Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Some content');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+
+    // 4. Verify the 'Clear all' button is now visible in the 'Your Notes' sidebar panel
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/subtitle-display.spec.ts
+// spec: app/specs/clear-all-and-subtitle.plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Subtitle Display', () => {
+  test('should display the subtitle beneath the main heading on page load', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage (seed resets state)
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // 2. Verify the main heading 'Note Taking App' is visible
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+
+    // 3. Verify the subtitle paragraph 'Create and manage notes. Your notes are stored locally.' is visible directly below the main heading
+    await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+  });
+});

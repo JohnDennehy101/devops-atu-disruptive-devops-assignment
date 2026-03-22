@@ -1,0 +1,121 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes', () => {
+  test('should not show Clear all button when no notes exist', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The page loads with an empty notes list showing 'Your Notes (0)' and 'No notes yet'
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // 2. Inspect the notes list header area for the presence of a 'Clear all' button
+    // expect: The 'Clear all' button is NOT present in the DOM when there are zero notes
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // 3. Fill in the Title field with 'Only Note', the Body field with 'Some body', and click the 'Create Note' button
+    await page.getByRole('textbox', { name: 'Title' }).fill('Only Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Some body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The notes list updates to 'Your Notes (1)' and the 'Clear all' button becomes visible
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+    // 4. Click the 'Clear all' button
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // expect: All notes are removed and the list returns to 'Your Notes (0)'
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+
+    // expect: The 'Clear all' button is no longer visible
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // expect: 'No notes yet' message is shown
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/clear-all-notes.spec.ts
+// spec: app/specs/test-plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Clear All Notes', () => {
+  test('should clear all notes when Clear all button is clicked', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The page loads with 'Your Notes (0)' heading and 'No notes yet' message. The 'Clear all' button is NOT visible.
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // 2. Fill in the Title field with 'First Note', the Body field with 'First note body', and click the 'Create Note' button
+    await page.getByRole('textbox', { name: 'Title' }).fill('First Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('First note body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The notes list updates to 'Your Notes (1)' and a 'Note #1' button appears in the list. The 'Clear all' button becomes visible next to the heading.
+    await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+    // 3. Fill in the Title field with 'Second Note', the Body field with 'Second note body', and click the 'Create Note' button
+    await page.getByRole('textbox', { name: 'Title' }).fill('Second Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Second note body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The notes list updates to 'Your Notes (2)' and a 'Note #2' button appears in the list alongside 'Note #1'.
+    await expect(page.getByRole('heading', { name: 'Your Notes (2)' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+
+    // 4. Click the 'Clear all' button
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // expect: All notes are immediately removed without any confirmation dialog
+    // expect: The notes list heading updates to 'Your Notes (0)'
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+
+    // expect: The 'No notes yet' paragraph is displayed
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // expect: The 'Clear all' button is no longer visible
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // expect: Any open note detail panel is dismissed
+    await expect(page.getByRole('button', { name: 'Note #1' })).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).not.toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/subtitle-display.spec.ts
+// spec: app/specs/test-plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Subtitle Display', () => {
+  test('should display subtitle on page load with no notes', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 with a clean localStorage state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The page loads successfully and displays the main heading 'Note Taking App'
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+
+    // 2. Observe the paragraph element below the main heading
+    // expect: The subtitle 'Create and manage notes. Your notes are stored locally.' is visible directly beneath the 'Note Taking App' heading
+    await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+
+    // 3. Verify no other subtitle or description text is present on the page
+    // expect: Only one subtitle paragraph is rendered, containing the exact text 'Create and manage notes. Your notes are stored locally.'
+    await expect(page.locator('p').filter({ hasText: 'Create and manage notes. Your notes are stored locally.' })).toHaveCount(1);
+  });
+});

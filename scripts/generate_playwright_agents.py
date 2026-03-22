@@ -25,6 +25,7 @@ from shared import (
 # Directories used by the Playwright agents pipeline
 SPECS_DIRECTORY = APP_DIR_PATH / "specs"
 TESTS_DIRECTORY = APP_DIR_PATH / "e2e" / "generated"
+AGENT_NODE_MODULES = APP_DIR_PATH / "e2e" / "node_modules"
 
 
 def clean_agent_outputs() -> None:
@@ -44,6 +45,10 @@ def clean_agent_outputs() -> None:
 
     # Recreate it ahead of next run
     TESTS_DIRECTORY.mkdir(exist_ok=True)
+
+    # Remove any node_modules created by agent runs to avoid conflicts
+    if AGENT_NODE_MODULES.exists():
+        shutil.rmtree(AGENT_NODE_MODULES)
 
 
 def run_agent(agent_name: str, prompt: str, timeout: int = 600) -> dict:
@@ -124,7 +129,9 @@ def run_agent(agent_name: str, prompt: str, timeout: int = 600) -> dict:
         # Return dict with as much output as possible
         return {
             "stdout": "".join(stdout_lines).strip(),
-            "stderr": stderr_output.strip() if stderr_output else f"Process timed out after {timeout}s",
+            "stderr": stderr_output.strip()
+            if stderr_output
+            else f"Process timed out after {timeout}s",
             "return_code": -1,
             "duration_s": duration,
             "timed_out": True,
@@ -360,7 +367,7 @@ def main():
     # rather than using the text prompt. The scenario and prompt type dimensions
     # produce identical runs for agents, so only one is needed per change.
 
-    # Using a set to track already seen combinations of iteration and 
+    # Using a set to track already seen combinations of iteration and
     # change typ
     seen_combinations = set()
 
@@ -373,7 +380,7 @@ def main():
         if key not in seen_combinations:
             seen_combinations.add(key)
             unique_prompts.append(p)
-    
+
     # Set prompts to the calculated unique prompts
     prompts = unique_prompts
 

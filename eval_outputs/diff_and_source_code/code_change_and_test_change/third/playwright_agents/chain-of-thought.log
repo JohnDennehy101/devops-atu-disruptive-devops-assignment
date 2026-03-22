@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Copy Note functionality › Copy button is visible in Note Details view when a note is selected
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:49:3 › Copy Note functionality › Copy button copies note body text to clipboard
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:91:3 › Copy Note functionality › Copy button is not visible when note is in Edit mode
+[1A[2K  3 passed (2.1s)
+
+
+=== STDERR ===
+

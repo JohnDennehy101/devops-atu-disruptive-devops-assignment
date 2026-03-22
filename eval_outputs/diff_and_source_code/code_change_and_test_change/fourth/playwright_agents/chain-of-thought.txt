@@ -1,0 +1,147 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Filter Note by Tag in Edit View', () => {
+  test('should filter notes by matching tag while in Edit view', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage to start from a blank state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await expect(page.getByText('Note Taking App')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Work Note', the Body field with 'This is a work note', and the Tags field with 'work, urgent', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Work Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is a work note');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('work, urgent');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // 3. Fill in the Title field with 'Personal Note', the Body field with 'This is a personal note', and the Tags field with 'personal, hobby', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Personal Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is a personal note');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('personal, hobby');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+
+    // 4. Click the 'Note #1' button in the sidebar to open the note details panel
+    await page.getByRole('button', { name: 'Note #1' }).click();
+    await expect(page.getByText('Note Details')).toBeVisible();
+    await expect(page.getByText('Title: Work Note')).toBeVisible();
+    await expect(page.getByText('Tags: work, urgent')).toBeVisible();
+
+    // 5. Click the 'Edit' button in the Note Details panel
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Save' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Delete' })).toBeVisible();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // 6. Type 'work' into the 'Filter by tag' textbox in the sidebar
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('work');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).not.toBeVisible();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+
+    // 7. Clear the 'Filter by tag' textbox (delete all text)
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('');
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/filter-by-tag-edit-view-no-match.spec.ts
+// spec: app/specs/filter-note-by-tag-edit-view.plan.md
+// seed: app/e2e/seed-generator.spec.ts
+
+
+test.describe('Filter Note by Tag in Edit View', () => {
+  test('should show empty state message when filter tag has no matches in Edit view', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage to start from a blank state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await expect(page.getByText('Note Taking App')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Work Note', the Body field with 'Meeting agenda', and the Tags field with 'work, urgent', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Work Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Meeting agenda');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('work, urgent');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // 3. Click 'Note #1' in the sidebar to open its details, then click the 'Edit' button
+    await page.getByRole('button', { name: 'Note #1' }).click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Save' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Delete' })).toBeVisible();
+
+    // 4. Type 'nonexistent' into the 'Filter by tag' textbox in the sidebar
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('nonexistent');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).not.toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/filter-by-tag-edit-view-partial-match.spec.ts
+// spec: app/specs/filter-note-by-tag-edit-view.plan.md
+// seed: app/e2e/seed-generator.spec.ts
+
+
+test.describe('Filter Note by Tag in Edit View', () => {
+  test('should support partial tag matching when filtering in Edit view', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage to start from a blank state
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+    await expect(page.getByText('Note Taking App')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Create two notes: first with Title 'Work Note', Tags 'work, urgent'; second with Title 'Personal Note', Tags 'personal, hobby'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Work Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Work note body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('work, urgent');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Personal Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Personal note body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('personal, hobby');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+
+    // 3. Click 'Note #1' in the sidebar to open its details, then click the 'Edit' button
+    await page.getByRole('button', { name: 'Note #1' }).click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+
+    // 4. Type 'urg' (a partial match for the tag 'urgent') into the 'Filter by tag' textbox
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('urg');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).not.toBeVisible();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+
+    // 5. Clear the filter and type 'hob' (a partial match for 'hobby') into the 'Filter by tag' textbox
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('hob');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Note #1' })).not.toBeVisible();
+    await expect(page.getByText('Edit Note')).toBeVisible();
+  });
+});

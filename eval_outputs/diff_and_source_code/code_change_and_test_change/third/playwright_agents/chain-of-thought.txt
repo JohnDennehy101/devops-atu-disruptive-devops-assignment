@@ -1,0 +1,138 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note functionality', () => {
+  test('Copy button is visible in Note Details view when a note is selected', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175 and clear localStorage, then reload the page
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The app loads showing the 'Create New Note' form and 'Your Notes (0)'
+    await expect(page.getByText('Create New Note')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // 2. Fill in the Title field with 'My Test Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('My Test Note');
+
+    // 3. Fill in the Body field with 'Hello clipboard world'
+    await page.getByRole('textbox', { name: 'Body' }).fill('Hello clipboard world');
+
+    // 4. Click the 'Create Note' button
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: A note button labelled 'Note #1' appears in the sidebar
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+    // expect: The notes count updates to 'Your Notes (1)'
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // 5. Click the 'Note #1' button in the sidebar
+    await page.getByRole('button', { name: 'Note #1' }).click();
+
+    // expect: The Note Details panel is displayed with heading 'Note Details'
+    await expect(page.getByText('Note Details')).toBeVisible();
+    // expect: An 'Edit' button is visible in the Note Details header
+    await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+    // expect: A 'Copy' button is visible in the Note Details header alongside the 'Edit' button
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+    // expect: The note body 'Hello clipboard world' is displayed in the details panel
+    await expect(page.getByText('Body: Hello clipboard world')).toBeVisible();
+  });
+});
+
+
+// File: app/e2e/generated/copy-note-copies-body.spec.ts
+// spec: app/specs/copy-note.plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Copy Note functionality', () => {
+  test('Copy button copies note body text to clipboard', async ({ page, context }) => {
+    // 1. Navigate to http://localhost:5175, clear localStorage, and reload
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The app loads in a fresh state
+    await expect(page.getByText('Create New Note')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Clipboard Test Note' and the Body field with 'Body text to be copied'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Clipboard Test Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body text to be copied');
+
+    // 3. Click the 'Create Note' button
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The note is created and 'Note #1' appears in the sidebar
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // 4. Click the 'Note #1' button in the sidebar to open Note Details
+    await page.getByRole('button', { name: 'Note #1' }).click();
+
+    // expect: The Note Details panel is visible with the 'Copy' button
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+    // 5. Grant clipboard permissions for the browser context, then click the 'Copy' button
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    // expect: The clipboard contains the text 'Body text to be copied'
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe('Body text to be copied');
+  });
+});
+
+
+// File: app/e2e/generated/copy-note-hidden-in-edit-mode.spec.ts
+// spec: app/specs/copy-note.plan.md
+// seed: app/e2e/seed.spec.ts
+
+
+test.describe('Copy Note functionality', () => {
+  test('Copy button is not visible when note is in Edit mode', async ({ page }) => {
+    // 1. Navigate to http://localhost:5175, clear localStorage, and reload
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+
+    // expect: The app loads in a fresh state
+    await expect(page.getByText('Create New Note')).toBeVisible();
+
+    // 2. Fill in the Title field with 'Edit Mode Test' and the Body field with 'Some note body', then click 'Create Note'
+    await page.getByRole('textbox', { name: 'Title' }).fill('Edit Mode Test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Some note body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // expect: The note is created and 'Note #1' appears in the sidebar
+    await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+    // 3. Click the 'Note #1' button in the sidebar
+    await page.getByRole('button', { name: 'Note #1' }).click();
+
+    // expect: The Note Details panel appears with both 'Edit' and 'Copy' buttons visible
+    await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+    // 4. Click the 'Edit' button in the Note Details header
+    await page.getByRole('button', { name: 'Edit' }).click();
+
+    // expect: The view switches to the Edit Note form with heading 'Edit Note'
+    await expect(page.getByText('Edit Note')).toBeVisible();
+    // expect: The 'Save', 'Cancel', and 'Delete' buttons are visible
+    await expect(page.getByRole('button', { name: 'Save' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Cancel' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Delete' })).toBeVisible();
+    // expect: The Note Details panel (and its 'Copy' button) is no longer visible on the page
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+
+    // 5. Click the 'Cancel' button to exit edit mode
+    await page.getByRole('button', { name: 'Cancel' }).click();
+
+    // The app deselects the note on cancel — re-select Note #1 to return to Note Details
+    await page.getByRole('button', { name: 'Note #1' }).click();
+
+    // expect: The view returns to the Note Details panel
+    await expect(page.getByText('Note Details')).toBeVisible();
+    // expect: The 'Copy' button is visible again in the Note Details header
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+});

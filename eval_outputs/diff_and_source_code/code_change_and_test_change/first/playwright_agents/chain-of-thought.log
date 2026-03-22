@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/chain-of-thought.spec.ts:4:3 › Clear All Notes Functionality › should remove all notes from the sidebar and reset localStorage when Clear all is clicked
+[1A[2K[2/3] [chromium] › e2e/chain-of-thought.spec.ts:47:3 › Clear All Notes Button Visibility › should show Clear all button only when notes exist and hide it when no notes are present
+[1A[2K[3/3] [chromium] › e2e/chain-of-thought.spec.ts:74:3 › Subtitle Display › should display the subtitle beneath the main heading on page load
+[1A[2K  3 passed (2.6s)
+
+
+=== STDERR ===
+
