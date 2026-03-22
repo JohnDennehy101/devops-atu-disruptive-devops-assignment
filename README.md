@@ -52,3 +52,17 @@ it only needs to be run once per change type
 ```
 python scripts/generate_playwright_agents.py --filter-prompt zero-shot --filter-scenario diff-and-source-code
 ```
+
+## Analysing test runs
+
+Generate summary
+
+```
+python scripts/generate_summary.py
+```
+
+Generate error summary analysis
+
+```
+python scripts/generate_error_analysis.py
+```

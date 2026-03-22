@@ -1,0 +1,4481 @@
+{
+  "total_failures_analysed": 428,
+  "error_category_summary": [
+    {
+      "category": "missing_import_test",
+      "count": 141,
+      "percentage": 32.9,
+      "description": "Model did not include 'import { test } from @playwright/test', so 'test' is undefined"
+    },
+    {
+      "category": "test_timeout",
+      "count": 74,
+      "percentage": 17.3,
+      "description": "Test execution timed out"
+    },
+    {
+      "category": "syntax_error_other",
+      "count": 55,
+      "percentage": 12.9,
+      "description": "Generated code has a syntax error"
+    },
+    {
+      "category": "element_not_found_timeout",
+      "count": 41,
+      "percentage": 9.6,
+      "description": "Test timed out waiting for an element that was never found on the page"
+    },
+    {
+      "category": "syntax_error_markdown_fences",
+      "count": 31,
+      "percentage": 7.2,
+      "description": "Model left markdown code fences (```) in the generated code"
+    },
+    {
+      "category": "wrong_url_connection_refused",
+      "count": 26,
+      "percentage": 6.1,
+      "description": "Model used wrong URL (e.g., localhost:3000 instead of localhost:5175)"
+    },
+    {
+      "category": "assertion_failure",
+      "count": 17,
+      "percentage": 4.0,
+      "description": "Test ran but an assertion (expect) did not match the actual page state"
+    },
+    {
+      "category": "type_error",
+      "count": 13,
+      "percentage": 3.0,
+      "description": "Runtime TypeError in the generated test code"
+    },
+    {
+      "category": "locator_mismatch",
+      "count": 9,
+      "percentage": 2.1,
+      "description": "Playwright locator resolved to wrong number of elements"
+    },
+    {
+      "category": "module_not_found",
+      "count": 8,
+      "percentage": 1.9,
+      "description": "Model imported a module that does not exist in the project"
+    },
+    {
+      "category": "no_tests_found",
+      "count": 6,
+      "percentage": 1.4,
+      "description": "Playwright could not find any valid tests in the generated file"
+    },
+    {
+      "category": "invalid_playwright_import",
+      "count": 3,
+      "percentage": 0.7,
+      "description": "Model tried to import a non-existent export from @playwright/test (e.g., getByRole)"
+    },
+    {
+      "category": "other",
+      "count": 2,
+      "percentage": 0.5,
+      "description": "Error that does not match any known category"
+    },
+    {
+      "category": "runtime_test_failure",
+      "count": 2,
+      "percentage": 0.5,
+      "description": "Test executed but failed at runtime (general failure not matching other categories)"
+    }
+  ],
+  "by_model": {
+    "DeepSeek-Coder-V2-Lite-Instruct": {
+      "syntax_error_markdown_fences": 17,
+      "syntax_error_other": 13,
+      "wrong_url_connection_refused": 13,
+      "test_timeout": 13,
+      "missing_import_test": 6,
+      "no_tests_found": 4,
+      "type_error": 3,
+      "element_not_found_timeout": 3,
+      "other": 2,
+      "locator_mismatch": 2
+    },
+    "Mistral-Nemo-Instruct-2407": {
+      "missing_import_test": 43,
+      "syntax_error_other": 8,
+      "element_not_found_timeout": 7,
+      "assertion_failure": 5,
+      "type_error": 4,
+      "test_timeout": 4,
+      "module_not_found": 4,
+      "invalid_playwright_import": 3,
+      "locator_mismatch": 2,
+      "wrong_url_connection_refused": 1
+    },
+    "Qwen2.5-Coder-14B-Instruct": {
+      "test_timeout": 20,
+      "missing_import_test": 14,
+      "syntax_error_other": 11,
+      "element_not_found_timeout": 9,
+      "assertion_failure": 6,
+      "module_not_found": 2,
+      "wrong_url_connection_refused": 1,
+      "syntax_error_markdown_fences": 1
+    },
+    "claude-sonnet-4-20250514": {
+      "missing_import_test": 53,
+      "test_timeout": 7,
+      "element_not_found_timeout": 3,
+      "locator_mismatch": 2,
+      "syntax_error_other": 1
+    },
+    "gemma-3-12b-it": {
+      "test_timeout": 15,
+      "syntax_error_markdown_fences": 13,
+      "missing_import_test": 10,
+      "element_not_found_timeout": 10,
+      "syntax_error_other": 10,
+      "wrong_url_connection_refused": 5,
+      "type_error": 5,
+      "assertion_failure": 4,
+      "no_tests_found": 2,
+      "module_not_found": 1,
+      "runtime_test_failure": 1
+    },
+    "gpt-4o": {
+      "missing_import_test": 15,
+      "syntax_error_other": 12,
+      "test_timeout": 12,
+      "wrong_url_connection_refused": 6,
+      "element_not_found_timeout": 5,
+      "assertion_failure": 2,
+      "locator_mismatch": 1,
+      "type_error": 1,
+      "runtime_test_failure": 1
+    },
+    "mcp-claude-sonnet-4-20250514": {
+      "element_not_found_timeout": 4,
+      "test_timeout": 3,
+      "locator_mismatch": 2
+    },
+    "playwright-agents-claude-sonnet-4-20250514": {
+      "module_not_found": 1
+    }
+  },
+  "by_prompt_type": {
+    "chain-of-thought": {
+      "test_timeout": 25,
+      "syntax_error_other": 22,
+      "missing_import_test": 18,
+      "element_not_found_timeout": 17,
+      "wrong_url_connection_refused": 8,
+      "assertion_failure": 6,
+      "no_tests_found": 5,
+      "syntax_error_markdown_fences": 5,
+      "locator_mismatch": 3,
+      "type_error": 2,
+      "module_not_found": 2
+    },
+    "few-shot": {
+      "missing_import_test": 92,
+      "element_not_found_timeout": 8,
+      "syntax_error_other": 8,
+      "test_timeout": 7,
+      "syntax_error_markdown_fences": 3,
+      "type_error": 3,
+      "other": 1
+    },
+    "instruction": {
+      "test_timeout": 20,
+      "syntax_error_other": 13,
+      "missing_import_test": 13,
+      "wrong_url_connection_refused": 11,
+      "assertion_failure": 8,
+      "element_not_found_timeout": 8,
+      "syntax_error_markdown_fences": 6,
+      "type_error": 5,
+      "invalid_playwright_import": 3,
+      "locator_mismatch": 3,
+      "module_not_found": 1,
+      "other": 1,
+      "runtime_test_failure": 1
+    },
+    "zero-shot": {
+      "test_timeout": 22,
+      "missing_import_test": 18,
+      "syntax_error_markdown_fences": 17,
+      "syntax_error_other": 12,
+      "element_not_found_timeout": 8,
+      "wrong_url_connection_refused": 7,
+      "module_not_found": 5,
+      "locator_mismatch": 3,
+      "type_error": 3,
+      "assertion_failure": 3,
+      "no_tests_found": 1,
+      "runtime_test_failure": 1
+    }
+  },
+  "by_scenario": {
+    "diff-and-source-code": {
+      "missing_import_test": 45,
+      "test_timeout": 21,
+      "syntax_error_markdown_fences": 18,
+      "syntax_error_other": 17,
+      "wrong_url_connection_refused": 14,
+      "element_not_found_timeout": 12,
+      "assertion_failure": 7,
+      "type_error": 6,
+      "invalid_playwright_import": 3,
+      "other": 2,
+      "module_not_found": 2,
+      "locator_mismatch": 1,
+      "no_tests_found": 1
+    },
+    "diff-and-source-code-and-tests": {
+      "missing_import_test": 52,
+      "syntax_error_other": 17,
+      "syntax_error_markdown_fences": 10,
+      "assertion_failure": 8,
+      "test_timeout": 8,
+      "element_not_found_timeout": 7,
+      "locator_mismatch": 6,
+      "type_error": 4,
+      "no_tests_found": 1
+    },
+    "diff-only": {
+      "test_timeout": 45,
+      "missing_import_test": 44,
+      "element_not_found_timeout": 22,
+      "syntax_error_other": 21,
+      "wrong_url_connection_refused": 12,
+      "module_not_found": 6,
+      "no_tests_found": 4,
+      "syntax_error_markdown_fences": 3,
+      "type_error": 3,
+      "assertion_failure": 2,
+      "locator_mismatch": 2,
+      "runtime_test_failure": 2
+    }
+  },
+  "by_iteration": {
+    "first": {
+      "missing_import_test": 31,
+      "test_timeout": 14,
+      "syntax_error_other": 11,
+      "wrong_url_connection_refused": 7,
+      "element_not_found_timeout": 5,
+      "syntax_error_markdown_fences": 4,
+      "assertion_failure": 4,
+      "locator_mismatch": 3,
+      "no_tests_found": 2,
+      "invalid_playwright_import": 1,
+      "other": 1,
+      "type_error": 1,
+      "module_not_found": 1
+    },
+    "fourth": {
+      "missing_import_test": 32,
+      "syntax_error_other": 21,
+      "test_timeout": 19,
+      "element_not_found_timeout": 10,
+      "syntax_error_markdown_fences": 8,
+      "wrong_url_connection_refused": 5,
+      "assertion_failure": 5,
+      "type_error": 4,
+      "locator_mismatch": 4,
+      "module_not_found": 2,
+      "invalid_playwright_import": 1,
+      "no_tests_found": 1
+    },
+    "second": {
+      "missing_import_test": 38,
+      "element_not_found_timeout": 20,
+      "syntax_error_other": 14,
+      "syntax_error_markdown_fences": 11,
+      "wrong_url_connection_refused": 9,
+      "test_timeout": 5,
+      "locator_mismatch": 2,
+      "assertion_failure": 1,
+      "module_not_found": 1,
+      "type_error": 1
+    },
+    "third": {
+      "missing_import_test": 40,
+      "test_timeout": 36,
+      "syntax_error_other": 9,
+      "syntax_error_markdown_fences": 8,
+      "type_error": 7,
+      "assertion_failure": 7,
+      "element_not_found_timeout": 6,
+      "wrong_url_connection_refused": 5,
+      "module_not_found": 4,
+      "no_tests_found": 3,
+      "runtime_test_failure": 2,
+      "other": 1,
+      "invalid_playwright_import": 1
+    }
+  },
+  "category_examples": {
+    "missing_import_test": [
+      {
+        "model": "claude-sonnet-4-20250514",
+        "prompt_type": "few-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "ReferenceError: test is not defined"
+      },
+      {
+        "model": "gpt-4o",
+        "prompt_type": "few-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "ReferenceError: test is not defined"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "few-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "ReferenceError: test is not defined"
+      }
+    ],
+    "syntax_error_other": [
+      {
+        "model": "gpt-4o",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (47:31)"
+      },
+      {
+        "model": "Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (16:17)"
+      },
+      {
+        "model": "claude-sonnet-4-20250514",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "SyntaxError: Unexpected end of JSON input"
+      }
+    ],
+    "wrong_url_connection_refused": [
+      {
+        "model": "gpt-4o",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+      },
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+      },
+      {
+        "model": "gpt-4o",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+      }
+    ],
+    "locator_mismatch": [
+      {
+        "model": "gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+      },
+      {
+        "model": "claude-sonnet-4-20250514",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code-and-tests",
+        "iteration": "first",
+        "error_message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Edit' }).or(getByText('Edit')) resolved to 4 elements:"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code-and-tests",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+      }
+    ],
+    "no_tests_found": [
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: No tests found."
+      },
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code-and-tests",
+        "iteration": "third",
+        "error_message": "Error: No tests found."
+      },
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "iteration": "first",
+        "error_message": "ReferenceError: require is not defined in ES module scope, you can use import instead"
+      }
+    ],
+    "test_timeout": [
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "few-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+      },
+      {
+        "model": "gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "Error: locator.textContent: Test timeout of 20000ms exceeded."
+      },
+      {
+        "model": "claude-sonnet-4-20250514",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+      }
+    ],
+    "syntax_error_markdown_fences": [
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+      },
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (53:3)"
+      },
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (19:3)"
+      }
+    ],
+    "element_not_found_timeout": [
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveTitle\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+      },
+      {
+        "model": "Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+      }
+    ],
+    "invalid_playwright_import": [
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+      }
+    ],
+    "assertion_failure": [
+      {
+        "model": "Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+      },
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+      },
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m"
+      }
+    ],
+    "type_error": [
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "TypeError: page.setLocalStorage is not a function"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "TypeError: page.locate is not a function"
+      },
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "fourth",
+        "error_message": "TypeError: Invalid module \"@playwright\" is not a valid package name imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts"
+      }
+    ],
+    "other": [
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "few-shot",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "Error: duplicate test title \"copy note body button functionality with selected note\", first declared in few-shot.spec.ts:21"
+      },
+      {
+        "model": "DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "first",
+        "error_message": "Error: duplicate test title \"can clear all notes from sidebar\", first declared in instruction.spec.ts:3"
+      }
+    ],
+    "module_not_found": [
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/services/api' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-"
+      },
+      {
+        "model": "playwright-agents-claude-sonnet-4-20250514",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-and-source-code",
+        "iteration": "third",
+        "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/seed' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignme"
+      },
+      {
+        "model": "Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "iteration": "first",
+        "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/pages/Home' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assign"
+      }
+    ],
+    "runtime_test_failure": [
+      {
+        "model": "gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "iteration": "third",
+        "error_message": "ReferenceError: jest is not defined"
+      },
+      {
+        "model": "gemma-3-12b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "iteration": "third",
+        "error_message": "ReferenceError: jest is not defined"
+      }
+    ]
+  },
+  "all_failures": [
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (47:31)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "no_tests_found",
+      "error_message": "Error: No tests found."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "invalid_playwright_import",
+      "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveTitle\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (16:17)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: Unexpected end of JSON input"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (34:6)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.textContent: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (53:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (71:21)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (19:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Missing semicolon. (2:3)"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "invalid_playwright_import",
+      "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: page.setLocalStorage is not a function"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (24:17)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Missing initializer in const declaration. (49:14)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (26:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Missing semicolon. (23:4)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (59:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (15:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (15:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: Failed to execute 'querySelectorAll' on 'Document': 'p.text-xs.text-gray-500.dark:text-gray-400.mt-1' is not a valid selector."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (6:30)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (7:17)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (42:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "other",
+      "error_message": "Error: duplicate test title \"copy note body button functionality with selected note\", first declared in few-shot.spec.ts:21"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (73:9)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unterminated template. (16:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/services/api' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "type_error",
+      "error_message": "TypeError: page.locate is not a function"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "invalid_playwright_import",
+      "error_message": "SyntaxError: The requested module '@playwright/test' does not provide an export named 'getByRole'"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (6:30)"
+    },
+    {
+      "model": "playwright-agents-claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/seed' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignme"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (19:17)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "other",
+      "error_message": "Error: duplicate test title \"can clear all notes from sidebar\", first declared in instruction.spec.ts:3"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (13:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (28:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "type_error",
+      "error_message": "TypeError: Invalid module \"@playwright\" is not a valid package name imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: Invalid module \"@playwright\" is not a valid package name imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token, expected \",\" (29:9)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Missing semicolon. (14:58)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (10:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (21:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (27:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "type_error",
+      "error_message": "TypeError: Invalid module \"@playwright\" is not a valid package name imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: Invalid module \"@playwright\" is not a valid package name imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Edit' }).or(getByText('Edit')) resolved to 4 elements:"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (60:9)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeNull\u001b[2m()\u001b[22m"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "type_error",
+      "error_message": "TypeError: expect(...).not is not a function"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (56:51)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (56:18)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (80:43)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: locator.click: Error: strict mode violation: getByRole('button', { name: /Note #\\d+/ }) resolved to 3 elements:"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (52:14)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: page.fill: Unknown engine \"placeholder\" while parsing selector placeholder=\"Filter by tag\""
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (61:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (67:62)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (60:27)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Missing semicolon. (52:117)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unterminated template. (20:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (73:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (69:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Edit' }).or(getByText('Edit')) resolved to 2 elements:"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: locator.fill: value: expected string, got number"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: Failed to execute 'querySelectorAll' on 'Document': 'p.text-xs.text-gray-500.dark:text-gray-400.mt-1' is not a valid selector."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token, expected \",\" (62:20)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: Cannot read properties of undefined (reading 'readText')"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated template. (59:3)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (62:0)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (61:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "type_error",
+      "error_message": "TypeError: Cannot read properties of undefined (reading 'readText')"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "type_error",
+      "error_message": "TypeError: Cannot read properties of undefined (reading 'readText')"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "assertion_failure",
+      "error_message": "Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (56:2)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token (56:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (58:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated string constant. (59:43)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated string constant. (32:32)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (1:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (33:69)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated string constant. (49:40)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (47:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "no_tests_found",
+      "error_message": "Error: No tests found."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (65:3)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-and-source-code-and-tests",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated string constant. (29:20)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "no_tests_found",
+      "error_message": "ReferenceError: require is not defined in ES module scope, you can use import instead"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (7:0)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Invalid left-hand side in prefix operation. (1:2)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unexpected token (19:26)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "assertion_failure",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "assertion_failure",
+      "error_message": "Error: locator.click: Unexpected token \"getByText(\" while parsing css selector \"getByText(\"Your Notes (1)\")\". Did you mean to CSS.escape it?"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/pages/Home' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assign"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unterminated string constant. (29:7)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.textContent: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.textContent: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "no_tests_found",
+      "error_message": "ReferenceError: require is not defined in ES module scope, you can use import instead"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (9:0)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (39:22)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unterminated template. (30:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Invalid left-hand side in prefix operation. (1:2)"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoContainText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/pages/HomePage' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devop"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Missing semicolon. (35:54)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Invalid left-hand side in prefix operation. (1:2)"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.textContent: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/pages/HomePage' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-d"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "locator_mismatch",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (7:0)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token, expected \",\" (12:20)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Invalid left-hand side in prefix operation. (1:2)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/pages/Home' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assign"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveTitle\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: Failed to execute 'querySelectorAll' on 'Document': '.text-xs.text-gray-500.dark:text-gray-400.mt-1' is not a valid selector."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "runtime_test_failure",
+      "error_message": "ReferenceError: jest is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "no_tests_found",
+      "error_message": "ReferenceError: require is not defined in ES module scope, you can use import instead"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Unexpected token (8:0)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "runtime_test_failure",
+      "error_message": "ReferenceError: jest is not defined"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "mcp-claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveTitle\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/pages/Home' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assign"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.click: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "module_not_found",
+      "error_message": "Error: Cannot find module '/Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/pages/HomePage' imported from /Users/johndennehy/Documents/Coding/devops-atu-disruptive-d"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "first",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/chain-of-thought.spec.ts: Unexpected token (23:49)"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "wrong_url_connection_refused",
+      "error_message": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3000/"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Missing semicolon. (2:8)"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "type_error",
+      "error_message": "TypeError: \"\" is not a function"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/zero-shot.spec.ts: Unterminated template. (28:3)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "fourth",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: \"\" is not a function"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "instruction",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "chain-of-thought",
+      "error_category": "element_not_found_timeout",
+      "error_message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "second",
+      "prompt_type": "few-shot",
+      "error_category": "syntax_error_markdown_fences",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/few-shot.spec.ts: Missing semicolon. (1:5)"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "claude-sonnet-4-20250514",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gpt-4o",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "type_error",
+      "error_message": "TypeError: \"\" is not a function"
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "DeepSeek-Coder-V2-Lite-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "no_tests_found",
+      "error_message": "ReferenceError: require is not defined in ES module scope, you can use import instead"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: page.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "syntax_error_other",
+      "error_message": "SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/instruction.spec.ts: Unexpected token (1:0)"
+    },
+    {
+      "model": "gemma-3-12b-it",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Mistral-Nemo-Instruct-2407",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "chain-of-thought",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "few-shot",
+      "error_category": "missing_import_test",
+      "error_message": "ReferenceError: test is not defined"
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "instruction",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    },
+    {
+      "model": "Qwen2.5-Coder-14B-Instruct",
+      "scenario": "diff-only",
+      "change_type": "code_change_and_test_change",
+      "iteration": "third",
+      "prompt_type": "zero-shot",
+      "error_category": "test_timeout",
+      "error_message": "Error: locator.fill: Test timeout of 20000ms exceeded."
+    }
+  ]
+}
