@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should create, edit, delete, and copy a note', async ({ page }) => {
+    // Create a new note
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await page.getByPlaceholder('Title').fill('Test Note');
+    await page.getByPlaceholder('Body').fill('This is a test note body.');
+    await page.getByPlaceholder('tag1, tag2, tag3').fill('test, note');
+    await page.getByRole('button', { name: 'Creating...' }).click();
+    await expect(page.getByText('Note #')).toContainText('Note #');
+
+    // Edit the note
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await page.getByPlaceholder('Title').fill('Edited Note');
+    await page.getByPlaceholder('Body').fill('This is an edited test note body.');
+    await page.getByPlaceholder('tag1, tag2, tag3').fill('edited, test');
+    await page.getByRole('button', { name: 'Saving...' }).click();
+    await expect(page.getByText('Note #')).toContainText('Note #');
+
+    // Delete the note
+    await page.getByRole('button', { name: 'Delete' }).click();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    // Copy the note body
+    await page.getByRole('button', { name: 'Copy' }).click();
+    await expect(page.getByText('This is an edited test note body.')).toBeVisible();
+  });
+});

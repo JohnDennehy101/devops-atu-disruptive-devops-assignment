@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › create and edit note
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › create and edit note ──────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('.space-y-2 button')
+    Expected substring: [32m"[7mTest [27mNote"[39m
+    Received string:    [31m"Note[7m #1[27m"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.space-y-2 button')[22m
+    [2m    9 × locator resolved to <button class="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white">Note #1</button>[22m
+    [2m      - unexpected value "Note #1"[22m
+
+
+      11 |
+      12 |   // Wait for the note to appear in the list
+    > 13 |   await expect(page.locator('.space-y-2 button')).toContainText('Test Note');
+         |                                                   ^
+      14 |
+      15 |   // Edit the note
+      16 |   await page.click('text=Edit');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:13:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-create-and-edit-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-create-and-edit-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-create-and-edit-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-create-and-edit-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-create-and-edit-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › create and edit note ───────────────────────────
+
+
+=== STDERR ===
+

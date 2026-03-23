@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Copy button should be present on the Home page
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Copy button should be present on the Home page 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button').filter({ hasText: 'Copy' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button').filter({ hasText: 'Copy' })[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   const copyButton = page.locator('button', { hasText: 'Copy' });
+    > 6 |   await expect(copyButton).toBeVisible();
+        |                            ^
+      7 | });
+      8 |
+      9 | test('Copy button should not be present on the Note page', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:6:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Copy-but-2ad32-be-present-on-the-Home-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Copy-but-2ad32-be-present-on-the-Home-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Copy-but-2ad32-be-present-on-the-Home-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Copy-but-2ad32-be-present-on-the-Home-page-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Copy-but-2ad32-be-present-on-the-Home-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › Copy button should not be present on the Note page
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Copy button should be present on the Home page 
+  1 passed (7.6s)
+
+
+=== STDERR ===
+

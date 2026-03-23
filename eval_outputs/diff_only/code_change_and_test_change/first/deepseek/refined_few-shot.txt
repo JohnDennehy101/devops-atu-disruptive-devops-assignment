@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('shows notes and clear button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText("Create and manage notes. Your notes are stored locally.")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+  // Add a new note
+  await page.getByLabel("Title").fill("New Note");
+  await page.getByLabel("Body").fill("This is the body of the new note.");
+  await page.getByLabel(/Tags/).fill("tag1");
+  await page.getByRole("button", { name: "Create Note" }).click();
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Clear all notes
+  await page.getByRole("button", { name: "Clear all" }).click();
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});

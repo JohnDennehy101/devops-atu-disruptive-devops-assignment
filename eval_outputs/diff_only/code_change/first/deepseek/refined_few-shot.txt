@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('should display notes and clear all button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByPlaceholder('Title').fill('Note 1');
+  await page.getByPlaceholder('Body').fill('Body of Note 1');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page.getByText('Note 1')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Clear all' }).click();
+  await expect(page.getByText('Note 1')).not.toBeVisible();
+});
+
+### GENERATED PLAYWRIGHT TEST:
+
+test('should display notes and clear all button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByPlaceholder('Title').fill('Note 1');
+  await page.getByPlaceholder('Body').fill('Body of Note 1');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await expect(page.getByText('Note 1')).toBeVisible();
+
+  await page.getByRole('button', { name: 'Clear all' }).click();
+  await expect(page.getByText('Note 1')).not.toBeVisible();
+});

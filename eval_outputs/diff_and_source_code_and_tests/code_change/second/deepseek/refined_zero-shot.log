@@ -1,0 +1,47 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › displays character count in the form
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › displays character count in the form 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"[7m7[27m / 5000"[39m
+    Received: [31m"[7m9[27m / 5000"[39m
+
+      14 |
+      15 |     const characterCount = await page.locator(".text-xs.text-gray-500.dark\\:text-gray-400.mt-1").innerText();
+    > 16 |     expect(characterCount).toBe("7 / 5000");
+         |                            ^
+      17 |   });
+      18 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:16:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-24b30-character-count-in-the-form-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-24b30-character-count-in-the-form-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-24b30-character-count-in-the-form-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-24b30-character-count-in-the-form-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-24b30-character-count-in-the-form-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › displays character count in the form 
+
+
+=== STDERR ===
+

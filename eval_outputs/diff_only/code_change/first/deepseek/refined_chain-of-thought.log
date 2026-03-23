@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Home page functionality
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Home page functionality ───────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoContainText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected substring: [32m"Create and manage notes. Your notes are stored locally."[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toContainText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+       5 |
+       6 |   // Step 2: Verify that the text "Create and manage notes. Your notes are stored locally." is present.
+    >  7 |   await expect(page.locator('p.text-gray-500')).toContainText('Create and manage notes. Your notes are stored locally.');
+         |                                                 ^
+       8 |
+       9 |   // Step 3: Verify that the number of notes is displayed correctly.
+      10 |   const noteCount = await page.locator('h3.text-lg').nth(0).innerText();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:7:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-page-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-page-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-page-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-page-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-page-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Home page functionality ────────────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('should clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Ensure there are no notes initially
+  await expect(page.locator('.space-y-2 > button')).toHaveCount(0);
+
+  // Create a new note
+  await page.fill('input[name="note-title"]', 'Test Note');
+  await page.fill('textarea[name="note-body"]', 'This is a test note.');
+  await page.fill('input[name="note-tags"]', 'test, note');
+  await page.click('button[type="submit"]');
+
+  // Ensure the note is created
+  await expect(page.locator('.space-y-2 > button')).toHaveCount(1);
+
+  // Clear all notes
+  await page.click('button:has-text("Clear all")');
+
+  // Ensure all notes are cleared
+  await expect(page.locator('.space-y-2 > button')).toHaveCount(0);
+});
+```

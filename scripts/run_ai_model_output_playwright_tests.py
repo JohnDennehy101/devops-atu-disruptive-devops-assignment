@@ -35,8 +35,11 @@ def generate_output_directory(record: dict) -> Path:
 
 
 def get_prompt_type(record: dict) -> str:
-    """Extract prompt type"""
-    return record["prompt_type"]
+    """Extract prompt type, prefixing with 'refined_' for refined runs"""
+    prompt_type = record["prompt_type"]
+    if "refined" in Path(record["file"]).name:
+        return f"refined_{prompt_type}"
+    return prompt_type
 
 
 def run_playwright(
@@ -270,6 +273,10 @@ def main() -> None:
         choices=list(ITERATION_MAP.keys()),
         help="Only evaluate this iteration",
     )
+    parser.add_argument(
+        "--filter-file",
+        help="Only include files where the file path contains the passed substring",
+    )
     args = parser.parse_args()
 
     print("Loading model outputs...", end=" ", flush=True)
@@ -290,6 +297,8 @@ def main() -> None:
         records = [r for r in records if r["scenario"] == args.filter_scenario]
     if args.filter_iteration:
         records = [r for r in records if r["iteration"] == args.filter_iteration]
+    if args.filter_file:
+        records = [r for r in records if args.filter_file in r["file"]]
 
     # Ensure breaks if no records match filter critera
     if not records:
@@ -310,7 +319,7 @@ def main() -> None:
             print(f"\nRunning Playwright tests ({len(records)} total)...")
 
             # Open the results file to write to it as we go
-            with open(jsonl_path, "w") as jsonl_file:
+            with open(jsonl_path, "a") as jsonl_file:
                 # Loop over the records
                 for i, r in enumerate(records, 1):
                     # Extract this info for logging and output dir creation purposes
@@ -346,7 +355,7 @@ def main() -> None:
                     # Playwright results for a full analysis after
                     result_row = {
                         "model": r["model_short"],
-                        "prompt_type": r["prompt_type"],
+                        "prompt_type": prompt_type,
                         "scenario": r["scenario"],
                         "iteration": r["iteration"],
                         "change_type": r.get("change_type", ""),

@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Clear all notes
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Clear all notes ───────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"Your Notes (0)"[39m
+    Received: [31m"Note Taking App"[39m
+
+       6 |   // Verify initial number of notes
+       7 |   const initialNotesCount = await page.locator('.text-gray-900').first().innerText();
+    >  8 |   expect(initialNotesCount).toBe('Your Notes (0)');
+         |                             ^
+       9 |
+      10 |   // Click the "Clear all" button
+      11 |   await page.click('button:has-text("Clear all")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:8:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Clear all notes ────────────────────────
+
+
+=== STDERR ===
+

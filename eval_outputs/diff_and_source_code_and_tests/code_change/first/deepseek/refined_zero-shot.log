@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:16:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:26:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:39:3 › Note Taking App › can clear all notes
+[1A[2K  4 passed (2.2s)
+
+
+=== STDERR ===
+

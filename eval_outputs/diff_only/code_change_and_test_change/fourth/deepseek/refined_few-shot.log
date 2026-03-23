@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts: Expecting Unicode escape sequence \uXXXX. (1:49)
+
+> 1 | import { test, expect } from '@playwright/test';\n\ntest(\"filter by tag shows only matching notes\", async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await page.getByLabel(\"Title\").fill(\"Work note\");\n  await page.getByLabel(\"Body\").fill(\"Body one\");\n  await page.getByLabel(/Tags/).fill(\"work, urgent\");\n  await page.getByRole(\"button\", { name: \"Create Note\" }).click();\n\n  await page.getByLabel(\"Title\").fill(\"Personal note\");\n  await page.getByLabel(\"Body\").fill(\"Body two\");\n  await page.getByLabel(/Tags/).fill(\"personal\");\n  await page.getByRole(\"button\", { name: \"Create Note\" }).click();\n\n  await expect(page.getByText(\"Your Notes (2)\")).toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"work\");\n  await expect(page.getByText(\"Your Notes (1)\")).toBeVisible();\n  await expect(page.getByRole(\"button\", { name: \"Note #1\" })).toBeVisible();\n  await expect(page.getByRole(\"button\", { name: \"Note #2\" })).not.toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"nonexistent\");\n  await expect(page.getByText(\"No notes match the filter\")).toBeVisible();\n  await expect(page.getByText(\"Your Notes (0)\")).toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"\");\n  await expect(page.getByText(\"Your Notes (2)\")).toBeVisible();\n});"
+    |                                                  ^
+  2 | }
+  3 | ```
+
+   at refined_few-shot.spec.ts:1
+
+> 1 | import { test, expect } from '@playwright/test';\n\ntest(\"filter by tag shows only matching notes\", async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await page.getByLabel(\"Title\").fill(\"Work note\");\n  await page.getByLabel(\"Body\").fill(\"Body one\");\n  await page.getByLabel(/Tags/).fill(\"work, urgent\");\n  await page.getByRole(\"button\", { name: \"Create Note\" }).click();\n\n  await page.getByLabel(\"Title\").fill(\"Personal note\");\n  await page.getByLabel(\"Body\").fill(\"Body two\");\n  await page.getByLabel(/Tags/).fill(\"personal\");\n  await page.getByRole(\"button\", { name: \"Create Note\" }).click();\n\n  await expect(page.getByText(\"Your Notes (2)\")).toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"work\");\n  await expect(page.getByText(\"Your Notes (1)\")).toBeVisible();\n  await expect(page.getByRole(\"button\", { name: \"Note #1\" })).toBeVisible();\n  await expect(page.getByRole(\"button\", { name: \"Note #2\" })).not.toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"nonexistent\");\n  await expect(page.getByText(\"No notes match the filter\")).toBeVisible();\n  await expect(page.getByText(\"Your Notes (0)\")).toBeVisible();\n\n  await page.getByPlaceholder(\"Filter by tag\").fill(\"\");\n  await expect(page.getByText(\"Your Notes (2)\")).toBeVisible();\n});"
+    |                                                 ^
+  2 | }
+  3 | ```
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

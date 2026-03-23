@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Note Taking App
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Note Taking App ───────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"Your Notes (0)"[39m
+    Received: [31m"Note Taking App"[39m
+
+       6 |   // 1. Verify that the notes count is displayed correctly.
+       7 |   const notesCount = await page.locator('.text-gray-900').first().textContent();
+    >  8 |   expect(notesCount).toBe('Your Notes (0)');
+         |                      ^
+       9 |
+      10 |   // 2. Enter a tag filter and verify that the notes are filtered accordingly.
+      11 |   await page.locator('input[placeholder="Filter by tag"]').fill('test');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:8:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Note Taking App ────────────────────────
+
+
+=== STDERR ===
+

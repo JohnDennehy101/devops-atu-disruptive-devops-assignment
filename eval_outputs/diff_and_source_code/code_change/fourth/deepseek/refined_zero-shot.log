@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts: Unterminated template. (70:3)
+
+  68 |   await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(0);
+  69 | });
+> 70 | ```
+     |    ^
+
+   at refined_zero-shot.spec.ts:70
+
+  68 |   await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(0);
+  69 | });
+> 70 | ```
+     |   ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

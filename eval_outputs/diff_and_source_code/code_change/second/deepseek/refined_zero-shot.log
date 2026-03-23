@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for formBody
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for formBody ──
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"5[7m0[27m00 / 5000"[39m
+    Received: [31m"5[7m1[27m00 / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">5100 / 5000</p>[22m
+    [2m      - unexpected value "5100 / 5000"[22m
+
+
+      21 |   // Try to exceed 5000 characters
+      22 |   await page.fill('textarea[id="note-body"]', 'C'.repeat(5100));
+    > 23 |   await expect(characterCount).toHaveText('5000 / 5000');
+         |                                ^
+      24 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:23:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-should-d-b1bed-haracter-count-for-formBody-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-should-d-b1bed-haracter-count-for-formBody-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-should-d-b1bed-haracter-count-for-formBody-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-should-d-b1bed-haracter-count-for-formBody-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_zero-shot/refined_zero-shot-should-d-b1bed-haracter-count-for-formBody-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for formBody ───
+
+
+=== STDERR ===
+

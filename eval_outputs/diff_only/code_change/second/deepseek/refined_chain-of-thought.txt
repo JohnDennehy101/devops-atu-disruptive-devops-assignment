@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify character count on home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify initial character count
+  const characterCount = await page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  // Enter text into the textarea
+  const textarea = await page.locator('textarea.border.p-2.w-full');
+  await textarea.fill('Hello, world!');
+
+  // Verify updated character count
+  await expect(characterCount).toHaveText('13 / 5000');
+});

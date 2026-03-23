@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:8:3 › Note Taking App › should create, edit, delete, and copy a note
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:8:3 › Note Taking App › should create, edit, delete, and copy a note 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Title')[22m
+
+
+       9 |     // Create a new note
+      10 |     await page.getByRole('button', { name: 'Create Note' }).click();
+    > 11 |     await page.getByPlaceholder('Title').fill('Test Note');
+         |                                          ^
+      12 |     await page.getByPlaceholder('Body').fill('This is a test note body.');
+      13 |     await page.getByPlaceholder('tag1, tag2, tag3').fill('test, note');
+      14 |     await page.getByRole('button', { name: 'Creating...' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:11:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-27a48-edit-delete-and-copy-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-27a48-edit-delete-and-copy-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-27a48-edit-delete-and-copy-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-27a48-edit-delete-and-copy-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-27a48-edit-delete-and-copy-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:8:3 › Note Taking App › should create, edit, delete, and copy a note 
+
+
+=== STDERR ===
+

@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should display character count with updated selector
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should display character count with updated selector 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#input-field')[22m
+
+
+      3 | test('should display character count with updated selector', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.fill('#input-field', 'Hello, world!');
+        |              ^
+      6 |   await expect(page.getByText('13 / 5000')).toBeVisible();
+      7 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-should-di-df0e0-count-with-updated-selector-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-should-di-df0e0-count-with-updated-selector-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-should-di-df0e0-count-with-updated-selector-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-should-di-df0e0-count-with-updated-selector-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/deepseek/artefacts/refined_few-shot/refined_few-shot-should-di-df0e0-count-with-updated-selector-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should display character count with updated selector 
+
+
+=== STDERR ===
+

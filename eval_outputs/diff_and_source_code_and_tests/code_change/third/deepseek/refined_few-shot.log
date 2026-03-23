@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts: Missing semicolon. (60:4)
+
+  58 | })
+  59 |
+> 60 | This test will check if the "Copy" button copies the note body to the clipboard.
+     |     ^
+
+   at refined_few-shot.spec.ts:60
+
+  58 | })
+  59 |
+> 60 | This test will check if the "Copy" button copies the note body to the clipboard.
+     |    ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Verify that the text "Create and manage notes. Your notes are stored locally." is present.
+  await expect(page.locator('p.text-gray-500')).toContainText('Create and manage notes. Your notes are stored locally.');
+
+  // Step 3: Verify that the number of notes is displayed correctly.
+  const noteCount = await page.locator('h3.text-lg').nth(0).innerText();
+  const count = parseInt(noteCount.split(' ')[2], 10); // Assuming the format is "Your Notes (X)"
+  expect(count).toBe(0); // Initially, there should be no notes
+
+  // Step 4: If there are notes, verify the presence of a "Clear all" button.
+  if (count > 0) {
+    await expect(page.locator('button.text-sm.text-red-600')).toContainText('Clear all');
+  }
+
+  // Step 5: Click the "Clear all" button.
+  if (count > 0) {
+    await page.locator('button.text-sm.text-red-600').click();
+  }
+
+  // Step 6: Verify that the notes are cleared by checking the number of notes and ensuring the form is reset.
+  await expect(page.locator('h3.text-lg')).toContainText('Your Notes (0)');
+  await expect(page.locator('input[name="title"]')).toBeEmpty();
+  await expect(page.locator('textarea[name="body"]')).toBeEmpty();
+  await expect(page.locator('input[name="tags"]')).toBeEmpty();
+});

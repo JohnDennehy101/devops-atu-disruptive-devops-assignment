@@ -1,0 +1,70 @@
+import { test, expect } from '@playwright/test';
+
+test('should display notes based on filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Add a note to trigger the notes display
+  await page.getByRole('button', { name: 'Create Note' }).click();
+  await page.getByPlaceholder('Title').fill('Test Note');
+  await page.getByPlaceholder('Body').fill('This is a test note.');
+  await page.getByPlaceholder('Tags (comma-separated)').fill('test, note');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Filter notes by tag
+  await page.getByPlaceholder('Filter by tag').fill('test');
+  await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Note #1' })).toHaveText('Note #1');
+
+  // Remove filter and check if all notes are displayed
+  await page.getByPlaceholder('Filter by tag').fill('');
+  await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Note #1' })).toHaveText('Note #1');
+});
+
+test('should create and edit a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note
+  await page.getByRole('button', { name: 'Create Note' }).click();
+  await page.getByPlaceholder('Title').fill('New Note');
+  await page.getByPlaceholder('Body').fill('This is a new note.');
+  await page.getByPlaceholder('Tags (comma-separated)').fill('new, note');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Edit the note
+  await page.getByRole('button', { name: 'Note #2' }).click();
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page.getByPlaceholder('Title').fill('Edited Note');
+  await page.getByPlaceholder('Body').fill('This is an edited note.');
+  await page.getByPlaceholder('Tags (comma-separated)').fill('edited, note');
+  await page.getByRole('button', { name: 'Save' }).click();
+
+  // Verify the note is edited
+  await expect(page.getByRole('button', { name: 'Note #2' })).toHaveText('Note #2');
+  await expect(page.getByRole('button', { name: 'Note #2' })).toBeVisible();
+  await expect(page.getByText('Edited Note')).toBeVisible();
+  await expect(page.getByText('This is an edited note.')).toBeVisible();
+  await expect(page.getByText('edited, note')).toBeVisible();
+});
+
+test('should delete a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note to delete
+  await page.getByRole('button', { name: 'Create Note' }).click();
+  await page.getByPlaceholder('Title').fill('Note to Delete');
+  await page.getByPlaceholder('Body').fill('This note will be deleted.');
+  await page.getByPlaceholder('Tags (comma-separated)').fill('delete, note');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Delete the note
+  await page.getByRole('button', { name: 'Note #3' }).click();
+  await page.getByRole('button', { name: 'Delete' }).click();
+
+  // Verify the note is deleted
+  await expect(page.getByRole('button', { name: 'Note #3' })).not.toBeVisible();
+  await expect(page.getByText('Note to Delete')).not.toBeVisible();
+  await expect(page.getByText('This note will be deleted.')).not.toBeVisible();
+  await expect(page.getByText('delete, note')).not.toBeVisible();
+});
+```
