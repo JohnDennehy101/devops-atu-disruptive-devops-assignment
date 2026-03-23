@@ -1,0 +1,59 @@
+import { test, expect } from '@playwright/test';
+
+test('displays welcome message', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText("Create and manage notes. Your notes are stored locally.")).toBeVisible();
+});
+
+test('can create and clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Fill in the note details
+  await page.getByLabel("Title").fill("Test Note");
+  await page.getByLabel("Body").fill("This is a test note.");
+  await page.getByLabel(/Tags/).fill("test,tag");
+
+  // Click the "Create Note" button
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Verify that the note is created
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.getByRole("button", { name: "Clear all" }).click();
+
+  // Verify that all notes are cleared
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});
+```
+
+```typescript
+
+test('displays welcome message', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText("Create and manage notes. Your notes are stored locally.")).toBeVisible();
+});
+
+test('can create and clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Fill in the note details
+  await page.getByLabel("Title").fill("Test Note");
+  await page.getByLabel("Body").fill("This is a test note.");
+  await page.getByLabel(/Tags/).fill("test,tag");
+
+  // Click the "Create Note" button
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  // Verify that the note is created
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.getByRole("button", { name: "Clear all" }).click();
+
+  // Verify that all notes are cleared
+  await expect(page.getByText("No notes yet")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+});
+```

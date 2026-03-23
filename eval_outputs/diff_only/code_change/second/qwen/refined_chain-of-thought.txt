@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+
+test('character count updates correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const textarea = await page.locator('textarea');
+  await textarea.fill('Sample text');
+  const charCountText = await page.locator('.text-xs').innerText();
+  expect(charCountText).toBe('11 / 5000');
+});

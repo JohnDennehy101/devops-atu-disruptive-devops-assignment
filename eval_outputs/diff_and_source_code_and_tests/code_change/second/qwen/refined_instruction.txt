@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify character count limit in the note body field', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByLabel('Body').fill('a'.repeat(5000));
+  await expect(page.getByText('5000 / 5000')).toBeVisible();
+  await page.getByLabel('Body').fill('a'.repeat(5001));
+  await expect(page.getByText('5001 / 5000')).toBeVisible();
+  await expect(page.getByText('Error: Character limit exceeded')).toBeVisible();
+});

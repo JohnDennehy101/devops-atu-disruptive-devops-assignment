@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Copy button copies note body to clipboard
+[1A[2K  1 passed (1.3s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the 'Copy' button copies the note body to the clipboard
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the 'Copy' button copies the note body to the clipboard 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Title')[22m
+
+
+      3 | test('Verify that the \'Copy\' button copies the note body to the clipboard', async ({ page }) => {
+      4 |   // Step 1: Create a new note
+    > 5 |   await page.getByLabel("Title").fill("Copy Test Note");
+        |                                  ^
+      6 |   await page.getByLabel("Body").fill("This is the body of the copy test note.");
+      7 |   await page.getByLabel(/Tags/).fill("copy, test");
+      8 |   await page.getByRole("button", { name: "Create Note" }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:5:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_instruction/refined_instruction-Verify-554ed--note-body-to-the-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_instruction/refined_instruction-Verify-554ed--note-body-to-the-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_instruction/refined_instruction-Verify-554ed--note-body-to-the-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_instruction/refined_instruction-Verify-554ed--note-body-to-the-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the 'Copy' button copies the note body to the clipboard 
+
+
+=== STDERR ===
+

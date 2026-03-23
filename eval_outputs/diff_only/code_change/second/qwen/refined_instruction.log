@@ -1,0 +1,54 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › character count display on Home page
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › character count display on Home page ───────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('paragraph', { name: /0 \/ 5000/ })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('paragraph', { name: /0 \/ 5000/ })[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   const charCountDisplay = await page.getByRole('paragraph', { name: /0 \/ 5000/ });
+    > 6 |   await expect(charCountDisplay).toBeVisible();
+        |                                  ^
+      7 |   await expect(charCountDisplay).toHaveText('0 / 5000');
+      8 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:6:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-character-count-display-on-Home-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-character-count-display-on-Home-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-character-count-display-on-Home-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-character-count-display-on-Home-page-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-character-count-display-on-Home-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › character count display on Home page ────────
+
+
+=== STDERR ===
+

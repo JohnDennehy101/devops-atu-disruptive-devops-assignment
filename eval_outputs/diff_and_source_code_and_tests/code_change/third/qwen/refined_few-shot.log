@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/refined_few-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/refined_few-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body ─────────
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      56 |
+      57 |     // Check if the copied text matches the note body
+    > 58 |     const clipboardText = await page.evaluate(async () => {
+         |                                      ^
+      59 |       return await navigator.clipboard.readText()
+      60 |     })
+      61 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:58:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body ──────────
+  3 passed (2.4s)
+
+
+=== STDERR ===
+

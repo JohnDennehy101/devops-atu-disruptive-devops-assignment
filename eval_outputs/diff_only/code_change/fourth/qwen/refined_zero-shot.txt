@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page displays notes and allows filtering by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state
+  const initialNotesCount = await page.textContent('text=Your Notes (0)');
+  expect(initialNotesCount).toBe('Your Notes (0)');
+
+  // Simulate adding a note (assuming there's a way to add notes in the app)
+  // This part is hypothetical and would need to be adjusted based on actual app functionality
+  await page.click('button:text("Add Note")'); // Example selector, adjust as needed
+  await page.fill('input:placeholder("Enter note content")', 'Test Note');
+  await page.click('button:text("Save")');
+
+  // Check notes count after adding a note
+  const notesCountAfterAdding = await page.textContent('text=Your Notes (1)');
+  expect(notesCountAfterAdding).toBe('Your Notes (1)');
+
+  // Filter notes by tag
+  await page.fill('input:placeholder("Filter by tag")', 'test');
+  const filteredNotesCount = await page.textContent('text=Your Notes (1)');
+  expect(filteredNotesCount).toBe('Your Notes (1)');
+
+  // Clear filter
+  await page.fill('input:placeholder("Filter by tag")', '');
+  const notesCountAfterClearingFilter = await page.textContent('text=Your Notes (1)');
+  expect(notesCountAfterClearingFilter).toBe('Your Notes (1)');
+});

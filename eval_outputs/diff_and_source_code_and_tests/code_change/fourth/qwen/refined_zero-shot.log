@@ -1,0 +1,17 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/6] [chromium] › e2e/refined_zero-shot.spec.ts:16:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/6] [chromium] › e2e/refined_zero-shot.spec.ts:26:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/6] [chromium] › e2e/refined_zero-shot.spec.ts:39:3 › Note Taking App › tag filter input is present
+[1A[2K[5/6] [chromium] › e2e/refined_zero-shot.spec.ts:43:3 › Note Taking App › filtering by a tag shows only notes with that tag
+[1A[2K[6/6] [chromium] › e2e/refined_zero-shot.spec.ts:54:3 › Note Taking App › filtering by a non-existent tag shows no notes
+[1A[2K  6 passed (2.8s)
+
+
+=== STDERR ===
+

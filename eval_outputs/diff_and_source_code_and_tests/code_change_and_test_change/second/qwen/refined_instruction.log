@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Unterminated template. (47:3)
+
+  45 |   });
+  46 | });
+> 47 | ```typescript
+     |    ^
+  48 |
+  49 | test.describe("Note Taking App", () => {
+  50 |   test.beforeEach(async ({ page }) => {
+
+   at refined_instruction.spec.ts:47
+
+  45 |   });
+  46 | });
+> 47 | ```typescript
+     |   ^
+  48 |
+  49 | test.describe("Note Taking App", () => {
+  50 |   test.beforeEach(async ({ page }) => {
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

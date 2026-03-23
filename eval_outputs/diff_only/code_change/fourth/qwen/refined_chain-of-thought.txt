@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Check initial note count
+  const initialCount = await page.textContent('h1');
+  expect(initialCount).toContain('Your Notes (');
+
+  // Step 3: Enter a tag into the filter input
+  await page.fill('input[placeholder="Filter by tag"]', 'exampleTag');
+
+  // Step 4: Verify that the note count updates based on the filter
+  const filteredCount = await page.textContent('h1');
+  expect(filteredCount).toContain('Your Notes (');
+
+  // Step 5: Clear the filter input
+  await page.fill('input[placeholder="Filter by tag"]', '');
+
+  // Step 6: Verify that the note count returns to the original count
+  const finalCount = await page.textContent('h1');
+  expect(finalCount).toBe(initialCount);
+});

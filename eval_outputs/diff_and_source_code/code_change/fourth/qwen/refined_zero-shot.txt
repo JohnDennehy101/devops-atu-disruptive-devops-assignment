@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are notes with tags 'work' and 'personal'
+  const tagFilterInput = page.locator('input[placeholder="Filter by tag"]');
+  await tagFilterInput.fill('work');
+  await page.waitForTimeout(1000); // Wait for filtering to occur
+
+  const displayedNotes = page.locator('button');
+  const displayedNoteCount = await displayedNotes.count();
+
+  // Check if only notes with the 'work' tag are displayed
+  for (let i = 0; i < displayedNoteCount; i++) {
+    const noteText = await displayedNotes.nth(i).innerText();
+    expect(noteText).toContain('work');
+  }
+});

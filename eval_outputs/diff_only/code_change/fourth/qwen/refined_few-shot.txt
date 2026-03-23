@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+
+  // Add a note (assuming there's a way to add notes)
+  await page.click('button#add-note'); // Assuming there's an add note button
+  await page.fill('input#note-title', 'Test Note');
+  await page.fill('input#note-tag', 'test');
+  await page.click('button#save-note'); // Assuming there's a save note button
+
+  // Check note appears
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('Test Note')).toBeVisible();
+
+  // Filter by tag
+  await page.fill('input[type="text"][placeholder="Filter by tag"]', 'test');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('Test Note')).toBeVisible();
+
+  // Filter by non-existent tag
+  await page.fill('input[type="text"][placeholder="Filter by tag"]', 'nonexistent');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+});

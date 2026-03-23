@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character count and limits input to 5000 characters', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Locate the textarea and the character count paragraph
+  const textarea = page.locator('textarea');
+  const charCount = page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+
+  // Type more than 5000 characters
+  await textarea.fill('a'.repeat(5001));
+
+  // Check that the character count does not exceed 5000
+  await expect(charCount).toHaveText('5000 / 5000');
+
+  // Check that the textarea value is exactly 5000 characters
+  await expect(textarea).toHaveValue('a'.repeat(5000));
+});

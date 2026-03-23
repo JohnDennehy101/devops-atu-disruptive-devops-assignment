@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Missing semicolon. (28:149)
+
+  26 | ```
+  27 |
+> 28 | This TypeScript code snippet is a Playwright test that verifies the functionality of filtering notes by tag on a web application running locally at `http://localhost:5175`. The test checks the initial state, applies a tag filter, verifies the filtered state, clears the filter, and then checks the state after clearing the filter. All assertions use `expect()` to ensure the expected outcomes are met.
+     |                                                                                                                                                      ^
+
+   at refined_instruction.spec.ts:28
+
+  26 | ```
+  27 |
+> 28 | This TypeScript code snippet is a Playwright test that verifies the functionality of filtering notes by tag on a web application running locally at `http://localhost:5175`. The test checks the initial state, applies a tag filter, verifies the filtered state, clears the filter, and then checks the state after clearing the filter. All assertions use `expect()` to ensure the expected outcomes are met.
+     |                                                                                                                                                     ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

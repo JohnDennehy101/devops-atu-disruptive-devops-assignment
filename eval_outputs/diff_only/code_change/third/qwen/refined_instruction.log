@@ -1,0 +1,29 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Unterminated template. (17:3)
+
+  15 |   expect(clipboardContent).toBe('This is a test note');
+  16 | });
+> 17 | ```
+     |    ^
+  18 |
+  19 | This test script should verify that clicking the "Copy" button copies the selected note's body to the clipboard. The test assumes that there is a note selected and displayed on the page, and that the selected note's body is 'This is a test note'.
+
+   at refined_instruction.spec.ts:17
+
+  15 |   expect(clipboardContent).toBe('This is a test note');
+  16 | });
+> 17 | ```
+     |   ^
+  18 |
+  19 | This test script should verify that clicking the "Copy" button copies the selected note's body to the clipboard. The test assumes that there is a note selected and displayed on the page, and that the selected note's body is 'This is a test note'.
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

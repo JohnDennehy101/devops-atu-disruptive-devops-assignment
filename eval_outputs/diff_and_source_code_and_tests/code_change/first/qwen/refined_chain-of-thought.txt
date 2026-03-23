@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('can clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Check if the "Clear all" button is visible only when there are notes.
+  await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+  // Step 3: Create a note to have at least one note.
+  await page.getByLabel('Title').fill('Test Note');
+  await page.getByLabel('Body').fill('This is a test note.');
+  await page.getByLabel(/Tags/).fill('test, e2e');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Step 4: Check if the "Clear all" button is now visible.
+  await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+  // Step 5: Click the "Clear all" button.
+  await page.getByRole('button', { name: 'Clear all' }).click();
+
+  // Step 6: Verify that the "Your Notes" count is zero.
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+  // Step 7: Verify that the "Clear all" button is not visible anymore.
+  await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+});

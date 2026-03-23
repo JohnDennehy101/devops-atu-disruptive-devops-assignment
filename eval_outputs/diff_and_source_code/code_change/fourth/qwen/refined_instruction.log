@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Missing semicolon. (22:3)
+
+  20 | });
+  21 | ```
+> 22 | ```typescript
+     |    ^
+  23 |
+  24 | test('filter notes by tag', async ({ page }) => {
+  25 |   await page.goto('http://localhost:5175');
+
+   at refined_instruction.spec.ts:22
+
+  20 | });
+  21 | ```
+> 22 | ```typescript
+     |   ^
+  23 |
+  24 | test('filter notes by tag', async ({ page }) => {
+  25 |   await page.goto('http://localhost:5175');
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('create and verify note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Fill in the title, body, and tags fields
+  await page.fill('input[id="note-title"]', 'Test Note');
+  await page.fill('textarea[id="note-body"]', 'This is a test note.');
+  await page.fill('input[id="note-tags"]', 'test, note');
+
+  // Click the "Create Note" button
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to be created and displayed
+  await expect(page.locator('text="Test Note"')).toBeVisible();
+  await expect(page.locator('text="This is a test note."')).toBeVisible();
+  await expect(page.locator('text="test, note"')).toBeVisible();
+
+  // Verify the character count
+  await expect(page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')).toHaveText('25 / 5000');
+});
+```
+
+The generated test should include the new character count feature and ensure it displays correctly after creating a note.

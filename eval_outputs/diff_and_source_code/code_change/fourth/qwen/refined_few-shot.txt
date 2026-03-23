@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are notes with tags 'work' and 'personal'
+  const notesWithWorkTag = ['Note 1', 'Note 2'];
+  const notesWithPersonalTag = ['Note 3'];
+
+  // Filter by 'work' tag
+  await page.fill('#tag-filter', 'work');
+  const displayedNotes = await page.$$eval('.note-button', el => el.map(e => e.textContent));
+  expect(displayedNotes).toEqual(notesWithWorkTag);
+
+  // Filter by 'personal' tag
+  await page.fill('#tag-filter', 'personal');
+  const displayedNotesAfterChange = await page.$$eval('.note-button', el => el.map(e => e.textContent));
+  expect(displayedNotesAfterChange).toEqual(notesWithPersonalTag);
+
+  // Clear filter
+  await page.fill('#tag-filter', '');
+  const allNotes = await page.$$eval('.note-button', el => el.map(e => e.textContent));
+  expect(allNotes).toEqual([...notesWithWorkTag,...notesWithPersonalTag]);
+});

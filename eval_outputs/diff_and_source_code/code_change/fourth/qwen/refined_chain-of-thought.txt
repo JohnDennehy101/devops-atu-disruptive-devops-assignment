@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Check that the initial count of notes is displayed correctly.
+  const initialCount = await page.locator('text=Your Notes (\\d+)').textContent();
+  const initialNumber = parseInt(initialCount.match(/\d+/)[0], 10);
+
+  // Step 3: Enter a tag into the filter input.
+  await page.fill('input[placeholder="Filter by tag"]', 'exampleTag');
+
+  // Step 4: Verify that the displayed notes count updates based on the filter.
+  const filteredCount = await page.locator('text=Your Notes (\\d+)').textContent();
+  const filteredNumber = parseInt(filteredCount.match(/\d+/)[0], 10);
+  expect(filteredNumber).toBeLessThanOrEqual(initialNumber);
+
+  // Step 5: Clear the filter input and verify that the displayed notes count returns to the original count.
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  const finalCount = await page.locator('text=Your Notes (\\d+)').textContent();
+  const finalNumber = parseInt(finalCount.match(/\d+/)[0], 10);
+  expect(finalNumber).toBe(initialNumber);
+});

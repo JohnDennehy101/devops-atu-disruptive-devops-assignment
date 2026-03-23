@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+
+test('character count updates correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const bodyField = await page.locator('#note-body');
+  await bodyField.fill('a'.repeat(5000));
+  const charCount = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  await expect(charCount).toHaveText('5000 / 5000');
+});
