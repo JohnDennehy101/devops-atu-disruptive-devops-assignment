@@ -1,0 +1,57 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body', () => {
+  test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+    await page.goto('http://localhost:5175');
+
+    // Create a note first
+    await page.fill('#note-title', 'Test Note for Copy');
+    await page.fill('#note-body', 'This is the body text to copy');
+    await page.fill('#note-tags', 'test, copy');
+    await page.click('button:has-text("Create Note")');
+
+    // Wait for the note to appear in the sidebar and click it
+    const noteButton = page.locator('button:has-text("Note #")').first();
+    await noteButton.waitFor({ state: 'visible' });
+    await noteButton.click();
+
+    // Wait for Note Details to appear
+    await expect(page.locator('text=Note Details')).toBeVisible();
+    await expect(page.locator('text=This is the body text to copy')).toBeVisible();
+
+    // Click the Copy button
+    await page.click('button:has-text("Copy")');
+
+    // Verify clipboard contents
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe('This is the body text to copy');
+  });
+
+  test('should display Copy button only when a note is selected and not editing', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Copy button should not be visible when no note is selected
+    await expect(page.locator('button:has-text("Copy")')).not.toBeVisible();
+
+    // Create a note
+    await page.fill('#note-title', 'Another Note');
+    await page.fill('#note-body', 'Some body content');
+    await page.click('button:has-text("Create Note")');
+
+    // Select the note
+    const noteButton = page.locator('button:has-text("Note #")').first();
+    await noteButton.waitFor({ state: 'visible' });
+    await noteButton.click();
+
+    // Copy button should now be visible in the Note Details section
+    await expect(page.locator('button:has-text("Copy")')).toBeVisible();
+
+    // Click Edit to enter editing mode
+    await page.click('button:has-text("Edit")');
+
+    // Copy button should not be visible in editing mode
+    await expect(page.locator('button:has-text("Copy")')).not.toBeVisible();
+  });
+});

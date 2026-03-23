@@ -1,0 +1,51 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display subtitle text about local storage', async ({ page }) => {
+    await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+  });
+
+  test('should not show Clear all button when there are no notes', async ({ page }) => {
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeHidden();
+  });
+
+  test('should show Clear all button when notes exist', async ({ page }) => {
+    await page.getByRole('textbox', { name: /title/i }).fill('Test Note');
+    await page.getByRole('textbox', { name: /body/i }).fill('Test Body');
+    await page.getByRole('button', { name: /save/i }).click();
+
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+  });
+
+  test('should clear all notes when Clear all is clicked', async ({ page }) => {
+    await page.getByRole('textbox', { name: /title/i }).fill('Note 1');
+    await page.getByRole('textbox', { name: /body/i }).fill('Body 1');
+    await page.getByRole('button', { name: /save/i }).click();
+
+    await page.getByRole('textbox', { name: /title/i }).fill('Note 2');
+    await page.getByRole('textbox', { name: /body/i }).fill('Body 2');
+    await page.getByRole('button', { name: /save/i }).click();
+
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeHidden();
+  });
+
+  test('should reset form fields after clearing all notes', async ({ page }) => {
+    await page.getByRole('textbox', { name: /title/i }).fill('Test Note');
+    await page.getByRole('textbox', { name: /body/i }).fill('Test Body');
+    await page.getByRole('button', { name: /save/i }).click();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByRole('textbox', { name: /title/i })).toHaveValue('');
+    await expect(page.getByRole('textbox', { name: /body/i })).toHaveValue('');
+  });
+});

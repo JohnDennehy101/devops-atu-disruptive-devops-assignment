@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Body character counter › displays character count that updates as user types
+[1A[2K[2/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:20:3 › Body character counter › resets character count after creating a note
+[1A[2K  2 passed (1.6s)
+
+
+=== STDERR ===
+

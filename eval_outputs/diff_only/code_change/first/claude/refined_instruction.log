@@ -1,0 +1,131 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Clear All Notes › should display subtitle text about local storage
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:12:3 › Clear All Notes › should not show Clear all button when there are no notes
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:16:3 › Clear All Notes › should show Clear all button when notes exist
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:16:3 › Clear All Notes › should show Clear all button when notes exist 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      17 |     await page.getByRole('textbox', { name: /title/i }).fill('Test Note');
+      18 |     await page.getByRole('textbox', { name: /body/i }).fill('Test Body');
+    > 19 |     await page.getByRole('button', { name: /save/i }).click();
+         |                                                       ^
+      20 |
+      21 |     await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+      22 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:19:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--3477c-all-button-when-notes-exist-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--3477c-all-button-when-notes-exist-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--3477c-all-button-when-notes-exist-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--3477c-all-button-when-notes-exist-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--3477c-all-button-when-notes-exist-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:24:3 › Clear All Notes › should clear all notes when Clear all is clicked
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:24:3 › Clear All Notes › should clear all notes when Clear all is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      25 |     await page.getByRole('textbox', { name: /title/i }).fill('Note 1');
+      26 |     await page.getByRole('textbox', { name: /body/i }).fill('Body 1');
+    > 27 |     await page.getByRole('button', { name: /save/i }).click();
+         |                                                       ^
+      28 |
+      29 |     await page.getByRole('textbox', { name: /title/i }).fill('Note 2');
+      30 |     await page.getByRole('textbox', { name: /body/i }).fill('Body 2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:27:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--999c8-s-when-Clear-all-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--999c8-s-when-Clear-all-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--999c8-s-when-Clear-all-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--999c8-s-when-Clear-all-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--999c8-s-when-Clear-all-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:41:3 › Clear All Notes › should reset form fields after clearing all notes
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:41:3 › Clear All Notes › should reset form fields after clearing all notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      42 |     await page.getByRole('textbox', { name: /title/i }).fill('Test Note');
+      43 |     await page.getByRole('textbox', { name: /body/i }).fill('Test Body');
+    > 44 |     await page.getByRole('button', { name: /save/i }).click();
+         |                                                       ^
+      45 |
+      46 |     await page.getByRole('button', { name: 'Clear all' }).click();
+      47 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:44:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--33b5a-ds-after-clearing-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--33b5a-ds-after-clearing-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--33b5a-ds-after-clearing-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--33b5a-ds-after-clearing-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_instruction/refined_instruction-Clear--33b5a-ds-after-clearing-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/refined_instruction.spec.ts:16:3 › Clear All Notes › should show Clear all button when notes exist 
+    [chromium] › e2e/refined_instruction.spec.ts:24:3 › Clear All Notes › should clear all notes when Clear all is clicked 
+    [chromium] › e2e/refined_instruction.spec.ts:41:3 › Clear All Notes › should reset form fields after clearing all notes 
+  2 passed (1.1m)
+
+
+=== STDERR ===
+

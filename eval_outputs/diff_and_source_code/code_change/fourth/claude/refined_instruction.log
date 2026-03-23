@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Tag filter on Your Notes sidebar › should display a "Filter by tag" input field
+[1A[2K[2/7] [chromium] › e2e/refined_instruction.spec.ts:13:3 › Tag filter on Your Notes sidebar › should show all saved notes when tag filter is empty
+[1A[2K[3/7] [chromium] › e2e/refined_instruction.spec.ts:34:3 › Tag filter on Your Notes sidebar › should filter notes by tag when typing in the filter input
+[1A[2K[4/7] [chromium] › e2e/refined_instruction.spec.ts:56:3 › Tag filter on Your Notes sidebar › should show "No notes match the filter" when no tags match
+[1A[2K[5/7] [chromium] › e2e/refined_instruction.spec.ts:74:3 › Tag filter on Your Notes sidebar › should update the displayed note count based on the filter
+[1A[2K[6/7] [chromium] › e2e/refined_instruction.spec.ts:97:3 › Tag filter on Your Notes sidebar › should perform case-insensitive tag filtering
+[1A[2K[7/7] [chromium] › e2e/refined_instruction.spec.ts:113:3 › Tag filter on Your Notes sidebar › should show all notes again after clearing the filter
+[1A[2K  7 passed (3.2s)
+
+
+=== STDERR ===
+

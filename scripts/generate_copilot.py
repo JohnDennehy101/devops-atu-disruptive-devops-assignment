@@ -109,6 +109,11 @@ def main():
         help="GitHub Models model name (default: gpt-4o)",
     )
     parser.add_argument(
+        "--refined",
+        action="store_true",
+        help="Only run prompt-engineered prompts (second pass)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be run without calling the API",
@@ -126,6 +131,10 @@ def main():
         prompts = [p for p in prompts if p["prompt_type"] == args.filter_prompt]
     if args.filter_iteration:
         prompts = [p for p in prompts if p["iteration"] == args.filter_iteration]
+    if args.refined:
+        prompts = [p for p in prompts if p.get("refined")]
+    else:
+        prompts = [p for p in prompts if not p.get("refined")]
 
     if not prompts:
         print("No prompts match the given filters.")
@@ -150,10 +159,15 @@ def main():
         # Make output directory if it doesn't exist
         output_directory.mkdir(parents=True, exist_ok=True)
 
+        # Determine file prefix based on whether first pass or refined prompt (second run)
+        file_prefix = "refined_copilot" if p.get("refined") else "copilot"
+
         # Skip if a copilot output already exists for this prompt combination
         # Needed as rate limit of 50 requests per day on the API
         existing = list(
-            output_directory.glob(f"copilot_{p['prompt_type']}_{p['scenario']}_*.json")
+            output_directory.glob(
+                f"{file_prefix}_{p['prompt_type']}_{p['scenario']}_*.json"
+            )
         )
         if existing:
             print("(already exists, skipping)")
@@ -163,7 +177,7 @@ def main():
         timestamp = datetime.now().isoformat()
 
         # Construct file name with model, prompt type, scenario, and timestamp for uniqueness
-        filename = f"copilot_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
+        filename = f"{prefix}_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
 
         # If dry run, just print what would be outputted, don't call API
         if args.dry_run:

@@ -1,0 +1,67 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page tag filter', () => {
+  test('should display a filter by tag input', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" when filter has no matches', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // First, create a note so the saved list is not empty
+    await page.getByRole('button', { name: /new note/i }).click();
+    const titleInput = page.getByPlaceholder(/title/i);
+    await titleInput.fill('Test Note for Filter');
+    const saveButton = page.getByRole('button', { name: /save/i });
+    await saveButton.click();
+
+    // Navigate back to home if needed
+    await page.goto('http://localhost:5175');
+
+    // Type a non-matching tag in the filter
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('nonexistenttag');
+
+    // Should show "No notes match the filter"
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should show correct note count reflecting filtered results', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Check that "Your Notes" heading is visible with a count
+    await expect(page.getByText(/Your Notes \(\d+\)/)).toBeVisible();
+  });
+
+  test('should filter notes by tag when typing in the filter input', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    // Type a tag filter value
+    await filterInput.fill('test');
+
+    // The heading should update to reflect filtered count
+    await expect(page.getByText(/Your Notes \(\d+\)/)).toBeVisible();
+  });
+
+  test('should show all saved notes when filter is cleared', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+
+    // Apply a filter
+    await filterInput.fill('somefilter');
+    await page.waitForTimeout(300);
+
+    // Clear the filter
+    await filterInput.clear();
+
+    // Notes should be displayed (either notes or "No notes yet" if none saved)
+    const heading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(heading).toBeVisible();
+  });
+});

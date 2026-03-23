@@ -1,0 +1,58 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy note body to clipboard when Copy button is clicked
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy note body to clipboard when Copy button is clicked 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=This is the body text to copy')
+    Expected: visible
+    Error: strict mode violation: locator('text=This is the body text to copy') resolved to 2 elements:
+        1) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">This is the body text to copy</textarea> aka getByRole('textbox', { name: 'Body' })
+        2) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Body: This is the body text')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=This is the body text to copy')[22m
+
+
+      20 |     // Wait for Note Details to appear
+      21 |     await expect(page.locator('text=Note Details')).toBeVisible();
+    > 22 |     await expect(page.locator('text=This is the body text to copy')).toBeVisible();
+         |                                                                      ^
+      23 |
+      24 |     // Click the Copy button
+      25 |     await page.click('button:has-text("Copy")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:22:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-244d7-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-244d7-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-244d7-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-244d7-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-244d7-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:32:3 › Copy Note Body › should display Copy button only when a note is selected and not editing
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy note body to clipboard when Copy button is clicked 
+  1 passed (2.6s)
+
+
+=== STDERR ===
+

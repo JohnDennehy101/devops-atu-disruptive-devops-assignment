@@ -53,6 +53,11 @@ def main():
         help="Filter by iteration",
     )
     parser.add_argument(
+        "--refined",
+        action="store_true",
+        help="Only run prompt-engineered prompts (second pass)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be run without calling Claude",
@@ -73,6 +78,10 @@ def main():
         prompts = [p for p in prompts if p["prompt_type"] == args.filter_prompt]
     if args.filter_iteration:
         prompts = [p for p in prompts if p["iteration"] == args.filter_iteration]
+    if args.refined:
+        prompts = [p for p in prompts if p.get("refined")]
+    else:
+        prompts = [p for p in prompts if not p.get("refined")]
 
     # Validation check if no prompt remain after filtering exit
     if not prompts:
@@ -102,10 +111,13 @@ def main():
         # Timestamp used for unique file name and record
         timestamp = datetime.now().isoformat()
 
+        # Determine file prefix based on whether first pass or refined prompt (second run)
+        file_prefix = "refined_claude" if p.get("refined") else "claude"
+
         # File name defined by prompt type, scenario, and timestamp
         # Same format used for other open-source model outputs
         # for consistency
-        filename = f"claude_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
+        filename = f"{file_prefix}_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
 
         # If dry run, just print what would be done and exit
         if args.dry_run:
@@ -148,7 +160,7 @@ def main():
         status = "ok" if re.search(r"\btest\s*\(", extracted) else "no test() found"
         print(f"({duration}s) [{status}]")
 
-        # Small delay to be respectful of rate limits
+        # Small delay to avoid hitting rate limits
         time.sleep(2)
 
     print("\nDone.")

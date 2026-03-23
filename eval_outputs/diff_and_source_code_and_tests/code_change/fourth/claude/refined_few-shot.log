@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Tag filter on notes sidebar › filter by tag input is visible
+[1A[2K[2/4] [chromium] › e2e/refined_few-shot.spec.ts:14:3 › Tag filter on notes sidebar › filtering by tag shows only matching notes
+[1A[2K[3/4] [chromium] › e2e/refined_few-shot.spec.ts:38:3 › Tag filter on notes sidebar › clearing tag filter shows all notes again
+[1A[2K[4/4] [chromium] › e2e/refined_few-shot.spec.ts:52:3 › Tag filter on notes sidebar › shows 'No notes yet' when there are no saved notes
+[1A[2K  4 passed (2.3s)
+
+
+=== STDERR ===
+

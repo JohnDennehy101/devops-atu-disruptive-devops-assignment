@@ -141,6 +141,9 @@ def collect_unique_prompts() -> list[dict]:
         # Extract iteration from path
         iteration = parts[2]
 
+        # Check if source file is has refined flag for prompt run (second pass)
+        refined = json_file.name.startswith("refined_")
+
         # Loop through entries in the file
         for entry in entries:
             # Extract prompt text
@@ -153,7 +156,7 @@ def collect_unique_prompts() -> list[dict]:
             scenario = entry.get("scenario", "")
 
             # Create key tuple to store in seen set for uniqueness check
-            key = (scenario, change_type, iteration, prompt_type)
+            key = (scenario, change_type, iteration, prompt_type, refined)
 
             # If that tuple already within set, don't add, continue to next iteration
             if key in seen or not prompt_text.strip():
@@ -171,6 +174,7 @@ def collect_unique_prompts() -> list[dict]:
                     "scenario_dir": scenario_directory,
                     "change_type": change_type,
                     "iteration": iteration,
+                    "refined": refined,
                 }
             )
 

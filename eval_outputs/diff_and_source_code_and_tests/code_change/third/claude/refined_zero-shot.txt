@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Copy Note Body", () => {
+  test.beforeEach(async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("copy button appears when a note is selected and copies body to clipboard", async ({ page }) => {
+    await page.getByLabel("Title").fill("Clipboard test");
+    await page.getByLabel("Body").fill("Body text to copy");
+    await page.getByLabel(/Tags/).fill("test");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click();
+    await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible();
+
+    const copyButton = page.getByRole("button", { name: "Copy" });
+    await expect(copyButton).toBeVisible();
+    await copyButton.click();
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe("Body text to copy");
+  });
+});

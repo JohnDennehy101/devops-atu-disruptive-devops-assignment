@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:4:3 › Clear All Notes › should not show Clear all button when there are no notes
+[1A[2K[2/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Clear All Notes › should show Clear all button after creating a note and clear all notes when clicked
+[1A[2K[3/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:44:3 › Clear All Notes › should clear multiple notes at once
+[1A[2K[4/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:68:3 › Clear All Notes › should reset form state when clearing all notes while a note is selected
+[1A[2K  4 passed (2.2s)
+
+
+=== STDERR ===
+

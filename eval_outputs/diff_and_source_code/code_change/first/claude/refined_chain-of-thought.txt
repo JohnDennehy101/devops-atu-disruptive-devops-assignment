@@ -1,0 +1,92 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes', () => {
+  test('should not show Clear all button when there are no notes', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('should show Clear all button after creating a note and clear all notes when clicked', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Verify Clear all is not visible initially
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    // Create a note
+    await page.getByLabel('Title').fill('Test Note');
+    await page.getByLabel('Body').fill('Test body content');
+    await page.getByLabel('Tags').fill('test, playwright');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Wait for note to appear in sidebar
+    await expect(page.getByText(/Note #\d+/)).toBeVisible();
+
+    // Verify Clear all button is now visible
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).toBeVisible();
+
+    // Click Clear all
+    await clearAllButton.click();
+
+    // Verify all notes are removed
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // Verify Clear all button is hidden again
+    await expect(clearAllButton).not.toBeVisible();
+
+    // Verify localStorage is cleared
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(JSON.parse(noteIds!)).toEqual([]);
+  });
+
+  test('should clear multiple notes at once', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Create first note
+    await page.getByLabel('Title').fill('First Note');
+    await page.getByLabel('Body').fill('First body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Create second note
+    await page.getByLabel('Title').fill('Second Note');
+    await page.getByLabel('Body').fill('Second body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Click Clear all
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // Verify everything is cleared
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('should reset form state when clearing all notes while a note is selected', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Create a note
+    await page.getByLabel('Title').fill('Selected Note');
+    await page.getByLabel('Body').fill('Selected body');
+    await page.getByLabel('Tags').fill('selected');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Click on the note to select it
+    await page.getByText(/Note #\d+/).click();
+    await expect(page.getByText('Note Details')).toBeVisible();
+
+    // Click Clear all
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    // Verify note details panel is gone
+    await expect(page.getByText('Note Details')).not.toBeVisible();
+
+    // Verify form is reset to create mode
+    await expect(page.getByText('Create New Note')).toBeVisible();
+    await expect(page.getByLabel('Title')).toHaveValue('');
+    await expect(page.getByLabel('Body')).toHaveValue('');
+  });
+});

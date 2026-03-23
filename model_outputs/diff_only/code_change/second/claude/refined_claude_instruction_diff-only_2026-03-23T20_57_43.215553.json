@@ -1,0 +1,19 @@
+[
+    {
+        "timestamp": "2026-03-23T20:57:43.215553",
+        "model_id": "anthropic/claude-sonnet-4-20250514",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 6.993
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('character counter is displayed below the form body textarea', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const textarea = page.getByRole('textbox', { name: /body/i });\n  await expect(textarea).toBeVisible();\n\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  await textarea.fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n});\n```",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('character counter is displayed below the form body textarea', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const textarea = page.getByRole('textbox', { name: /body/i });\n  await expect(textarea).toBeVisible();\n\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n\n  await textarea.fill('Hello');\n  await expect(page.getByText('5 / 5000')).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "note": "Claude Code CLI (claude -p), Max subscription"
+        }
+    }
+]

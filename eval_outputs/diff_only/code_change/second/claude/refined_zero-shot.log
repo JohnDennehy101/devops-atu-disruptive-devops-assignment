@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Body character counter › should display character counter showing 0 / 5000 initially
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Body character counter › should update character count as user types in the body field
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:18:3 › Body character counter › should update character count for longer text
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:27:3 › Body character counter › should reset character count when body is cleared
+[1A[2K  4 passed (1.9s)
+
+
+=== STDERR ===
+

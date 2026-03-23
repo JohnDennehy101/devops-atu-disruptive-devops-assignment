@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Character counter for note body › displays character counter showing 0 / 5000 when body is empty
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:14:3 › Character counter for note body › updates character counter as user types in body
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Character counter for note body › shows correct count for longer text
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Character counter for note body › counter resets after creating a note
+[1A[2K  4 passed (2.2s)
+
+
+=== STDERR ===
+

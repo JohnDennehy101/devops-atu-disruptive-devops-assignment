@@ -1,0 +1,97 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag filter functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display a "Filter by tag" input field', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('should create notes and filter them by tag', async ({ page }) => {
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+
+    // Create first note with tag "work"
+    await page.getByLabel('Title').fill('Work Note');
+    await page.getByLabel('Body').fill('This is a work note');
+    await page.getByLabel('Tags (comma-separated)').fill('work, important');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Create second note with tag "personal"
+    await page.getByLabel('Title').fill('Personal Note');
+    await page.getByLabel('Body').fill('This is a personal note');
+    await page.getByLabel('Tags (comma-separated)').fill('personal, fun');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Both notes should be visible in the sidebar
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Filter by "work" tag
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('work');
+
+    // Only one note should match
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by "personal" tag
+    await filterInput.fill('personal');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by non-existent tag
+    await filterInput.fill('nonexistent');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+    // Clear filter to show all notes again
+    await filterInput.fill('');
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" when filter has no matches but notes exist', async ({ page }) => {
+    // Create a note first
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+
+    await page.getByLabel('Title').fill('Test Note');
+    await page.getByLabel('Body').fill('Test body');
+    await page.getByLabel('Tags (comma-separated)').fill('alpha');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Apply a filter that won't match
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('zzz');
+
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+
+    await page.getByLabel('Title').fill('Case Test');
+    await page.getByLabel('Body').fill('Body text');
+    await page.getByLabel('Tags (comma-separated)').fill('JavaScript');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('javascript');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await filterInput.fill('JAVASCRIPT');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+});

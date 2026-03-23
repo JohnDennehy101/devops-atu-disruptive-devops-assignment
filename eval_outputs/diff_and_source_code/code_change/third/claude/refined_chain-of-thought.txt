@@ -1,0 +1,43 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy button copies note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const noteTitle = 'Clipboard Test Note';
+  const noteBody = 'This is the body text to be copied.';
+
+  await page.fill('#note-title', noteTitle);
+  await page.fill('#note-body', noteBody);
+  await page.click('button:has-text("Create Note")');
+
+  await page.waitForSelector('text=Your Notes (1)');
+
+  await page.click('button:has-text("Note #")');
+
+  await page.waitForSelector('text=Note Details');
+  await expect(page.locator('text=Note Details')).toBeVisible();
+
+  const clipboardText = await page.evaluate(async (expectedBody) => {
+    let capturedText = '';
+    const originalWriteText = navigator.clipboard.writeText.bind(navigator.clipboard);
+    navigator.clipboard.writeText = async (text: string) => {
+      capturedText = text;
+    };
+    const copyButton = document.querySelector('button:has-text("Copy")') as HTMLElement | null;
+    if (copyButton) copyButton.click();
+    navigator.clipboard.writeText = originalWriteText;
+    return capturedText;
+  }, noteBody);
+
+  // Alternative approach: grant clipboard permissions and use the actual button
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+
+  await page.evaluate(() => {
+    navigator.clipboard.writeText('');
+  });
+
+  await page.click('button:has-text("Copy")');
+
+  const copiedText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copiedText).toBe(noteBody);
+});

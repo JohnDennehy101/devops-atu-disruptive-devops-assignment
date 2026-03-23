@@ -1,0 +1,74 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag filter on Your Notes sidebar', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  async function createNote(page, title: string, body: string, tags: string) {
+    await page.fill('#note-title', title);
+    await page.fill('#note-body', body);
+    await page.fill('#note-tags', tags);
+    await page.click('button:has-text("Create Note")');
+    await page.waitForTimeout(1000);
+  }
+
+  test('should filter notes by tag and show appropriate messages', async ({ page }) => {
+    // Create first note with "work" tag
+    await createNote(page, 'Work Note', 'This is a work note', 'work');
+
+    // Create second note with "personal" tag
+    await createNote(page, 'Personal Note', 'This is a personal note', 'personal');
+
+    // Verify both notes appear in sidebar
+    const sidebar = page.locator('text=Your Notes');
+    await expect(sidebar).toContainText('Your Notes (2)');
+
+    // Get the tag filter input
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    // Filter by "work" — only one note should show
+    await filterInput.fill('work');
+    await expect(sidebar).toContainText('Your Notes (1)');
+
+    // Filter by a tag that matches nothing
+    await filterInput.fill('nonexistent');
+    await expect(sidebar).toContainText('Your Notes (0)');
+    await expect(page.locator('text=No notes match the filter')).toBeVisible();
+
+    // Clear the filter — both notes should reappear
+    await filterInput.fill('');
+    await expect(sidebar).toContainText('Your Notes (2)');
+  });
+
+  test('should show "No notes yet" when there are no notes at all', async ({ page }) => {
+    await expect(page.locator('text=No notes yet')).toBeVisible();
+    await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    await createNote(page, 'Tagged Note', 'Body content', 'JavaScript');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+
+    // Filter with different case
+    await filterInput.fill('javascript');
+    await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+
+    await filterInput.fill('JAVASCRIPT');
+    await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+  });
+
+  test('should support partial tag matching', async ({ page }) => {
+    await createNote(page, 'Dev Note', 'Body', 'development');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+
+    // Partial match should work
+    await filterInput.fill('dev');
+    await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+  });
+});
