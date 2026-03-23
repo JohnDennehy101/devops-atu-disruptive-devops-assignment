@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+  await expect(page.locator('text=No notes yet')).toBeVisible();
+
+  // Add a note
+  await page.locator('text=Add Note').click();
+  await page.locator('input[name="title"]').fill('Test Note');
+  await page.locator('input[name="tags"]').fill('test, test2');
+  await page.locator('button[type="submit"]').click();
+
+  // Check updated state
+  await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+  await expect(page.locator('text=Test Note')).toBeVisible();
+
+  // Filter notes
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+  await expect(page.locator('text=No notes match the filter')).toBeVisible();
+
+  // Clear filter
+  await page.locator('input[placeholder="Filter by tag"]').fill('');
+  await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+  await expect(page.locator('text=Test Note')).toBeVisible();
+});

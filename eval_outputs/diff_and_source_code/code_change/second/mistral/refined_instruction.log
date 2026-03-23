@@ -1,0 +1,47 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Check character count in form body
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Check character count in form body ─────────
+
+    Error: locator.textContent: Unexpected token "getByText(" while parsing css selector "getByText("5000 / 5000")". Did you mean to CSS.escape it?
+    Call log:
+    [2m  - waiting for getByText("5000 / 5000")[22m
+
+
+      3 | test('Check character count in form body', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   const bodyCount = await page.locator('getByText("5000 / 5000")').textContent();
+        |                                                                    ^
+      6 |   expect(bodyCount).toBe('5000 / 5000');
+      7 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:5:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Check-character-count-in-form-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Check-character-count-in-form-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Check-character-count-in-form-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Check-character-count-in-form-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Check-character-count-in-form-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Check character count in form body ──────────
+
+
+=== STDERR ===
+

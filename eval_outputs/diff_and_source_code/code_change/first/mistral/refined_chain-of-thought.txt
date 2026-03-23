@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('Test clear all notes functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify that the "Clear all" button is not visible initially
+  const clearAllButton = page.locator('button:text-is("Clear all")');
+  expect(await clearAllButton.isVisible()).toBe(false);
+
+  // Click on the "Create New Note" button
+  await page.locator('button:text-is("Create New Note")').click();
+
+  // Fill in the form with some data
+  await page.locator('input[name="note-title"]').fill('Test Note');
+  await page.locator('textarea[name="note-body"]').fill('This is a test note.');
+  await page.locator('input[name="note-tags"]').fill('tag1, tag2');
+
+  // Click on the "Create Note" button
+  await page.locator('button:text-is("Create Note")').click();
+
+  // Verify that the "Clear all" button is now visible
+  expect(await clearAllButton.isVisible()).toBe(true);
+
+  // Click on the "Clear all" button
+  await clearAllButton.click();
+
+  // Verify that all notes are cleared from the list
+  const noteList = page.locator('button:has-text("Note #")');
+  expect(await noteList.count()).toBe(0);
+});

@@ -1,0 +1,59 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Tag Filtering", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("can filter notes by tag", async ({ page }) => {
+    // Create notes with different tags
+    await page.getByLabel("Title").fill("Note 1")
+    await page.getByLabel("Body").fill("Body 1")
+    await page.getByLabel(/Tags/).fill("tag1")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByLabel("Title").fill("Note 2")
+    await page.getByLabel("Body").fill("Body 2")
+    await page.getByLabel(/Tags/).fill("tag2")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await page.getByLabel("Title").fill("Note 3")
+    await page.getByLabel("Body").fill("Body 3")
+    await page.getByLabel(/Tags/).fill("tag1, tag2")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Filter by tag1
+    await page.getByPlaceholder("Filter by tag").fill("tag1")
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(2)
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    // Filter by tag2
+    await page.getByPlaceholder("Filter by tag").fill("tag2")
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(2)
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    // Filter by both tags
+    await page.getByPlaceholder("Filter by tag").fill("tag1, tag2")
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1)
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Clear filter
+    await page.getByPlaceholder("Filter by tag").fill("")
+    await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(3)
+    await expect(page.getByText("Your Notes (3)")).toBeVisible()
+  })
+
+  test("shows 'No notes match the filter' when no notes match", async ({ page }) => {
+    // Create a note with a unique tag
+    await page.getByLabel("Title").fill("Unique Note")
+    await page.getByLabel("Body").fill("Unique Body")
+    await page.getByLabel(/Tags/).fill("unique")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    // Filter by a non-existent tag
+    await page.getByPlaceholder("Filter by tag").fill("non-existent")
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+  })
+})

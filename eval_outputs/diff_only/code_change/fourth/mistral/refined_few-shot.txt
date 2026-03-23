@@ -1,0 +1,12 @@
+import { test, expect } from '@playwright/test';
+
+test('displays correct note count and filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (0)');
+  await page.locator('#note-filter').fill('test');
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (0)');
+  await expect(page.locator('.note-count')).toContainText('No notes match the filter');
+  await page.locator('#note-filter').fill('');
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (0)');
+  await expect(page.locator('.note-count')).toContainText('No notes yet');
+});

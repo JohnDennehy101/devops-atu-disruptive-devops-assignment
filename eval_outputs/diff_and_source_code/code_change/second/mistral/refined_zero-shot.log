@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count in form body
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count in form body ──
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[name="note-body"]')[22m
+
+
+      3 | test('should display character count in form body', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.locator('input[name="note-body"]').fill('a'.repeat(5000));
+        |                                                 ^
+      6 |   await page.locator('button[type="submit"]').click();
+      7 |   await expect(page.locator('p.text-xs.text-gray-500')).toHaveText('5000 / 5000');
+      8 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:5:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-64d4f-haracter-count-in-form-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-64d4f-haracter-count-in-form-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-64d4f-haracter-count-in-form-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-64d4f-haracter-count-in-form-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-64d4f-haracter-count-in-form-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count in form body ───
+
+
+=== STDERR ===
+

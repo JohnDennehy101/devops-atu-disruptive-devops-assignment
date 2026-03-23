@@ -1,0 +1,70 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Copy button functionality
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Copy button functionality ──────────────────
+
+    Error: locator.click: Error: strict mode violation: locator('text=Note') resolved to 5 elements:
+        1) <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Note Taking App</h1> aka getByRole('heading', { name: 'Note Taking App' })
+        2) <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Create New Note</h2> aka getByRole('heading', { name: 'Create New Note' })
+        3) <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50">Create Note</button> aka getByRole('button', { name: 'Create Note' })
+        4) <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3> aka getByRole('heading', { name: 'Your Notes (0)' })
+        5) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - waiting for locator('text=Note')[22m
+
+
+       9 |
+      10 |   // Check if the Copy button is present on Note page
+    > 11 |   await page.locator('text=Note').click();
+         |                                   ^
+      12 |   const copyButtonNote = page.locator('button', { hasText: 'Copy' });
+      13 |   expect(copyButtonNote).toBeVisible();
+      14 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:11:35
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('button').filter({ hasText: 'Copy' })
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('button').filter({ hasText: 'Copy' })[22m
+
+
+       6 |   // Check if the Copy button is present on Home page
+       7 |   const copyButtonHome = page.locator('button', { hasText: 'Copy' });
+    >  8 |   expect(copyButtonHome).toBeVisible();
+         |                          ^
+       9 |
+      10 |   // Check if the Copy button is present on Note page
+      11 |   await page.locator('text=Note').click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:8:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Copy-button-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Copy-button-functionality-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Copy-button-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Copy-button-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Copy button functionality ───────────────────
+
+
+=== STDERR ===
+

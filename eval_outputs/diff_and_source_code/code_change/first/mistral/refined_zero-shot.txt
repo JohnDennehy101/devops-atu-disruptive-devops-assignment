@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('should display clear all button when there are saved notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('button').nth(1).click(); // Click on the first note
+  await page.locator('button').nth(2).click(); // Click on the second note
+  await page.locator('button').nth(3).click(); // Click on the third note
+
+  // Check if the "Clear all" button is displayed
+  await expect(page.locator('button >> text="Clear all"')).toBeVisible();
+});

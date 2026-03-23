@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page ────────────────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Add Note')[22m
+
+
+       9 |
+      10 |   // Add a note
+    > 11 |   await page.locator('text=Add Note').click();
+         |                                       ^
+      12 |   await page.locator('input[name="title"]').fill('Test Note');
+      13 |   await page.locator('input[name="tags"]').fill('test, test2');
+      14 |   await page.locator('button[type="submit"]').click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:11:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-Home-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-Home-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-Home-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-Home-page-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-Home-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page ─────────────────────────────────────
+
+
+=== STDERR ===
+

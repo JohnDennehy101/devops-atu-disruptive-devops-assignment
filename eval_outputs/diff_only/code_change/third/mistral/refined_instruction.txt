@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy button functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the Copy button is present on Home page
+  const copyButtonHome = page.locator('button', { hasText: 'Copy' });
+  expect(copyButtonHome).toBeVisible();
+
+  // Check if the Copy button is present on Note page
+  await page.locator('text=Note').click();
+  const copyButtonNote = page.locator('button', { hasText: 'Copy' });
+  expect(copyButtonNote).toBeVisible();
+
+  // Check if the Copy button functionality works
+  await copyButtonNote.click();
+  await page.waitForTimeout(1000); // Wait for clipboard to update
+  expect(navigator.clipboard.readText()).toEqual(selectedNote.body);
+});

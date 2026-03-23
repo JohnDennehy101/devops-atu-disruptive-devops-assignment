@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test';
+
+test('Test tag filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state
+  await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+
+  // Type a tag in the filter input and verify that the displayed notes change accordingly.
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+
+  // Clear the filter input and verify that all saved notes are displayed again.
+  await page.locator('input[placeholder="Filter by tag"]').clear();
+  await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+});

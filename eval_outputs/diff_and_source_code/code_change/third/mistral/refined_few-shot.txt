@@ -1,0 +1,13 @@
+import { test, expect } from '@playwright/test';
+
+test('copy button is functional', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('#note-title').fill('Test Note');
+  await page.locator('#note-body').fill('This is a test note.');
+  await page.locator('button[type="submit"]').click();
+  await page.locator('#note-title').fill('Another Test Note');
+  await page.locator('#note-body').fill('This is another test note.');
+  await page.locator('button[type="submit"]').click();
+  await page.locator('button[aria-label="Copy"]').click();
+  await expect(navigator.clipboard.readText()).toEqual('This is another test note.');
+});

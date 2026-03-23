@@ -1,0 +1,79 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display "No notes yet" when no notes are saved
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display "No notes yet" when no notes are saved 
+
+    TypeError: page.locate is not a function
+
+      3 | test('should display "No notes yet" when no notes are saved', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.locate('button').filter({ hasText: 'Create Note' }).click();
+        |              ^
+      6 |   await page.locate('input').filter({ hasText: 'Title' }).fill('Test Note');
+      7 |   await page.locate('textarea').filter({ hasText: 'Body' }).fill('This is a test note.');
+      8 |   await page.locate('input').filter({ hasText: 'Tags (comma-separated)' }).fill('tag1, tag2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9857e-yet-when-no-notes-are-saved-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9857e-yet-when-no-notes-are-saved-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9857e-yet-when-no-notes-are-saved-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9857e-yet-when-no-notes-are-saved-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9857e-yet-when-no-notes-are-saved-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:14:1 › should display "No notes match the filter" when no notes match the filter
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:14:1 › should display "No notes match the filter" when no notes match the filter 
+
+    TypeError: page.locate is not a function
+
+      14 | test('should display "No notes match the filter" when no notes match the filter', async ({ page }) => {
+      15 |   await page.goto('http://localhost:5175');
+    > 16 |   await page.locate('button').filter({ hasText: 'Create Note' }).click();
+         |              ^
+      17 |   await page.locate('input').filter({ hasText: 'Title' }).fill('Test Note');
+      18 |   await page.locate('textarea').filter({ hasText: 'Body' }).fill('This is a test note.');
+      19 |   await page.locate('input').filter({ hasText: 'Tags (comma-separated)' }).fill('tag1, tag2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:16:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-60eb6-n-no-notes-match-the-filter-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-60eb6-n-no-notes-match-the-filter-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-60eb6-n-no-notes-match-the-filter-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-60eb6-n-no-notes-match-the-filter-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-60eb6-n-no-notes-match-the-filter-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display "No notes yet" when no notes are saved 
+    [chromium] › e2e/refined_zero-shot.spec.ts:14:1 › should display "No notes match the filter" when no notes match the filter 
+
+
+=== STDERR ===
+

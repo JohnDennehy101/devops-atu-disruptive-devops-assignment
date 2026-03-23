@@ -1,0 +1,42 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Note Taking App - Form Validation", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("form shows error when submitting without title", async ({ page }) => {
+    await page.getByLabel("Body").fill("Some body text")
+    await page.getByLabel(/Tags/).fill("demo, e2e")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("Title is required")).toBeVisible()
+  })
+
+  test("form shows error when submitting without body", async ({ page }) => {
+    await page.getByLabel("Title").fill("My first note")
+    await page.getByLabel(/Tags/).fill("demo, e2e")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("Body is required")).toBeVisible()
+  })
+
+  test("form shows error when submitting without tags", async ({ page }) => {
+    await page.getByLabel("Title").fill("My first note")
+    await page.getByLabel("Body").fill("Some body text")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("Tags is required")).toBeVisible()
+  })
+
+  test("form shows character count for body", async ({ page }) => {
+    await page.getByLabel("Title").fill("My first note")
+    await page.getByLabel("Body").fill("a".repeat(5001))
+    await page.getByLabel(/Tags/).fill("demo, e2e")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("5000 / 5000")).toBeVisible()
+  })
+})

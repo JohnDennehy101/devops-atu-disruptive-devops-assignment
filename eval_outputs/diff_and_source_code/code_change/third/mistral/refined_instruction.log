@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Test copy button functionality
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Test copy button functionality ─────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button').filter({ hasText: 'Copy' })[22m
+
+
+      3 | test('Test copy button functionality', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.locator('button', { hasText: 'Copy' }).click();
+        |                                                     ^
+      6 |   await expect(navigator.clipboard.readText()).toBe('Expected note body');
+      7 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:5:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Test-copy-button-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Test-copy-button-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Test-copy-button-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Test-copy-button-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Test-copy-button-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Test copy button functionality ──────────────
+
+
+=== STDERR ===
+

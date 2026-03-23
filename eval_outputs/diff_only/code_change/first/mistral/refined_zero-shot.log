@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display the correct number of notes and clear all button
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display the correct number of notes and clear all button 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('button')
+    Expected: [32m"C[7ml[27mea[7mr all[27m"[39m
+    Received: [31m"C[7mr[27mea[7mte Note[27m"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('button')[22m
+    [2m    9 × locator resolved to <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50">Create Note</button>[22m
+    [2m      - unexpected value "Create Note"[22m
+
+
+       6 |   // Check the initial state of the page
+       7 |   await expect(page.locator('h3')).toHaveText('Your Notes (0)');
+    >  8 |   await expect(page.locator('button')).toHaveText('Clear all');
+         |                                        ^
+       9 |
+      10 |   // Add some notes and check the updated state
+      11 |   await page.locator('input[name="title"]').fill('Test Note');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:8:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-f09ec--notes-and-clear-all-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-f09ec--notes-and-clear-all-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-f09ec--notes-and-clear-all-button-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-f09ec--notes-and-clear-all-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-f09ec--notes-and-clear-all-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display the correct number of notes and clear all button 
+
+
+=== STDERR ===
+

@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('should display "No notes yet" when no notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.locator('text=No notes yet')).toBeVisible();
+});
+
+test('should display "Your Notes (0)" when no notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+});
+
+test('should display "No notes match the filter" when filter is applied and no notes match', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  await expect(page.locator('text=No notes match the filter')).toBeVisible();
+});

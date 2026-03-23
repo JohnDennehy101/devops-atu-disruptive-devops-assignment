@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('should display "No notes yet" when no notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locate('button').filter({ hasText: 'Create Note' }).click();
+  await page.locate('input').filter({ hasText: 'Title' }).fill('Test Note');
+  await page.locate('textarea').filter({ hasText: 'Body' }).fill('This is a test note.');
+  await page.locate('input').filter({ hasText: 'Tags (comma-separated)' }).fill('tag1, tag2');
+  await page.locate('button').filter({ hasText: 'Create Note' }).click();
+  await page.locate('button').filter({ hasText: 'Your Notes (1)' }).click();
+  await expect(page.locate('p')).toHaveText('No notes yet');
+});
+
+test('should display "No notes match the filter" when no notes match the filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locate('button').filter({ hasText: 'Create Note' }).click();
+  await page.locate('input').filter({ hasText: 'Title' }).fill('Test Note');
+  await page.locate('textarea').filter({ hasText: 'Body' }).fill('This is a test note.');
+  await page.locate('input').filter({ hasText: 'Tags (comma-separated)' }).fill('tag1, tag2');
+  await page.locate('button').filter({ hasText: 'Create Note' }).click();
+  await page.locate('input').filter({ hasText: 'Filter by tag' }).fill('nonexistent');
+  await page.locate('button').filter({ hasText: 'Your Notes (1)' }).click();
+  await expect(page.locate('p')).toHaveText('No notes match the filter');
+});

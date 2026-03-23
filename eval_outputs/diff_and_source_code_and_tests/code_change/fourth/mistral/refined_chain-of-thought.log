@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App - Tag Filtering › can filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App - Tag Filtering › can filter notes by tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('button', { name: /Note #\d+/ })
+    Expected: [32m1[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /Note #\d+/ })[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      37 |     // Filter by both tags
+      38 |     await page.getByPlaceholder("Filter by tag").fill("tag1, tag2")
+    > 39 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1)
+         |                                                                   ^
+      40 |     await expect(page.getByText("Your Notes (1)")).toBeVisible()
+      41 |
+      42 |     // Clear filter
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:39:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-a1525-ing-can-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-a1525-ing-can-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-a1525-ing-can-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-a1525-ing-can-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-a1525-ing-can-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:48:3 › Note Taking App - Tag Filtering › shows 'No notes match the filter' when no notes match
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App - Tag Filtering › can filter notes by tag 
+  1 passed (7.6s)
+
+
+=== STDERR ===
+
