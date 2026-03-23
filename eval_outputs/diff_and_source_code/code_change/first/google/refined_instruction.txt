@@ -1,0 +1,21 @@
+test.describe("Home Page", () => {
+  test("should display the correct number of notes", async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    const noteCountElement = await page.getByRole("heading", { name: "Your Notes" });
+    const noteCountText = await noteCountElement.textContent();
+    const noteCount = parseInt(noteCountText.split("(")[1].split(")")[0], 10);
+    expect(noteCount).toBe(0);
+  });
+
+  test("should display the 'Clear all' button when there are notes", async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    const clearAllButton = await page.getByRole("button", { name: "Clear all" });
+    expect(clearAllButton).toBeVisible();
+  });
+
+  test("should display 'No notes yet' when there are no notes", async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    const noNotesElement = await page.getByText("No notes yet");
+    expect(noNotesElement).toBeVisible();
+  });
+});

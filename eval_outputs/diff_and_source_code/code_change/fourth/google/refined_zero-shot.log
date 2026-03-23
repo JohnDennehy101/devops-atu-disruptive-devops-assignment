@@ -1,0 +1,85 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check your notes count
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check your notes count ───────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Your Notes (\\d+)')[22m
+
+
+      3 | test('check your notes count', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   const yourNotesCount = await page.locator('text=Your Notes (\\d+)').textContent();
+        |                                                                       ^
+      6 |   expect(yourNotesCount).not().toBe('Your Notes (0)');
+      7 | });
+      8 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:5:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-your-notes-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-your-notes-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-your-notes-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-your-notes-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-your-notes-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › check filter by tag
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › check filter by tag ──────────────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0[39m
+    Received:   [31m0[39m
+
+      12 |   await page.locator('input[placeholder="Filter by tag"]').fill('test');
+      13 |   const filteredNoteCount = await page.locator('text=Note #\\d+').count();
+    > 14 |   expect(filteredNoteCount).toBeLessThan(initialNoteCount);
+         |                             ^
+      15 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:14:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-filter-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-filter-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-filter-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-filter-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_zero-shot/refined_zero-shot-check-filter-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check your notes count ────────────────────────
+    [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › check filter by tag ───────────────────────────
+
+
+=== STDERR ===
+

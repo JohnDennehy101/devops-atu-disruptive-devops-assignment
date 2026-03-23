@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there's a note with an ID that exists.  Adjust as needed.
+  await page.click('[data-testid="note-1"]');
+
+  // Wait for the note details to load
+  await page.waitForSelector('[data-testid="note-title"]');
+
+  // Click the "Copy" button
+  await page.click('[data-testid="copy-button"]');
+
+  // Get the copied text from the clipboard
+  const copiedText = await page.evaluate(() => navigator.clipboard.readText());
+
+  // Get the note body from the page
+  const noteBody = await page.locator('[data-testid="note-body"]').textContent();
+
+  // Assert that the copied text matches the note body
+  expect(copiedText).toBe(noteBody);
+});

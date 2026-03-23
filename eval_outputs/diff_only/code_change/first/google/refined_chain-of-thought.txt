@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are some notes already, let's add one for testing purposes
+  // This part is omitted for brevity, as the focus is on the clear all functionality
+  // You would need to add code here to create a note if none exist
+
+  // Verify that the "Your Notes" heading displays the correct number of notes
+  const noteCount = await page.locator('h3').innerText();
+  const count = parseInt(noteCount.split(' ')[1]);
+  expect(count).toBeGreaterThan(0);
+
+  // Verify that the "Clear all" button is present when there are notes
+  const clearAllButton = await page.locator('text=Clear all');
+  expect(clearAllButton).toBeVisible();
+
+  // Click the "Clear all" button
+  await clearAllButton.click();
+
+  // Verify that the "Your Notes" heading now displays 0 notes
+  const updatedNoteCount = await page.locator('h3').innerText();
+  const updatedCount = parseInt(updatedNoteCount.split(' ')[1]);
+  expect(updatedCount).toBe(0);
+
+  // Verify that the "Clear all" button is no longer present
+  const clearAllButtonAfter = await page.locator('text=Clear all');
+  expect(clearAllButtonAfter).toBeHidden();
+});

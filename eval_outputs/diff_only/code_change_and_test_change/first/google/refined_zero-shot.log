@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › can clear all notes from sidebar
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › can clear all notes from sidebar ─────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Title')[22m
+
+
+      2 |
+      3 | test('can clear all notes from sidebar', async ({ page }) => {
+    > 4 |   await page.getByLabel('Title').fill('To clear');
+        |                                  ^
+      5 |   await page.getByLabel('Body').fill('Body');
+      6 |   await page.getByLabel(/Tags/).fill('x');
+      7 |   await page.getByRole('button', { name: 'Create Note' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:4:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/google/artefacts/refined_zero-shot/refined_zero-shot-can-clear-all-notes-from-sidebar-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/google/artefacts/refined_zero-shot/refined_zero-shot-can-clear-all-notes-from-sidebar-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/first/google/artefacts/refined_zero-shot/refined_zero-shot-can-clear-all-notes-from-sidebar-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/first/google/artefacts/refined_zero-shot/refined_zero-shot-can-clear-all-notes-from-sidebar-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:14:1 › introductory text is visible
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › can clear all notes from sidebar ──────────────
+  1 passed (22.7s)
+
+
+=== STDERR ===
+

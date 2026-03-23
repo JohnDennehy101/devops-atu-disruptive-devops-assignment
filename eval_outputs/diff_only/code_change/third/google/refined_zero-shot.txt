@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
+
+test('Home page loads', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  expect(page).toHaveTitle(/Next.js/);
+});
+
+test('Copy button copies note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there's a note displayed on the page
+  const noteBodySelector = '[data-testid="note-body"]';
+  const noteBody = await page.locator(noteBodySelector).textContent();
+
+  // Click the copy button
+  const copyButtonSelector = '[class="text-sm text-blue-600 dark:text-blue-400 hover:underline"]';
+  await page.locator(copyButtonSelector).click();
+
+  // Verify that the note body was copied to the clipboard
+  expect(await navigator.clipboard.readText()).toBe(noteBody);
+});

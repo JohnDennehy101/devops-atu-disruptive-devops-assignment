@@ -1,0 +1,53 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check form body count
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check form body count ────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('p:has-text("100 / 5000")')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('p:has-text("100 / 5000")')[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   const formBodyCountElement = page.locator('p:has-text("100 / 5000")');
+    > 6 |   await expect(formBodyCountElement).toBeVisible();
+        |                                      ^
+      7 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:6:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/artefacts/refined_zero-shot/refined_zero-shot-check-form-body-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/artefacts/refined_zero-shot/refined_zero-shot-check-form-body-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/google/artefacts/refined_zero-shot/refined_zero-shot-check-form-body-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/artefacts/refined_zero-shot/refined_zero-shot-check-form-body-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/google/artefacts/refined_zero-shot/refined_zero-shot-check-form-body-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › check form body count ─────────────────────────
+
+
+=== STDERR ===
+

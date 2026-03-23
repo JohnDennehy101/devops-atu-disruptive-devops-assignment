@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('form body length is displayed correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+  await page.fill('#form-body', 'a'.repeat(1000));
+  await expect(page.getByText('1000 / 5000')).toBeVisible();
+});

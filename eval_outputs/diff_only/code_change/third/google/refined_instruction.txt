@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+ 
+ import { mockNotes } from './src/utils/data';
+ 
+ test('should copy note body to clipboard', async ({ page }) => {
+   await page.goto('http://localhost:5175');
+ 
+   // Click on the first note card
+   await page.getByRole('listitem').first

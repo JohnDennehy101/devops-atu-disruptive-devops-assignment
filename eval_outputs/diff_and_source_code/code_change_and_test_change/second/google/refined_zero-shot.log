@@ -1,0 +1,30 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts: ES2015 named imports do not destructure. Use another statement for destructuring after the import. (4:0)
+
+  2 | import { http://localhost:5175 } from '@playwright/test';
+  3 |
+> 4 | test("shows body character count and updates when typing", async ({ page }) => {
+    | ^
+  5 |   await expect(page.getByText("0 / 5000")).toBeVisible()
+  6 |   await page.getByLabel("Body").fill("Hello")
+  7 |   await expect(page.getByText("5 / 5000")).toBeVisible()
+
+   at refined_zero-shot.spec.ts:4
+
+  2 | import { http://localhost:5175 } from '@playwright/test';
+  3 |
+> 4 | test("shows body character count and updates when typing", async ({ page }) => {
+  5 |   await expect(page.getByText("0 / 5000")).toBeVisible()
+  6 |   await page.getByLabel("Body").fill("Hello")
+  7 |   await expect(page.getByText("5 / 5000")).toBeVisible()
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

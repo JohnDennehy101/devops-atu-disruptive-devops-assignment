@@ -1,0 +1,86 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page loads
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page loads ──────────────────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveTitle[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/Next.js/[39m
+    Received string:  [31m"Vite + React"[39m
+
+    Call log:
+    [2m  - Expect "toHaveTitle" with timeout 5000ms[22m
+    [2m    2 × unexpected value "Vite + React"[22m
+
+
+      4 | test('Home page loads', async ({ page }) => {
+      5 |   await page.goto('http://localhost:5175');
+    > 6 |   expect(page).toHaveTitle(/Next.js/);
+        |                ^
+      7 | });
+      8 |
+      9 | test('Copy button copies note body', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:6:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Home-page-loads-chromium/test-finished-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Home-page-loads-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Home-page-loads-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › Copy button copies note body
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › Copy button copies note body ─────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="note-body"]')[22m
+
+
+      11 |   // Assuming there's a note displayed on the page
+      12 |   const noteBodySelector = '[data-testid="note-body"]';
+    > 13 |   const noteBody = await page.locator(noteBodySelector).textContent();
+         |                                                         ^
+      14 |
+      15 |   // Click the copy button
+      16 |   const copyButtonSelector = '[class="text-sm text-blue-600 dark:text-blue-400 hover:underline"]';
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:13:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Copy-button-copies-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Copy-button-copies-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Copy-button-copies-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Copy-button-copies-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-Copy-button-copies-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page loads ───────────────────────────────
+    [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › Copy button copies note body ──────────────────
+
+
+=== STDERR ===
+

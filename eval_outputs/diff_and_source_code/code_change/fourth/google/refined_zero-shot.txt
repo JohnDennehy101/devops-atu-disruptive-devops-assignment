@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test';
+
+test('check your notes count', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const yourNotesCount = await page.locator('text=Your Notes (\\d+)').textContent();
+  expect(yourNotesCount).not().toBe('Your Notes (0)');
+});
+
+test('check filter by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const initialNoteCount = await page.locator('text=Note #\\d+').count();
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  const filteredNoteCount = await page.locator('text=Note #\\d+').count();
+  expect(filteredNoteCount).toBeLessThan(initialNoteCount);
+});

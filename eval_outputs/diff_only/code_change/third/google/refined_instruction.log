@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Unexpected token (9:41)
+
+  7 |  
+  8 |    // Click on the first note card
+> 9 |    await page.getByRole('listitem').first
+    |                                          ^
+
+   at refined_instruction.spec.ts:9
+
+  7 |  
+  8 |    // Click on the first note card
+> 9 |    await page.getByRole('listitem').first
+    |                                         ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

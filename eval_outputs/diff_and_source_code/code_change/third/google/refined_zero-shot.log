@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › copy note body
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › copy note body ───────────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('[data-testid="note-1"]')[22m
+
+
+       5 |
+       6 |   // Assuming there's a note with an ID that exists.  Adjust as needed.
+    >  7 |   await page.click('[data-testid="note-1"]');
+         |              ^
+       8 |
+       9 |   // Wait for the note details to load
+      10 |   await page.waitForSelector('[data-testid="note-title"]');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/google/artefacts/refined_zero-shot/refined_zero-shot-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › copy note body ────────────────────────────────
+
+
+=== STDERR ===
+

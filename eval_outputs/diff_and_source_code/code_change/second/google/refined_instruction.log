@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › check form body length
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › check form body length ─────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('textarea', { name: 'Body' })[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   const formBodyLengthElement = await page.getByRole('textarea', { name: 'Body' });
+    > 6 |   const formBodyLengthText = await formBodyLengthElement.textContent();
+        |                                                          ^
+      7 |   expect(formBodyLengthText).toBe('0 / 5000');
+      8 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:6:58
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/refined_instruction/refined_instruction-check-form-body-length-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/refined_instruction/refined_instruction-check-form-body-length-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/refined_instruction/refined_instruction-check-form-body-length-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/refined_instruction/refined_instruction-check-form-body-length-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/google/artefacts/refined_instruction/refined_instruction-check-form-body-length-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › check form body length ──────────────────────
+
+
+=== STDERR ===
+

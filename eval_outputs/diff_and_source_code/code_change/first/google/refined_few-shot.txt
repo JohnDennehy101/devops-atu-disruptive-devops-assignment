@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all button clears all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there are notes to clear, add some notes first
+  await page.fill('#note-title', 'Note 1');
+  await page.fill('#note-body', 'Body 1');
+  await page.fill('#note-tags', 'tag1');
+  await page.click('text=Create Note');
+  await page.fill('#note-title', 'Note 2');
+  await page.fill('#note-body', 'Body 2');
+  await page.fill('#note-tags', 'tag2');
+  await page.click('text=Create Note');
+
+  await page.locator('#clear-all').click();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+});

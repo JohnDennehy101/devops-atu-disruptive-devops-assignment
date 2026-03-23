@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_instruction.spec.ts:3:1 › has title
+[1A[2K[2/3] [chromium] › e2e/refined_instruction.spec.ts:8:1 › filter by tag
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:8:1 › filter by tag ──────────────────────────────
+
+    TypeError: page.getByRole(...).toBeVisible is not a function
+
+       9 |   await page.goto('http://localhost:5175/');
+      10 |   await page.getByRole('textbox', { name: 'Filter by tag' }).fill('test');
+    > 11 |   await page.getByRole('heading', { name: 'Your Notes' }).toBeVisible();
+         |                                                           ^
+      12 | });
+      13 |
+      14 | test('no notes yet message', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:11:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-filter-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-filter-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-filter-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-filter-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-filter-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/refined_instruction.spec.ts:14:1 › no notes yet message
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:8:1 › filter by tag ───────────────────────────────
+  2 passed (2.6s)
+
+
+=== STDERR ===
+

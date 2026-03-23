@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test('Tag filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are initially some notes with tags
+  const initialNoteCount = await page.locator('text=/Your Notes \(/').textContent();
+  const initialCount = parseInt(initialNoteCount.split(' ')[1]);
+
+  // Enter a tag filter
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+
+  // Verify that the number of notes displayed updates
+  const filteredNoteCount = await page.locator('text=/Your Notes \(/').textContent();
+  const filteredCount = parseInt(filteredNoteCount.split(' ')[1]);
+
+  expect(filteredCount).toBeLessThan(initialCount);
+
+  // Verify that the "No notes match the filter" message is displayed when no notes match
+  await page.locator('input[placeholder="Filter by tag"]').fill('nonexistenttag');
+  const noMatchNoteCount = await page.locator('text=/No notes match the filter/').isVisible();
+  expect(noMatchNoteCount).toBe(true);
+
+  // Clear the tag filter
+  await page.locator('input[placeholder="Filter by tag"]').clear();
+
+  // Verify that the number of notes displayed returns to the initial value
+  const clearedNoteCount = await page.locator('text=/Your Notes \(/').textContent();
+  const clearedCount = parseInt(clearedNoteCount.split(' ')[1]);
+  expect(clearedCount).toBe(initialCount);
+});

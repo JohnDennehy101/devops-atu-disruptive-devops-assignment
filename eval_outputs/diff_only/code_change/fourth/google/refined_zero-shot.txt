@@ -1,0 +1,111 @@
+--- a/app/src/utils/api.ts
++++ b/app/src/utils/api.ts
+-export const api = {
++export const api = {
++  getNotes: () => {
++    return fetch('/api/notes').then(res => res.json())
++  },
++  createNote: (note: Omit<Note, 'id'>) => {
++    return fetch('/api/notes', {
++      method: 'POST',
++      headers: {
++        'Content-Type': 'application/json',
++      },
++      body: JSON.stringify(note),
++    })
++  },
++  deleteNote: (id: string) => {
++    return fetch(`/api/notes/${id}`, {
++      method: 'DELETE',
++    })
++  },
+ }
+--- a/app/src/types/Note.ts
++++ b/app/src/types/Note.ts
+-export interface Note {
++export interface Note {
++  id: string
++  title: string
++  content: string
++  tags: string[]
++  createdAt: string
++  updatedAt: string
+ }
+--- a/app/src/utils/api.ts
++++ b/app/src/utils/api.ts
+@@ -1,12 +1,12 @@
+-export const api = {
+-  getNotes: () => {
+-    return fetch('/api/notes').then(res => res.json())
+-  },
+-  createNote: (note: Omit<Note, 'id'>) => {
+-    return fetch('/api/notes', {
+-      method: 'POST',
+-      headers: {
+-        'Content-Type': 'application/json',
+-      },
+-      body: JSON.stringify(note),
+-    })
+-  },
+-  deleteNote: (id: string) => {
+-    return fetch(`/api/notes/${id}`, {
+-      method: 'DELETE',
+-    })
+-  },
++export const api = {
++  getNotes: () => {
++    return fetch('/api/notes').then(res => res.json())
++  },
++  createNote: (note: Omit<Note, 'id'>) => {
++    return fetch('/api/notes', {
++      method: 'POST',
++      headers: {
++        'Content-Type': 'application/json',
++      },
++      body: JSON.stringify(note),
++    })
++  },
++  deleteNote: (id: string) => {
++    return fetch(`/api/notes/${id}`, {
++      method: 'DELETE',
++    })
++  },
+ }
+--- a/app/src/types/Note.ts
++++ b/app/src/types/Note.ts
+@@ -1,12 +1,12 @@
+-export interface Note {
++export interface Note {
++  id: string
++  title: string
++  content: string
++  tags: string[]
++  createdAt: string
++  updatedAt: string
+ }
+--- a/app/src/pages/Home.tsx
++++ b/app/src/pages/Home.tsx
+@@ -1,12 +1,12 @@
+-import React from "react"
++import React, { useMemo, useState, useEffect } from "react"
++  const [tagFilter, setTagFilter] = useState("")
++  const [allNotes, setAllNotes] = useState<Note[]>([])
++  useEffect(() => {
++    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
++  }, [savedIds])
++
++  const displayedIds = useMemo(() => {
++    if (!tagFilter.trim()) return savedIds
++    const lower = tagFilter.trim().toLowerCase()
++    return allNotes
++     .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))
++     .map(n => n.id)
++  }, [savedIds, allNotes, tagFilter])
++
+-              Your Notes ({savedIds.length})
++              Your Notes ({displayedIds.length})
++            <input
++              type="text"
++              placeholder="Filter by tag"
++              value={tagFilter}
++              onChange
