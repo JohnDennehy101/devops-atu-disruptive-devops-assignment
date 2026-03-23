@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-23T09:38:36.343214",
+        "model_id": "mistralai/Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 28.949,
+            "tokens_per_sec": 9.19,
+            "input_token_count": 386,
+            "output_token_count": 266,
+            "total_token_count": 652
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should display the correct number of notes and clear all button', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check the initial state of the page\n  await expect(page.locator('h3')).toHaveText('Your Notes (0)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n\n  // Add some notes and check the updated state\n  await page.locator('input[name=\"title\"]').fill('Test Note');\n  await page.locator('input[name=\"body\"]').fill('This is a test note.');\n  await page.locator('input[name=\"tags\"]').fill('test,note');\n  await page.locator('button[type=\"submit\"]').click();\n\n  await expect(page.locator('h3')).toHaveText('Your Notes (1)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n\n  // Click the clear all button and check the final state\n  await page.locator('button').click();\n  await expect(page.locator('h3')).toHaveText('Your Notes (0)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should display the correct number of notes and clear all button', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check the initial state of the page\n  await expect(page.locator('h3')).toHaveText('Your Notes (0)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n\n  // Add some notes and check the updated state\n  await page.locator('input[name=\"title\"]').fill('Test Note');\n  await page.locator('input[name=\"body\"]').fill('This is a test note.');\n  await page.locator('input[name=\"tags\"]').fill('test,note');\n  await page.locator('button[type=\"submit\"]').click();\n\n  await expect(page.locator('h3')).toHaveText('Your Notes (1)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n\n  // Click the clear all button and check the final state\n  await page.locator('button').click();\n  await expect(page.locator('h3')).toHaveText('Your Notes (0)');\n  await expect(page.locator('button')).toHaveText('Clear all');\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

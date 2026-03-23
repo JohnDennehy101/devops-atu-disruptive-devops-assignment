@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-22T20:10:18.478778",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 26.131,
+            "tokens_per_sec": 7.42,
+            "input_token_count": 188,
+            "output_token_count": 194,
+            "total_token_count": 382
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Assuming there is a note selected and displayed on the page\n  // You might need to interact with the page to select a note first\n  // For example, clicking on a note or selecting it from a list\n\n  // Click the \"Copy\" button\n  await page.click('button:text(\"Copy\")');\n\n  // Verify that the note body has been copied to the clipboard\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  // Assuming'selectedNoteBody' is a variable containing the expected note body\n  const selectedNoteBody = 'This is the body of the selected note';\n\n  expect(clipboardText).toBe(selectedNoteBody);\n});\n```",
+            "extracted_code": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Assuming there is a note selected and displayed on the page\n  // You might need to interact with the page to select a note first\n  // For example, clicking on a note or selecting it from a list\n\n  // Click the \"Copy\" button\n  await page.click('button:text(\"Copy\")');\n\n  // Verify that the note body has been copied to the clipboard\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  // Assuming'selectedNoteBody' is a variable containing the expected note body\n  const selectedNoteBody = 'This is the body of the selected note';\n\n  expect(clipboardText).toBe(selectedNoteBody);\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]
