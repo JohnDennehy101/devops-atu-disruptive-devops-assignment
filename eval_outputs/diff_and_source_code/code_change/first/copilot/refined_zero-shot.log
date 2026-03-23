@@ -1,0 +1,187 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected: [32m"Create and manage notes. Your notes are stored locally."[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+       9 |
+      10 |     // Check the description text
+    > 11 |     await expect(page.locator('p.text-gray-500')).toHaveText('Create and manage notes. Your notes are stored locally.');
+         |                                                   ^
+      12 |
+      13 |     // Check the "Your Notes" section
+      14 |     await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (0)');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:11:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-c2eec-play-the-correct-initial-UI-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-c2eec-play-the-correct-initial-UI-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-c2eec-play-the-correct-initial-UI-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-c2eec-play-the-correct-initial-UI-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-c2eec-play-the-correct-initial-UI-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:18:3 › Home Page › should create a new note
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:34:3 › Home Page › should clear all notes
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:34:3 › Home Page › should clear all notes ──────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected: [32m"No notes yet"[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+      49 |     // Verify all notes are cleared
+      50 |     await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (0)');
+    > 51 |     await expect(page.locator('p.text-gray-500')).toHaveText('No notes yet');
+         |                                                   ^
+      52 |   });
+      53 |
+      54 |   test('should edit an existing note', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:51:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:54:3 › Home Page › should edit an existing note
+[1A[2K  3) [chromium] › e2e/refined_zero-shot.spec.ts:54:3 › Home Page › should edit an existing note ────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('h3.text-lg')
+    Expected: [32m"Your Notes (1)"[39m
+    Error: strict mode violation: locator('h3.text-lg') resolved to 2 elements:
+        1) <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Your Notes (1)</h3> aka getByRole('heading', { name: 'Your Notes (1)' })
+        2) <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Note Details</h3> aka getByRole('heading', { name: 'Note Details' })
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('h3.text-lg')[22m
+
+
+      74 |
+      75 |     // Verify the note is updated
+    > 76 |     await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (1)');
+         |                                              ^
+      77 |     await page.click('button:has-text("Note #1")');
+      78 |     await expect(page.locator('p:has-text("Title: Updated Note")')).toBeVisible();
+      79 |     await expect(page.locator('p:has-text("Body: This is an updated test note.")')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:76:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-edit-an-existing-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-edit-an-existing-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-edit-an-existing-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-edit-an-existing-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-edit-an-existing-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:83:3 › Home Page › should delete a note
+[1A[2K  4) [chromium] › e2e/refined_zero-shot.spec.ts:83:3 › Home Page › should delete a note ────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Delete")')[22m
+
+
+      94 |
+      95 |     // Delete the note
+    > 96 |     await page.click('button:has-text("Delete")');
+         |                ^
+      97 |     await page.on('dialog', async (dialog) => {
+      98 |       await dialog.accept();
+      99 |     });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:96:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-delete-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-delete-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-delete-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-delete-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-should-delete-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › should display the correct initial UI 
+    [chromium] › e2e/refined_zero-shot.spec.ts:34:3 › Home Page › should clear all notes ───────────
+    [chromium] › e2e/refined_zero-shot.spec.ts:54:3 › Home Page › should edit an existing note ─────
+    [chromium] › e2e/refined_zero-shot.spec.ts:83:3 › Home Page › should delete a note ─────────────
+  1 passed (25.5s)
+
+
+=== STDERR ===
+

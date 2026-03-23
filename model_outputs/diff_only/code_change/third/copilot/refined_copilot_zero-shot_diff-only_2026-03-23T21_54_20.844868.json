@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-23T21:54:20.844868",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 3.913,
+            "input_token_count": 196,
+            "output_token_count": 170,
+            "total_token_count": 366,
+            "tokens_per_sec": 43.44
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  \n  // Assuming there's a way to select a note, this part of the code would need to be adjusted\n  // to select a specific note. For example, clicking on a note in a list.\n  // await page.click('selector-for-note');\n\n  const copyButton = page.locator('button:text(\"Copy\")');\n  await copyButton.click();\n\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  \n  // Assuming 'expectedNoteBody' is the body of the selected note\n  const expectedNoteBody = 'Expected note body text';\n  expect(clipboardText).toBe(expectedNoteBody);\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  \n  // Assuming there's a way to select a note, this part of the code would need to be adjusted\n  // to select a specific note. For example, clicking on a note in a list.\n  // await page.click('selector-for-note');\n\n  const copyButton = page.locator('button:text(\"Copy\")');\n  await copyButton.click();\n\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  \n  // Assuming 'expectedNoteBody' is the body of the selected note\n  const expectedNoteBody = 'Expected note body text';\n  expect(clipboardText).toBe(expectedNoteBody);\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

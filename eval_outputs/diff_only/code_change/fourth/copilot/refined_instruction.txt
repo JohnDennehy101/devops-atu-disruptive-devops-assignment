@@ -1,0 +1,20 @@
+import { test, expect } from '@playwright/test';
+
+test('should filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state with no filter
+  const notesCount = await page.locator('text=Your Notes (0)').count();
+  expect(notesCount).toBe(1);
+
+  // Enter a tag filter
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('exampleTag');
+
+  // Check filtered state
+  const filteredNotesCount = await page.locator('text=Your Notes (0)').count();
+  expect(filteredNotesCount).toBe(1);
+
+  // Check message when no notes match the filter
+  const noNotesMessage = await page.getByText('No notes match the filter').count();
+  expect(noNotesMessage).toBe(1);
+});

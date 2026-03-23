@@ -1,0 +1,27 @@
+import { test, expect } from "@playwright/test";
+
+test.describe("Note Taking App - Copy Note Body", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("can copy note body to clipboard", async ({ page }) => {
+    // Create a new note
+    await page.getByLabel("Title").fill("Copy Test Note");
+    await page.getByLabel("Body").fill("This is the body to be copied.");
+    await page.getByLabel(/Tags/).fill("copy, test");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Open the created note
+    await page.getByRole("button", { name: /Note #\d+/ }).click();
+
+    // Click the "Copy" button
+    await page.getByRole("button", { name: "Copy" }).click();
+
+    // Verify clipboard content
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe("This is the body to be copied.");
+  });
+});

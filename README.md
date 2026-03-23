@@ -22,8 +22,16 @@ python scripts/generate_claude.py
 
 ## Generating Copilot outputs
 
+Using endpoint associated with Copilot account (limited to 50 requests per day)
+
 ```
 python scripts/generate_copilot.py
+```
+
+To directly use OpenAI (API key needed with credit applied to account)
+
+```
+python scripts/generate_copilot.py --openai
 ```
 
 ## Using Model Context Protocol (MCP) for test generation

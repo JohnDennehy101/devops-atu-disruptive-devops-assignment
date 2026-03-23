@@ -1,0 +1,57 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify initial state with no notes
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByPlaceholder('Filter by tag')).toBeVisible();
+
+  // Add notes via API or mock (assuming API is available)
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+    window.dispatchEvent(new Event('storage'));
+  });
+
+  // Mock API response for notes
+  await page.route('**/api/notes', route => {
+    route.fulfill({
+      status: 200,
+      body: JSON.stringify([
+        { id: 1, tags: ['work', 'urgent'] },
+        { id: 2, tags: ['personal', 'important'] },
+        { id: 3, tags: ['work', 'important'] },
+      ]),
+    });
+  });
+
+  // Reload page to fetch notes
+  await page.reload();
+
+  // Verify all notes are displayed initially
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('Note #1')).toBeVisible();
+  await expect(page.getByText('Note #2')).toBeVisible();
+  await expect(page.getByText('Note #3')).toBeVisible();
+
+  // Apply tag filter
+  await page.fill('input[placeholder="Filter by tag"]', 'work');
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByText('Note #1')).toBeVisible();
+  await expect(page.getByText('Note #3')).toBeVisible();
+  await expect(page.getByText('Note #2')).not.toBeVisible();
+
+  // Apply another tag filter
+  await page.fill('input[placeholder="Filter by tag"]', 'urgent');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('Note #1')).toBeVisible();
+  await expect(page.getByText('Note #2')).not.toBeVisible();
+  await expect(page.getByText('Note #3')).not.toBeVisible();
+
+  // Clear the filter
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('Note #1')).toBeVisible();
+  await expect(page.getByText('Note #2')).toBeVisible();
+  await expect(page.getByText('Note #3')).toBeVisible();
+});

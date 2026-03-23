@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Tag Filter Functionality › displays filtered notes based on tag input
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Tag Filter Functionality › displays filtered notes based on tag input 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: /First Note/ })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /First Note/ })[22m
+
+
+      29 |     await expect(page.getByText("Your Notes (1)")).toBeVisible();
+      30 |     await expect(page.getByRole("button", { name: /Note #\d+/ })).toHaveCount(1);
+    > 31 |     await expect(page.getByRole("button", { name: /First Note/ })).toBeVisible();
+         |                                                                    ^
+      32 |
+      33 |     // Filter by tag "personal"
+      34 |     await page.getByPlaceholder("Filter by tag").fill("personal");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:31:68
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_few-shot/refined_few-shot-Tag-Filte-67021-ed-notes-based-on-tag-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_few-shot/refined_few-shot-Tag-Filte-67021-ed-notes-based-on-tag-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_few-shot/refined_few-shot-Tag-Filte-67021-ed-notes-based-on-tag-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_few-shot/refined_few-shot-Tag-Filte-67021-ed-notes-based-on-tag-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_few-shot/refined_few-shot-Tag-Filte-67021-ed-notes-based-on-tag-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Tag Filter Functionality › displays filtered notes based on tag input 
+
+
+=== STDERR ===
+

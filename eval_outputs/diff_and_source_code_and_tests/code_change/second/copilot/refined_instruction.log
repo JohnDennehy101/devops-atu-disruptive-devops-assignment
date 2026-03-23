@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › displays character count for note body
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › displays character count for note body 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('26 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('26 / 5000')[22m
+
+
+      10 |   test('displays character count for note body', async ({ page }) => {
+      11 |     await page.getByLabel('Body').fill('This is a test note body.');
+    > 12 |     await expect(page.getByText('26 / 5000')).toBeVisible();
+         |                                               ^
+      13 |
+      14 |     await page.getByLabel('Body').fill('This is a longer test note body to check the character count functionality.');
+      15 |     await expect(page.getByText('81 / 5000')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:12:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/copilot/artefacts/refined_instruction/refined_instruction-Note-T-a5139-aracter-count-for-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/copilot/artefacts/refined_instruction/refined_instruction-Note-T-a5139-aracter-count-for-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/copilot/artefacts/refined_instruction/refined_instruction-Note-T-a5139-aracter-count-for-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/copilot/artefacts/refined_instruction/refined_instruction-Note-T-a5139-aracter-count-for-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/copilot/artefacts/refined_instruction/refined_instruction-Note-T-a5139-aracter-count-for-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › displays character count for note body 
+
+
+=== STDERR ===
+

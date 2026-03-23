@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('Filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify initial state
+  const notesCount = await page.locator('h3:has-text("Your Notes")').textContent();
+  expect(notesCount).toMatch(/Your Notes \(\d+\)/);
+
+  // Input a tag filter
+  const filterInput = page.locator('input[placeholder="Filter by tag"]');
+  await filterInput.fill('exampleTag');
+
+  // Verify filtered notes count
+  const filteredNotesCount = await page.locator('h3:has-text("Your Notes")').textContent();
+  expect(filteredNotesCount).toMatch(/Your Notes \(\d+\)/);
+
+  // Check for "No notes match the filter" message if no notes match
+  const noNotesMessage = page.locator('text=No notes match the filter');
+  if (await noNotesMessage.isVisible()) {
+    expect(await noNotesMessage.textContent()).toBe('No notes match the filter');
+  }
+
+  // Clear the filter
+  await filterInput.fill('');
+
+  // Verify notes count returns to original state
+  const resetNotesCount = await page.locator('h3:has-text("Your Notes")').textContent();
+  expect(resetNotesCount).toMatch(/Your Notes \(\d+\)/);
+});

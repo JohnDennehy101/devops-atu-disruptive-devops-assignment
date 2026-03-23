@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for note body
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for note body ─
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500')
+    Expected: [32m"2[7m4[27m / 5000"[39m
+    Received: [31m"2[7m5[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">25 / 5000</p>[22m
+    [2m      - unexpected value "25 / 5000"[22m
+
+
+      12 |   // Type into the body textarea
+      13 |   await bodyTextarea.fill('This is a test note body.');
+    > 14 |   await expect(charCount).toHaveText('24 / 5000');
+         |                           ^
+      15 |
+      16 |   // Add more text and verify updated character count
+      17 |   await bodyTextarea.fill('This is a longer test note body to check the character count functionality.');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:14:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-d-2eeee-aracter-count-for-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-d-2eeee-aracter-count-for-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-d-2eeee-aracter-count-for-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-d-2eeee-aracter-count-for-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-d-2eeee-aracter-count-for-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for note body ──
+
+
+=== STDERR ===
+

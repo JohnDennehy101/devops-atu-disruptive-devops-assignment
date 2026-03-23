@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should filter notes by tag ───────────────────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m1[39m
+    Received: [31m0[39m
+
+      24 |   // Check notes count after fetching
+      25 |   const fetchedNoteCount = await page.locator('text=Your Notes (3)').count();
+    > 26 |   expect(fetchedNoteCount).toBe(1);
+         |                            ^
+      27 |
+      28 |   // Apply tag filter
+      29 |   await page.fill('input[placeholder="Filter by tag"]', 'work');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:26:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should filter notes by tag ────────────────────
+
+
+=== STDERR ===
+

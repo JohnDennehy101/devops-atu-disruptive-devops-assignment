@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App with Tag Filter › displays tag filter input and updates note count
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:29:3 › Note Taking App with Tag Filter › filters notes by tag and displays matching notes
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:29:3 › Note Taking App with Tag Filter › filters notes by tag and displays matching notes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: getByRole('button', { name: /Note #\d+/ })
+    Expected pattern: [32m/First note/[39m
+    Received string:  [31m"Note #1"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /Note #\d+/ })[22m
+    [2m    9 × locator resolved to <button class="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white">Note #1</button>[22m
+    [2m      - unexpected value "Note #1"[22m
+
+
+      42 |     await page.getByPlaceholder('Filter by tag').fill('tag1');
+      43 |     await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    > 44 |     await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveText(/First note/);
+         |                                                                   ^
+      45 |
+      46 |     await page.getByPlaceholder('Filter by tag').fill('tag2');
+      47 |     await expect(page.getByText('Your Notes (1)')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:44:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-a42c2-and-displays-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-a42c2-and-displays-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-a42c2-and-displays-matching-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-a42c2-and-displays-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/copilot/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-a42c2-and-displays-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:29:3 › Note Taking App with Tag Filter › filters notes by tag and displays matching notes 
+  1 passed (6.7s)
+
+
+=== STDERR ===
+

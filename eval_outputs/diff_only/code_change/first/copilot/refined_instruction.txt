@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('should display and clear notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the introductory text is present
+  await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+
+  // Check if the "Your Notes" header is present
+  await expect(page.getByRole('heading', { name: /Your Notes \(\d+\)/ })).toBeVisible();
+
+  // If there are notes, check for the "Clear all" button and click it
+  const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+  if (await clearAllButton.isVisible()) {
+    await clearAllButton.click();
+    // Verify that notes count is updated to 0
+    await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+  }
+});

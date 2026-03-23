@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('UI change test for clear all notes button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  // Verify the presence of the new paragraph
+  const paragraph = await page.locator('p.text-gray-500');
+  await expect(paragraph).toHaveText('Create and manage notes. Your notes are stored locally.');
+  
+  // Verify the presence of the "Your Notes" header
+  const header = await page.locator('h3.text-lg.font-semibold');
+  await expect(header).toHaveText(/Your Notes \(\d+\)/);
+  
+  // Check if the "Clear all" button is present when there are saved notes
+  const clearAllButton = page.locator('button:text("Clear all")');
+  if (await clearAllButton.isVisible()) {
+    // Click the "Clear all" button
+    await clearAllButton.click();
+    
+    // Verify that the notes are cleared
+    await expect(header).toHaveText('Your Notes (0)');
+  }
+});

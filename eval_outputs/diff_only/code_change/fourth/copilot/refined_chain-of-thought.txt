@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test';
+
+test('should filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  // Check initial state
+  const initialNotesCount = await page.locator('text=Your Notes (0)').count();
+  expect(initialNotesCount).toBe(1);
+
+  // Add a note with a specific tag
+  await page.evaluate(() => {
+    window.localStorage.setItem('notes', JSON.stringify([
+      { id: '1', tags: ['work'], content: 'Work note' },
+      { id: '2', tags: ['personal'], content: 'Personal note' }
+    ]));
+  });
+  await page.reload();
+
+  // Check notes count after adding
+  const notesCountAfterAdding = await page.locator('text=Your Notes (2)').count();
+  expect(notesCountAfterAdding).toBe(1);
+
+  // Filter notes by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'work');
+  const filteredNotesCount = await page.locator('text=Your Notes (1)').count();
+  expect(filteredNotesCount).toBe(1);
+
+  // Check if the correct note is displayed
+  const workNoteVisible = await page.locator('text=Work note').isVisible();
+  expect(workNoteVisible).toBe(true);
+
+  const personalNoteVisible = await page.locator('text=Personal note').isVisible();
+  expect(personalNoteVisible).toBe(false);
+
+  // Clear filter and check all notes are visible again
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  const allNotesVisible = await page.locator('text=Your Notes (2)').count();
+  expect(allNotesVisible).toBe(1);
+
+  const allNotesWorkVisible = await page.locator('text=Work note').isVisible();
+  expect(allNotesWorkVisible).toBe(true);
+
+  const allNotesPersonalVisible = await page.locator('text=Personal note').isVisible();
+  expect(allNotesPersonalVisible).toBe(true);
+});

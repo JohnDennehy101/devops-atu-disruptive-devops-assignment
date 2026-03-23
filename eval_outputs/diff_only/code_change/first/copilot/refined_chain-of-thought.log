@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › UI change test for clear all notes button
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › UI change test for clear all notes button 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p.text-gray-500')
+    Expected: [32m"Create and manage notes. Your notes are stored locally."[39m
+    Error: strict mode violation: locator('p.text-gray-500') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-gray-500')[22m
+
+
+       6 |   // Verify the presence of the new paragraph
+       7 |   const paragraph = await page.locator('p.text-gray-500');
+    >  8 |   await expect(paragraph).toHaveText('Create and manage notes. Your notes are stored locally.');
+         |                           ^
+       9 |   
+      10 |   // Verify the presence of the "Your Notes" header
+      11 |   const header = await page.locator('h3.text-lg.font-semibold');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:8:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-U-df184--for-clear-all-notes-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-U-df184--for-clear-all-notes-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-U-df184--for-clear-all-notes-button-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-U-df184--for-clear-all-notes-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-U-df184--for-clear-all-notes-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › UI change test for clear all notes button 
+
+
+=== STDERR ===
+
