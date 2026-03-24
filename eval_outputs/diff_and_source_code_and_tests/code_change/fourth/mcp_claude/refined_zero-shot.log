@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Tag Filter Feature › shows filter by tag input in the sidebar
+[1A[2K[2/8] [chromium] › e2e/refined_zero-shot.spec.ts:14:3 › Tag Filter Feature › shows correct note count after creating notes
+[1A[2K[3/8] [chromium] › e2e/refined_zero-shot.spec.ts:24:3 › Tag Filter Feature › filters notes by tag and updates displayed count
+[1A[2K[4/8] [chromium] › e2e/refined_zero-shot.spec.ts:54:3 › Tag Filter Feature › shows 'No notes match the filter' when filter has no matches
+[1A[2K[5/8] [chromium] › e2e/refined_zero-shot.spec.ts:68:3 › Tag Filter Feature › shows 'No notes yet' when there are no saved notes at all
+[1A[2K[6/8] [chromium] › e2e/refined_zero-shot.spec.ts:73:3 › Tag Filter Feature › clearing the filter restores all notes
+[1A[2K[7/8] [chromium] › e2e/refined_zero-shot.spec.ts:91:3 › Tag Filter Feature › filter is case-insensitive
+[1A[2K[8/8] [chromium] › e2e/refined_zero-shot.spec.ts:110:3 › Tag Filter Feature › partial tag match works
+[1A[2K  8 passed (4.8s)
+
+
+=== STDERR ===
+

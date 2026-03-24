@@ -1,0 +1,53 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body textarea character counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('displays initial character count of 0 / 5000 when body is empty', async ({ page }) => {
+    const counter = page.locator('p', { hasText: '/ 5000' });
+    await expect(counter).toBeVisible();
+    await expect(counter).toHaveText('0 / 5000');
+  });
+
+  test('updates character count as user types in the body textarea', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.locator('p', { hasText: '/ 5000' });
+
+    await bodyTextarea.fill('Hello world');
+    await expect(counter).toHaveText('11 / 5000');
+  });
+
+  test('updates character count correctly when text is cleared', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.locator('p', { hasText: '/ 5000' });
+
+    await bodyTextarea.fill('Some text');
+    await expect(counter).toHaveText('9 / 5000');
+
+    await bodyTextarea.fill('');
+    await expect(counter).toHaveText('0 / 5000');
+  });
+
+  test('shows correct count for longer text input', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.locator('p', { hasText: '/ 5000' });
+
+    const longText = 'a'.repeat(500);
+    await bodyTextarea.fill(longText);
+    await expect(counter).toHaveText('500 / 5000');
+  });
+
+  test('character counter is positioned below the body textarea', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.locator('p', { hasText: '/ 5000' });
+
+    const textareaBox = await bodyTextarea.boundingBox();
+    const counterBox = await counter.boundingBox();
+
+    expect(textareaBox).not.toBeNull();
+    expect(counterBox).not.toBeNull();
+    expect(counterBox!.y).toBeGreaterThan(textareaBox!.y);
+  });
+});

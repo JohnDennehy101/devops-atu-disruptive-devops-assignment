@@ -1,0 +1,119 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Tag Filter Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("shows filter by tag input in the sidebar", async ({ page }) => {
+    await expect(page.getByPlaceholder("Filter by tag")).toBeVisible();
+  });
+
+  test("shows 'No notes yet' when no notes exist and filter is empty", async ({ page }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("filters notes by tag", async ({ page }) => {
+    // Create first note with tag "python"
+    await page.getByLabel("Title").fill("Python Note");
+    await page.getByLabel("Body").fill("About python");
+    await page.getByLabel(/Tags/).fill("python, coding");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Create second note with tag "javascript"
+    await page.getByLabel("Title").fill("JS Note");
+    await page.getByLabel("Body").fill("About javascript");
+    await page.getByLabel(/Tags/).fill("javascript, web");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    // Filter by "python" — should show only one note
+    await page.getByPlaceholder("Filter by tag").fill("python");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    // Filter by "javascript" — should show only the other note
+    await page.getByPlaceholder("Filter by tag").fill("javascript");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    // Clear filter — should show both notes again
+    await page.getByPlaceholder("Filter by tag").fill("");
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2);
+  });
+
+  test("shows 'No notes match the filter' when filter has no matches", async ({ page }) => {
+    // Create a note first
+    await page.getByLabel("Title").fill("Sample Note");
+    await page.getByLabel("Body").fill("Sample body");
+    await page.getByLabel(/Tags/).fill("demo");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Type a non-matching filter
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+  });
+
+  test("tag filter is case-insensitive", async ({ page }) => {
+    await page.getByLabel("Title").fill("Case Test");
+    await page.getByLabel("Body").fill("Testing case");
+    await page.getByLabel(/Tags/).fill("Python");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Filter with lowercase should match uppercase tag
+    await page.getByPlaceholder("Filter by tag").fill("python");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    // Filter with uppercase should also match
+    await page.getByPlaceholder("Filter by tag").fill("PYTHON");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+
+  test("tag filter supports partial matching", async ({ page }) => {
+    await page.getByLabel("Title").fill("Partial Match");
+    await page.getByLabel("Body").fill("Testing partial");
+    await page.getByLabel(/Tags/).fill("javascript");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Partial tag "java" should match "javascript"
+    await page.getByPlaceholder("Filter by tag").fill("java");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+
+  test("filter with shared tag shows all matching notes", async ({ page }) => {
+    // Create two notes with the shared tag "coding"
+    await page.getByLabel("Title").fill("Note A");
+    await page.getByLabel("Body").fill("Body A");
+    await page.getByLabel(/Tags/).fill("coding, python");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByLabel("Title").fill("Note B");
+    await page.getByLabel("Body").fill("Body B");
+    await page.getByLabel(/Tags/).fill("coding, rust");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    // Filter by shared tag "coding" — both should appear
+    await page.getByPlaceholder("Filter by tag").fill("coding");
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2);
+
+    // Filter by unique tag "rust" — only one should appear
+    await page.getByPlaceholder("Filter by tag").fill("rust");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+});

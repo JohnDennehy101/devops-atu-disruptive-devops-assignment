@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › filter by tag › filter by tag shows only matching notes
+[1A[2K[2/5] [chromium] › e2e/refined_few-shot.spec.ts:34:3 › filter by tag › filter is case-insensitive
+[1A[2K[3/5] [chromium] › e2e/refined_few-shot.spec.ts:49:3 › filter by tag › filter by partial tag match works
+[1A[2K[4/5] [chromium] › e2e/refined_few-shot.spec.ts:61:3 › filter by tag › filter input is visible when notes exist
+[1A[2K[5/5] [chromium] › e2e/refined_few-shot.spec.ts:65:3 › filter by tag › empty filter shows all notes
+[1A[2K  5 passed (3.7s)
+
+
+=== STDERR ===
+

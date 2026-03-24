@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Body character counter › shows 0 / 5000 when body is empty
+[1A[2K[2/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:14:3 › Body character counter › updates character count as user types in body
+[1A[2K[3/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:19:3 › Body character counter › character counter reflects longer text accurately
+[1A[2K[4/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:25:3 › Body character counter › counter resets to 0 after creating a note
+[1A[2K[5/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:35:3 › Body character counter › counter is positioned below the body textarea
+[1A[2K  5 passed (3.4s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_few-shot.spec.ts:11:3 › Tag filter functionality › filter by tag input is visible
+[1A[2K[2/7] [chromium] › e2e/refined_few-shot.spec.ts:16:3 › Tag filter functionality › shows "No notes yet" when no notes exist
+[1A[2K[3/7] [chromium] › e2e/refined_few-shot.spec.ts:20:3 › Tag filter functionality › displays note count in header as Your Notes (0) initially
+[1A[2K[4/7] [chromium] › e2e/refined_few-shot.spec.ts:24:3 › Tag filter functionality › filters notes by tag and shows correct count
+[1A[2K[5/7] [chromium] › e2e/refined_few-shot.spec.ts:67:3 › Tag filter functionality › tag filter is case-insensitive
+[1A[2K[6/7] [chromium] › e2e/refined_few-shot.spec.ts:87:3 › Tag filter functionality › tag filter supports partial matching
+[1A[2K[7/7] [chromium] › e2e/refined_few-shot.spec.ts:104:3 › Tag filter functionality › shows "No notes match the filter" when notes exist but none match filter
+[1A[2K  7 passed (4.5s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_zero-shot.spec.ts:31:3 › Tag Filter Feature › should display the tag filter input
+[1A[2K[2/8] [chromium] › e2e/refined_zero-shot.spec.ts:37:3 › Tag Filter Feature › should show all notes when filter is empty
+[1A[2K[3/8] [chromium] › e2e/refined_zero-shot.spec.ts:43:3 › Tag Filter Feature › should filter notes by matching tag
+[1A[2K[4/8] [chromium] › e2e/refined_zero-shot.spec.ts:53:3 › Tag Filter Feature › should filter notes by partial tag match
+[1A[2K[5/8] [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Tag Filter Feature › should be case-insensitive when filtering
+[1A[2K[6/8] [chromium] › e2e/refined_zero-shot.spec.ts:72:3 › Tag Filter Feature › should show "No notes match the filter" when no tags match
+[1A[2K[7/8] [chromium] › e2e/refined_zero-shot.spec.ts:80:3 › Tag Filter Feature › should restore all notes when filter is cleared
+[1A[2K[8/8] [chromium] › e2e/refined_zero-shot.spec.ts:94:3 › Tag Filter Feature › should update count in heading to reflect filtered results
+[1A[2K  8 passed (5.3s)
+
+
+=== STDERR ===
+

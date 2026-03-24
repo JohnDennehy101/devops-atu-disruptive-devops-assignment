@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › filter by tag shows only matching notes
+[1A[2K[2/5] [chromium] › e2e/refined_few-shot.spec.ts:30:1 › filter by tag is case-insensitive
+[1A[2K[3/5] [chromium] › e2e/refined_few-shot.spec.ts:47:1 › filter by tag with partial match
+[1A[2K[4/5] [chromium] › e2e/refined_few-shot.spec.ts:61:1 › filter input is visible in sidebar
+[1A[2K[5/5] [chromium] › e2e/refined_few-shot.spec.ts:67:1 › no notes yet message shows when no notes exist and filter is empty
+[1A[2K  5 passed (3.2s)
+
+
+=== STDERR ===
+

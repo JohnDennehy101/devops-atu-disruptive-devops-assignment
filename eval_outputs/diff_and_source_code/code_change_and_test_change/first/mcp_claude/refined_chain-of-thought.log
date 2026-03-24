@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:11:3 › Clear all notes and description text › displays description text below heading
+[1A[2K[2/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:17:3 › Clear all notes and description text › does not show Clear all button when there are no notes
+[1A[2K[3/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:23:3 › Clear all notes and description text › shows Clear all button when notes exist
+[1A[2K[4/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:32:3 › Clear all notes and description text › can clear all notes from sidebar
+[1A[2K[5/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:49:3 › Clear all notes and description text › clear all removes notes from localStorage
+[1A[2K[6/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:67:3 › Clear all notes and description text › clear all with multiple notes removes all of them
+[1A[2K[7/7] [chromium] › e2e/refined_chain-of-thought.spec.ts:87:3 › Clear all notes and description text › form is reset after clearing all notes
+[1A[2K  7 passed (4.7s)
+
+
+=== STDERR ===
+

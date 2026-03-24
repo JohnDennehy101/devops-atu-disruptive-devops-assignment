@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › Copy button copies note body to clipboard
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:28:3 › Note Taking App › Copy button is visible in note details view
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:40:3 › Note Taking App › Copy button is not visible when no note is selected
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:44:3 › Note Taking App › Copy button copies correct body after selecting different notes
+[1A[2K  4 passed (3.3s)
+
+
+=== STDERR ===
+

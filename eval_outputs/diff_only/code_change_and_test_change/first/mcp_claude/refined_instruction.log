@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page - Notes Management › displays subtitle text about local storage
+[1A[2K[2/8] [chromium] › e2e/refined_instruction.spec.ts:14:3 › Home Page - Notes Management › displays note count in sidebar heading
+[1A[2K[3/8] [chromium] › e2e/refined_instruction.spec.ts:18:3 › Home Page - Notes Management › does not show Clear all button when there are no notes
+[1A[2K[4/8] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Home Page - Notes Management › shows Clear all button after creating a note
+[1A[2K[5/8] [chromium] › e2e/refined_instruction.spec.ts:32:3 › Home Page - Notes Management › can clear all notes from sidebar
+[1A[2K[6/8] [chromium] › e2e/refined_instruction.spec.ts:43:3 › Home Page - Notes Management › Clear all button disappears after clearing notes
+[1A[2K[7/8] [chromium] › e2e/refined_instruction.spec.ts:54:3 › Home Page - Notes Management › can clear multiple notes at once
+[1A[2K[8/8] [chromium] › e2e/refined_instruction.spec.ts:75:3 › Home Page - Notes Management › form fields are reset after clearing all notes
+[1A[2K  8 passed (4.4s)
+
+
+=== STDERR ===
+

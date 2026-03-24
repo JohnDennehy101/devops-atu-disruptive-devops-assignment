@@ -1,0 +1,99 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag Filter Feature', () => {
+  const createNote = async (page, title: string, body: string, tags: string) => {
+    await page.getByRole('textbox', { name: 'Title' }).fill(title);
+    await page.getByRole('textbox', { name: 'Body' }).fill(body);
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill(tags);
+    await page.getByRole('button', { name: 'Create Note' }).click();
+  };
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display the tag filter input', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute('placeholder', 'Filter by tag');
+  });
+
+  test('should show "No notes yet" when no notes exist and filter is empty', async ({ page }) => {
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('should show all notes when filter is empty', async ({ page }) => {
+    await createNote(page, 'Note A', 'Body A', 'javascript, react');
+    await createNote(page, 'Note B', 'Body B', 'python, devops');
+
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (2)');
+  });
+
+  test('should filter notes by tag', async ({ page }) => {
+    await createNote(page, 'JS Note', 'Body', 'javascript, react');
+    await createNote(page, 'Python Note', 'Body', 'python, devops');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('python');
+
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (1)');
+  });
+
+  test('should show "No notes match the filter" when no tags match', async ({ page }) => {
+    await createNote(page, 'Test Note', 'Body', 'javascript');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistent');
+
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (0)');
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should perform case-insensitive tag filtering', async ({ page }) => {
+    await createNote(page, 'Test Note', 'Body', 'JavaScript');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('javascript');
+
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (1)');
+  });
+
+  test('should support partial tag matching', async ({ page }) => {
+    await createNote(page, 'Test Note', 'Body', 'javascript');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('java');
+
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (1)');
+  });
+
+  test('should restore all notes when filter is cleared', async ({ page }) => {
+    await createNote(page, 'Note A', 'Body A', 'javascript');
+    await createNote(page, 'Note B', 'Body B', 'python');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+
+    await filterInput.fill('python');
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (1)');
+
+    await filterInput.fill('');
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (2)');
+  });
+
+  test('should update count in heading based on filtered results', async ({ page }) => {
+    await createNote(page, 'Note 1', 'Body', 'react, frontend');
+    await createNote(page, 'Note 2', 'Body', 'react, backend');
+    await createNote(page, 'Note 3', 'Body', 'python, backend');
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+
+    await filterInput.fill('react');
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (2)');
+
+    await filterInput.fill('backend');
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (2)');
+
+    await filterInput.fill('python');
+    await expect(page.getByRole('heading', { level: 3 })).toContainText('Your Notes (1)');
+  });
+});

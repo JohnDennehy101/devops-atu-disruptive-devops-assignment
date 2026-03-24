@@ -1,0 +1,50 @@
+import { test, expect } from '@playwright/test';
+
+test('copy button copies note body to clipboard', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('http://localhost:5175');
+
+  // Create a note so we have something to copy
+  await page.getByLabel('Title').fill('Clipboard Test Note');
+  await page.getByLabel('Body').fill('This is the body to copy');
+  await page.getByLabel('Tags').fill('test');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Wait for the note to appear in the sidebar and click it
+  const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+  await noteButton.click();
+
+  // Verify Note Details section is visible with the Copy button
+  await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+  // Click the Copy button
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  // Verify clipboard contains the note body
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('This is the body to copy');
+});
+
+test('copy button is not visible when no note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+});
+
+test('copy button is not visible when editing a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a note
+  await page.getByLabel('Title').fill('Edit Mode Test');
+  await page.getByLabel('Body').fill('Some body text');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Select the note
+  const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+  await noteButton.click();
+  await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+  // Click Edit — Copy button should disappear
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+});

@@ -1,0 +1,104 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Clear All Notes Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("shows subtitle text about local storage", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally."),
+    ).toBeVisible()
+  })
+
+  test("does not show Clear all button when there are no notes", async ({ page }) => {
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("shows Clear all button after creating a note", async ({ page }) => {
+    await page.getByLabel("Title").fill("Test note")
+    await page.getByLabel("Body").fill("Test body")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByText("Clear all")).toBeVisible()
+  })
+
+  test("Clear all removes all notes from the sidebar", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note one")
+    await page.getByLabel("Body").fill("Body one")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByLabel("Title").fill("Note two")
+    await page.getByLabel("Body").fill("Body two")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    await page.getByText("Clear all").click()
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByText("Clear all")).not.toBeVisible()
+  })
+
+  test("Clear all clears localStorage noteIds", async ({ page }) => {
+    await page.getByLabel("Title").fill("Persist test")
+    await page.getByLabel("Body").fill("Body text")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByText("Clear all").click()
+
+    const storedIds = await page.evaluate(() => {
+      const raw = localStorage.getItem("noteIds")
+      return raw ? JSON.parse(raw) : null
+    })
+    expect(storedIds).toEqual([])
+  })
+
+  test("Clear all resets the form fields", async ({ page }) => {
+    await page.getByLabel("Title").fill("Will be cleared")
+    await page.getByLabel("Body").fill("Body content")
+    await page.getByLabel(/Tags/).fill("tag1, tag2")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    // Select the note to populate form
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+    await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+
+    // Click edit to enter editing mode
+    await page.getByText("Edit").click()
+    await expect(page.getByRole("heading", { name: "Edit Note" })).toBeVisible()
+
+    // Clear all should reset everything
+    await page.getByText("Clear all").click()
+
+    await expect(page.getByLabel("Title")).toHaveValue("")
+    await expect(page.getByLabel("Body")).toHaveValue("")
+    await expect(page.getByLabel(/Tags/)).toHaveValue("")
+    await expect(
+      page.getByRole("heading", { name: "Create New Note" }),
+    ).toBeVisible()
+  })
+
+  test("notes remain cleared after page reload", async ({ page }) => {
+    await page.getByLabel("Title").fill("Reload test")
+    await page.getByLabel("Body").fill("Body here")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByText("Clear all").click()
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+
+    await page.reload()
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByText("Clear all")).not.toBeVisible()
+  })
+})

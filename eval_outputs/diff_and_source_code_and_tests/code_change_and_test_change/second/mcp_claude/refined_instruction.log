@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Body Character Count › shows body character count and updates when typing
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:18:3 › Body Character Count › character count resets to zero when body is cleared
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:25:3 › Body Character Count › character count resets after creating a note
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:33:3 › Body Character Count › character count reflects long text accurately
+[1A[2K  4 passed (3.0s)
+
+
+=== STDERR ===
+

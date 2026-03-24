@@ -1,0 +1,38 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character count', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('shows initial character count of 0', async ({ page }) => {
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('updates character count when typing in Body field', async ({ page }) => {
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+    await page.getByLabel('Body').fill('Hello');
+    await expect(page.getByText('5 / 5000')).toBeVisible();
+  });
+
+  test('updates character count as text changes', async ({ page }) => {
+    await page.getByLabel('Body').fill('Hello');
+    await expect(page.getByText('5 / 5000')).toBeVisible();
+    await page.getByLabel('Body').fill('Hello world');
+    await expect(page.getByText('11 / 5000')).toBeVisible();
+  });
+
+  test('resets character count when body is cleared', async ({ page }) => {
+    await page.getByLabel('Body').fill('Some text');
+    await expect(page.getByText('9 / 5000')).toBeVisible();
+    await page.getByLabel('Body').fill('');
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('character count is displayed near the Body field', async ({ page }) => {
+    const bodyLabel = page.getByLabel('Body');
+    const charCount = page.getByText('0 / 5000');
+    await expect(bodyLabel).toBeVisible();
+    await expect(charCount).toBeVisible();
+  });
+});

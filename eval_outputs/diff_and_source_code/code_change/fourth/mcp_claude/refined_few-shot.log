@@ -1,0 +1,104 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/refined_few-shot.spec.ts:8:3 › Tag filter on Your Notes sidebar › filter by tag input is visible
+[1A[2K[2/6] [chromium] › e2e/refined_few-shot.spec.ts:12:3 › Tag filter on Your Notes sidebar › shows all saved notes when filter is empty
+[1A[2K[3/6] [chromium] › e2e/refined_few-shot.spec.ts:19:3 › Tag filter on Your Notes sidebar › filters notes by tag and updates count
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:19:3 › Tag filter on Your Notes sidebar › filters notes by tag and updates count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      25 |     await page.getByPlaceholder('Filter by tag').fill('zzz_nonexistent_tag');
+      26 |     await expect(heading).toContainText('Your Notes (0)');
+    > 27 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      28 |
+      29 |     // Clear the filter to restore all notes
+      30 |     await page.getByPlaceholder('Filter by tag').fill('');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:27:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-84aa0-es-by-tag-and-updates-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-84aa0-es-by-tag-and-updates-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-84aa0-es-by-tag-and-updates-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-84aa0-es-by-tag-and-updates-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-84aa0-es-by-tag-and-updates-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/6] [chromium] › e2e/refined_few-shot.spec.ts:35:3 › Tag filter on Your Notes sidebar › shows "No notes match the filter" when tag filter has no matches
+[1A[2K  2) [chromium] › e2e/refined_few-shot.spec.ts:35:3 › Tag filter on Your Notes sidebar › shows "No notes match the filter" when tag filter has no matches 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      35 |   test('shows "No notes match the filter" when tag filter has no matches', async ({ page }) => {
+      36 |     await page.getByPlaceholder('Filter by tag').fill('unmatchable_tag_xyz');
+    > 37 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      38 |     const noteButtons = page.locator('button', { hasText: /^Note #/ });
+      39 |     await expect(noteButtons).toHaveCount(0);
+      40 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:37:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-9e0c4-n-tag-filter-has-no-matches-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-9e0c4-n-tag-filter-has-no-matches-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-9e0c4-n-tag-filter-has-no-matches-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-9e0c4-n-tag-filter-has-no-matches-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/mcp_claude/artefacts/refined_few-shot/refined_few-shot-Tag-filte-9e0c4-n-tag-filter-has-no-matches-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/6] [chromium] › e2e/refined_few-shot.spec.ts:42:3 › Tag filter on Your Notes sidebar › creates a note with a tag then filters by that tag
+[1A[2K[6/6] [chromium] › e2e/refined_few-shot.spec.ts:67:3 › Tag filter on Your Notes sidebar › tag filter is case-insensitive
+[1A[2K  2 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:19:3 › Tag filter on Your Notes sidebar › filters notes by tag and updates count 
+    [chromium] › e2e/refined_few-shot.spec.ts:35:3 › Tag filter on Your Notes sidebar › shows "No notes match the filter" when tag filter has no matches 
+  4 passed (16.0s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,92 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('Copy button is visible when a note is selected', async ({ page }) => {
+    // Create a note first
+    await page.getByLabel('Title').fill('Copy Test Note');
+    await page.getByLabel('Body').fill('Body content to copy');
+    await page.getByLabel('Tags').fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Wait for note to appear in the sidebar and click it
+    const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+    await noteButton.waitFor();
+    await noteButton.click();
+
+    // Verify note details are shown with Copy button
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+
+  test('Copy button is not visible when no note is selected', async ({ page }) => {
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+  });
+
+  test('Copy button copies the note body to clipboard', async ({ context, page }) => {
+    // Grant clipboard permissions
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+    // Create a note with specific body content
+    const bodyText = 'This is the body text to be copied';
+    await page.getByLabel('Title').fill('Clipboard Test');
+    await page.getByLabel('Body').fill(bodyText);
+    await page.getByLabel('Tags').fill('clipboard');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Select the note
+    const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+    await noteButton.waitFor();
+    await noteButton.click();
+
+    // Wait for note details to load
+    await expect(page.getByText(`Body: ${bodyText}`)).toBeVisible();
+
+    // Click the Copy button
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    // Verify clipboard contents
+    const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardContent).toBe(bodyText);
+  });
+
+  test('Copy button disappears when entering edit mode', async ({ page }) => {
+    // Create a note
+    await page.getByLabel('Title').fill('Edit Mode Test');
+    await page.getByLabel('Body').fill('Some body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Select the note
+    const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+    await noteButton.waitFor();
+    await noteButton.click();
+
+    // Verify Copy button is visible
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+
+    // Click Edit to enter edit mode
+    await page.getByRole('button', { name: 'Edit' }).click();
+
+    // Copy button should no longer be visible (note details panel hides during edit)
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+  });
+
+  test('Copy button appears alongside Edit button in note details', async ({ page }) => {
+    // Create a note
+    await page.getByLabel('Title').fill('Layout Test');
+    await page.getByLabel('Body').fill('Layout body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    // Select the note
+    const noteButton = page.getByRole('button', { name: /Note #/ }).last();
+    await noteButton.waitFor();
+    await noteButton.click();
+
+    // Both Edit and Copy buttons should be visible in the details panel
+    await expect(page.getByRole('button', { name: 'Edit' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+});

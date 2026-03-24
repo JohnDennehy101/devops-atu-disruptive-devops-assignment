@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Body character counter › shows 0 / 5000 when body is empty
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:14:3 › Body character counter › updates character count as user types
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Body character counter › shows correct count for longer text
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Body character counter › resets counter after creating a note
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:35:3 › Body character counter › counter reflects body content when editing a note
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:35:3 › Body character counter › counter reflects body content when editing a note 
+
+    Error: locator.click: Error: strict mode violation: getByRole('link', { name: 'Edit' }).or(getByText('Edit')) resolved to 2 elements:
+        1) <button class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Edit</button> aka getByRole('button', { name: 'Edit' })
+        2) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Title: Edit test')
+
+    Call log:
+    [2m  - waiting for getByRole('link', { name: 'Edit' }).or(getByText('Edit'))[22m
+
+
+      41 |     await expect(page.getByText('Title: Edit test')).toBeVisible();
+      42 |
+    > 43 |     await page.getByRole('link', { name: 'Edit' }).or(page.getByText('Edit')).click();
+         |                                                                               ^
+      44 |     await expect(page.getByText('13 / 5000')).toBeVisible();
+      45 |   });
+      46 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:43:79
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Body-cha-05b10-content-when-editing-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Body-cha-05b10-content-when-editing-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Body-cha-05b10-content-when-editing-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Body-cha-05b10-content-when-editing-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Body-cha-05b10-content-when-editing-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:35:3 › Body character counter › counter reflects body content when editing a note 
+  4 passed (3.4s)
+
+
+=== STDERR ===
+

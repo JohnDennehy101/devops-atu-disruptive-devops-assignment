@@ -1,0 +1,292 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Tag Filter Functionality › should display the filter by tag input
+[1A[2K[2/8] [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter Functionality › should show all saved notes when filter is empty
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter Functionality › should show all saved notes when filter is empty 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      20 |     expect(match).toBeTruthy();
+      21 |     const count = parseInt(match![1], 10);
+    > 22 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      23 |   });
+      24 |
+      25 |   test('should filter notes by tag and update the count', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:22:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-b5643--notes-when-filter-is-empty-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-b5643--notes-when-filter-is-empty-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-b5643--notes-when-filter-is-empty-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-b5643--notes-when-filter-is-empty-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-b5643--notes-when-filter-is-empty-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/8] [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Tag Filter Functionality › should filter notes by tag and update the count
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Tag Filter Functionality › should filter notes by tag and update the count 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button').filter({ hasText: /Note #/ }).first()[22m
+
+
+      31 |     // Click on a note to see its tags
+      32 |     const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    > 33 |     await firstNoteButton.click();
+         |                           ^
+      34 |     const tagsText = await page.locator('text=/Tags:.*/')
+      35 |       .first()
+      36 |       .textContent();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:33:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-75194-by-tag-and-update-the-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-75194-by-tag-and-update-the-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-75194-by-tag-and-update-the-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-75194-by-tag-and-update-the-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-75194-by-tag-and-update-the-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/8] [chromium] › e2e/refined_zero-shot.spec.ts:51:3 › Tag Filter Functionality › should show "No notes match the filter" for non-matching tag
+[1A[2K  3) [chromium] › e2e/refined_zero-shot.spec.ts:51:3 › Tag Filter Functionality › should show "No notes match the filter" for non-matching tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      58 |
+      59 |     // Should show the no-match message
+    > 60 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      61 |   });
+      62 |
+      63 |   test('should restore all notes when filter is cleared', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:60:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-02bc9-filter-for-non-matching-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-02bc9-filter-for-non-matching-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-02bc9-filter-for-non-matching-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-02bc9-filter-for-non-matching-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-02bc9-filter-for-non-matching-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/8] [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Tag Filter Functionality › should restore all notes when filter is cleared
+[1A[2K  4) [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Tag Filter Functionality › should restore all notes when filter is cleared 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      69 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+      70 |     await filterInput.fill('nonexistenttag12345');
+    > 71 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      72 |
+      73 |     // Clear the filter
+      74 |     await filterInput.clear();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:71:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-bddb3-otes-when-filter-is-cleared-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-bddb3-otes-when-filter-is-cleared-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-bddb3-otes-when-filter-is-cleared-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-bddb3-otes-when-filter-is-cleared-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-bddb3-otes-when-filter-is-cleared-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/8] [chromium] › e2e/refined_zero-shot.spec.ts:82:3 › Tag Filter Functionality › should filter case-insensitively
+[1A[2K  5) [chromium] › e2e/refined_zero-shot.spec.ts:82:3 › Tag Filter Functionality › should filter case-insensitively 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button').filter({ hasText: /Note #/ }).first()[22m
+
+
+      83 |     // Click a note to find a tag
+      84 |     const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    > 85 |     await firstNoteButton.click();
+         |                           ^
+      86 |     const tagsText = await page.locator('text=/Tags:.*/')
+      87 |       .first()
+      88 |       .textContent();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:85:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-481f7-d-filter-case-insensitively-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-481f7-d-filter-case-insensitively-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-481f7-d-filter-case-insensitively-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-481f7-d-filter-case-insensitively-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-481f7-d-filter-case-insensitively-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/8] [chromium] › e2e/refined_zero-shot.spec.ts:102:3 › Tag Filter Functionality › should support partial tag matching
+[1A[2K  6) [chromium] › e2e/refined_zero-shot.spec.ts:102:3 › Tag Filter Functionality › should support partial tag matching 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button').filter({ hasText: /Note #/ }).first()[22m
+
+
+      103 |     // Click a note to find a tag
+      104 |     const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    > 105 |     await firstNoteButton.click();
+          |                           ^
+      106 |     const tagsText = await page.locator('text=/Tags:.*/')
+      107 |       .first()
+      108 |       .textContent();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:105:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-563f2-upport-partial-tag-matching-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-563f2-upport-partial-tag-matching-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-563f2-upport-partial-tag-matching-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-563f2-upport-partial-tag-matching-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-563f2-upport-partial-tag-matching-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[8/8] [chromium] › e2e/refined_zero-shot.spec.ts:122:3 › Tag Filter Functionality › should not show "No notes yet" when notes exist but filter has no matches
+[1A[2K  7) [chromium] › e2e/refined_zero-shot.spec.ts:122:3 › Tag Filter Functionality › should not show "No notes yet" when notes exist but filter has no matches 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      125 |     const initialText = await heading.textContent();
+      126 |     const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1], 10);
+    > 127 |     expect(initialCount).toBeGreaterThan(0);
+          |                          ^
+      128 |
+      129 |     // Apply a non-matching filter
+      130 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:127:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-56654-t-but-filter-has-no-matches-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-56654-t-but-filter-has-no-matches-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-56654-t-but-filter-has-no-matches-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-56654-t-but-filter-has-no-matches-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-56654-t-but-filter-has-no-matches-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  7 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter Functionality › should show all saved notes when filter is empty 
+    [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Tag Filter Functionality › should filter notes by tag and update the count 
+    [chromium] › e2e/refined_zero-shot.spec.ts:51:3 › Tag Filter Functionality › should show "No notes match the filter" for non-matching tag 
+    [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Tag Filter Functionality › should restore all notes when filter is cleared 
+    [chromium] › e2e/refined_zero-shot.spec.ts:82:3 › Tag Filter Functionality › should filter case-insensitively 
+    [chromium] › e2e/refined_zero-shot.spec.ts:102:3 › Tag Filter Functionality › should support partial tag matching 
+    [chromium] › e2e/refined_zero-shot.spec.ts:122:3 › Tag Filter Functionality › should not show "No notes yet" when notes exist but filter has no matches 
+  1 passed (1.4m)
+
+
+=== STDERR ===
+
