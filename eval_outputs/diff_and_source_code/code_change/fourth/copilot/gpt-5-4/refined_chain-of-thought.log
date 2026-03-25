@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › filters saved notes by tag in the Your Notes sidebar
+[1A[2K  1 passed (1.5s)
+
+
+=== STDERR ===
+

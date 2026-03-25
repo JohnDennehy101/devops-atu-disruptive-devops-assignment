@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › filters saved notes by tag and shows matching count and empty-filter state
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:52:1 › shows no notes yet when there are no saved notes
+[1A[2K  2 passed (1.7s)
+
+
+=== STDERR ===
+

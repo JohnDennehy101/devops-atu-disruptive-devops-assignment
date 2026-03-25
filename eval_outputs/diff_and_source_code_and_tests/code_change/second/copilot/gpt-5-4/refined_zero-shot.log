@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › shows body character count and updates as user types
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Note Taking App › resets body character count after creating a note
+[1A[2K  2 passed (1.6s)
+
+
+=== STDERR ===
+

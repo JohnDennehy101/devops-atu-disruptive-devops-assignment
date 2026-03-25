@@ -1,0 +1,34 @@
+import { test, expect } from "@playwright/test"
+
+test("can clear all notes from the sidebar and reset the form state", async ({ page }) => {
+  await page.goto("http://localhost:5175")
+  await page.evaluate(() => localStorage.clear())
+  await page.reload()
+
+  await page.getByLabel("Title").fill("Note to clear")
+  await page.getByLabel("Body").fill("Body to clear")
+  await page.getByLabel(/Tags/).fill("tag1, tag2")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await expect(page.getByText("Your Notes (1)")).toBeVisible()
+  await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible()
+
+  await page.getByRole("button", { name: /Note #\d+/ }).click()
+  await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+
+  await page.getByRole("button", { name: "Edit" }).click()
+  await expect(page.getByRole("heading", { name: "Edit Note" })).toBeVisible()
+
+  await page.getByRole("button", { name: "Clear all" }).click()
+
+  await expect(page.getByText("Your Notes (0)")).toBeVisible()
+  await expect(page.getByText("No notes yet")).toBeVisible()
+  await expect(page.getByRole("button", { name: "Clear all" })).toHaveCount(0)
+  await expect(page.getByRole("heading", { name: "Create New Note" })).toBeVisible()
+  await expect(page.getByLabel("Title")).toHaveValue("")
+  await expect(page.getByLabel("Body")).toHaveValue("")
+  await expect(page.getByLabel(/Tags/)).toHaveValue("")
+
+  const noteIds = await page.evaluate(() => localStorage.getItem("noteIds"))
+  expect(noteIds).toBe("[]")
+})

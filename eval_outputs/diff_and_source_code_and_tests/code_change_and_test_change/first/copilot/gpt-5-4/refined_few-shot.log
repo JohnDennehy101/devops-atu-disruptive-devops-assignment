@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › shows description text on the home page
+[1A[2K[2/2] [chromium] › e2e/refined_few-shot.spec.ts:16:3 › Note Taking App › can clear all notes from sidebar
+[1A[2K  2 passed (1.7s)
+
+
+=== STDERR ===
+

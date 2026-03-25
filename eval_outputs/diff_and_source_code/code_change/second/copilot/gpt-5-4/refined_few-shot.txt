@@ -1,0 +1,13 @@
+import { test, expect } from '@playwright/test';
+
+test('shows live body character count out of 5000', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  await page.fill('#note-body', 'Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+
+  await page.fill('#note-body', '12345');
+  await expect(page.getByText('5 / 5000')).toBeVisible();
+});

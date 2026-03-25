@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all removes saved notes and resets the selected note and form state', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.fill('#note-title', 'First note');
+  await page.fill('#note-body', 'Body for first note');
+  await page.fill('#note-tags', 'tag1, tag2');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByText(/Your Notes \(1\)/)).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+  await page.getByRole('button', { name: /Note #/ }).click();
+  await expect(page.getByText('Note Details')).toBeVisible();
+  await expect(page.locator('#note-title')).toHaveValue('First note');
+  await expect(page.locator('#note-body')).toHaveValue('Body for first note');
+  await expect(page.locator('#note-tags')).toHaveValue('tag1, tag2');
+
+  await page.getByRole('button', { name: 'Clear all' }).click();
+
+  await expect(page.getByText(/Your Notes \(0\)/)).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Clear all' })).toHaveCount(0);
+  await expect(page.getByText('Note Details')).toHaveCount(0);
+  await expect(page.locator('#note-title')).toHaveValue('');
+  await expect(page.locator('#note-body')).toHaveValue('');
+  await expect(page.locator('#note-tags')).toHaveValue('');
+
+  await page.reload();
+  await expect(page.getByText(/Your Notes \(0\)/)).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+});

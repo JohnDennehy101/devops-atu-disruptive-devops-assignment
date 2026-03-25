@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag on Home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const saveButtons = page.getByRole('button', { name: /save/i });
+  const saveCount = await saveButtons.count();
+
+  if (saveCount >= 2) {
+    await saveButtons.nth(0).click();
+    await saveButtons.nth(1).click();
+  } else if (saveCount === 1) {
+    await saveButtons.nth(0).click();
+  }
+
+  await expect(page.getByText(/Your Notes \(\d+\)/)).toBeVisible();
+
+  const filterInput = page.getByRole('textbox', { name: /filter by tag/i }).or(page.getByPlaceholder('Filter by tag'));
+  await expect(filterInput).toBeVisible();
+
+  const notesCountText = await page.getByText(/Your Notes \(\d+\)/).textContent();
+  expect(notesCountText).toBeTruthy();
+
+  await filterInput.fill('nonexistent-tag-xyz');
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  await expect(page.getByText(/Your Notes \(0\)/)).toBeVisible();
+
+  await filterInput.fill('');
+  await expect(page.getByText(/Your Notes \(\d+\)/)).toBeVisible();
+});

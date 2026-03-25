@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › filter by tag shows only matching notes
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › filter by tag shows only matching notes ────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.waitFor: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByText('Home') to be visible[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |
+    > 6 |   await page.getByText('Home').waitFor();
+        |                                ^
+      7 |
+      8 |   await page.getByRole('textbox', { name: 'Title' }).fill('Work note');
+      9 |   await page.getByRole('textbox', { name: 'Body' }).fill('Body one');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:6:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-filter-by-tag-shows-only-matching-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-filter-by-tag-shows-only-matching-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-filter-by-tag-shows-only-matching-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/fourth/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-filter-by-tag-shows-only-matching-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › filter by tag shows only matching notes ─────
+
+
+=== STDERR ===
+

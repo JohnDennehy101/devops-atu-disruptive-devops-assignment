@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:12:3 › Home page clear all notes UI › shows helper text and hides Clear all when there are no saved notes
+[1A[2K[2/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:20:3 › Home page clear all notes UI › shows Clear all when notes exist and clears saved notes plus form/detail state
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:20:3 › Home page clear all notes UI › shows Clear all when notes exist and clears saved notes plus form/detail state 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Test note')
+    Expected: visible
+    Error: strict mode violation: getByText('Test note') resolved to 3 elements:
+        1) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">This is a test note body</textarea> aka getByRole('textbox', { name: 'Body' })
+        2) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Title: Test note')
+        3) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Body: This is a test note body')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Test note')[22m
+
+
+      32 |
+      33 |     await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    > 34 |     await expect(page.getByText('Test note')).toBeVisible();
+         |                                               ^
+      35 |
+      36 |     await page.getByRole('button', { name: 'Clear all' }).click();
+      37 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:34:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-cf152-otes-plus-form-detail-state-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-cf152-otes-plus-form-detail-state-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-cf152-otes-plus-form-detail-state-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-cf152-otes-plus-form-detail-state-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-cf152-otes-plus-form-detail-state-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:20:3 › Home page clear all notes UI › shows Clear all when notes exist and clears saved notes plus form/detail state 
+  1 passed (1.7s)
+
+
+=== STDERR ===
+

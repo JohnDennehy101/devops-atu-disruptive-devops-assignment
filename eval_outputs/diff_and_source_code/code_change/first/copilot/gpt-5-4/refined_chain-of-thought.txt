@@ -1,0 +1,49 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page clear all notes UI', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => {
+      localStorage.clear();
+    });
+    await page.reload();
+  });
+
+  test('shows helper text and hides Clear all when there are no saved notes', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+    await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toHaveCount(0);
+  });
+
+  test('shows Clear all when notes exist and clears saved notes plus form/detail state', async ({ page }) => {
+    await page.getByLabel('Title').fill('Test note');
+    await page.getByLabel('Body').fill('This is a test note body');
+    await page.getByLabel('Tags (comma-separated)').fill('tag1, tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText(/Your Notes \(1\)/)).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+    const noteButton = page.getByRole('button', { name: /Note #\d+/ });
+    await expect(noteButton).toBeVisible();
+    await noteButton.click();
+
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    await expect(page.getByText('Test note')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toHaveCount(0);
+    await expect(page.getByLabel('Title')).toHaveValue('');
+    await expect(page.getByLabel('Body')).toHaveValue('');
+    await expect(page.getByLabel('Tags (comma-separated)')).toHaveValue('');
+
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(noteIds).toBe('[]');
+  });
+});
