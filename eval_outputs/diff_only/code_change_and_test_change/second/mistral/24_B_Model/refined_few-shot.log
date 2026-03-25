@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows body character count and updates when typing
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows body character count and updates when typing 
+
+    Error: locator.fill: Unknown engine "label" while parsing selector label=Body
+    Call log:
+    [2m  - waiting for locator('label=Body')[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   await expect(page.locator('text=0 / 5000')).toBeVisible();
+    > 6 |   await page.locator('label=Body').fill('Hello');
+        |                                    ^
+      7 |   await expect(page.locator('text=5 / 5000')).toBeVisible();
+      8 |   await page.locator('label=Body').fill('Hello world');
+      9 |   await expect(page.locator('text=11 / 5000')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:6:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-shows-bod-37f8c-unt-and-updates-when-typing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-shows-bod-37f8c-unt-and-updates-when-typing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-shows-bod-37f8c-unt-and-updates-when-typing-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-shows-bod-37f8c-unt-and-updates-when-typing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-shows-bod-37f8c-unt-and-updates-when-typing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows body character count and updates when typing 
+
+
+=== STDERR ===
+

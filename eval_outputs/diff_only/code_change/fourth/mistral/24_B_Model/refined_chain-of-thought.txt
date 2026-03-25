@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('Filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify that the filter input field is present
+  const filterInput = await page.locator('input[placeholder="Filter by tag"]');
+  await expect(filterInput).toBeVisible();
+
+  // Enter a tag in the filter input field
+  await filterInput.fill('exampleTag');
+
+  // Verify that the notes displayed match the filter criteria
+  const filteredNotes = await page.locator('text=exampleTag');
+  await expect(filteredNotes).toBeVisible();
+
+  // Clear the filter input field
+  await filterInput.fill('');
+
+  // Verify that all notes are displayed again
+  const allNotes = await page.locator('text=Your Notes');
+  await expect(allNotes).toBeVisible();
+});

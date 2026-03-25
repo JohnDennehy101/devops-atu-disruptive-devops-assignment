@@ -1,0 +1,14 @@
+import { test, expect } from '@playwright/test';
+
+test('delete button is initially disabled', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const deleteButton = page.locator('#delete-button');
+  await expect(deleteButton).toBeDisabled();
+});
+
+test('delete button is enabled after selection', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('#select-item').click();
+  const deleteButton = page.locator('#delete-button');
+  await expect(deleteButton).toBeEnabled();
+});

@@ -1,0 +1,39 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the correct number of notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const noteCount = await page.getByRole('heading', { name: new RegExp(`Your Notes \\\((\\d+)\\)`) }).textContent();
+  expect(noteCount).toContain('Your Notes (0)');
+});
+
+test('should clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('button', { name: 'Clear all' }).click();
+  const noteCount = await page.getByRole('heading', { name: new RegExp(`Your Notes \\\((\\d+)\\)`) }).textContent();
+  expect(noteCount).toContain('Your Notes (0)');
+});
+
+test('should display the note details when a note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('button', { name: 'Note #1' }).click();
+  const noteDetails = await page.getByRole('heading', { name: 'Note Details' }).textContent();
+  expect(noteDetails).toBe('Note Details');
+});
+
+test('should allow editing of a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('button', { name: 'Note #1' }).click();
+  await page.getByRole('button', { name: 'Edit' }).click();
+  const editNoteTitle = await page.getByRole('textbox', { name: 'Title' }).inputValue();
+  expect(editNoteTitle).toBe('Note Title');
+});
+
+test('should create a new note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('textbox', { name: 'Title' }).fill('New Note Title');
+  await page.getByRole('textbox', { name: 'Body' }).fill('New Note Body');
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('tag1, tag2');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+  const noteCount = await page.getByRole('heading', { name: new RegExp(`Your Notes \\\((\\d+)\\)`) }).textContent();
+  expect(noteCount).toContain('Your Notes (1)');
+});

@@ -1,0 +1,20 @@
+import { test, expect } from '@playwright/test';
+
+test('should clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a note
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('text=Create Note');
+
+  // Verify the note is created
+  await expect(page.locator('text=Note #1')).toBeVisible();
+
+  // Clear all notes
+  await page.click('text=Clear all');
+
+  // Verify all notes are cleared
+  await expect(page.locator('text=No notes yet')).toBeVisible();
+});

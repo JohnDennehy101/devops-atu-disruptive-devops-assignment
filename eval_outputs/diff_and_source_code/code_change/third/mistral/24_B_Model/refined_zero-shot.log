@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ───────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Note #1')[22m
+
+
+       5 |
+       6 |   // Select a note
+    >  7 |   await page.click('text=Note #1');
+         |              ^
+       8 |
+       9 |   // Wait for the note details to load
+      10 |   await page.waitForSelector('text=Note Details');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ────────────
+
+
+=== STDERR ===
+

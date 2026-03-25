@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('test copy note body functionality on Home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.click('text=Copy');
+  await page.waitForTimeout(1000);
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardContent).toBe('Note body content');
+});
+
+test('test copy note body functionality on Note page', async ({ page }) => {
+  await page.goto('http://localhost:5175/note');
+  await page.click('text=Copy');
+  await page.waitForTimeout(1000);
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardContent).toBe('Note body content');
+});

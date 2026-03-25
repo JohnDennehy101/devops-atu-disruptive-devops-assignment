@@ -1,0 +1,16 @@
+import { test, expect } from '@playwright/test';
+
+test('test clear all notes button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the "Clear all" button is present
+  const clearAllButton = await page.locator('button:has-text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+
+  // Click the "Clear all" button
+  await clearAllButton.click();
+
+  // Verify that the notes are cleared
+  const notesSection = await page.locator('div:has-text("Your Notes")');
+  await expect(notesSection).toContainText('No notes yet');
+});

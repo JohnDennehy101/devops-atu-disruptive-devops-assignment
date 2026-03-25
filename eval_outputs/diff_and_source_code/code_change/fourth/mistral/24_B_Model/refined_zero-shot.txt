@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('test tag filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Add a note with a specific tag
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'testTag');
+  await page.click('text=Create Note');
+
+  // Verify the note is added
+  await expect(page.locator('text=Note #1')).toBeVisible();
+
+  // Filter notes by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'testTag');
+
+  // Verify the filtered note is visible
+  await expect(page.locator('text=Note #1')).toBeVisible();
+
+  // Clear the filter
+  await page.fill('input[placeholder="Filter by tag"]', '');
+
+  // Verify all notes are visible again
+  await expect(page.locator('text=Note #1')).toBeVisible();
+});

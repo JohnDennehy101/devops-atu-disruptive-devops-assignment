@@ -1,0 +1,52 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › should display the character count
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:12:3 › About Page › should display the character count
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:12:3 › About Page › should display the character count 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.textContent: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+
+
+      12 |   test('should display the character count', async ({ page }) => {
+      13 |     await page.goto('http://localhost:5175/about');
+    > 14 |     const characterCount = await page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1').textContent();
+         |                                                                                                    ^
+      15 |     expect(characterCount).toContain('/ 5000');
+      16 |   });
+      17 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:14:100
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-About-Pa-a0758-display-the-character-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-About-Pa-a0758-display-the-character-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-About-Pa-a0758-display-the-character-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-About-Pa-a0758-display-the-character-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/mistral/24_B_Model/artefacts/refined_zero-shot/refined_zero-shot-About-Pa-a0758-display-the-character-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:12:3 › About Page › should display the character count 
+  1 passed (22.1s)
+
+
+=== STDERR ===
+

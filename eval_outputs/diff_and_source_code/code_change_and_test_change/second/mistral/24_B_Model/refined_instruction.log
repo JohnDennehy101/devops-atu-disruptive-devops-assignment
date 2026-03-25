@@ -1,0 +1,262 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page › shows body character count and updates when typing
+[1A[2K[2/7] [chromium] › e2e/refined_instruction.spec.ts:16:3 › Home Page › displays error message when creating a note with empty title
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:16:3 › Home Page › displays error message when creating a note with empty title 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Title is required')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Title is required')[22m
+
+
+      18 |     await page.getByLabel("Body").fill("Test body");
+      19 |     await page.getByRole("button", { name: "Create Note" }).click();
+    > 20 |     await expect(page.getByText("Title is required")).toBeVisible();
+         |                                                       ^
+      21 |   });
+      22 |
+      23 |   test("displays error message when creating a note with empty body", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:20:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-de36d-ing-a-note-with-empty-title-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-de36d-ing-a-note-with-empty-title-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-de36d-ing-a-note-with-empty-title-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-de36d-ing-a-note-with-empty-title-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-de36d-ing-a-note-with-empty-title-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/7] [chromium] › e2e/refined_instruction.spec.ts:23:3 › Home Page › displays error message when creating a note with empty body
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:23:3 › Home Page › displays error message when creating a note with empty body 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Body is required')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Body is required')[22m
+
+
+      25 |     await page.getByLabel("Body").fill("");
+      26 |     await page.getByRole("button", { name: "Create Note" }).click();
+    > 27 |     await expect(page.getByText("Body is required")).toBeVisible();
+         |                                                      ^
+      28 |   });
+      29 |
+      30 |   test("displays success message when creating a note successfully", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:27:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-03801-ting-a-note-with-empty-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-03801-ting-a-note-with-empty-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-03801-ting-a-note-with-empty-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-03801-ting-a-note-with-empty-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-03801-ting-a-note-with-empty-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/7] [chromium] › e2e/refined_instruction.spec.ts:30:3 › Home Page › displays success message when creating a note successfully
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:30:3 › Home Page › displays success message when creating a note successfully 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Note created successfully')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Note created successfully')[22m
+
+
+      32 |     await page.getByLabel("Body").fill("Test body");
+      33 |     await page.getByRole("button", { name: "Create Note" }).click();
+    > 34 |     await expect(page.getByText("Note created successfully")).toBeVisible();
+         |                                                               ^
+      35 |   });
+      36 |
+      37 |   test("displays note details when a note is selected", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:34:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-b9897-reating-a-note-successfully-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-b9897-reating-a-note-successfully-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-b9897-reating-a-note-successfully-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-b9897-reating-a-note-successfully-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-b9897-reating-a-note-successfully-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/7] [chromium] › e2e/refined_instruction.spec.ts:37:3 › Home Page › displays note details when a note is selected
+[1A[2K  4) [chromium] › e2e/refined_instruction.spec.ts:37:3 › Home Page › displays note details when a note is selected 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Note #1' })[22m
+
+
+      36 |
+      37 |   test("displays note details when a note is selected", async ({ page }) => {
+    > 38 |     await page.getByRole("button", { name: "Note #1" }).click();
+         |                                                         ^
+      39 |     await expect(page.getByText("Note Details")).toBeVisible();
+      40 |     await expect(page.getByText("ID: 1")).toBeVisible();
+      41 |     await expect(page.getByText("Title: Test title")).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:38:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-215c5-ils-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-215c5-ils-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-215c5-ils-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-215c5-ils-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-P-215c5-ils-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/7] [chromium] › e2e/refined_instruction.spec.ts:48:3 › Home Page › allows editing a note
+[1A[2K  5) [chromium] › e2e/refined_instruction.spec.ts:48:3 › Home Page › allows editing a note ─────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Note #1' })[22m
+
+
+      47 |
+      48 |   test("allows editing a note", async ({ page }) => {
+    > 49 |     await page.getByRole("button", { name: "Note #1" }).click();
+         |                                                         ^
+      50 |     await page.getByRole("button", { name: "Edit" }).click();
+      51 |     await expect(page.getByText("Edit Note")).toBeVisible();
+      52 |     await page.getByLabel("Title").fill("Updated title");
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:49:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-editing-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-editing-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-editing-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-editing-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-editing-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/7] [chromium] › e2e/refined_instruction.spec.ts:58:3 › Home Page › allows deleting a note
+[1A[2K  6) [chromium] › e2e/refined_instruction.spec.ts:58:3 › Home Page › allows deleting a note ────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Note #1' })[22m
+
+
+      57 |
+      58 |   test("allows deleting a note", async ({ page }) => {
+    > 59 |     await page.getByRole("button", { name: "Note #1" }).click();
+         |                                                         ^
+      60 |     await page.getByRole("button", { name: "Delete" }).click();
+      61 |     await page.on('dialog', dialog => dialog.accept());
+      62 |     await expect(page.getByText("Note deleted successfully")).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:59:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-deleting-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-deleting-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-deleting-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-deleting-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change_and_test_change/second/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-allows-deleting-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  6 failed
+    [chromium] › e2e/refined_instruction.spec.ts:16:3 › Home Page › displays error message when creating a note with empty title 
+    [chromium] › e2e/refined_instruction.spec.ts:23:3 › Home Page › displays error message when creating a note with empty body 
+    [chromium] › e2e/refined_instruction.spec.ts:30:3 › Home Page › displays success message when creating a note successfully 
+    [chromium] › e2e/refined_instruction.spec.ts:37:3 › Home Page › displays note details when a note is selected 
+    [chromium] › e2e/refined_instruction.spec.ts:48:3 › Home Page › allows editing a note ──────────
+    [chromium] › e2e/refined_instruction.spec.ts:58:3 › Home Page › allows deleting a note ─────────
+  1 passed (1.4m)
+
+
+=== STDERR ===
+

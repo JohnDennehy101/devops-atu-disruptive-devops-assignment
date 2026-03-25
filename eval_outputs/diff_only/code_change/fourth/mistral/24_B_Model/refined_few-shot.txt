@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+
+test('filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('input[placeholder="Filter by tag"]', 'exampleTag');
+  await expect(page.locator('text=No notes match the filter')).toBeVisible();
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  await expect(page.locator('text=No notes match the filter')).toBeHidden();
+});

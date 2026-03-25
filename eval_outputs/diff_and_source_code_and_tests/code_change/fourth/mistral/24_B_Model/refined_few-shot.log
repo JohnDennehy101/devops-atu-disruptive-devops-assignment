@@ -1,0 +1,93 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/5] [chromium] › e2e/refined_few-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/5] [chromium] › e2e/refined_few-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/5] [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can filter notes by tag ────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Filter by tag')[22m
+
+
+      51 |     await page.getByRole("button", { name: "Create Note" }).click()
+      52 |
+    > 53 |     await page.getByLabel("Filter by tag").fill("filter")
+         |                                            ^
+      54 |     await expect(page.getByText("Your Notes (1)")).toBeVisible()
+      55 |     await expect(page.getByText("No notes match the filter")).toBeHidden()
+      56 |   })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:53:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taking-App-can-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_few-shot.spec.ts:58:3 › Note Taking App › displays 'No notes match the filter' when no notes match the filter
+[1A[2K  2) [chromium] › e2e/refined_few-shot.spec.ts:58:3 › Note Taking App › displays 'No notes match the filter' when no notes match the filter 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Filter by tag')[22m
+
+
+      62 |     await page.getByRole("button", { name: "Create Note" }).click()
+      63 |
+    > 64 |     await page.getByLabel("Filter by tag").fill("non-existent-tag")
+         |                                            ^
+      65 |     await expect(page.getByText("Your Notes (0)")).toBeVisible()
+      66 |     await expect(page.getByText("No notes match the filter")).toBeVisible()
+      67 |   })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:64:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-63cdb-n-no-notes-match-the-filter-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-63cdb-n-no-notes-match-the-filter-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-63cdb-n-no-notes-match-the-filter-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-63cdb-n-no-notes-match-the-filter-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-63cdb-n-no-notes-match-the-filter-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can filter notes by tag ─────
+    [chromium] › e2e/refined_few-shot.spec.ts:58:3 › Note Taking App › displays 'No notes match the filter' when no notes match the filter 
+  3 passed (44.4s)
+
+
+=== STDERR ===
+

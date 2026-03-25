@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-24T21:34:47.344224",
+        "model_id": "mistralai/Mistral-Small-24B-Instruct-2501",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 19.113,
+            "tokens_per_sec": 9.16,
+            "input_token_count": 502,
+            "output_token_count": 175,
+            "total_token_count": 677
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n-import React from \"react\"\n+import React, { useMemo } from \"react\"\n+  const [tagFilter, setTagFilter] = useState(\"\")\n+  const [allNotes, setAllNotes] = useState<Note[]>([])\n+  useEffect(() => {\n+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))\n+  }, [savedIds])\n+\n+  const displayedIds = useMemo(() => {\n+    if (!tagFilter.trim()) return savedIds\n+    const lower = tagFilter.trim().toLowerCase()\n+    return allNotes\n+      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))\n+      .map(n => n.id)\n+  }, [savedIds, allNotes, tagFilter])\n+\n-              Your Notes ({savedIds.length})\n+              Your Notes ({displayedIds.length})\n+            <input\n+              type=\"text\"\n+              placeholder=\"Filter by tag\"\n+              value={tagFilter}\n+              onChange={e => setTagFilter(e.target.value)}\n+              className=\"w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500\"\n+            />\n-              {savedIds.length === 0 ? (\n+              {displayedIds.length === 0 ? (\n-                  No notes yet\n+                  {savedIds.length === 0\n+                    ? \"No notes yet\"\n+                    : \"No notes match the filter\"}\n-                savedIds.map(id => (\n+                displayedIds.map(id => (\n\n",
+            "raw_response": "### GIT DIFF END\n\nimport { test, expect } from '@playwright/test';\n\ntest('Home page should display notes with filter', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const notesText = page.getByRole('heading', { name: /Your Notes/ });\n  await expect(notesText).toBeVisible();\n\n  const filterInput = page.getByPlaceholder('Filter by tag');\n  await filterInput.fill('tag1');\n\n  const noNotesText = page.getByText('No notes match the filter');\n  await expect(noNotesText).toBeVisible();\n\n  await filterInput.fill('');\n  const notesTextAfterClear = page.getByRole('heading', { name: /Your Notes/ });\n  await expect(notesTextAfterClear).toBeVisible();\n});",
+            "extracted_code": "### GIT DIFF END\n\nimport { test, expect } from '@playwright/test';\n\ntest('Home page should display notes with filter', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const notesText = page.getByRole('heading', { name: /Your Notes/ });\n  await expect(notesText).toBeVisible();\n\n  const filterInput = page.getByPlaceholder('Filter by tag');\n  await filterInput.fill('tag1');\n\n  const noNotesText = page.getByText('No notes match the filter');\n  await expect(noNotesText).toBeVisible();\n\n  await filterInput.fill('');\n  const notesTextAfterClear = page.getByRole('heading', { name: /Your Notes/ });\n  await expect(notesTextAfterClear).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

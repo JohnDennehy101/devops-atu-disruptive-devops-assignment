@@ -1,0 +1,131 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display the correct number of notes
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:9:1 › should clear all notes
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:9:1 › should clear all notes ─────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Clear all' })[22m
+
+
+       9 | test('should clear all notes', async ({ page }) => {
+      10 |   await page.goto('http://localhost:5175');
+    > 11 |   await page.getByRole('button', { name: 'Clear all' }).click();
+         |                                                         ^
+      12 |   const noteCount = await page.getByRole('heading', { name: new RegExp(`Your Notes \\\((\\d+)\\)`) }).textContent();
+      13 |   expect(noteCount).toContain('Your Notes (0)');
+      14 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:11:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:16:1 › should display the note details when a note is selected
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:16:1 › should display the note details when a note is selected 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Note #1' })[22m
+
+
+      16 | test('should display the note details when a note is selected', async ({ page }) => {
+      17 |   await page.goto('http://localhost:5175');
+    > 18 |   await page.getByRole('button', { name: 'Note #1' }).click();
+         |                                                       ^
+      19 |   const noteDetails = await page.getByRole('heading', { name: 'Note Details' }).textContent();
+      20 |   expect(noteDetails).toBe('Note Details');
+      21 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:18:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-136ea-ils-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-136ea-ils-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-136ea-ils-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-136ea-ils-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-136ea-ils-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:23:1 › should allow editing of a note
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:23:1 › should allow editing of a note ────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Note #1' })[22m
+
+
+      23 | test('should allow editing of a note', async ({ page }) => {
+      24 |   await page.goto('http://localhost:5175');
+    > 25 |   await page.getByRole('button', { name: 'Note #1' }).click();
+         |                                                       ^
+      26 |   await page.getByRole('button', { name: 'Edit' }).click();
+      27 |   const editNoteTitle = await page.getByRole('textbox', { name: 'Title' }).inputValue();
+      28 |   expect(editNoteTitle).toBe('Note Title');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:25:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-allow-editing-of-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-allow-editing-of-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-allow-editing-of-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-allow-editing-of-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-should-allow-editing-of-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:31:1 › should create a new note
+[1A[2K  3 failed
+    [chromium] › e2e/refined_instruction.spec.ts:9:1 › should clear all notes ──────────────────────
+    [chromium] › e2e/refined_instruction.spec.ts:16:1 › should display the note details when a note is selected 
+    [chromium] › e2e/refined_instruction.spec.ts:23:1 › should allow editing of a note ─────────────
+  2 passed (1.1m)
+
+
+=== STDERR ===
+

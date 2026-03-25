@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('test character count display', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.fill('#note-body', 'a'.repeat(5000));
+  await page.fill('#note-tags', 'tag1, tag2, tag3');
+
+  const characterCountElement = await page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCountElement).toHaveText('5000 / 5000');
+});
