@@ -46,9 +46,43 @@ if not API_KEY:
     logger.error("FATAL: API_KEY environment variable is missing!")
     raise ValueError("API_KEY environment variable is required")
 
+def load_model(model_id):
+    logger.info(f"Loading model: {model_id}")
+    path = snapshot_download(repo_id=model_id)
+
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.bfloat16,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True
+    )
+
+    logger.info("Loading tokenizer and model")
+    tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
+    model = AutoModelForCausalLM.from_pretrained(
+        path,
+        quantization_config=quantization_config,
+        device_map="auto",
+        trust_remote_code=True,
+        attn_implementation="eager"
+    )
+
+    model_cache[model_id] = pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer
+    )
+    logger.info(f"Model {model_id} loaded.")
+
+@app.on_event("startup")
+async def preload_model():
+    default_model = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-Coder-1.5B-Instruct")
+    logger.info(f"Preloading default model: {default_model}")
+    load_model(default_model)
+
 @app.get("/health")
 async def health():
-    return {"status": "ok"}
+    return {"status": "ok", "model_loaded": len(model_cache) > 0}
 
 @app.post("/generate-test")
 async def generate(
@@ -61,34 +95,9 @@ async def generate(
 
     model_id = payload.get("model_id", os.getenv("MODEL_NAME", "Qwen/Qwen2.5-Coder-1.5B-Instruct"))
     diff = payload.get("diff", "")
-    
+
     if model_id not in model_cache:
-        logger.info(f"Loading model: {model_id}")
-        path = snapshot_download(repo_id=model_id)
-        
-        quantization_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_compute_dtype=torch.bfloat16, 
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_use_double_quant=True
-        )
-        
-        logger.info("Loading tokenizer and model")
-        tokenizer = AutoTokenizer.from_pretrained(path, trust_remote_code=True)
-        model = AutoModelForCausalLM.from_pretrained(
-            path, 
-            quantization_config=quantization_config,
-            device_map="auto",
-            trust_remote_code=True,
-            attn_implementation="eager" # Avoids the CUBLAS_STATUS_INVALID_VALUE
-        )
-        
-        model_cache[model_id] = pipeline(
-            "text-generation", 
-            model=model, 
-            tokenizer=tokenizer
-        )
-        logger.info(f"Model {model_id} loaded.")
+        load_model(model_id)
     
     pipe = model_cache[model_id]
     prompt = payload.get("prompt", f"### Instruction:\nAnalyze the git diff and write a Playwright test.\n\n### Diff:\n{diff}\n\n### Response:\n")
