@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for note body
+[1A[2K[2/3] [chromium] › e2e/refined_zero-shot.spec.ts:20:1 › character count should update when editing existing note
+[1A[2K[3/3] [chromium] › e2e/refined_zero-shot.spec.ts:38:1 › character count should reset when cancelling edit
+[1A[2K  3 passed (1.9s)
+
+
+=== STDERR ===
+

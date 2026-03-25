@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for form body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  const textarea = page.locator('textarea[name="formBody"]');
+  await expect(textarea).toBeVisible();
+  
+  const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(counter).toBeVisible();
+  
+  await expect(counter).toHaveText('0 / 5000');
+  
+  await textarea.fill('Hello World');
+  await expect(counter).toHaveText('11 / 5000');
+  
+  await textarea.fill('A'.repeat(100));
+  await expect(counter).toHaveText('100 / 5000');
+  
+  await textarea.fill('A'.repeat(5000));
+  await expect(counter).toHaveText('5000 / 5000');
+});

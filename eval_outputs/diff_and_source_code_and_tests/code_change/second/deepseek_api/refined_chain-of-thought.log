@@ -1,0 +1,106 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App - Character Counter › should display character counter for note body field
+[1A[2K[2/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update as user types in body field
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update as user types in body field 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"3[7m3[27m / 5000"[39m
+    Received: [31m"3[7m2[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">32 / 5000</p>[22m
+    [2m      - unexpected value "32 / 5000"[22m
+
+
+      25 |
+      26 |     await bodyTextarea.fill('This is a longer note body text.');
+    > 27 |     await expect(counter).toHaveText('33 / 5000');
+         |                           ^
+      28 |
+      29 |     await bodyTextarea.fill('');
+      30 |     await expect(counter).toHaveText('0 / 5000');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-e0af6-as-user-types-in-body-field-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-e0af6-as-user-types-in-body-field-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-e0af6-as-user-types-in-body-field-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-e0af6-as-user-types-in-body-field-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-e0af6-as-user-types-in-body-field-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:33:3 › Note Taking App - Character Counter › character counter should reflect existing note body when editing
+[1A[2K  2) [chromium] › e2e/refined_chain-of-thought.spec.ts:33:3 › Note Taking App - Character Counter › character counter should reflect existing note body when editing 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"4[7m5[27m / 5000"[39m
+    Received: [31m"4[7m2[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">42 / 5000</p>[22m
+    [2m      - unexpected value "42 / 5000"[22m
+
+
+      41 |
+      42 |     const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+    > 43 |     await expect(counter).toHaveText('45 / 5000');
+         |                           ^
+      44 |
+      45 |     const bodyTextarea = page.getByLabel('Body');
+      46 |     await bodyTextarea.fill('Updated body with different length');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:43:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-19712-ting-note-body-when-editing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-19712-ting-note-body-when-editing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-19712-ting-note-body-when-editing-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-19712-ting-note-body-when-editing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-N-19712-ting-note-body-when-editing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:50:3 › Note Taking App - Character Counter › character counter should reset when form is cleared
+[1A[2K  2 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update as user types in body field 
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:33:3 › Note Taking App - Character Counter › character counter should reflect existing note body when editing 
+  2 passed (14.8s)
+
+
+=== STDERR ===
+

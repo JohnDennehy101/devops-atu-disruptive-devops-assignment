@@ -1,0 +1,78 @@
+import { test, expect } from '@playwright/test';
+
+test('should display Clear all button when notes exist and clear all notes when clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const notesHeading = page.locator('h3:has-text("Your Notes")');
+  await expect(notesHeading).toBeVisible();
+  await expect(notesHeading).toContainText('Your Notes (0)');
+  await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+
+  const titleInput = page.locator('input[placeholder="Title"]');
+  const bodyTextarea = page.locator('textarea[placeholder="Body"]');
+  const saveButton = page.locator('button:has-text("Save")');
+
+  await titleInput.fill('Test Note');
+  await bodyTextarea.fill('Test content');
+  await saveButton.click();
+
+  await expect(notesHeading).toContainText('Your Notes (1)');
+  const clearAllButton = page.locator('button:has-text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+
+  await clearAllButton.click();
+
+  await expect(notesHeading).toContainText('Your Notes (0)');
+  await expect(clearAllButton).not.toBeVisible();
+  await expect(titleInput).toHaveValue('');
+  await expect(bodyTextarea).toHaveValue('');
+});
+
+test('should clear all notes and reset form when Clear all is clicked with multiple notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const titleInput = page.locator('input[placeholder="Title"]');
+  const bodyTextarea = page.locator('textarea[placeholder="Body"]');
+  const saveButton = page.locator('button:has-text("Save")');
+
+  await titleInput.fill('First Note');
+  await bodyTextarea.fill('First content');
+  await saveButton.click();
+
+  await titleInput.fill('Second Note');
+  await bodyTextarea.fill('Second content');
+  await saveButton.click();
+
+  const notesHeading = page.locator('h3:has-text("Your Notes")');
+  await expect(notesHeading).toContainText('Your Notes (2)');
+
+  const clearAllButton = page.locator('button:has-text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+  await clearAllButton.click();
+
+  await expect(notesHeading).toContainText('Your Notes (0)');
+  await expect(clearAllButton).not.toBeVisible();
+  await expect(titleInput).toHaveValue('');
+  await expect(bodyTextarea).toHaveValue('');
+});
+
+test('should persist clear all action after page reload', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const titleInput = page.locator('input[placeholder="Title"]');
+  const bodyTextarea = page.locator('textarea[placeholder="Body"]');
+  const saveButton = page.locator('button:has-text("Save")');
+
+  await titleInput.fill('Persistent Note');
+  await bodyTextarea.fill('Persistent content');
+  await saveButton.click();
+
+  const clearAllButton = page.locator('button:has-text("Clear all")');
+  await clearAllButton.click();
+
+  await page.reload();
+
+  const notesHeading = page.locator('h3:has-text("Your Notes")');
+  await expect(notesHeading).toContainText('Your Notes (0)');
+  await expect(clearAllButton).not.toBeVisible();
+});

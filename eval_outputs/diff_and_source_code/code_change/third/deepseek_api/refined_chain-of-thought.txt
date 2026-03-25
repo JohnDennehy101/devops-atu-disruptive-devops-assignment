@@ -1,0 +1,45 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('#note-title').fill('Test Note Title');
+  await page.locator('#note-body').fill('This is the note body content to be copied.');
+  await page.locator('#note-tags').fill('test, copy');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.locator('button:has-text("Note #")').first()).toBeVisible();
+  await page.locator('button:has-text("Note #")').first().click();
+
+  await expect(page.locator('text=Note Details')).toBeVisible();
+  await expect(page.locator('text=Body: This is the note body content to be copied.')).toBeVisible();
+
+  const copyButton = page.locator('button:has-text("Copy")');
+  await expect(copyButton).toBeVisible();
+
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+  await copyButton.click();
+
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('This is the note body content to be copied.');
+});
+
+test('Copy button should not be visible when no note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.locator('button:has-text("Copy")')).not.toBeVisible();
+});
+
+test('Copy button should not be visible when editing a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('#note-title').fill('Test Note');
+  await page.locator('#note-body').fill('Test body');
+  await page.locator('#note-tags').fill('test');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await page.locator('button:has-text("Note #")').first().click();
+  await page.getByRole('button', { name: 'Edit' }).click();
+
+  await expect(page.locator('button:has-text("Copy")')).not.toBeVisible();
+});

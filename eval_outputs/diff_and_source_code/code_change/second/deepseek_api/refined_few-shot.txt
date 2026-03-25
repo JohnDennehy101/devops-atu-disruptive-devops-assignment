@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('shows character count for note body textarea', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  const textarea = page.locator('#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  
+  await expect(characterCount).toBeVisible();
+  await expect(characterCount).toContainText('0 / 5000');
+  
+  await textarea.fill('Hello');
+  await expect(characterCount).toContainText('5 / 5000');
+  
+  await textarea.fill('A'.repeat(5000));
+  await expect(characterCount).toContainText('5000 / 5000');
+});

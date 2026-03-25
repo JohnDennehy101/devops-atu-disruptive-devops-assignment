@@ -1,0 +1,52 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+  await expect(characterCount).toBeVisible();
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  await bodyTextarea.fill('Hello, world!');
+  await expect(characterCount).toHaveText('13 / 5000');
+
+  const longText = 'A'.repeat(100);
+  await bodyTextarea.fill(longText);
+  await expect(characterCount).toHaveText('100 / 5000');
+});
+
+test('character count should update when editing existing note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+  await bodyTextarea.fill('Initial text');
+  await expect(characterCount).toHaveText('12 / 5000');
+
+  const editButton = page.locator('button:has-text("Edit")');
+  if (await editButton.isVisible()) {
+    await editButton.click();
+    await expect(characterCount).toBeVisible();
+    await bodyTextarea.fill('Updated text');
+    await expect(characterCount).toHaveText('12 / 5000');
+  }
+});
+
+test('character count should reset when cancelling edit', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  const cancelButton = page.locator('button:has-text("Cancel")');
+
+  await bodyTextarea.fill('Some text');
+  await expect(characterCount).toHaveText('9 / 5000');
+
+  if (await cancelButton.isVisible()) {
+    await cancelButton.click();
+    await expect(characterCount).toHaveText('0 / 5000');
+  }
+});

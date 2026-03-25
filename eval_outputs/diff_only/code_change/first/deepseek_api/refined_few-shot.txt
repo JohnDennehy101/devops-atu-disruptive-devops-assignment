@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all button appears when there are notes and clears everything when clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+  await expect(clearAllButton).toBeHidden();
+
+  await page.getByRole('textbox', { name: /title/i }).fill('Test Note');
+  await page.getByRole('textbox', { name: /body/i }).fill('Test body content');
+  await page.getByRole('button', { name: /save/i }).click();
+
+  await expect(clearAllButton).toBeVisible();
+  
+  await clearAllButton.click();
+  
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByRole('textbox', { name: /title/i })).toHaveValue('');
+  await expect(page.getByRole('textbox', { name: /body/i })).toHaveValue('');
+  await expect(page.getByRole('textbox', { name: /tags/i })).toHaveValue('');
+});

@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+
+test('shows character count for form body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const textarea = page.locator('textarea[name="formBody"]');
+  await textarea.fill('Hello, world!');
+  await expect(page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toContainText('13 / 5000');
+  await textarea.fill('A'.repeat(100));
+  await expect(page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toContainText('100 / 5000');
+});

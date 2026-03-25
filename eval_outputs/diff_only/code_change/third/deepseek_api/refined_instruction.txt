@@ -1,0 +1,59 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page Copy Button', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+    await page.goto('http://localhost:5175');
+
+    const noteItem = page.getByRole('listitem').first();
+    await noteItem.click();
+
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).toBeVisible();
+
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+    await copyButton.click();
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBeTruthy();
+  });
+
+  test('Copy button should be visible only when a note is selected', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).not.toBeVisible();
+
+    const noteItem = page.getByRole('listitem').first();
+    await noteItem.click();
+
+    await expect(copyButton).toBeVisible();
+  });
+
+  test('should copy the correct note body text', async ({ page, context }) => {
+    await page.goto('http://localhost:5175');
+
+    const noteItems = page.getByRole('listitem');
+    const noteCount = await noteItems.count();
+
+    for (let i = 0; i < Math.min(noteCount, 3); i++) {
+      const noteItem = noteItems.nth(i);
+      await noteItem.click();
+
+      const noteBodyElement = page.getByRole('article').first();
+      const expectedText = await noteBodyElement.textContent();
+
+      await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+      const copyButton = page.getByRole('button', { name: 'Copy' });
+      await copyButton.click();
+
+      const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+      expect(clipboardText).toBe(expectedText);
+    }
+  });
+});

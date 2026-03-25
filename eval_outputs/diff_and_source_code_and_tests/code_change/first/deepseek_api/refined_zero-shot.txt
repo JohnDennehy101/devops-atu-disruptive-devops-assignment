@@ -1,0 +1,74 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App - Clear All Notes', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('should show "Clear all" button only when there are notes', async ({ page }) => {
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+
+    await page.getByLabel('Title').fill('Test note');
+    await page.getByLabel('Body').fill('Test body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    await page.getByLabel('Title').fill('First note');
+    await page.getByLabel('Body').fill('First body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Second note');
+    await page.getByLabel('Body').fill('Second body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(2);
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('should reset form fields after clearing all notes', async ({ page }) => {
+    await page.getByLabel('Title').fill('Note title');
+    await page.getByLabel('Body').fill('Note body');
+    await page.getByLabel(/Tags/).fill('tag1, tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+
+    await expect(page.getByLabel('Title')).toHaveValue('Note title');
+    await expect(page.getByLabel('Body')).toHaveValue('Note body');
+    await expect(page.getByLabel(/Tags/)).toHaveValue('tag1, tag2');
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByLabel('Title')).toHaveValue('');
+    await expect(page.getByLabel('Body')).toHaveValue('');
+    await expect(page.getByLabel(/Tags/)).toHaveValue('');
+    await expect(page.getByRole('heading', { name: 'Create New Note' })).toBeVisible();
+  });
+
+  test('should clear localStorage noteIds after clearing all notes', async ({ page }) => {
+    await page.getByLabel('Title').fill('Persisted note');
+    await page.getByLabel('Body').fill('Persisted body');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const noteIdsBefore = await page.evaluate(() => JSON.parse(localStorage.getItem('noteIds') || '[]'));
+    expect(noteIdsBefore).toHaveLength(1);
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    const noteIdsAfter = await page.evaluate(() => JSON.parse(localStorage.getItem('noteIds') || '[]'));
+    expect(noteIdsAfter).toHaveLength(0);
+  });
+});

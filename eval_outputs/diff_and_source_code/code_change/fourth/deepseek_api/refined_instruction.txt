@@ -1,0 +1,64 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page tag filtering', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display tag filter input and filter notes', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute('placeholder', 'Filter by tag');
+    await expect(filterInput).toBeEditable();
+  });
+
+  test('should show correct note count in header', async ({ page }) => {
+    const notesHeader = page.getByRole('heading', { name: /your notes \(\d+\)/i });
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should display "No notes yet" when no saved notes exist', async ({ page }) => {
+    const notesSection = page.getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..');
+    const emptyState = notesSection.getByText('No notes yet');
+    await expect(emptyState).toBeVisible();
+  });
+
+  test('should display "No notes match the filter" when filter yields no results', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await filterInput.fill('nonexistenttag');
+    
+    const notesSection = page.getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..');
+    const noMatchText = notesSection.getByText('No notes match the filter');
+    await expect(noMatchText).toBeVisible();
+  });
+
+  test('should filter notes based on tag input', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    
+    await filterInput.fill('important');
+    
+    const notesSection = page.getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..');
+    const noteButtons = notesSection.getByRole('button', { name: /note #\d+/i });
+    
+    await expect(noteButtons).toHaveCount(0);
+  });
+
+  test('should update note count when filter is applied', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    const notesHeader = page.getByRole('heading', { name: /your notes \(\d+\)/i });
+    
+    const initialCount = await notesHeader.textContent();
+    await filterInput.fill('work');
+    
+    await expect(notesHeader).not.toHaveText(initialCount!);
+  });
+
+  test('should clear filter when input is emptied', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    
+    await filterInput.fill('work');
+    await filterInput.clear();
+    
+    await expect(filterInput).toHaveValue('');
+  });
+});

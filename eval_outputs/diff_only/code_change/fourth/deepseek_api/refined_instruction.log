@@ -1,0 +1,104 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page Tag Filter › should display tag filter input and initial note count
+[1A[2K[2/6] [chromium] › e2e/refined_instruction.spec.ts:17:3 › Home Page Tag Filter › should show "No notes yet" when there are no saved notes
+[1A[2K[3/6] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Home Page Tag Filter › should filter notes by tag when typing in filter input
+[1A[2K[4/6] [chromium] › e2e/refined_instruction.spec.ts:28:3 › Home Page Tag Filter › should update note count when filter is applied
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:28:3 › Home Page Tag Filter › should update note count when filter is applied 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      33 |     await filterInput.fill('work');
+      34 |     
+    > 35 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      36 |     
+      37 |     const updatedCount = await notesHeader.textContent();
+      38 |     expect(updatedCount).not.toBe(initialCount);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:35:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-04412-ount-when-filter-is-applied-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-04412-ount-when-filter-is-applied-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-04412-ount-when-filter-is-applied-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-04412-ount-when-filter-is-applied-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-04412-ount-when-filter-is-applied-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/6] [chromium] › e2e/refined_instruction.spec.ts:41:3 › Home Page Tag Filter › should clear filter and show all notes
+[1A[2K[6/6] [chromium] › e2e/refined_instruction.spec.ts:50:3 › Home Page Tag Filter › should display filtered notes only
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:50:3 › Home Page Tag Filter › should display filtered notes only 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      56 |     
+      57 |     if (count === 0) {
+    > 58 |       await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                                 ^
+      59 |     } else {
+      60 |       for (let i = 0; i < count; i++) {
+      61 |         const note = noteItems.nth(i);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:58:65
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-633f5-display-filtered-notes-only-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-633f5-display-filtered-notes-only-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-633f5-display-filtered-notes-only-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-633f5-display-filtered-notes-only-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-633f5-display-filtered-notes-only-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:28:3 › Home Page Tag Filter › should update note count when filter is applied 
+    [chromium] › e2e/refined_instruction.spec.ts:50:3 › Home Page Tag Filter › should display filtered notes only 
+  4 passed (13.5s)
+
+
+=== STDERR ===
+

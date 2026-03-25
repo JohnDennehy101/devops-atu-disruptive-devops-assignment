@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all button appears when there are notes and clears all notes when clicked
+[1A[2K  1 passed (1.3s)
+
+
+=== STDERR ===
+

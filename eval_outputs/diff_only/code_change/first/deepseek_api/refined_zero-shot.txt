@@ -1,0 +1,78 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page notes management', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display "Clear all" button when there are notes', async ({ page }) => {
+    const noteTitleInput = page.getByPlaceholder('Note title');
+    const noteBodyInput = page.getByPlaceholder('Note content');
+    const saveButton = page.getByRole('button', { name: 'Save' });
+
+    await noteTitleInput.fill('Test Note');
+    await noteBodyInput.fill('Test content');
+    await saveButton.click();
+
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).toBeVisible();
+    await expect(clearAllButton).toHaveClass(/text-red-600/);
+  });
+
+  test('should not display "Clear all" button when there are no notes', async ({ page }) => {
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await expect(clearAllButton).toBeHidden();
+  });
+
+  test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+    const noteTitleInput = page.getByPlaceholder('Note title');
+    const noteBodyInput = page.getByPlaceholder('Note content');
+    const saveButton = page.getByRole('button', { name: 'Save' });
+
+    await noteTitleInput.fill('First Note');
+    await noteBodyInput.fill('First content');
+    await saveButton.click();
+
+    await noteTitleInput.fill('Second Note');
+    await noteBodyInput.fill('Second content');
+    await saveButton.click();
+
+    const notesCount = page.getByText('Your Notes (2)');
+    await expect(notesCount).toBeVisible();
+
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await clearAllButton.click();
+
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(clearAllButton).toBeHidden();
+    await expect(noteTitleInput).toBeEmpty();
+    await expect(noteBodyInput).toBeEmpty();
+  });
+
+  test('should clear form and selection when clearing all notes', async ({ page }) => {
+    const noteTitleInput = page.getByPlaceholder('Note title');
+    const noteBodyInput = page.getByPlaceholder('Note content');
+    const tagsInput = page.getByPlaceholder('Tags (comma separated)');
+    const saveButton = page.getByRole('button', { name: 'Save' });
+
+    await noteTitleInput.fill('Note with tags');
+    await noteBodyInput.fill('Note body');
+    await tagsInput.fill('important, todo');
+    await saveButton.click();
+
+    const noteItem = page.getByText('Note with tags').first();
+    await noteItem.click();
+
+    await expect(noteTitleInput).toHaveValue('Note with tags');
+    await expect(noteBodyInput).toHaveValue('Note body');
+    await expect(tagsInput).toHaveValue('important, todo');
+
+    const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+    await clearAllButton.click();
+
+    await expect(noteTitleInput).toBeEmpty();
+    await expect(noteBodyInput).toBeEmpty();
+    await expect(tagsInput).toBeEmpty();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  });
+});

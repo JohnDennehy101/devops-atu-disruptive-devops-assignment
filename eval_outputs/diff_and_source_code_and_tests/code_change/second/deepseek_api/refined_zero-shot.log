@@ -1,0 +1,152 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App - Character Counter › should display character counter for note body
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update when typing in body field
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update when typing in body field 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"3[7m3[27m / 5000"[39m
+    Received: [31m"3[7m2[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">32 / 5000</p>[22m
+    [2m      - unexpected value "32 / 5000"[22m
+
+
+      25 |
+      26 |     await bodyTextarea.fill('This is a longer note body text.');
+    > 27 |     await expect(counter).toHaveText('33 / 5000');
+         |                           ^
+      28 |   });
+      29 |
+      30 |   test('character counter should reset when creating a note', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:27:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-23e99-e-when-typing-in-body-field-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-23e99-e-when-typing-in-body-field-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-23e99-e-when-typing-in-body-field-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-23e99-e-when-typing-in-body-field-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-23e99-e-when-typing-in-body-field-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Note Taking App - Character Counter › character counter should reset when creating a note
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Note Taking App - Character Counter › character counter should reset when creating a note 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"2[7m6[27m / 5000"[39m
+    Received: [31m"2[7m5[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">25 / 5000</p>[22m
+    [2m      - unexpected value "25 / 5000"[22m
+
+
+      35 |     await bodyTextarea.fill('This is the body content.');
+      36 |     await page.getByLabel(/Tags/).fill('test');
+    > 37 |     await expect(counter).toHaveText('26 / 5000');
+         |                           ^
+      38 |
+      39 |     await page.getByRole('button', { name: 'Create Note' }).click();
+      40 |     await expect(bodyTextarea).toHaveValue('');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:37:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-08dd0--reset-when-creating-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-08dd0--reset-when-creating-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-08dd0--reset-when-creating-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-08dd0--reset-when-creating-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-08dd0--reset-when-creating-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:44:3 › Note Taking App - Character Counter › character counter should show correct count when editing a note
+[1A[2K  3) [chromium] › e2e/refined_zero-shot.spec.ts:44:3 › Note Taking App - Character Counter › character counter should show correct count when editing a note 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"3[7m7[27m / 5000"[39m
+    Received: [31m"3[7m4[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">34 / 5000</p>[22m
+    [2m      - unexpected value "34 / 5000"[22m
+
+
+      56 |     const bodyTextarea = page.getByLabel('Body');
+      57 |     await bodyTextarea.fill('Updated body with more characters.');
+    > 58 |     await expect(counter).toHaveText('37 / 5000');
+         |                           ^
+      59 |   });
+      60 |
+      61 |   test('character counter should update when clearing body field', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:58:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-c203a-t-count-when-editing-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-c203a-t-count-when-editing-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-c203a-t-count-when-editing-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-c203a-t-count-when-editing-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-c203a-t-count-when-editing-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:61:3 › Note Taking App - Character Counter › character counter should update when clearing body field
+[1A[2K  3 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Note Taking App - Character Counter › character counter should update when typing in body field 
+    [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Note Taking App - Character Counter › character counter should reset when creating a note 
+    [chromium] › e2e/refined_zero-shot.spec.ts:44:3 › Note Taking App - Character Counter › character counter should show correct count when editing a note 
+  2 passed (20.8s)
+
+
+=== STDERR ===
+

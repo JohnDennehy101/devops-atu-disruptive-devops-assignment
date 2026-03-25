@@ -1,0 +1,87 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for note body input', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.getByRole('textbox', { name: /body/i });
+  await expect(bodyTextarea).toBeVisible();
+
+  const initialCount = page.getByText('0 / 5000');
+  await expect(initialCount).toBeVisible();
+
+  const testText = 'This is a test note body.';
+  await bodyTextarea.fill(testText);
+
+  const updatedCount = page.getByText(`${testText.length} / 5000`);
+  await expect(updatedCount).toBeVisible();
+});
+
+test('character count should update as user types in note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.getByRole('textbox', { name: /body/i });
+  await bodyTextarea.click();
+
+  const testText = 'Typing character by character';
+  for (let i = 0; i < testText.length; i++) {
+    await bodyTextarea.press(testText[i]);
+    const currentCount = page.getByText(`${i + 1} / 5000`);
+    await expect(currentCount).toBeVisible();
+  }
+
+  const finalCount = page.getByText(`${testText.length} / 5000`);
+  await expect(finalCount).toBeVisible();
+});
+
+test('character count should be visible when editing an existing note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const createButton = page.getByRole('button', { name: /create note/i });
+  await expect(createButton).toBeVisible();
+
+  const titleInput = page.getByRole('textbox', { name: /title/i });
+  const bodyTextarea = page.getByRole('textbox', { name: /body/i });
+  const tagsInput = page.getByRole('textbox', { name: /tags/i });
+
+  const testNote = {
+    title: 'Test Note for Edit',
+    body: 'Initial body content for testing edit functionality.',
+    tags: 'test, edit'
+  };
+
+  await titleInput.fill(testNote.title);
+  await bodyTextarea.fill(testNote.body);
+  await tagsInput.fill(testNote.tags);
+
+  await createButton.click();
+
+  const noteButton = page.getByRole('button', { name: /note #/i }).first();
+  await noteButton.click();
+
+  const editButton = page.getByRole('button', { name: /edit/i });
+  await editButton.click();
+
+  const characterCount = page.getByText(`${testNote.body.length} / 5000`);
+  await expect(characterCount).toBeVisible();
+
+  const updatedBody = 'This is the updated body content for the note.';
+  await bodyTextarea.fill(updatedBody);
+
+  const updatedCount = page.getByText(`${updatedBody.length} / 5000`);
+  await expect(updatedCount).toBeVisible();
+});
+
+test('character count should reset when form is cleared', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.getByRole('textbox', { name: /body/i });
+  await bodyTextarea.fill('Some initial text that will be cleared.');
+
+  const countWithText = page.getByText(/\/ 5000$/);
+  await expect(countWithText).not.toHaveText('0 / 5000');
+
+  await bodyTextarea.clear();
+
+  const resetCount = page.getByText('0 / 5000');
+  await expect(resetCount).toBeVisible();
+});

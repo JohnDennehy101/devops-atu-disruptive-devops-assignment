@@ -1,0 +1,89 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › tag filter functionality
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › tag filter functionality ──────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#note-input')[22m
+
+
+      10 |   await expect(page.getByText('No notes yet')).toBeVisible();
+      11 |   
+    > 12 |   await page.fill('#note-input', 'Test note with tag');
+         |              ^
+      13 |   await page.fill('#tag-input', 'important');
+      14 |   await page.click('#save-note');
+      15 |   
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:12:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-tag-filter-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-tag-filter-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-tag-filter-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-tag-filter-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-tag-filter-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_few-shot.spec.ts:29:1 › filter updates count correctly
+[1A[2K  2) [chromium] › e2e/refined_few-shot.spec.ts:29:1 › filter updates count correctly ───────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#note-input')[22m
+
+
+      30 |   await page.goto('http://localhost:5175');
+      31 |   
+    > 32 |   await page.fill('#note-input', 'First note');
+         |              ^
+      33 |   await page.fill('#tag-input', 'work');
+      34 |   await page.click('#save-note');
+      35 |   
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:32:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-filter-updates-count-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-filter-updates-count-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-filter-updates-count-correctly-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-filter-updates-count-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/deepseek_api/artefacts/refined_few-shot/refined_few-shot-filter-updates-count-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › tag filter functionality ───────────────────────
+    [chromium] › e2e/refined_few-shot.spec.ts:29:1 › filter updates count correctly ────────────────
+
+
+=== STDERR ===
+

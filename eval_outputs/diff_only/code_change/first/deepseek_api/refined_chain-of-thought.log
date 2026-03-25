@@ -1,0 +1,128 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should display Clear all button when notes exist and clear all notes when clicked
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should display Clear all button when notes exist and clear all notes when clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Title"]')[22m
+
+
+      13 |   const saveButton = page.locator('button:has-text("Save")');
+      14 |
+    > 15 |   await titleInput.fill('Test Note');
+         |                    ^
+      16 |   await bodyTextarea.fill('Test content');
+      17 |   await saveButton.click();
+      18 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:15:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-b343c-lear-all-notes-when-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-b343c-lear-all-notes-when-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-b343c-lear-all-notes-when-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-b343c-lear-all-notes-when-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-b343c-lear-all-notes-when-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:31:1 › should clear all notes and reset form when Clear all is clicked with multiple notes
+[1A[2K  2) [chromium] › e2e/refined_chain-of-thought.spec.ts:31:1 › should clear all notes and reset form when Clear all is clicked with multiple notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Title"]')[22m
+
+
+      36 |   const saveButton = page.locator('button:has-text("Save")');
+      37 |
+    > 38 |   await titleInput.fill('First Note');
+         |                    ^
+      39 |   await bodyTextarea.fill('First content');
+      40 |   await saveButton.click();
+      41 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:38:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-093b0-clicked-with-multiple-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-093b0-clicked-with-multiple-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-093b0-clicked-with-multiple-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-093b0-clicked-with-multiple-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-093b0-clicked-with-multiple-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:59:1 › should persist clear all action after page reload
+[1A[2K  3) [chromium] › e2e/refined_chain-of-thought.spec.ts:59:1 › should persist clear all action after page reload 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[placeholder="Title"]')[22m
+
+
+      64 |   const saveButton = page.locator('button:has-text("Save")');
+      65 |
+    > 66 |   await titleInput.fill('Persistent Note');
+         |                    ^
+      67 |   await bodyTextarea.fill('Persistent content');
+      68 |   await saveButton.click();
+      69 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:66:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-d662b-ll-action-after-page-reload-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-d662b-ll-action-after-page-reload-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-d662b-ll-action-after-page-reload-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-d662b-ll-action-after-page-reload-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-s-d662b-ll-action-after-page-reload-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should display Clear all button when notes exist and clear all notes when clicked 
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:31:1 › should clear all notes and reset form when Clear all is clicked with multiple notes 
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:59:1 › should persist clear all action after page reload 
+
+
+=== STDERR ===
+

@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts: Unterminated string constant. (90:7)
+
+  88 |   });
+  89 |
+> 90 |   test('clearing
+     |        ^
+
+   at refined_zero-shot.spec.ts:90
+
+  88 |   });
+  89 |
+> 90 |   test('clearing
+     |       ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

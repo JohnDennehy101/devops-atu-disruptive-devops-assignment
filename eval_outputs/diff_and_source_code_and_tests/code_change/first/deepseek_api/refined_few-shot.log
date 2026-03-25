@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/5] [chromium] › e2e/refined_few-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/5] [chromium] › e2e/refined_few-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/5] [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › clear all button appears only when there are notes
+[1A[2K[5/5] [chromium] › e2e/refined_few-shot.spec.ts:57:3 › Note Taking App › clear all button removes all notes and resets form
+[1A[2K  5 passed (2.9s)
+
+
+=== STDERR ===
+

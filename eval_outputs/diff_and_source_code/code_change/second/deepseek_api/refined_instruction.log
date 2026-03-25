@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display character count for note body input
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:19:1 › character count should update as user types in note body
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:36:1 › character count should be visible when editing an existing note
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:74:1 › character count should reset when form is cleared
+[1A[2K  4 passed (2.6s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,112 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page tag filtering', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display tag filter input and update note count', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+    
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should filter notes by tag when typing in filter input', async ({ page }) => {
+    // First create a note with tags
+    await page.fill('#note-title', 'Test Note with Tags');
+    await page.fill('#note-body', 'Test body content');
+    await page.fill('#note-tags', 'important, todo');
+    await page.click('button[type="submit"]');
+    
+    // Wait for note to be created and appear in saved notes
+    await page.waitForSelector('button:has-text("Note #")');
+    
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    
+    // Type a tag that matches
+    await filterInput.fill('important');
+    await expect(page.locator('button:has-text("Note #")')).toBeVisible();
+    
+    // Type a tag that doesn't match
+    await filterInput.fill('nonexistent');
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+    
+    // Clear filter should show the note again
+    await filterInput.fill('');
+    await expect(page.locator('button:has-text("Note #")')).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" when filter excludes all notes', async ({ page }) => {
+    // Create at least one note first
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'Test body');
+    await page.fill('#note-tags', 'work');
+    await page.click('button[type="submit"]');
+    
+    await page.waitForSelector('button:has-text("Note #")');
+    
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('personal');
+    
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    // Clear any existing notes from localStorage
+    await page.evaluate(() => {
+      localStorage.removeItem('noteIds');
+    });
+    
+    await page.reload();
+    
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('anytag');
+    
+    // Should still show "No notes yet" since there are no notes at all
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('should update note count in header when filtering', async ({ page }) => {
+    // Create multiple notes with different tags
+    await page.fill('#note-title', 'Work Note');
+    await page.fill('#note-body', 'Work related');
+    await page.fill('#note-tags', 'work, important');
+    await page.click('button[type="submit"]');
+    
+    await page.waitForSelector('button:has-text("Note #")');
+    
+    await page.fill('#note-title', 'Personal Note');
+    await page.fill('#note-body', 'Personal stuff');
+    await page.fill('#note-tags', 'personal');
+    await page.click('button[type="submit"]');
+    
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    
+    // Should show total count (2)
+    await expect(notesHeader).toContainText('(2)');
+    
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    
+    // Filter for 'work' - should show 1
+    await filterInput.fill('work');
+    await expect(notesHeader).toContainText('(1)');
+    
+    // Filter for 'important' - should show 1 (first note has this tag)
+    await filterInput.fill('important');
+    await expect(notesHeader).toContainText('(1)');
+    
+    // Filter for 'personal' - should show 1
+    await filterInput.fill('personal');
+    await expect(notesHeader).toContainText('(1)');
+    
+    // Clear filter - should show 2 again
+    await filterInput.fill('');
+    await expect(notesHeader).toContainText('(2)');
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    await page.fill('#

@@ -1,0 +1,60 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Character Counter › should display character counter for note body input
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:18:3 › Note Taking App - Character Counter › should update character counter when typing in body field
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:28:3 › Note Taking App - Character Counter › should show correct counter after creating and editing a note
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:48:3 › Note Taking App - Character Counter › should reset character counter when canceling edit
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:48:3 › Note Taking App - Character Counter › should reset character counter when canceling edit 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('49 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('49 / 5000')[22m
+
+
+      59 |     
+      60 |     const counterAfterEdit = page.getByText('49 / 5000');
+    > 61 |     await expect(counterAfterEdit).toBeVisible();
+         |                                    ^
+      62 |
+      63 |     await page.getByRole('button', { name: 'Cancel' }).click();
+      64 |     
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:61:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-a49a6-counter-when-canceling-edit-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-a49a6-counter-when-canceling-edit-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-a49a6-counter-when-canceling-edit-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-a49a6-counter-when-canceling-edit-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-a49a6-counter-when-canceling-edit-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:69:3 › Note Taking App - Character Counter › should show correct counter when body is empty
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:48:3 › Note Taking App - Character Counter › should reset character counter when canceling edit 
+  4 passed (8.6s)
+
+
+=== STDERR ===
+

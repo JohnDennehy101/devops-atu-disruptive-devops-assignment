@@ -1,0 +1,92 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page tag filter feature', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display tag filter input and update note count', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toBeEmpty();
+
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should filter notes by tag and update displayed count', async ({ page }) => {
+    await page.getByLabel('Title').fill('Test Note 1');
+    await page.getByLabel('Body').fill('Test body 1');
+    await page.getByLabel('Tags (comma-separated)').fill('work, urgent');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Note #')).first().toBeVisible();
+
+    await page.getByLabel('Title').fill('Test Note 2');
+    await page.getByLabel('Body').fill('Test body 2');
+    await page.getByLabel('Tags (comma-separated)').fill('personal');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toContainText('Your Notes (2)');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('work');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('personal');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('nonexistent');
+    await expect(notesHeader).toContainText('Your Notes (0)');
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+    await filterInput.clear();
+    await expect(notesHeader).toContainText('Your Notes (2)');
+  });
+
+  test('should show appropriate message when no notes exist', async ({ page }) => {
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toContainText('Your Notes (0)');
+    await expect(page.getByText('No notes yet')).toBeVisible();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('any');
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    await page.getByLabel('Title').fill('Case Test Note');
+    await page.getByLabel('Body').fill('Test body');
+    await page.getByLabel('Tags (comma-separated)').fill('IMPORTANT, Work');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('important');
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('WORK');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('work');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+  });
+
+  test('should filter by partial tag match', async ({ page }) => {
+    await page.getByLabel('Title').fill('Partial Match Note');
+    await page.getByLabel('Body').fill('Test body');
+    await page.getByLabel('Tags (comma-separated)').fill('development, frontend');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('dev');
+    const notesHeader = page.locator('h3:has-text("Your Notes")');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('front');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+
+    await filterInput.fill('end');
+    await expect(notesHeader).toContainText('Your Notes (1)');
+  });
+});
