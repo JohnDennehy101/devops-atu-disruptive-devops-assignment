@@ -13,6 +13,10 @@ After numerous attempts tonight, it appears GPU availability is extremely limite
 
 Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models.
 
+## Model selection
+
+Testing MCP in pipeline
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
