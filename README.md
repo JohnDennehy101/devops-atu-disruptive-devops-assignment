@@ -15,7 +15,7 @@ Therefore, have added backup option of using Hugging Face Inferencing for the AP
 
 ## Model selection
 
-Testing MCP in pipeline
+Testing MCP in pipeline with Claude
 
 ## Run model outputs with Playwright
 
