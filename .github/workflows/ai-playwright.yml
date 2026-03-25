@@ -33,3 +33,4 @@ jobs:
           dev-server-url: "http://localhost:5175"
           test-output-path: "e2e/ai-generated.spec.ts"
           start-dev-server: "false"
+          mcp-servers: '{"playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}}'
