@@ -1,5 +1,13 @@
 Repo for Disruptive Devops module assignment
 
+## GPU usage
+
+`provision.yml` workflow provisioned a GPU on Digital Ocean (this was working a few weeks ago).
+
+After numerous attempts tonight, it appears GPU availability is extremely limited there.
+
+Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models.
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
