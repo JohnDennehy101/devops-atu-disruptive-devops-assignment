@@ -27,3 +27,7 @@ jobs:
           include-source-files: "true"
           test-file-suffixes: ".spec"
           test-file-roots: "app/e2e"
+          run-tests: "true"
+          app-directory: "app"
+          dev-server-url: "http://localhost:5175"
+          test-output-path: "e2e/ai-generated.spec.ts"
