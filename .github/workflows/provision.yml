@@ -67,31 +67,35 @@ jobs:
             - [ bash, /app/setup.sh ]
           EOF
 
-          # Note defining this here as ran into gpu unavailability in some regions
-          GPU_SIZE="gpu-h100x1-80gb"
-          GPU_IMAGE="gpu-h100x1-base"
+          # Try GPU sizes with enough VRAM for 32B model (needs around 20GB in 4-bit quantisation)
+          # H100 (80GB) > H200 (141GB) > L40S (48GB) > RTX 6000 Ada (48GB)
+          GPU_CONFIGS="gpu-h100x1-80gb:gpu-h100x1-base gpu-h200x1-141gb:gpu-h200x1-base gpu-l40sx1-48gb:gpu-l40sx1-base gpu-6000adax1-48gb:gpu-6000adax1-base"
           REGIONS="tor1 nyc1 nyc2 nyc3 ams3 fra1 lon1 sfo3"
 
           DROPLET_ID=""
-          for REGION in $REGIONS; do
-            echo "Trying region: $REGION"
-            DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
-              --region "$REGION" \
-              --size "$GPU_SIZE" \
-              --image "$GPU_IMAGE" \
-              --user-data-file /tmp/user-data.yml \
-              --ssh-keys "${{ secrets.DO_SSH_KEY_ID }}" \
-              --wait --format ID --no-header 2>&1) && break
-            echo "Region $REGION failed: $DROPLET_ID"
-            DROPLET_ID=""
+          for CONFIG in $GPU_CONFIGS; do
+            GPU_SIZE="${CONFIG%%:*}"
+            GPU_IMAGE="${CONFIG##*:}"
+            for REGION in $REGIONS; do
+              echo "Trying $GPU_SIZE in $REGION"
+              DROPLET_ID=$(doctl compute droplet create ai-worker-${{ github.sha }} \
+                --region "$REGION" \
+                --size "$GPU_SIZE" \
+                --image "$GPU_IMAGE" \
+                --user-data-file /tmp/user-data.yml \
+                --ssh-keys "${{ secrets.DO_SSH_KEY_ID }}" \
+                --wait --format ID --no-header 2>&1) && break 2
+              echo "Failed: $DROPLET_ID"
+              DROPLET_ID=""
+            done
           done
 
           if [ -z "$DROPLET_ID" ]; then
-            echo "ERROR: Could not create GPU droplet in any region"
+            echo "ERROR: Could not create GPU droplet with any size in any region"
             exit 1
           fi
 
-          echo "Created droplet $DROPLET_ID in region $REGION"
+          echo "Created droplet $DROPLET_ID ($GPU_SIZE in $REGION)"
 
           IP=$(doctl compute droplet get $DROPLET_ID --format PublicIPv4 --no-header)
           echo "id=$DROPLET_ID" >> $GITHUB_OUTPUT
