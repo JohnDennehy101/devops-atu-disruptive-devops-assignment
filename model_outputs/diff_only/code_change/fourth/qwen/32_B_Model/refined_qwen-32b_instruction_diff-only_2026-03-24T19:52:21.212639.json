@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-24T19:52:21.212639",
+        "model_id": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 49.516,
+            "tokens_per_sec": 5.78,
+            "input_token_count": 482,
+            "output_token_count": 286,
+            "total_token_count": 768
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n-import React from \"react\"\n+import React, { useMemo } from \"react\"\n+  const [tagFilter, setTagFilter] = useState(\"\")\n+  const [allNotes, setAllNotes] = useState<Note[]>([])\n+  useEffect(() => {\n+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))\n+  }, [savedIds])\n+\n+  const displayedIds = useMemo(() => {\n+    if (!tagFilter.trim()) return savedIds\n+    const lower = tagFilter.trim().toLowerCase()\n+    return allNotes\n+      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))\n+      .map(n => n.id)\n+  }, [savedIds, allNotes, tagFilter])\n+\n-              Your Notes ({savedIds.length})\n+              Your Notes ({displayedIds.length})\n+            <input\n+              type=\"text\"\n+              placeholder=\"Filter by tag\"\n+              value={tagFilter}\n+              onChange={e => setTagFilter(e.target.value)}\n+              className=\"w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500\"\n+            />\n-              {savedIds.length === 0 ? (\n+              {displayedIds.length === 0 ? (\n-                  No notes yet\n+                  {savedIds.length === 0\n+                    ? \"No notes yet\"\n+                    : \"No notes match the filter\"}\n-                savedIds.map(id => (\n+                displayedIds.map(id => (\n\n",
+            "raw_response": "### GIT DIFF Summary:\nThe Home page now includes a tag filter input that allows users to filter notes by tags. The displayed note count and list are updated based on the filter input. The number of notes displayed is now based on `displayedIds` instead of `savedIds`.\nimport { test, expect } from '@playwright/test';\n\ntest('Home page displays notes and filters by tag', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check initial note count\n  const initialNoteCount = await page.getByRole('heading', { name: /Your Notes \\(\\d+\\)/ }).innerText();\n  expect(initialNoteCount).toMatch(/Your Notes \\(\\d+\\)/);\n\n  // Enter a tag filter\n  await page.getByPlaceholder('Filter by tag').fill('exampleTag');\n\n  // Check filtered note count\n  const filteredNoteCount = await page.getByRole('heading', { name: /Your Notes \\(\\d+\\)/ }).innerText();\n  expect(filteredNoteCount).toMatch(/Your Notes \\(\\d+\\)/);\n\n  // Verify no notes message when no notes match the filter\n  if (filteredNoteCount === 'Your Notes (0)') {\n    const noNotesMessage = await page.getByText('No notes match the filter').innerText();\n    expect(noNotesMessage).toBe('No notes match the filter');\n  }\n});",
+            "extracted_code": "### GIT DIFF Summary:\nThe Home page now includes a tag filter input that allows users to filter notes by tags. The displayed note count and list are updated based on the filter input. The number of notes displayed is now based on `displayedIds` instead of `savedIds`.\nimport { test, expect } from '@playwright/test';\n\ntest('Home page displays notes and filters by tag', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check initial note count\n  const initialNoteCount = await page.getByRole('heading', { name: /Your Notes \\(\\d+\\)/ }).innerText();\n  expect(initialNoteCount).toMatch(/Your Notes \\(\\d+\\)/);\n\n  // Enter a tag filter\n  await page.getByPlaceholder('Filter by tag').fill('exampleTag');\n\n  // Check filtered note count\n  const filteredNoteCount = await page.getByRole('heading', { name: /Your Notes \\(\\d+\\)/ }).innerText();\n  expect(filteredNoteCount).toMatch(/Your Notes \\(\\d+\\)/);\n\n  // Verify no notes message when no notes match the filter\n  if (filteredNoteCount === 'Your Notes (0)') {\n    const noNotesMessage = await page.getByText('No notes match the filter').innerText();\n    expect(noNotesMessage).toBe('No notes match the filter');\n  }\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]
