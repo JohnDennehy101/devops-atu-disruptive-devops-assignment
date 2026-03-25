@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T11:53:18.148503",
+        "model_id": "deepseek-api/deepseek-chat",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 8.503,
+            "input_token_count": 249,
+            "output_token_count": 245,
+            "total_token_count": 494,
+            "tokens_per_sec": 28.81
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should copy note body when Copy button is clicked', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const noteSelector = '[data-testid^=\"note-item-\"]';\n  await page.waitForSelector(noteSelector);\n  const firstNote = page.locator(noteSelector).first();\n  await firstNote.click();\n\n  const copyButton = page.locator('button:has-text(\"Copy\")');\n  await expect(copyButton).toBeVisible();\n  await copyButton.click();\n\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  const noteBody = await page.locator('[data-testid=\"note-body\"]').textContent();\n  expect(clipboardText).toBe(noteBody);\n});\n\ntest('Copy button should not be visible when no note is selected', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  const copyButton = page.locator('button:has-text(\"Copy\")');\n  await expect(copyButton).not.toBeVisible();\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should copy note body when Copy button is clicked', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const noteSelector = '[data-testid^=\"note-item-\"]';\n  await page.waitForSelector(noteSelector);\n  const firstNote = page.locator(noteSelector).first();\n  await firstNote.click();\n\n  const copyButton = page.locator('button:has-text(\"Copy\")');\n  await expect(copyButton).toBeVisible();\n  await copyButton.click();\n\n  const clipboardText = await page.evaluate(async () => {\n    return await navigator.clipboard.readText();\n  });\n\n  const noteBody = await page.locator('[data-testid=\"note-body\"]').textContent();\n  expect(clipboardText).toBe(noteBody);\n});\n\ntest('Copy button should not be visible when no note is selected', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  const copyButton = page.locator('button:has-text(\"Copy\")');\n  await expect(copyButton).not.toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "DeepSeek API (deepseek-chat = DeepSeek-V3)"
+        }
+    }
+]

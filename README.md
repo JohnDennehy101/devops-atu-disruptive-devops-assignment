@@ -34,6 +34,20 @@ To directly use OpenAI (API key needed with credit applied to account)
 python scripts/generate_copilot.py --openai
 ```
 
+## Generating Deepseek API outputs
+
+Set API key in terminal
+
+```
+export DEEPSEEK_API_KEY="REPLACE WITH YOUR KEY VALUE"
+```
+
+Then run the script
+
+```
+python scripts/generate_deepseek.py --refined
+```
+
 ## Using Model Context Protocol (MCP) for test generation
 
 ```

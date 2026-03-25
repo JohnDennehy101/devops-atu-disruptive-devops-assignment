@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T11:53:51.866218",
+        "model_id": "deepseek-api/deepseek-chat",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 13.352,
+            "input_token_count": 205,
+            "output_token_count": 416,
+            "total_token_count": 621,
+            "tokens_per_sec": 31.16
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest.describe('Home page copy functionality', () => {\n  test.beforeEach(async ({ page }) => {\n    await page.goto('http://localhost:5175');\n  });\n\n  test('should copy note body when copy button is clicked', async ({ page, context }) => {\n    await page.waitForSelector('[data-testid^=\"note-item-\"]');\n    const firstNote = page.locator('[data-testid^=\"note-item-\"]').first();\n    await firstNote.click();\n\n    await page.waitForSelector('button:has-text(\"Copy\")');\n    \n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    await expect(copyButton).toBeVisible();\n\n    await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n    const noteBody = await page.locator('[data-testid=\"note-body\"]').textContent();\n    \n    await copyButton.click();\n\n    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n    expect(clipboardText).toBe(noteBody);\n  });\n\n  test('copy button should be visible when a note is selected', async ({ page }) => {\n    await page.waitForSelector('[data-testid^=\"note-item-\"]');\n    const firstNote = page.locator('[data-testid^=\"note-item-\"]').first();\n    await firstNote.click();\n\n    await page.waitForSelector('button:has-text(\"Copy\")');\n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    \n    await expect(copyButton).toBeVisible();\n    await expect(copyButton).toHaveClass(/text-blue-600/);\n  });\n\n  test('copy button should not be visible when no note is selected', async ({ page }) => {\n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    await expect(copyButton).not.toBeVisible();\n  });\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest.describe('Home page copy functionality', () => {\n  test.beforeEach(async ({ page }) => {\n    await page.goto('http://localhost:5175');\n  });\n\n  test('should copy note body when copy button is clicked', async ({ page, context }) => {\n    await page.waitForSelector('[data-testid^=\"note-item-\"]');\n    const firstNote = page.locator('[data-testid^=\"note-item-\"]').first();\n    await firstNote.click();\n\n    await page.waitForSelector('button:has-text(\"Copy\")');\n    \n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    await expect(copyButton).toBeVisible();\n\n    await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n    const noteBody = await page.locator('[data-testid=\"note-body\"]').textContent();\n    \n    await copyButton.click();\n\n    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n    expect(clipboardText).toBe(noteBody);\n  });\n\n  test('copy button should be visible when a note is selected', async ({ page }) => {\n    await page.waitForSelector('[data-testid^=\"note-item-\"]');\n    const firstNote = page.locator('[data-testid^=\"note-item-\"]').first();\n    await firstNote.click();\n\n    await page.waitForSelector('button:has-text(\"Copy\")');\n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    \n    await expect(copyButton).toBeVisible();\n    await expect(copyButton).toHaveClass(/text-blue-600/);\n  });\n\n  test('copy button should not be visible when no note is selected', async ({ page }) => {\n    const copyButton = page.locator('button:has-text(\"Copy\")');\n    await expect(copyButton).not.toBeVisible();\n  });\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "DeepSeek API (deepseek-chat = DeepSeek-V3)"
+        }
+    }
+]
