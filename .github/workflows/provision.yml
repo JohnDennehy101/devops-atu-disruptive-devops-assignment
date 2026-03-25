@@ -69,7 +69,7 @@ jobs:
 
           # Try GPU sizes with enough VRAM for 32B model (needs around 20GB in 4-bit quantisation)
           # H100 (80GB) > H200 (141GB) > L40S (48GB) > RTX 6000 Ada (48GB)
-          GPU_CONFIGS="gpu-h100x1-80gb:gpu-h100x1-base gpu-h200x1-141gb:gpu-h200x1-base gpu-l40sx1-48gb:gpu-l40sx1-base gpu-6000adax1-48gb:gpu-6000adax1-base"
+          GPU_CONFIGS="gpu-h100x1-80gb:gpu-h100x1-base gpu-h200x1-141gb:gpu-h100x1-base gpu-l40sx1-48gb:gpu-h100x1-base gpu-6000adax1-48gb:gpu-h100x1-base"
           REGIONS="tor1 nyc1 nyc2 nyc3 ams3 fra1 lon1 sfo3"
 
           DROPLET_ID=""
