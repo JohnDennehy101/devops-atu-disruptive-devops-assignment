@@ -1,0 +1,68 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body to clipboard ───────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('body')
+    Timeout: 5000ms
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 6[39m
+
+    [32m- This is a test note body.[39m
+    [31m+[39m
+    [31m+     Note Taking AppCreate New NoteTitleBodyThis is a test note body.Tags (comma-separated)Create NoteYour Notes (1)Note #1Note DetailsEditCopyID: 1Title: Test NoteBody: This is a test note body.Tags: test, tagArchived: NoUpdated: 3/25/2026, 11:04:01 AM[39m
+    [31m+ [43m    [49m[39m
+    [31m+ [43m  [49m[39m
+    [31m+[39m
+    [31m+[39m
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('body')[22m
+    [2m    9 × locator resolved to <body>…</body>[22m
+    [2m      - unexpected value "[22m
+    [2m    Note Taking AppCreate New NoteTitleBodyThis is a test note body.Tags (comma-separated)Create NoteYour Notes (1)Note #1Note DetailsEditCopyID: 1Title: Test NoteBody: This is a test note body.Tags: test, tagArchived: NoUpdated: 3/25/2026, 11:04:01 AM[22m
+    [2m    [22m
+    [2m  [22m
+    [2m[22m
+    [2m"[22m
+
+
+       9 |   await page.click('button:has-text("Note #1")');
+      10 |   await page.click('text=Copy');
+    > 11 |   await expect(page.locator('body')).toHaveText('This is a test note body.');
+         |                                      ^
+      12 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:11:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body to clipboard ────────────────────
+
+
+=== STDERR ===
+

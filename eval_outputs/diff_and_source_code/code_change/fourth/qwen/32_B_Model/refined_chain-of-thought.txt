@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test('test note filtering', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Verify that the initial note count is displayed correctly.
+  await expect(page.locator('h3:has-text("Your Notes (0)")')).toBeVisible();
+
+  // Step 3: Add a new note with tags.
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, example');
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to be added
+  await expect(page.locator('button:has-text("Note #1")')).toBeVisible();
+
+  // Step 4: Filter notes by tag and verify that only matching notes are displayed.
+  await page.fill('input[placeholder="Filter by tag"]', 'test');
+  await expect(page.locator('button:has-text("Note #1")')).toBeVisible();
+  await expect(page.locator('h3:has-text("Your Notes (1)")')).toBeVisible();
+
+  // Step 5: Clear the filter and verify that all notes are displayed again.
+  await page.fill('input[placeholder="Filter by tag"]', '');
+  await expect(page.locator('button:has-text("Note #1")')).toBeVisible();
+  await expect(page.locator('h3:has-text("Your Notes (1)")')).toBeVisible();
+
+  // Step 6: Verify that the correct message is displayed when no notes match the filter.
+  await page.fill('input[placeholder="Filter by tag"]', 'nonexistent');
+  await expect(page.locator('p:has-text("No notes match the filter")')).toBeVisible();
+});

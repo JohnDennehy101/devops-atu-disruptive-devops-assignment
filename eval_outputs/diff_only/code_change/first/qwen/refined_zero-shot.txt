@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test('displays "Your Notes" heading and "Clear all" button when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are notes saved in localStorage for this test
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify(['note1', 'note2']));
+  });
+
+  await page.reload();
+
+  const heading = page.locator('h3:text("Your Notes (2)")');
+  await expect(heading).toBeVisible();
+
+  const clearAllButton = page.locator('button:text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+});
+
+test('does not display "Clear all" button when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Clearing localStorage to simulate no notes
+  await page.evaluate(() => {
+    localStorage.removeItem('noteIds');
+  });
+
+  await page.reload();
+
+  const heading = page.locator('h3:text("Your Notes (0)")');
+  await expect(heading).toBeVisible();
+
+  const clearAllButton = page.locator('button:text("Clear all")');
+  await expect(clearAllButton).not.toBeVisible();
+});

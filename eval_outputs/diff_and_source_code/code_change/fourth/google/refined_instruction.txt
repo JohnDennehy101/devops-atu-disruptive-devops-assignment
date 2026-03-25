@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('has title', async ({ page }) => {
+  await page.goto('http://localhost:5175/');
+  await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+});
+
+test('filter by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175/');
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('test');
+  await page.getByRole('heading', { name: 'Your Notes' }).toBeVisible();
+});
+
+test('no notes yet message', async ({ page }) => {
+  await page.goto('http://localhost:5175/');
+  await expect(page.getByText('No notes yet')).toBeVisible();
+});

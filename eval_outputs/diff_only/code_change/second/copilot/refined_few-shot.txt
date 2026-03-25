@@ -1,0 +1,7 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character count for form body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#form-body-input', 'Hello, world!');
+  await expect(page.getByText('13 / 5000')).toBeVisible();
+});

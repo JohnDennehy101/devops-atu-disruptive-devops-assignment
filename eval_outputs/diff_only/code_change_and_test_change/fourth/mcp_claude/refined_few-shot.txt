@@ -1,0 +1,74 @@
+import { test, expect } from '@playwright/test';
+
+test("filter by tag shows only matching notes", async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.getByLabel("Title").fill("Work note");
+  await page.getByLabel("Body").fill("Body one");
+  await page.getByLabel(/Tags/).fill("work, urgent");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  await page.getByLabel("Title").fill("Personal note");
+  await page.getByLabel("Body").fill("Body two");
+  await page.getByLabel(/Tags/).fill("personal");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("work");
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+  await expect(page.getByRole("button", { name: /Note #\d+/ })).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+  await expect(page.getByText("No notes match the filter")).toBeVisible();
+  await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("");
+  await expect(page.getByText("Your Notes (2)")).toBeVisible();
+});
+
+test("filter by tag is case-insensitive", async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.getByLabel("Title").fill("Test note");
+  await page.getByLabel("Body").fill("Some body");
+  await page.getByLabel(/Tags/).fill("Work");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("work");
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("WORK");
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+});
+
+test("filter by tag with partial match", async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.getByLabel("Title").fill("Tagged note");
+  await page.getByLabel("Body").fill("Body content");
+  await page.getByLabel(/Tags/).fill("urgent");
+  await page.getByRole("button", { name: "Create Note" }).click();
+
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+  await page.getByPlaceholder("Filter by tag").fill("urg");
+  await expect(page.getByText("Your Notes (1)")).toBeVisible();
+});
+
+test("filter input is visible in sidebar", async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await expect(page.getByPlaceholder("Filter by tag")).toBeVisible();
+});
+
+test("no notes yet message shows when no notes exist and filter is empty", async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const noteCount = page.getByText(/Your Notes \(0\)/);
+  if (await noteCount.isVisible().catch(() => false)) {
+    await expect(page.getByText("No notes yet")).toBeVisible();
+  }
+});

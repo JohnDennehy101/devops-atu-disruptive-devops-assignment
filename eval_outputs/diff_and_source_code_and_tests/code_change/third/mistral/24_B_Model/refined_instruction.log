@@ -1,0 +1,47 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Copy Note Button › should display the copy button when a note is selected
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:21:3 › Copy Note Button › should copy the note body to the clipboard when the copy button is clicked
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:21:3 › Copy Note Button › should copy the note body to the clipboard when the copy button is clicked 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      29 |     await page.getByRole('button', { name: 'Copy' }).click();
+      30 |
+    > 31 |     const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+         |                                         ^
+      32 |     await expect(clipboardContent).toBe('This is a test note body.');
+      33 |   });
+      34 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:31:41
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Copy-N-26ff8--the-copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Copy-N-26ff8--the-copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Copy-N-26ff8--the-copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Copy-N-26ff8--the-copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Copy-N-26ff8--the-copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:21:3 › Copy Note Button › should copy the note body to the clipboard when the copy button is clicked 
+  1 passed (1.9s)
+
+
+=== STDERR ===
+

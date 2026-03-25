@@ -1,0 +1,7 @@
+import { test, expect } from '@playwright/test';
+
+test('form character limit is displayed', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#form-body', 'a'.repeat(5000));
+  await expect(page.getByText('5000 / 5000')).toBeVisible();
+});

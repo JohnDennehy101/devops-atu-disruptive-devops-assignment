@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T12:26:21.116191",
+        "model_id": "github/gpt-5.4",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 2.323,
+            "input_token_count": 145,
+            "output_token_count": 138,
+            "total_token_count": 283,
+            "tokens_per_sec": 59.41
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('shows form body character counter', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const bodyField = page.locator('textarea');\n  await expect(bodyField).toBeVisible();\n\n  const counter = page.getByText('0 / 5000');\n  await expect(counter).toBeVisible();\n\n  await bodyField.fill('Hello world');\n  await expect(page.getByText('11 / 5000')).toBeVisible();\n\n  await bodyField.fill('');\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('shows form body character counter', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const bodyField = page.locator('textarea');\n  await expect(bodyField).toBeVisible();\n\n  const counter = page.getByText('0 / 5000');\n  await expect(counter).toBeVisible();\n\n  await bodyField.fill('Hello world');\n  await expect(page.getByText('11 / 5000')).toBeVisible();\n\n  await bodyField.fill('');\n  await expect(page.getByText('0 / 5000')).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

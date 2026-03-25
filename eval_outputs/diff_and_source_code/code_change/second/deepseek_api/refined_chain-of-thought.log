@@ -1,0 +1,52 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should display character count for note body
+[1A[2K[2/2] [chromium] › e2e/refined_chain-of-thought.spec.ts:21:1 › character count should update when editing existing note
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:21:1 › character count should update when editing existing note 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Edit")')[22m
+
+
+      28 |   await page.locator('button[type="submit"]').click();
+      29 |
+    > 30 |   await page.locator('button:has-text("Edit")').click();
+         |                                                 ^
+      31 |   await expect(characterCount).toHaveText('12 / 5000');
+      32 |
+      33 |   await bodyTextarea.fill('Updated text');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:30:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-0a9fe--when-editing-existing-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-0a9fe--when-editing-existing-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-0a9fe--when-editing-existing-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-0a9fe--when-editing-existing-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-0a9fe--when-editing-existing-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:21:1 › character count should update when editing existing note 
+  1 passed (21.5s)
+
+
+=== STDERR ===
+

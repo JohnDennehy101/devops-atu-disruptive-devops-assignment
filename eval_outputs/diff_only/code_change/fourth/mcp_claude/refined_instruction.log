@@ -1,0 +1,296 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Tag filter functionality › should display the filter by tag input
+[1A[2K[2/8] [chromium] › e2e/refined_instruction.spec.ts:15:3 › Tag filter functionality › should show all saved notes when filter is empty
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:15:3 › Tag filter functionality › should show all saved notes when filter is empty 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      18 |     const noteButtons = page.getByRole('button', { name: /Note #/ });
+      19 |     const count = await noteButtons.count();
+    > 20 |     expect(count).toBeGreaterThan(0);
+         |                   ^
+      21 |     const headingText = await heading.textContent();
+      22 |     expect(headingText).toContain(`Your Notes (${count})`);
+      23 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:20:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-ad7cd--notes-when-filter-is-empty-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-ad7cd--notes-when-filter-is-empty-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-ad7cd--notes-when-filter-is-empty-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-ad7cd--notes-when-filter-is-empty-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-ad7cd--notes-when-filter-is-empty-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/8] [chromium] › e2e/refined_instruction.spec.ts:25:3 › Tag filter functionality › should filter notes by matching tag
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:25:3 › Tag filter functionality › should filter notes by matching tag 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: >= [32m2[39m
+    Received:    [31m0[39m
+
+      26 |     const noteButtons = page.getByRole('button', { name: /Note #/ });
+      27 |     const initialCount = await noteButtons.count();
+    > 28 |     expect(initialCount).toBeGreaterThanOrEqual(2);
+         |                          ^
+      29 |
+      30 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+      31 |     await filterInput.fill('python');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:28:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-3c855-ilter-notes-by-matching-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-3c855-ilter-notes-by-matching-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-3c855-ilter-notes-by-matching-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-3c855-ilter-notes-by-matching-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-3c855-ilter-notes-by-matching-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/8] [chromium] › e2e/refined_instruction.spec.ts:40:3 › Tag filter functionality › should show "No notes match the filter" for non-matching tag
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:40:3 › Tag filter functionality › should show "No notes match the filter" for non-matching tag 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      45 |     await expect(heading).toBeVisible();
+      46 |
+    > 47 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      48 |
+      49 |     const noteButtons = page.getByRole('button', { name: /Note #/ });
+      50 |     await expect(noteButtons).toHaveCount(0);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:47:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-59a02-filter-for-non-matching-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-59a02-filter-for-non-matching-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-59a02-filter-for-non-matching-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-59a02-filter-for-non-matching-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-59a02-filter-for-non-matching-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/8] [chromium] › e2e/refined_instruction.spec.ts:53:3 › Tag filter functionality › should update count in heading when filtering
+[1A[2K  4) [chromium] › e2e/refined_instruction.spec.ts:53:3 › Tag filter functionality › should update count in heading when filtering 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('heading', { name: /Your Notes/ })
+    Expected: not [32m"Your Notes (0)"[39m
+    Received: [31m"[7mYour Notes (0)[27m"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "not toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /Your Notes/ })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      58 |     await filterInput.fill('react');
+      59 |
+    > 60 |     await expect(heading).not.toHaveText(initialText!);
+         |                               ^
+      61 |     const updatedText = await heading.textContent();
+      62 |     const match = updatedText?.match(/Your Notes \((\d+)\)/);
+      63 |     expect(match).toBeTruthy();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:60:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-c8a7d-t-in-heading-when-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-c8a7d-t-in-heading-when-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-c8a7d-t-in-heading-when-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-c8a7d-t-in-heading-when-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-c8a7d-t-in-heading-when-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/8] [chromium] › e2e/refined_instruction.spec.ts:68:3 › Tag filter functionality › should restore all notes when filter is cleared
+[1A[2K  5) [chromium] › e2e/refined_instruction.spec.ts:68:3 › Tag filter functionality › should restore all notes when filter is cleared 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('button', { name: /Note #/ })
+    Expected: not [32m0[39m
+    Received: [31m0[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "not toHaveCount" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: /Note #/ })[22m
+    [2m    9 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      72 |     const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+      73 |     await filterInput.fill('python');
+    > 74 |     await expect(noteButtons).not.toHaveCount(initialCount);
+         |                                   ^
+      75 |
+      76 |     await filterInput.fill('');
+      77 |     await expect(noteButtons).toHaveCount(initialCount);
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:74:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-cbcd6-otes-when-filter-is-cleared-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-cbcd6-otes-when-filter-is-cleared-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-cbcd6-otes-when-filter-is-cleared-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-cbcd6-otes-when-filter-is-cleared-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-cbcd6-otes-when-filter-is-cleared-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/8] [chromium] › e2e/refined_instruction.spec.ts:80:3 › Tag filter functionality › should perform case-insensitive tag filtering
+[1A[2K  6) [chromium] › e2e/refined_instruction.spec.ts:80:3 › Tag filter functionality › should perform case-insensitive tag filtering 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+      88 |
+      89 |     expect(upperCaseCount).toBe(lowerCaseCount);
+    > 90 |     expect(upperCaseCount).toBeGreaterThan(0);
+         |                            ^
+      91 |   });
+      92 |
+      93 |   test('should support partial tag matching', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:90:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-4f024-e-insensitive-tag-filtering-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-4f024-e-insensitive-tag-filtering-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-4f024-e-insensitive-tag-filtering-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-4f024-e-insensitive-tag-filtering-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-4f024-e-insensitive-tag-filtering-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[8/8] [chromium] › e2e/refined_instruction.spec.ts:93:3 › Tag filter functionality › should support partial tag matching
+[1A[2K  7) [chromium] › e2e/refined_instruction.spec.ts:93:3 › Tag filter functionality › should support partial tag matching 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeGreaterThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: > [32m0[39m
+    Received:   [31m0[39m
+
+       97 |     const noteButtons = page.getByRole('button', { name: /Note #/ });
+       98 |     const count = await noteButtons.count();
+    >  99 |     expect(count).toBeGreaterThan(0);
+          |                   ^
+      100 |   });
+      101 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:99:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-9a398-upport-partial-tag-matching-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-9a398-upport-partial-tag-matching-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-9a398-upport-partial-tag-matching-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-9a398-upport-partial-tag-matching-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mcp_claude/artefacts/refined_instruction/refined_instruction-Tag-fi-9a398-upport-partial-tag-matching-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  7 failed
+    [chromium] › e2e/refined_instruction.spec.ts:15:3 › Tag filter functionality › should show all saved notes when filter is empty 
+    [chromium] › e2e/refined_instruction.spec.ts:25:3 › Tag filter functionality › should filter notes by matching tag 
+    [chromium] › e2e/refined_instruction.spec.ts:40:3 › Tag filter functionality › should show "No notes match the filter" for non-matching tag 
+    [chromium] › e2e/refined_instruction.spec.ts:53:3 › Tag filter functionality › should update count in heading when filtering 
+    [chromium] › e2e/refined_instruction.spec.ts:68:3 › Tag filter functionality › should restore all notes when filter is cleared 
+    [chromium] › e2e/refined_instruction.spec.ts:80:3 › Tag filter functionality › should perform case-insensitive tag filtering 
+    [chromium] › e2e/refined_instruction.spec.ts:93:3 › Tag filter functionality › should support partial tag matching 
+  1 passed (26.5s)
+
+
+=== STDERR ===
+

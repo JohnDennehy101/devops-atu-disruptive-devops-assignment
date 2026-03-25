@@ -1,0 +1,130 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Home page notes management › should display "Clear all" button when there are notes
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Home page notes management › should display "Clear all" button when there are notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      11 |     const saveButton = page.getByRole('button', { name: 'Save' });
+      12 |
+    > 13 |     await noteTitleInput.fill('Test Note');
+         |                          ^
+      14 |     await noteBodyInput.fill('Test content');
+      15 |     await saveButton.click();
+      16 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:13:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-d94e5-button-when-there-are-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-d94e5-button-when-there-are-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-d94e5-button-when-there-are-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-d94e5-button-when-there-are-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-d94e5-button-when-there-are-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Home page notes management › should not display "Clear all" button when there are no notes
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:27:3 › Home page notes management › should clear all notes when "Clear all" button is clicked
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:27:3 › Home page notes management › should clear all notes when "Clear all" button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      30 |     const saveButton = page.getByRole('button', { name: 'Save' });
+      31 |
+    > 32 |     await noteTitleInput.fill('First Note');
+         |                          ^
+      33 |     await noteBodyInput.fill('First content');
+      34 |     await saveButton.click();
+      35 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:32:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-c37e4-Clear-all-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-c37e4-Clear-all-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-c37e4-Clear-all-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-c37e4-Clear-all-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-c37e4-Clear-all-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:52:3 › Home page notes management › should clear form and selection when clearing all notes
+[1A[2K  3) [chromium] › e2e/refined_zero-shot.spec.ts:52:3 › Home page notes management › should clear form and selection when clearing all notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      56 |     const saveButton = page.getByRole('button', { name: 'Save' });
+      57 |
+    > 58 |     await noteTitleInput.fill('Note with tags');
+         |                          ^
+      59 |     await noteBodyInput.fill('Note body');
+      60 |     await tagsInput.fill('important, todo');
+      61 |     await saveButton.click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:58:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-770c3-ion-when-clearing-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-770c3-ion-when-clearing-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-770c3-ion-when-clearing-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-770c3-ion-when-clearing-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-770c3-ion-when-clearing-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Home page notes management › should display "Clear all" button when there are notes 
+    [chromium] › e2e/refined_zero-shot.spec.ts:27:3 › Home page notes management › should clear all notes when "Clear all" button is clicked 
+    [chromium] › e2e/refined_zero-shot.spec.ts:52:3 › Home page notes management › should clear form and selection when clearing all notes 
+  1 passed (1.1m)
+
+
+=== STDERR ===
+

@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › check that the number of notes displayed is correct
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › check that the number of notes displayed is correct 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m0[39m
+    Received: [31m1[39m
+
+      5 |   await expect(page.getByText('Your Notes')).toBeVisible();
+      6 |   const noteCount = await page.locator('button').count();
+    > 7 |   await expect(noteCount).toBe(0);
+        |                           ^
+      8 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:7:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-check-tha-6fdcd--notes-displayed-is-correct-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-check-tha-6fdcd--notes-displayed-is-correct-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-check-tha-6fdcd--notes-displayed-is-correct-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-check-tha-6fdcd--notes-displayed-is-correct-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-check-tha-6fdcd--notes-displayed-is-correct-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › check that the number of notes displayed is correct 
+
+
+=== STDERR ===
+

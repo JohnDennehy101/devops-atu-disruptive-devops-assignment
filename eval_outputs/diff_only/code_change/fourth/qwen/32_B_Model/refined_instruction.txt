@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page displays notes and filters by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial note count
+  const initialNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(initialNoteCount).toMatch(/Your Notes \(\d+\)/);
+
+  // Enter a tag filter
+  await page.getByPlaceholder('Filter by tag').fill('exampleTag');
+
+  // Check filtered note count
+  const filteredNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(filteredNoteCount).toMatch(/Your Notes \(\d+\)/);
+
+  // Verify no notes message when no notes match the filter
+  if (filteredNoteCount === 'Your Notes (0)') {
+    const noNotesMessage = await page.getByText('No notes match the filter').innerText();
+    expect(noNotesMessage).toBe('No notes match the filter');
+  }
+});

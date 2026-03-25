@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › clear all notes functionality
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › clear all notes functionality ─────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Clear all")')[22m
+
+
+       9 |
+      10 |   // Step 3: Click the "Clear all" button
+    > 11 |   await clearAllButton.click();
+         |                        ^
+      12 |
+      13 |   // Step 4: Verify that the "Clear all" button is no longer visible
+      14 |   await expect(clearAllButton).not.toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:11:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-clear-all-notes-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-clear-all-notes-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-clear-all-notes-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-clear-all-notes-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-clear-all-notes-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › clear all notes functionality ──────────
+
+
+=== STDERR ===
+

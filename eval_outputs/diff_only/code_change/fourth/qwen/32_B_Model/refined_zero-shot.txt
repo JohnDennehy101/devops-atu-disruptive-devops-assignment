@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('displays "Your Notes (X)" where X is the number of displayed notes', async ({ page }) => {
+    const noteCount = await page.locator('.note').count();
+    const headerText = await page.locator('h1').textContent();
+    expect(headerText).toContain(`Your Notes (${noteCount})`);
+  });
+
+  test('has an input field to filter notes by tag', async ({ page }) => {
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await expect(filterInput).toBeVisible();
+  });
+
+  test('displays all notes when the input field is empty', async ({ page }) => {
+    const initialNoteCount = await page.locator('.note').count();
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await filterInput.fill('');
+    const filteredNoteCount = await page.locator('.note').count();
+    expect(filteredNoteCount).toBe(initialNoteCount);
+  });
+
+  test('displays only matching notes when the input field is filled with a tag that matches some notes', async ({ page }) => {
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await filterInput.fill('matchingTag');
+    const matchingNotes = await page.locator('.note:has-text("matchingTag")').count();
+    const displayedNotes = await page.locator('.note').count();
+    expect(displayedNotes).toBe(matchingNotes);
+  });
+
+  test('displays "No notes match the filter" when the input field is filled with a tag that does not match any notes', async ({ page }) => {
+    const filterInput = page.locator('input[placeholder="Filter by tag"]');
+    await filterInput.fill('nonExistentTag');
+    const noMatchMessage = await page.locator('text=No notes match the filter').textContent();
+    expect(noMatchMessage).toBe('No notes match the filter');
+  });
+});

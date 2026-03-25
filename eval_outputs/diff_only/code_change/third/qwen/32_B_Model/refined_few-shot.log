@@ -1,0 +1,93 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › user can navigate to home page
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › user can navigate to home page ────────────────
+
+    Error: [2mexpect([22m[31mpage[39m[2m).[22mtoHaveTitle[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Expected pattern: [32m/Home/[39m
+    Received string:  [31m"Vite + React"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveTitle" with timeout 5000ms[22m
+    [2m    9 × unexpected value "Vite + React"[22m
+
+
+      3 | test('user can navigate to home page', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await expect(page).toHaveTitle(/Home/);
+        |                      ^
+      6 | });
+      7 |
+      8 | test('user can copy note body to clipboard', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-navigate-to-home-page-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-navigate-to-home-page-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-navigate-to-home-page-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-navigate-to-home-page-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-navigate-to-home-page-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_few-shot.spec.ts:8:1 › user can copy note body to clipboard
+[1A[2K  2) [chromium] › e2e/refined_few-shot.spec.ts:8:1 › user can copy note body to clipboard ──────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Select Note')[22m
+
+
+       8 | test('user can copy note body to clipboard', async ({ page }) => {
+       9 |   await page.goto('http://localhost:5175');
+    > 10 |   await page.click('text=Select Note'); // Assuming there's a way to select a note
+         |              ^
+      11 |   await page.click('button:has-text("Copy")');
+      12 |   const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+      13 |   await expect(clipboardContent).toBe('Expected Note Body'); // Replace with actual expected note body
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:10:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_few-shot/refined_few-shot-user-can-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › user can navigate to home page ─────────────────
+    [chromium] › e2e/refined_few-shot.spec.ts:8:1 › user can copy note body to clipboard ───────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page Tests › displays introductory text
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:11:3 › Home Page Tests › can clear all notes from sidebar
+[1A[2K  2 passed (1.5s)
+
+
+=== STDERR ===
+

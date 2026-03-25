@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can copy note body
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can copy note body ────────────────────
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      17 |
+      18 |   // Verify the note's body text has been copied to the clipboard
+    > 19 |   const clipboardText = await page.evaluate(async () => {
+         |                                    ^
+      20 |     return await navigator.clipboard.readText();
+      21 |   });
+      22 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:19:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-can-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-can-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-can-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-can-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/qwen/artefacts/refined_chain-of-thought/refined_chain-of-thought-can-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can copy note body ─────────────────────
+
+
+=== STDERR ===
+

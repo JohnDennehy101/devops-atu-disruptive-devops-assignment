@@ -1,0 +1,92 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display the new note management message
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › should show the "Clear all" button when there are notes
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › should show the "Clear all" button when there are notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:text-is("Add Note")')[22m
+
+
+      10 |   await page.goto('http://localhost:5175');
+      11 |   // Assuming there's a way to add a note for testing purposes
+    > 12 |   await page.click('button:text-is("Add Note")'); // This is an assumption, adjust as necessary
+         |              ^
+      13 |   const clearButton = await page.locator('button:text-is("Clear all")');
+      14 |   await expect(clearButton).toBeVisible();
+      15 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:12:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-s-c457a-button-when-there-are-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-s-c457a-button-when-there-are-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-s-c457a-button-when-there-are-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-s-c457a-button-when-there-are-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-s-c457a-button-when-there-are-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:17:1 › should not show the "Clear all" button when there are no notes
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:23:1 › should clear all notes when "Clear all" button is clicked
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:23:1 › should clear all notes when "Clear all" button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:text-is("Add Note")')[22m
+
+
+      24 |   await page.goto('http://localhost:5175');
+      25 |   // Assuming there's a way to add a note for testing purposes
+    > 26 |   await page.click('button:text-is("Add Note")'); // This is an assumption, adjust as necessary
+         |              ^
+      27 |   await page.click('button:text-is("Clear all")');
+      28 |   const clearButton = await page.locator('button:text-is("Clear all")');
+      29 |   await expect(clearButton).not.toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:26:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-c-cf073-Clear-all-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-c-cf073-Clear-all-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-c-cf073-Clear-all-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-c-cf073-Clear-all-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/qwen/32_B_Model/artefacts/refined_zero-shot/refined_zero-shot-should-c-cf073-Clear-all-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › should show the "Clear all" button when there are notes 
+    [chromium] › e2e/refined_zero-shot.spec.ts:23:1 › should clear all notes when "Clear all" button is clicked 
+  2 passed (43.7s)
+
+
+=== STDERR ===
+

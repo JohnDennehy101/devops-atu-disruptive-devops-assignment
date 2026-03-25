@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('can copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note
+  await page.getByLabel('Title').fill('Test Note');
+  await page.getByLabel('Body').fill('This is a test note body.');
+  await page.getByLabel(/Tags/).fill('test, copy');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Open the created note
+  await page.getByRole('button', { name: /Note #\d+/ }).click();
+
+  // Click the "Copy" button
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  // Verify the note's body text has been copied to the clipboard
+  const clipboardText = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  expect(clipboardText).toBe('This is a test note body.');
+});

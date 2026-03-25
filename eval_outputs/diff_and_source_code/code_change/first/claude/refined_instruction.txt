@@ -1,0 +1,48 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear All Notes functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should not show Clear all button when there are no notes', async ({ page }) => {
+    await page.evaluate(() => localStorage.removeItem('noteIds'));
+    await page.reload();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('should show Clear all button when notes exist', async ({ page }) => {
+    await page.evaluate(() => localStorage.setItem('noteIds', JSON.stringify([1, 2])));
+    await page.reload();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+  });
+
+  test('should clear all notes when Clear all is clicked', async ({ page }) => {
+    await page.evaluate(() => localStorage.setItem('noteIds', JSON.stringify([1, 2, 3])));
+    await page.reload();
+    await expect(page.getByText('Your Notes (3)')).toBeVisible();
+    await page.getByRole('button', { name: 'Clear all' }).click();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+    const storedIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(storedIds).toBe('[]');
+  });
+
+  test('should reset form state when Clear all is clicked during editing', async ({ page }) => {
+    await page.evaluate(() => localStorage.setItem('noteIds', JSON.stringify([1])));
+    await page.reload();
+    await page.getByRole('textbox', { name: 'Title' }).fill('Some title');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Some body');
+    await page.getByRole('button', { name: 'Clear all' }).click();
+    await expect(page.getByRole('textbox', { name: 'Title' })).toHaveValue('');
+    await expect(page.getByRole('textbox', { name: 'Body' })).toHaveValue('');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  });
+
+  test('should display subtitle text about local storage', async ({ page }) => {
+    await expect(page.getByText('Create and manage notes. Your notes are stored locally.')).toBeVisible();
+  });
+});

@@ -1,0 +1,55 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Tag filter on notes sidebar", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("filter by tag input is visible", async ({ page }) => {
+    await expect(page.getByPlaceholder("Filter by tag")).toBeVisible()
+  })
+
+  test("filtering by tag shows only matching notes", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note with alpha tag")
+    await page.getByLabel("Body").fill("Body one")
+    await page.getByLabel(/Tags/).fill("alpha")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByLabel("Title").fill("Note with beta tag")
+    await page.getByLabel("Body").fill("Body two")
+    await page.getByLabel(/Tags/).fill("beta")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("alpha")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("beta")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("gamma")
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes match the filter")).toBeVisible()
+  })
+
+  test("clearing tag filter shows all notes again", async ({ page }) => {
+    await page.getByLabel("Title").fill("Tagged note")
+    await page.getByLabel("Body").fill("Body")
+    await page.getByLabel(/Tags/).fill("urgent")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent")
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+
+    await page.getByPlaceholder("Filter by tag").fill("")
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+  })
+
+  test("shows 'No notes yet' when there are no saved notes", async ({ page }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible()
+  })
+})

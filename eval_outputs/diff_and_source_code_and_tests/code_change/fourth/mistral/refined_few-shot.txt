@@ -1,0 +1,25 @@
+test("can filter notes by tag", async ({ page }) => {
+  // Create notes with different tags
+  await page.getByLabel("Title").fill("Note 1")
+  await page.getByLabel("Body").fill("Content 1")
+  await page.getByLabel(/Tags/).fill("tag1")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await page.getByLabel("Title").fill("Note 2")
+  await page.getByLabel("Body").fill("Content 2")
+  await page.getByLabel(/Tags/).fill("tag2")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  await page.getByLabel("Title").fill("Note 3")
+  await page.getByLabel("Body").fill("Content 3")
+  await page.getByLabel(/Tags/).fill("tag1, tag2")
+  await page.getByRole("button", { name: "Create Note" }).click()
+
+  // Filter notes by tag
+  await page.getByPlaceholder("Filter by tag").fill("tag1")
+  await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+  // Clear filter
+  await page.getByPlaceholder("Filter by tag").fill("")
+  await expect(page.getByText("Your Notes (3)")).toBeVisible()
+})

@@ -1,0 +1,87 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Home Page - Notes Management", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+  });
+
+  test("displays subtitle text about local storage", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally."),
+    ).toBeVisible();
+  });
+
+  test("displays note count in sidebar heading", async ({ page }) => {
+    await expect(page.getByRole("heading", { name: "Your Notes (0)" })).toBeVisible();
+  });
+
+  test("does not show Clear all button when there are no notes", async ({ page }) => {
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("shows Clear all button after creating a note", async ({ page }) => {
+    await page.getByLabel("Title").fill("My Note");
+    await page.getByLabel("Body").fill("Some body");
+    await page.getByLabel(/Tags/).fill("t1");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible();
+  });
+
+  test("can clear all notes from sidebar", async ({ page }) => {
+    await page.getByLabel("Title").fill("To clear");
+    await page.getByLabel("Body").fill("Body");
+    await page.getByLabel(/Tags/).fill("x");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await page.getByRole("button", { name: "Clear all" }).click();
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("Clear all button disappears after clearing notes", async ({ page }) => {
+    await page.getByLabel("Title").fill("Temp Note");
+    await page.getByLabel("Body").fill("Temp Body");
+    await page.getByLabel(/Tags/).fill("tmp");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible();
+
+    await page.getByRole("button", { name: "Clear all" }).click();
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("can clear multiple notes at once", async ({ page }) => {
+    // Create first note
+    await page.getByLabel("Title").fill("Note 1");
+    await page.getByLabel("Body").fill("Body 1");
+    await page.getByLabel(/Tags/).fill("a");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Create second note
+    await page.getByLabel("Title").fill("Note 2");
+    await page.getByLabel("Body").fill("Body 2");
+    await page.getByLabel(/Tags/).fill("b");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    // Clear all
+    await page.getByRole("button", { name: "Clear all" }).click();
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("form fields are reset after clearing all notes", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note to clear");
+    await page.getByLabel("Body").fill("Body text");
+    await page.getByLabel(/Tags/).fill("tag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await page.getByRole("button", { name: "Clear all" }).click();
+
+    await expect(page.getByLabel("Title")).toHaveValue("");
+    await expect(page.getByLabel("Body")).toHaveValue("");
+    await expect(page.getByLabel(/Tags/)).toHaveValue("");
+  });
+});

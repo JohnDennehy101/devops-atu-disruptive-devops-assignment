@@ -1,0 +1,44 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ───────────
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      23 |
+      24 |   // Verify clipboard content
+    > 25 |   const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+         |                                    ^
+      26 |   expect(clipboardText).toBe('This is a test note body.');
+      27 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:25:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ────────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the new note management message', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const message = await page.locator('p:text-is("Create and manage notes. Your notes are stored locally.")');
+  await expect(message).toBeVisible();
+});
+
+test('should show the "Clear all" button when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there's a way to add a note for testing purposes
+  await page.click('button:text-is("Add Note")'); // This is an assumption, adjust as necessary
+  const clearButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearButton).toBeVisible();
+});
+
+test('should not show the "Clear all" button when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const clearButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearButton).not.toBeVisible();
+});
+
+test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there's a way to add a note for testing purposes
+  await page.click('button:text-is("Add Note")'); // This is an assumption, adjust as necessary
+  await page.click('button:text-is("Clear all")');
+  const clearButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearButton).not.toBeVisible();
+});

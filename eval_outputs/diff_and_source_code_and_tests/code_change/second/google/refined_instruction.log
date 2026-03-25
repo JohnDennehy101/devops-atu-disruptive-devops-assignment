@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › form body length is displayed
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › form body length is displayed 
+
+    TypeError: page.getByRole(...).toBeVisible is not a function
+
+       9 |
+      10 |   test('form body length is displayed', async ({ page }) => {
+    > 11 |     await page.getByRole('heading', { name: 'Note Taking App' }).toBeVisible();
+         |                                                                  ^
+      12 |     await page.getByRole('heading', { name: /Create New Note/ }).toBeVisible();
+      13 |     await page.getByRole('button', { name: 'Create Note' }).toBeVisible();
+      14 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:11:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/refined_instruction/refined_instruction-Note-T-6e250-rm-body-length-is-displayed-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/refined_instruction/refined_instruction-Note-T-6e250-rm-body-length-is-displayed-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/refined_instruction/refined_instruction-Note-T-6e250-rm-body-length-is-displayed-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/refined_instruction/refined_instruction-Note-T-6e250-rm-body-length-is-displayed-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/artefacts/refined_instruction/refined_instruction-Note-T-6e250-rm-body-length-is-displayed-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › form body length is displayed 
+
+
+=== STDERR ===
+

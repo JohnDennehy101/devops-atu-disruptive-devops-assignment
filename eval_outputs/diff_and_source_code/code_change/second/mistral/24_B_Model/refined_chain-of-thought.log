@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › test character count in note body
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › test character count in note body ─────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"[7m500[27m0 / 5000"[39m
+    Received: [31m"0 / 5000"[39m
+
+      11 |
+      12 |   const characterCount = await page.textContent('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+    > 13 |   expect(characterCount).toBe('5000 / 5000');
+         |                          ^
+      14 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:13:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-test-character-count-in-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-test-character-count-in-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-test-character-count-in-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-test-character-count-in-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-test-character-count-in-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › test character count in note body ──────
+
+
+=== STDERR ===
+

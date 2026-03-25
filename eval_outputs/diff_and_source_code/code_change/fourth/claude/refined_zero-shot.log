@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Tag filter functionality › should display a "Filter by tag" input field
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:13:3 › Tag filter functionality › should show "No notes yet" when there are no saved notes
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:19:3 › Tag filter functionality › should create notes and filter them by tag
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:59:3 › Tag filter functionality › should show "No notes match the filter" when filter has no matches but notes exist
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:79:3 › Tag filter functionality › should filter case-insensitively
+[1A[2K  5 passed (2.7s)
+
+
+=== STDERR ===
+

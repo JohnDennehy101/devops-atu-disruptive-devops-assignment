@@ -1,0 +1,52 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('shows initial character count of 0 / 5000 when body is empty', async ({ page }) => {
+    const counter = page.locator('text=0 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('updates character count as user types in body textarea', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    await bodyTextarea.fill('Hello world');
+    await expect(page.locator('text=11 / 5000')).toBeVisible();
+  });
+
+  test('updates character count for longer text', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const longText = 'a'.repeat(100);
+    await bodyTextarea.fill(longText);
+    await expect(page.locator('text=100 / 5000')).toBeVisible();
+  });
+
+  test('resets character count when body is cleared', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    await bodyTextarea.fill('Some text');
+    await expect(page.locator('text=9 / 5000')).toBeVisible();
+    await bodyTextarea.fill('');
+    await expect(page.locator('text=0 / 5000')).toBeVisible();
+  });
+
+  test('character counter is positioned below the body textarea', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    const counter = page.locator('text=0 / 5000');
+
+    const textareaBox = await bodyTextarea.boundingBox();
+    const counterBox = await counter.boundingBox();
+
+    expect(textareaBox).not.toBeNull();
+    expect(counterBox).not.toBeNull();
+    // Counter should be below the textarea
+    expect(counterBox!.y).toBeGreaterThan(textareaBox!.y);
+  });
+
+  test('displays correct count with multi-byte and special characters', async ({ page }) => {
+    const bodyTextarea = page.getByRole('textbox', { name: 'Body' });
+    await bodyTextarea.fill('Hello! @#$%');
+    await expect(page.locator('text=11 / 5000')).toBeVisible();
+  });
+});

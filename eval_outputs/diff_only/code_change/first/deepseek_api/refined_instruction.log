@@ -1,0 +1,130 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page Clear All Notes › should display "Clear all" button when there are notes
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page Clear All Notes › should display "Clear all" button when there are notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      13 |     await noteTitleInput.fill('Test Note Title');
+      14 |     await noteBodyInput.fill('Test Note Body');
+    > 15 |     await saveButton.click();
+         |                      ^
+      16 |
+      17 |     const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+      18 |     await expect(clearAllButton).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:15:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-49003-button-when-there-are-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-49003-button-when-there-are-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-49003-button-when-there-are-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-49003-button-when-there-are-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-49003-button-when-there-are-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:21:3 › Home Page Clear All Notes › should not display "Clear all" button when there are no notes
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home Page Clear All Notes › should clear all notes when "Clear all" button is clicked
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home Page Clear All Notes › should clear all notes when "Clear all" button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      31 |     await noteTitleInput.fill('First Note');
+      32 |     await noteBodyInput.fill('First Body');
+    > 33 |     await saveButton.click();
+         |                      ^
+      34 |
+      35 |     await noteTitleInput.fill('Second Note');
+      36 |     await noteBodyInput.fill('Second Body');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:33:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-66eaf-Clear-all-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-66eaf-Clear-all-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-66eaf-Clear-all-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-66eaf-Clear-all-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-66eaf-Clear-all-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:55:3 › Home Page Clear All Notes › should clear form fields and editing state after clearing all notes
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:55:3 › Home Page Clear All Notes › should clear form fields and editing state after clearing all notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      60 |     await noteTitleInput.fill('Note to Edit');
+      61 |     await noteBodyInput.fill('Original Body');
+    > 62 |     await saveButton.click();
+         |                      ^
+      63 |
+      64 |     const noteItem = page.getByText('Note to Edit').first();
+      65 |     await noteItem.click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:62:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-e5e19-te-after-clearing-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-e5e19-te-after-clearing-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-e5e19-te-after-clearing-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-e5e19-te-after-clearing-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-P-e5e19-te-after-clearing-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  3 failed
+    [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page Clear All Notes › should display "Clear all" button when there are notes 
+    [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home Page Clear All Notes › should clear all notes when "Clear all" button is clicked 
+    [chromium] › e2e/refined_instruction.spec.ts:55:3 › Home Page Clear All Notes › should clear form fields and editing state after clearing all notes 
+  1 passed (1.1m)
+
+
+=== STDERR ===
+

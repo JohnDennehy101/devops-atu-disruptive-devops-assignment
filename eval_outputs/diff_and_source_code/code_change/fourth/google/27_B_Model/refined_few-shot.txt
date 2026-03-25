@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+
+test('displayed notes count matches filtered notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#count-input', '11');
+  const displayedNotesCount = await page.locator('Your Notes ({displayedIds.length})').textContent();
+  const savedNotesCount = await page.locator('Your Notes ({savedIds.length})').textContent();
+  await expect(parseInt(displayedNotesCount.replace('Your Notes (', '').replace(')', '') )).toBeGreaterThan(0);
+});

@@ -1,0 +1,44 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('clear all notes button is visible when notes exist', async ({ page }) => {
+    await page.getByLabel('Title').fill('Note 1');
+    await page.getByLabel('Body').fill('Body 1');
+    await page.getByLabel(/Tags/).fill('tag1');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note 2');
+    await page.getByLabel('Body').fill('Body 2');
+    await page.getByLabel(/Tags/).fill('tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Clear all')).toBeVisible();
+  });
+
+  test('clear all notes button is not visible when no notes exist', async ({ page }) => {
+    await expect(page.getByText('Clear all')).not.toBeVisible();
+  });
+
+  test('clear all notes button clears all notes', async ({ page }) => {
+    await page.getByLabel('Title').fill('Note 1');
+    await page.getByLabel('Body').fill('Body 1');
+    await page.getByLabel(/Tags/).fill('tag1');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note 2');
+    await page.getByLabel('Body').fill('Body 2');
+    await page.getByLabel(/Tags/).fill('tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByText('Clear all').click();
+
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).not.toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+});

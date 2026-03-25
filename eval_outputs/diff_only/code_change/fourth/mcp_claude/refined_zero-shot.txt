@@ -1,0 +1,137 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag Filter Functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display the filter by tag input', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute('placeholder', 'Filter by tag');
+    await expect(filterInput).toHaveValue('');
+  });
+
+  test('should show all saved notes when filter is empty', async ({ page }) => {
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    await expect(heading).toBeVisible();
+    const headingText = await heading.textContent();
+    const match = headingText?.match(/Your Notes \((\d+)\)/);
+    expect(match).toBeTruthy();
+    const count = parseInt(match![1], 10);
+    expect(count).toBeGreaterThan(0);
+  });
+
+  test('should filter notes by tag and update the count', async ({ page }) => {
+    // Get initial count
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    const initialText = await heading.textContent();
+    const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1], 10);
+
+    // Click on a note to see its tags
+    const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    await firstNoteButton.click();
+    const tagsText = await page.locator('text=/Tags:.*/')
+      .first()
+      .textContent();
+    const firstTag = tagsText!.replace('Tags: ', '').split(',')[0].trim();
+
+    // Type the tag into the filter
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill(firstTag);
+
+    // The count should update and be less than or equal to the initial count
+    await expect(heading).toContainText('Your Notes');
+    const filteredText = await heading.textContent();
+    const filteredCount = parseInt(filteredText!.match(/\((\d+)\)/)![1], 10);
+    expect(filteredCount).toBeGreaterThan(0);
+    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+  });
+
+  test('should show "No notes match the filter" for non-matching tag', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistenttag12345');
+
+    // Count should be 0
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes \(0\)/ });
+    await expect(heading).toBeVisible();
+
+    // Should show the no-match message
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should restore all notes when filter is cleared', async ({ page }) => {
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    const initialText = await heading.textContent();
+    const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1], 10);
+
+    // Apply a filter
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistenttag12345');
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+    // Clear the filter
+    await filterInput.clear();
+
+    // Count should be restored
+    const restoredText = await heading.textContent();
+    const restoredCount = parseInt(restoredText!.match(/\((\d+)\)/)![1], 10);
+    expect(restoredCount).toBe(initialCount);
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    // Click a note to find a tag
+    const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    await firstNoteButton.click();
+    const tagsText = await page.locator('text=/Tags:.*/')
+      .first()
+      .textContent();
+    const firstTag = tagsText!.replace('Tags: ', '').split(',')[0].trim();
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+
+    // Filter with uppercase version of the tag
+    await filterInput.fill(firstTag.toUpperCase());
+
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    const filteredText = await heading.textContent();
+    const filteredCount = parseInt(filteredText!.match(/\((\d+)\)/)![1], 10);
+    expect(filteredCount).toBeGreaterThan(0);
+  });
+
+  test('should support partial tag matching', async ({ page }) => {
+    // Click a note to find a tag
+    const firstNoteButton = page.locator('button').filter({ hasText: /Note #/ }).first();
+    await firstNoteButton.click();
+    const tagsText = await page.locator('text=/Tags:.*/')
+      .first()
+      .textContent();
+    const firstTag = tagsText!.replace('Tags: ', '').split(',')[0].trim();
+
+    // Use only the first 3 characters of the tag as a partial match
+    const partialTag = firstTag.substring(0, 3);
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill(partialTag);
+
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    const filteredText = await heading.textContent();
+    const filteredCount = parseInt(filteredText!.match(/\((\d+)\)/)![1], 10);
+    expect(filteredCount).toBeGreaterThan(0);
+  });
+
+  test('should not show "No notes yet" when notes exist but filter has no matches', async ({ page }) => {
+    // Ensure notes exist
+    const heading = page.getByRole('heading', { level: 3, name: /Your Notes/ });
+    const initialText = await heading.textContent();
+    const initialCount = parseInt(initialText!.match(/\((\d+)\)/)![1], 10);
+    expect(initialCount).toBeGreaterThan(0);
+
+    // Apply a non-matching filter
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistenttag12345');
+
+    // Should show "No notes match the filter", NOT "No notes yet"
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+    await expect(page.getByText('No notes yet')).not.toBeVisible();
+  });
+});

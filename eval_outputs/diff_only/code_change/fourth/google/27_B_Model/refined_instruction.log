@@ -1,0 +1,52 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page displays notes and allows filtering by tag
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page displays notes and allows filtering by tag 
+
+    Error: locator.fill: Error: strict mode violation: locator('input[type="text"]') resolved to 3 elements:
+        1) <input value="" required="" type="text" id="note-title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"/> aka getByRole('textbox', { name: 'Title' })
+        2) <input value="" type="text" id="note-tags" placeholder="tag1, tag2, tag3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"/> aka getByRole('textbox', { name: 'Tags (comma-separated)' })
+        3) <input value="" type="text" placeholder="Filter by tag" class="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500"/> aka getByRole('textbox', { name: 'Filter by tag' })
+
+    Call log:
+    [2m  - waiting for locator('input[type="text"]')[22m
+
+
+       7 |   await page.getByText('No notes yet');
+       8 |
+    >  9 |   await page.locator('input[type="text"]').fill('test');
+         |                                            ^
+      10 |   await page.getByText('No notes match the filter');
+      11 |
+      12 |   await page.locator('input[type="text"]').fill('');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-88d49-and-allows-filtering-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-88d49-and-allows-filtering-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-88d49-and-allows-filtering-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-88d49-and-allows-filtering-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-88d49-and-allows-filtering-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page displays notes and allows filtering by tag 
+
+
+=== STDERR ===
+

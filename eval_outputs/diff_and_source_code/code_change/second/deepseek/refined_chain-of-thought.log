@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Character Count Display and Note Operations
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Character Count Display and Note Operations 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')
+    Expected: [32m"[7m31[27m / 5000"[39m
+    Received: [31m"[7m0[27m / 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">0 / 5000</p>[22m
+    [2m      - unexpected value "0 / 5000"[22m
+
+
+      15 |
+      16 |   // Verify character count updates after creating a note
+    > 17 |   await expect(characterCount).toHaveText('31 / 5000');
+         |                                ^
+      18 |
+      19 |   // Edit the note
+      20 |   await page.click('button:has-text("Edit")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:17:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-f1d69-Display-and-Note-Operations-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-f1d69-Display-and-Note-Operations-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-f1d69-Display-and-Note-Operations-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-f1d69-Display-and-Note-Operations-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/deepseek/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-f1d69-Display-and-Note-Operations-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Character Count Display and Note Operations 
+
+
+=== STDERR ===
+

@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-22T19:57:44.590212",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 40.176,
+            "tokens_per_sec": 7.37,
+            "input_token_count": 141,
+            "output_token_count": 296,
+            "total_token_count": 437
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "--- a/app/src/components/Editor.tsx\n+++ b/app/src/components/Editor.tsx\n@@ -23,6 +23,7 @@ export default function Editor() {\n     const [formBody, setFormBody] = useState('');\n \n     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {\n+      if (e.target.value.length <= 5000) {\n         setFormBody(e.target.value);\n       }\n     };\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('displays character count and limits input to 5000 characters', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Locate the textarea and the character count paragraph\n  const textarea = page.locator('textarea');\n  const charCount = page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');\n\n  // Type more than 5000 characters\n  await textarea.fill('a'.repeat(5001));\n\n  // Check that the character count does not exceed 5000\n  await expect(charCount).toHaveText('5000 / 5000');\n\n  // Check that the textarea value is exactly 5000 characters\n  await expect(textarea).toHaveValue('a'.repeat(5000));\n});\n```",
+            "extracted_code": "--- a/app/src/components/Editor.tsx\n+++ b/app/src/components/Editor.tsx\n@@ -23,6 +23,7 @@ export default function Editor() {\n     const [formBody, setFormBody] = useState('');\n \n     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {\n+      if (e.target.value.length <= 5000) {\n         setFormBody(e.target.value);\n       }\n     };\n\n```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('displays character count and limits input to 5000 characters', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Locate the textarea and the character count paragraph\n  const textarea = page.locator('textarea');\n  const charCount = page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');\n\n  // Type more than 5000 characters\n  await textarea.fill('a'.repeat(5001));\n\n  // Check that the character count does not exceed 5000\n  await expect(charCount).toHaveText('5000 / 5000');\n\n  // Check that the textarea value is exactly 5000 characters\n  await expect(textarea).toHaveValue('a'.repeat(5000));\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

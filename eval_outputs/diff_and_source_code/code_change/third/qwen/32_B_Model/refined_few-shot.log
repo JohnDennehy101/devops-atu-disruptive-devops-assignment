@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "copy button copies note body to clipboard", first declared in refined_few-shot.spec.ts:3
+
+   at refined_few-shot.spec.ts:12
+
+  10 | });
+  11 |
+> 12 | test('copy button copies note body to clipboard', async ({ page }) => {
+     | ^
+  13 |   await page.goto('http://localhost:5175');
+  14 |   // Assuming there's a way to select a note and make it the selectedNote
+  15 |   await page.click('button:has-text("Note #1")'); // Example selector, adjust as necessary
+
+[1A[2K
+
+=== STDERR ===
+

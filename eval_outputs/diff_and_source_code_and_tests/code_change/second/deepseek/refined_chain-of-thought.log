@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:16:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/3] [chromium] › e2e/refined_chain-of-thought.spec.ts:26:3 › Note Taking App › can open a note and see its details
+[1A[2K  3 passed (1.8s)
+
+
+=== STDERR ===
+

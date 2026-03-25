@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+import { page } from '../fixtures';
+
+test('Verify tag filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+  await page.locator('input[placeholder="Filter by tag"]').clear();
+  await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+});

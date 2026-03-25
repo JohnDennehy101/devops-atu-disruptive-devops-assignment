@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the note count correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Ensure the form is displayed
+  await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+
+  // Ensure the initial note count is displayed
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+  // Ensure the form title input is displayed
+  await expect(page.getByRole('textbox', { name: 'Title' })).toBeVisible();
+
+  // Ensure the form body input is displayed
+  await expect(page.getByRole('textarea', { name: 'Body' })).toBeVisible();
+
+  // Ensure the form tags input is displayed
+  await expect(page.getByRole('textbox', { name: 'Tags (comma-separated)' })).toBeVisible();
+
+  // Ensure the create note button is displayed
+  await expect(page.getByRole('button', { name: 'Create Note' })).toBeVisible();
+});
+```

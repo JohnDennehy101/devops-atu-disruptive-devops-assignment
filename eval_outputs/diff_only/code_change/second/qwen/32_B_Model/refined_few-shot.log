@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "form body character limit is displayed", first declared in refined_few-shot.spec.ts:3
+
+   at refined_few-shot.spec.ts:9
+
+   7 | });
+   8 |
+>  9 | test('form body character limit is displayed', async ({ page }) => {
+     | ^
+  10 |   await page.goto('http://localhost:5175');
+  11 |   await page.fill('#form-body', 'Hello World');
+  12 |   await expect(page.getByText(/13 \/ 5000/)).toBeVisible();
+
+[1A[2K
+
+=== STDERR ===
+

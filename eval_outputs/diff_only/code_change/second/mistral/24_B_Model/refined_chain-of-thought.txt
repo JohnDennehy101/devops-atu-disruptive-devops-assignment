@@ -1,0 +1,27 @@
+import React from'react';
+import { useForm } from'react-hook-form';
+
+const Home = () => {
+  const { register, handleSubmit, watch } = useForm();
+  const formBody = watch('body');
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <textarea
+        {...register('body')}
+        className="form-control"
+        placeholder="Enter your message"
+      />
+      <button type="submit">Submit</button>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+        {formBody.length} / 5000
+      </p>
+    </form>
+  );
+};
+
+export default Home;

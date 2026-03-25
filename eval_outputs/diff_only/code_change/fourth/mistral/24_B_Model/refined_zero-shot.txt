@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('test note filtering', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state
+  const initialNoteCount = await page.locator('text=Your Notes (0)').count();
+  expect(initialNoteCount).toBe(1);
+
+  // Add a note with a tag
+  await page.fill('input[placeholder="Filter by tag"]', 'tag1');
+  await page.click('button:has-text("Add Note")');
+
+  // Check if the note is displayed
+  const noteCountAfterAdd = await page.locator('text=Your Notes (1)').count();
+  expect(noteCountAfterAdd).toBe(1);
+
+  // Filter notes by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'tag1');
+  const filteredNoteCount = await page.locator('text=Your Notes (1)').count();
+  expect(filteredNoteCount).toBe(1);
+
+  // Filter notes with a non-matching tag
+  await page.fill('input[placeholder="Filter by tag"]', 'tag2');
+  const noMatchNoteCount = await page.locator('text=Your Notes (0)').count();
+  expect(noMatchNoteCount).toBe(1);
+});

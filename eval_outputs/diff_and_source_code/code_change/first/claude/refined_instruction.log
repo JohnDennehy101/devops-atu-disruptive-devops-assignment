@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Clear All Notes functionality › should not show Clear all button when there are no notes
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:15:3 › Clear All Notes functionality › should show Clear all button when notes exist
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:34:3 › Clear All Notes functionality › should reset form state when Clear all is clicked during editing
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:45:3 › Clear All Notes functionality › should display subtitle text about local storage
+[1A[2K  5 passed (2.6s)
+
+
+=== STDERR ===
+

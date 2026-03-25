@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.goto('http://localhost:5175');
+  });
+
+  test('shows the local storage helper text on the home page', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+    await expect(
+      page.getByText('Create and manage notes. Your notes are stored locally.')
+    ).toBeVisible();
+  });
+
+  test('can clear all notes from sidebar', async ({ page }) => {
+    await page.getByRole('textbox', { name: 'Title' }).fill('To clear');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('x');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  });
+});

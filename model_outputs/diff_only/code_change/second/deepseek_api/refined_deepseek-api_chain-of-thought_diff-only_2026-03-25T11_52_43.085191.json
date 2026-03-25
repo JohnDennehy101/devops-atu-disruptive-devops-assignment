@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T11:52:43.085191",
+        "model_id": "deepseek-api/deepseek-chat",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 6.767,
+            "input_token_count": 195,
+            "output_token_count": 182,
+            "total_token_count": 377,
+            "tokens_per_sec": 26.9
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('character counter displays correctly on Home page', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const textarea = page.locator('textarea[name=\"formBody\"]');\n  await expect(textarea).toBeVisible();\n\n  const counter = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(counter).toBeVisible();\n  await expect(counter).toHaveText('0 / 5000');\n\n  await textarea.fill('Hello');\n  await expect(counter).toHaveText('5 / 5000');\n\n  const longText = 'A'.repeat(5000);\n  await textarea.fill(longText);\n  await expect(counter).toHaveText('5000 / 5000');\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('character counter displays correctly on Home page', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const textarea = page.locator('textarea[name=\"formBody\"]');\n  await expect(textarea).toBeVisible();\n\n  const counter = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(counter).toBeVisible();\n  await expect(counter).toHaveText('0 / 5000');\n\n  await textarea.fill('Hello');\n  await expect(counter).toHaveText('5 / 5000');\n\n  const longText = 'A'.repeat(5000);\n  await textarea.fill(longText);\n  await expect(counter).toHaveText('5000 / 5000');\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "DeepSeek API (deepseek-chat = DeepSeek-V3)"
+        }
+    }
+]

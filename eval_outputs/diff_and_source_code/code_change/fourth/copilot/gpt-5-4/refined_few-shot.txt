@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag and updates the notes count and empty state', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.fill('#note-title', 'Frontend Note');
+  await page.fill('#note-body', 'Body for frontend note');
+  await page.fill('#note-tags', 'react, ui');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByText(/Your Notes \(1\)/)).toBeVisible();
+
+  await page.fill('#note-title', 'Backend Note');
+  await page.fill('#note-body', 'Body for backend note');
+  await page.fill('#note-tags', 'api, server');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByText(/Your Notes \(2\)/)).toBeVisible();
+
+  const filterInput = page.getByPlaceholder('Filter by tag');
+
+  await filterInput.fill('react');
+  await expect(page.getByText(/Your Notes \(1\)/)).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(1);
+
+  await filterInput.fill('server');
+  await expect(page.getByText(/Your Notes \(1\)/)).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(1);
+
+  await filterInput.fill('missing-tag');
+  await expect(page.getByText(/Your Notes \(0\)/)).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+  await filterInput.fill('');
+  await expect(page.getByText(/Your Notes \(2\)/)).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(2);
+});

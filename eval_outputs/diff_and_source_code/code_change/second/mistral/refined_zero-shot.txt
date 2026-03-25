@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count in form body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('input[name="note-body"]').fill('a'.repeat(5000));
+  await page.locator('button[type="submit"]').click();
+  await expect(page.locator('p.text-xs.text-gray-500')).toHaveText('5000 / 5000');
+});

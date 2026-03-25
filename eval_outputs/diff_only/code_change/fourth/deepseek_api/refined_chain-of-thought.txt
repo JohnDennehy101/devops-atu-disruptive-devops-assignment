@@ -1,0 +1,102 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page tag filter functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display tag filter input and initial state', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveValue('');
+    await expect(filterInput).toBeEditable();
+  });
+
+  test('should show correct note count when filter is empty', async ({ page }) => {
+    const notesHeader = page.getByText(/Your Notes \(\d+\)/);
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should filter notes by tag when typing in filter input', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('important');
+    await filterInput.press('Enter');
+    
+    await page.waitForTimeout(500);
+    
+    const notesHeader = page.getByText(/Your Notes \(\d+\)/);
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" when filter returns no results', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('nonexistenttag');
+    
+    const noNotesMessage = page.getByText('No notes match the filter');
+    await expect(noNotesMessage).toBeVisible();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    const noNotesMessage = page.getByText('No notes yet');
+    const noNotesMatchMessage = page.getByText('No notes match the filter');
+    
+    const noNotesYetVisible = await noNotesMessage.isVisible();
+    const noNotesMatchVisible = await noNotesMatchMessage.isVisible();
+    
+    expect(noNotesYetVisible || noNotesMatchVisible).toBeTruthy();
+  });
+
+  test('should update displayed note count when filter changes', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    const notesHeader = page.getByText(/Your Notes \(\d+\)/);
+    
+    const initialHeaderText = await notesHeader.textContent();
+    const initialCount = parseInt(initialHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    await filterInput.fill('test');
+    await page.waitForTimeout(500);
+    
+    const filteredHeaderText = await notesHeader.textContent();
+    const filteredCount = parseInt(filteredHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+  });
+
+  test('should clear filter and show all notes', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    
+    await filterInput.fill('sometag');
+    await page.waitForTimeout(500);
+    
+    const notesHeader = page.getByText(/Your Notes \(\d+\)/);
+    const filteredHeaderText = await notesHeader.textContent();
+    const filteredCount = parseInt(filteredHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    await filterInput.clear();
+    await page.waitForTimeout(500);
+    
+    const clearedHeaderText = await notesHeader.textContent();
+    const clearedCount = parseInt(clearedHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    expect(clearedCount).toBeGreaterThanOrEqual(filteredCount);
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    
+    await filterInput.fill('IMPORTANT');
+    await page.waitForTimeout(500);
+    
+    const notesHeader = page.getByText(/Your Notes \(\d+\)/);
+    const upperCaseHeaderText = await notesHeader.textContent();
+    const upperCaseCount = parseInt(upperCaseHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    await filterInput.fill('important');
+    await page.waitForTimeout(500);
+    
+    const lowerCaseHeaderText = await notesHeader.textContent();
+    const lowerCaseCount = parseInt(lowerCaseHeaderText?.match(/\((\d+)\)/)?.[1] || '0');
+    
+    expect(upperCaseCount).toBe(lowerCaseCount);
+  });
+});

@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › formBody length is displayed
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › formBody length is displayed ─────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  locator('.text-xs')
+    Expected: [32m"25/ 5000"[39m
+    Received: [31m"25[7m [27m/ 5000"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.text-xs')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">25 / 5000</p>[22m
+    [2m      - unexpected value "25 / 5000"[22m
+
+
+       7 |     await expect(page.locator('.text-xs')).toBeVisible();
+       8 |     const bodyLength = await page.locator('[id="note-body"]').inputValue();
+    >  9 |     await expect(page.locator('.text-xs')).toHaveText(bodyLength.length.toString() +'/ 5000');
+         |                                            ^
+      10 |   });
+      11 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:9:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-formBody-length-is-displayed-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-formBody-length-is-displayed-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-formBody-length-is-displayed-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-formBody-length-is-displayed-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Page-formBody-length-is-displayed-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › formBody length is displayed ──────
+
+
+=== STDERR ===
+

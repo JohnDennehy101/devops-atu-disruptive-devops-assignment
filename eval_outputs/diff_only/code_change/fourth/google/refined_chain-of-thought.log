@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Tag filter functionality
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Tag filter functionality ──────────────
+
+    Error: locator.textContent: SyntaxError: Invalid regular expression: /Your Notes (/: Unterminated group
+        at new RegExp (<anonymous>)
+        at createTextMatcher (<anonymous>:7998:16)
+        at Object.queryAll (<anonymous>:6874:33)
+        at InjectedScript._queryEngineAll (<anonymous>:6847:49)
+        at InjectedScript.querySelectorAll (<anonymous>:6834:30)
+        at InjectedScript.querySelector (<anonymous>:6746:25)
+        at eval (eval at evaluate (:290:30), <anonymous>:3:34)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+    Call log:
+    [2m  - waiting for locator('text=/Your Notes (/')[22m
+
+        at createTextMatcher (<anonymous>:7998:16)
+        at Object.queryAll (<anonymous>:6874:33)
+        at InjectedScript._queryEngineAll (<anonymous>:6847:49)
+        at InjectedScript.querySelectorAll (<anonymous>:6834:30)
+        at InjectedScript.querySelector (<anonymous>:6746:25)
+        at eval (eval at evaluate (:290:30), <anonymous>:3:34)
+        at UtilityScript.evaluate (<anonymous>:292:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:7:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_chain-of-thought/refined_chain-of-thought-Tag-filter-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_chain-of-thought/refined_chain-of-thought-Tag-filter-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_chain-of-thought/refined_chain-of-thought-Tag-filter-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_chain-of-thought/refined_chain-of-thought-Tag-filter-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_chain-of-thought/refined_chain-of-thought-Tag-filter-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Tag filter functionality ───────────────
+
+
+=== STDERR ===
+

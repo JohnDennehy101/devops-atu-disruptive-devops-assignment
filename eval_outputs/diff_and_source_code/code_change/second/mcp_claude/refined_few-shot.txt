@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character counter for body field showing length out of 5000', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Initially the counter should show 0 / 5000
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  // Type some text and verify the counter updates
+  await page.getByRole('textbox', { name: 'Body' }).fill('Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+
+  // Clear the field and verify it resets to 0
+  await page.getByRole('textbox', { name: 'Body' }).fill('');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  // Type a longer string and verify count accuracy
+  const longText = 'a'.repeat(100);
+  await page.getByRole('textbox', { name: 'Body' }).fill(longText);
+  await expect(page.getByText('100 / 5000')).toBeVisible();
+});

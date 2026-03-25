@@ -1,0 +1,12 @@
+import { test, expect } from '@playwright/test';
+
+test('check form body length', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const formBodyLengthElement = await page.locator('p.text-xs.text-gray-500');
+  const formBodyLengthText = await formBodyLengthElement.textContent();
+
+  const formBodyLength = parseInt(formBodyLengthText.split('/')[0]);
+
+  expect(formBodyLength).toBeLessThanOrEqual(5000);
+});

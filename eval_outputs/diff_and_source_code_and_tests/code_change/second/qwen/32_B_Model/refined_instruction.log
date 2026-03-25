@@ -1,0 +1,58 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:47:3 › Note Taking App › character count for body field is displayed correctly
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:47:3 › Note Taking App › character count for body field is displayed correctly 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText(/13 \/ 5000/)
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText(/13 \/ 5000/)[22m
+
+
+      47 |   test("character count for body field is displayed correctly", async ({ page }) => {
+      48 |     await page.getByLabel("Body").fill("This is a test.");
+    > 49 |     await expect(page.getByText(/13 \/ 5000/)).toBeVisible();
+         |                                                ^
+      50 |   });
+      51 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:49:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/32_B_Model/artefacts/refined_instruction/refined_instruction-Note-T-fd9bd-ield-is-displayed-correctly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/32_B_Model/artefacts/refined_instruction/refined_instruction-Note-T-fd9bd-ield-is-displayed-correctly-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/32_B_Model/artefacts/refined_instruction/refined_instruction-Note-T-fd9bd-ield-is-displayed-correctly-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/32_B_Model/artefacts/refined_instruction/refined_instruction-Note-T-fd9bd-ield-is-displayed-correctly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/32_B_Model/artefacts/refined_instruction/refined_instruction-Note-T-fd9bd-ield-is-displayed-correctly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:47:3 › Note Taking App › character count for body field is displayed correctly 
+  3 passed (7.5s)
+
+
+=== STDERR ===
+

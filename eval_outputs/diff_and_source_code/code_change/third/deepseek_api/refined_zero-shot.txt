@@ -1,0 +1,82 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page Copy button', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should copy note body to clipboard when Copy button is clicked', async ({ page, context }) => {
+    // Mock the clipboard API
+    let clipboardText = '';
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.addInitScript(() => {
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: (text: string) => {
+            (window as any).__clipboardText = text;
+            return Promise.resolve();
+          },
+          readText: () => {
+            return Promise.resolve((window as any).__clipboardText || '');
+          }
+        }
+      });
+    });
+
+    // Create a note first
+    await page.fill('#note-title', 'Test Note for Copy');
+    await page.fill('#note-body', 'This is the note body content to be copied.');
+    await page.fill('#note-tags', 'test, copy');
+    await page.click('button[type="submit"]');
+    await expect(page.locator('text=Note Details')).toBeVisible();
+
+    // Click the Copy button
+    await page.click('button:has-text("Copy")');
+
+    // Read the clipboard content via our mock
+    const copiedText = await page.evaluate(async () => {
+      return await navigator.clipboard.readText();
+    });
+
+    expect(copiedText).toBe('This is the note body content to be copied.');
+  });
+
+  test('Copy button should only be visible when a note is selected and not in edit mode', async ({ page }) => {
+    // Initially, no note selected, so Copy button should not exist
+    await expect(page.locator('button:has-text("Copy")')).toHaveCount(0);
+
+    // Create a note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'Test body');
+    await page.fill('#note-tags', 'test');
+    await page.click('button[type="submit"]');
+
+    // After creation, note is selected and Copy button should appear
+    await expect(page.locator('button:has-text("Copy")')).toBeVisible();
+
+    // Click Edit button
+    await page.click('button:has-text("Edit")');
+
+    // In edit mode, Copy button should not be visible
+    await expect(page.locator('button:has-text("Copy")')).toHaveCount(0);
+
+    // Cancel edit
+    await page.click('button:has-text("Cancel")');
+
+    // Back to view mode, Copy button should be visible again
+    await expect(page.locator('button:has-text("Copy")')).toBeVisible();
+  });
+
+  test('Copy button should have correct styling classes', async ({ page }) => {
+    // Create a note to make Copy button appear
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'Test body');
+    await page.fill('#note-tags', 'test');
+    await page.click('button[type="submit"]');
+
+    const copyButton = page.locator('button:has-text("Copy")');
+    await expect(copyButton).toHaveClass(/text-blue-600/);
+    await expect(copyButton).toHaveClass(/dark:text-blue-400/);
+    await expect(copyButton).toHaveClass(/hover:underline/);
+  });
+});

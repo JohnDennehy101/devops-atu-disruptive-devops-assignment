@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('Editor updates and character count is correct', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('link', { name: 'Editor' }).click();
+
+  const editor = page.getByRole('textbox');
+  const characterCount = page.getByText('{formBody.length} / 5000');
+
+  await editor.fill('This is a test.');
+  await expect(characterCount).toHaveText('15 / 5000');
+
+  await editor.fill('This is a longer test string to check the character count.');
+  await expect(characterCount).toHaveText('48 / 5000');
+
+  await editor.fill('');
+  await expect(characterCount).toHaveText('0 / 5000');
+});

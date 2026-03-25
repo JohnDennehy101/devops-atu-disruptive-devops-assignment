@@ -1,0 +1,50 @@
+import { test, expect } from '@playwright/test';
+
+test('tag filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  const filterInput = page.getByPlaceholder('Filter by tag');
+  await expect(filterInput).toBeVisible();
+  
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+  
+  await page.fill('#note-input', 'Test note with tag');
+  await page.fill('#tag-input', 'important');
+  await page.click('#save-note');
+  
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  
+  await filterInput.fill('important');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  
+  await filterInput.fill('nonexistent');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  
+  await filterInput.clear();
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+});
+
+test('filter updates count correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  await page.fill('#note-input', 'First note');
+  await page.fill('#tag-input', 'work');
+  await page.click('#save-note');
+  
+  await page.fill('#note-input', 'Second note');
+  await page.fill('#tag-input', 'personal');
+  await page.click('#save-note');
+  
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  
+  await page.getByPlaceholder('Filter by tag').fill('work');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  
+  await page.getByPlaceholder('Filter by tag').fill('personal');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  
+  await page.getByPlaceholder('Filter by tag').fill('');
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+});

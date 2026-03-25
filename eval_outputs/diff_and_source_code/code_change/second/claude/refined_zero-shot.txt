@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for body field', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('#note-body');
+  const characterCount = page.locator('text=/\\d+ \\/ 5000/');
+
+  // Initially should show 0 / 5000
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  // Type some text and verify the counter updates
+  await bodyTextarea.fill('Hello World');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+
+  // Clear and type different text
+  await bodyTextarea.fill('Test');
+  await expect(page.getByText('4 / 5000')).toBeVisible();
+
+  // Clear the field
+  await bodyTextarea.fill('');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+});

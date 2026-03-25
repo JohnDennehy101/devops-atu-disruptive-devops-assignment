@@ -1,0 +1,78 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Tag Filter on Home Page", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("shows filter by tag input field", async ({ page }) => {
+    await expect(page.getByPlaceholder("Filter by tag")).toBeVisible();
+  });
+
+  test("filters notes by tag", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note with alpha tag");
+    await page.getByLabel("Body").fill("Body one");
+    await page.getByLabel(/Tags/).fill("alpha, shared");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByLabel("Title").fill("Note with beta tag");
+    await page.getByLabel("Body").fill("Body two");
+    await page.getByLabel(/Tags/).fill("beta, shared");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").fill("alpha");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    await page.getByPlaceholder("Filter by tag").fill("shared");
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(2);
+  });
+
+  test("shows 'No notes match the filter' when tag filter has no matches", async ({ page }) => {
+    await page.getByLabel("Title").fill("Tagged note");
+    await page.getByLabel("Body").fill("Some body");
+    await page.getByLabel(/Tags/).fill("existing");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("clearing the tag filter shows all notes again", async ({ page }) => {
+    await page.getByLabel("Title").fill("Clearable note");
+    await page.getByLabel("Body").fill("Body text");
+    await page.getByLabel(/Tags/).fill("cleartest");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").fill("nomatch");
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").clear();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toBeVisible();
+  });
+
+  test("tag filter is case-insensitive", async ({ page }) => {
+    await page.getByLabel("Title").fill("Case test note");
+    await page.getByLabel("Body").fill("Body");
+    await page.getByLabel(/Tags/).fill("MyTag");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").fill("mytag");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+
+    await page.getByPlaceholder("Filter by tag").fill("MYTAG");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ })).toHaveCount(1);
+  });
+});

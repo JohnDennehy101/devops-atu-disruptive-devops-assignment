@@ -1,0 +1,60 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_zero-shot.spec.ts:11:3 › Clear All Notes functionality › should display subtitle text about local storage
+[1A[2K[2/7] [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Clear All Notes functionality › should not show Clear all button when there are no notes
+[1A[2K[3/7] [chromium] › e2e/refined_zero-shot.spec.ts:21:3 › Clear All Notes functionality › should show Clear all button when a note exists
+[1A[2K[4/7] [chromium] › e2e/refined_zero-shot.spec.ts:33:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked
+[1A[2K[5/7] [chromium] › e2e/refined_zero-shot.spec.ts:55:3 › Clear All Notes functionality › should clear form fields when Clear all is clicked
+[1A[2K[6/7] [chromium] › e2e/refined_zero-shot.spec.ts:76:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked
+[1A[2K[7/7] [chromium] › e2e/refined_zero-shot.spec.ts:96:3 › Clear All Notes functionality › should reset to Create New Note mode when Clear all is clicked during edit
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:96:3 › Clear All Notes functionality › should reset to Create New Note mode when Clear all is clicked during edit 
+
+    Error: locator.click: Error: strict mode violation: getByText('Edit') resolved to 4 elements:
+        1) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">Edit body</textarea> aka getByRole('textbox', { name: 'Body' })
+        2) <button class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Edit</button> aka getByRole('button', { name: 'Edit' })
+        3) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Title: Edit Test')
+        4) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Body: Edit body')
+
+    Call log:
+    [2m  - waiting for getByText('Edit')[22m
+
+
+      104 |     await page.getByRole('button', { name: /Note #/ }).click();
+      105 |     await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    > 106 |     await page.getByText('Edit').click();
+          |                                  ^
+      107 |     await expect(page.getByRole('heading', { name: 'Edit Note' })).toBeVisible();
+      108 |
+      109 |     // Click Clear all
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:106:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-271ea--all-is-clicked-during-edit-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-271ea--all-is-clicked-during-edit-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-271ea--all-is-clicked-during-edit-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-271ea--all-is-clicked-during-edit-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/mcp_claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-271ea--all-is-clicked-during-edit-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:96:3 › Clear All Notes functionality › should reset to Create New Note mode when Clear all is clicked during edit 
+  6 passed (4.4s)
+
+
+=== STDERR ===
+

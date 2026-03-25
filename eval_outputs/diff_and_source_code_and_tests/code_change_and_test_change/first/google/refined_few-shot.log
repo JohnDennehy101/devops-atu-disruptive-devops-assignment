@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "Note Taking App › can clear all notes from sidebar", first declared in refined_few-shot.spec.ts:10
+
+   at refined_few-shot.spec.ts:58
+
+  56 |   });
+  57 |
+> 58 |   test("can clear all notes from sidebar", async ({ page }) => {
+     |   ^
+  59 |     await page.goto("/");
+  60 |     await page.getByLabel("Title").fill("To clear");
+  61 |     await page.getByLabel("Body").fill("Body");
+
+[1A[2K
+
+=== STDERR ===
+

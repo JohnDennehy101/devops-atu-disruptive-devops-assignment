@@ -1,0 +1,12 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character count in the form', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Type into the body field
+  await page.fill('#note-body', 'This is a test note.');
+
+  // Check if the character count is displayed correctly
+  const charCount = await page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1').textContent();
+  expect(charCount).toBe('21 / 5000');
+});

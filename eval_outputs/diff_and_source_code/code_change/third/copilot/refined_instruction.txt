@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body to clipboard when "Copy" button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Simulate selecting a note
+  await page.getByRole('button', { name: /Note #1/i }).click();
+
+  // Click the "Copy" button
+  await page.getByRole('button', { name: /Copy/i }).click();
+
+  // Verify that the clipboard contains the note body
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('Expected note body text here');
+});

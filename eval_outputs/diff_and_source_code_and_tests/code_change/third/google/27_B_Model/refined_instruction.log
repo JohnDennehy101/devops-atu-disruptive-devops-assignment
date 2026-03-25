@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:4:3 › Home Page › copy note body
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:4:3 › Home Page › copy note body ─────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+      10 |     await page.getByRole("button", { name: /Note #\d+/ }).click();
+      11 |     await page.getByRole("button", { name: "Edit" }).click();
+    > 12 |     await page.getByRole("button", { name: "Copy" }).click();
+         |                                                      ^
+      13 |     await expect(page.locator('textarea[aria-label="Body"]')).toHaveValue("This is the note body to copy.");
+      14 |   });
+      15 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:12:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_instruction/refined_instruction-Home-Page-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:4:3 › Home Page › copy note body ──────────────────
+
+
+=== STDERR ===
+

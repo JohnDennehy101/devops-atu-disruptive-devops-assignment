@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there is a note selected and displayed on the page
+  // You might need to interact with the page to select a note first
+  // For example, clicking on a note or selecting it from a list
+
+  // Click the "Copy" button
+  await page.click('button:text("Copy")');
+
+  // Verify that the note body has been copied to the clipboard
+  const clipboardText = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  // Assuming'selectedNoteBody' is a variable containing the expected note body
+  const selectedNoteBody = 'This is the body of the selected note';
+
+  expect(clipboardText).toBe(selectedNoteBody);
+});

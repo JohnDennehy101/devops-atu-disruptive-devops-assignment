@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the character count is displayed
+  const characterCount = await page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('0 / 5000');
+});
+
+test('should update character count when text is entered', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Type some text to trigger the character count update
+  const inputField = page.locator('textarea');
+  await inputField.fill('Hello, world!');
+
+  // Check if the character count is updated
+  const characterCount = await page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('13 / 5000');
+});

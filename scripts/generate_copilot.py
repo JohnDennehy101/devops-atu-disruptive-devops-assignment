@@ -19,31 +19,34 @@ from shared import (
 CLIENT = None
 
 
-def get_client() -> OpenAI:
+def get_client(use_openai: bool = False) -> OpenAI:
     """
-    Initialise OpenAI client pointed at GitHub Models API.
+    Initialise OpenAI client pointed at GitHub Models API or OpenAI directly.
     """
 
     # Avoid re-initialiing client on every call, cache in global var
     global CLIENT
 
-    # On first run, check for env variable required to authenticate
-    # with GitHub models API
     if CLIENT is None:
-        # Extract token from env variable
-        token = os.environ.get("GITHUB_TOKEN")
-
-        # If not found, inform user as it is required
-        if not token:
-            raise RuntimeError(
-                "GITHUB_TOKEN env var not set. Run: export GITHUB_TOKEN=$(gh auth token)"
+        if use_openai:
+            # Use OpenAI API directly, extract API key from env variable
+            token = os.environ.get("OPENAI_API_KEY")
+            if not token:
+                raise RuntimeError(
+                    "OPENAI_API_KEY env var not set. Run: export OPENAI_API_KEY=sk-..."
+                )
+            CLIENT = OpenAI(api_key=token)
+        else:
+            # Use GitHub Models API with GITHUB_TOKEN
+            token = os.environ.get("GITHUB_TOKEN")
+            if not token:
+                raise RuntimeError(
+                    "GITHUB_TOKEN env var not set. Run: export GITHUB_TOKEN=$(gh auth token)"
+                )
+            CLIENT = OpenAI(
+                base_url="https://models.inference.ai.azure.com",
+                api_key=token,
             )
-
-        # If found, initialise open ai client point at GitHub models endpoint
-        CLIENT = OpenAI(
-            base_url="https://models.inference.ai.azure.com",
-            api_key=token,
-        )
 
     # Return configured client
     return CLIENT
@@ -61,11 +64,17 @@ def call_copilot(prompt: str, model: str = "gpt-4o") -> tuple[str, float, dict]:
     t_start = time.time()
 
     # Call API with the prompt and hyperparams
+    # Newer models including gpt-5 require max_completion_tokens instead of max_tokens
+    token_param = (
+        {"max_completion_tokens": 1024}
+        if model.startswith("gpt-5")
+        else {"max_tokens": 1024}
+    )
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0,
-        max_tokens=1024,
+        **token_param,
     )
 
     # Measure total duration taken for response from API
@@ -109,11 +118,24 @@ def main():
         help="GitHub Models model name (default: gpt-4o)",
     )
     parser.add_argument(
+        "--openai",
+        action="store_true",
+        help="Use OpenAI API directly instead of GitHub Models - requires Open AI API key",
+    )
+    parser.add_argument(
+        "--refined",
+        action="store_true",
+        help="Only run prompt-engineered prompts (second pass)",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Show what would be run without calling the API",
     )
     args = parser.parse_args()
+
+    # Initialise API client
+    get_client(use_openai=args.openai)
 
     print("Collecting unique prompts from model_outputs/...", end=" ", flush=True)
     prompts = collect_unique_prompts()
@@ -126,6 +148,10 @@ def main():
         prompts = [p for p in prompts if p["prompt_type"] == args.filter_prompt]
     if args.filter_iteration:
         prompts = [p for p in prompts if p["iteration"] == args.filter_iteration]
+    if args.refined:
+        prompts = [p for p in prompts if p.get("refined")]
+    else:
+        prompts = [p for p in prompts if not p.get("refined")]
 
     if not prompts:
         print("No prompts match the given filters.")
@@ -138,22 +164,30 @@ def main():
         label = f"{p['scenario']} / {p['change_type']} / {p['iteration']} / {p['prompt_type']}"
         print(f"[{i}/{len(prompts)}] {label}", end=" ", flush=True)
 
-        # Build output path
+        # Build output path within copilot directory
+        # Model subdirectory for each model for easy separation of outputs
+        model_subdir = args.model.replace(".", "-")
         output_directory = (
             MODEL_OUTPUTS_PATH
             / p["scenario_dir"]
             / p["change_type"]
             / p["iteration"]
             / "copilot"
+            / model_subdir
         )
 
         # Make output directory if it doesn't exist
         output_directory.mkdir(parents=True, exist_ok=True)
 
+        # Determine file prefix based on whether first pass or refined prompt (second run)
+        file_prefix = "refined_copilot" if p.get("refined") else "copilot"
+
         # Skip if a copilot output already exists for this prompt combination
         # Needed as rate limit of 50 requests per day on the API
         existing = list(
-            output_directory.glob(f"copilot_{p['prompt_type']}_{p['scenario']}_*.json")
+            output_directory.glob(
+                f"{file_prefix}_{p['prompt_type']}_{p['scenario']}_*.json"
+            )
         )
         if existing:
             print("(already exists, skipping)")
@@ -163,7 +197,7 @@ def main():
         timestamp = datetime.now().isoformat()
 
         # Construct file name with model, prompt type, scenario, and timestamp for uniqueness
-        filename = f"copilot_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
+        filename = f"{file_prefix}_{p['prompt_type']}_{p['scenario']}_{timestamp.replace(':', '_')}.json"
 
         # If dry run, just print what would be outputted, don't call API
         if args.dry_run:

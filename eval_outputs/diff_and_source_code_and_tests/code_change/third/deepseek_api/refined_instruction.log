@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Copy Functionality › Copy button is visible when a note is selected
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:21:3 › Note Taking App - Copy Functionality › Copy button copies note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:21:3 › Note Taking App - Copy Functionality › Copy button copies note body to clipboard 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      34 |     await page.getByRole('button', { name: 'Copy' }).click();
+      35 |
+    > 36 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+         |                                      ^
+      37 |     expect(clipboardText).toBe('Unique clipboard content 123');
+      38 |   });
+      39 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:36:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-129c7-pies-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-129c7-pies-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-129c7-pies-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-129c7-pies-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_instruction/refined_instruction-Note-T-129c7-pies-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:40:3 › Note Taking App - Copy Functionality › Copy button is not present when no note is selected
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:44:3 › Note Taking App - Copy Functionality › Copy button is not present when editing a note
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:21:3 › Note Taking App - Copy Functionality › Copy button copies note body to clipboard 
+  3 passed (3.5s)
+
+
+=== STDERR ===
+

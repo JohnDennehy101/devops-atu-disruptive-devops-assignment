@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Filter notes by tag ───────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=exampleTag')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=exampleTag')[22m
+
+
+      13 |   // Verify that the notes displayed match the filter criteria
+      14 |   const filteredNotes = await page.locator('text=exampleTag');
+    > 15 |   await expect(filteredNotes).toBeVisible();
+         |                               ^
+      16 |
+      17 |   // Clear the filter input field
+      18 |   await filterInput.fill('');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:15:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/mistral/24_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Filter notes by tag ────────────────────
+
+
+=== STDERR ===
+

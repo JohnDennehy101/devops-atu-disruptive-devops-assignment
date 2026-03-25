@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › can clear all notes from sidebar
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:21:3 › Note Taking App › can see welcome message
+[1A[2K  2 passed (1.6s)
+
+
+=== STDERR ===
+

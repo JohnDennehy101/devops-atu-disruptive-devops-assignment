@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('textarea#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+  await expect(bodyTextarea).toBeVisible();
+  await expect(characterCount).toBeVisible();
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  await bodyTextarea.fill('Hello, world!');
+  await expect(characterCount).toHaveText('13 / 5000');
+
+  const longText = 'A'.repeat(5000);
+  await bodyTextarea.fill(longText);
+  await expect(characterCount).toHaveText('5000 / 5000');
+});
+
+test('character count should update when editing existing note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('textarea#note-body');
+  const characterCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+  await bodyTextarea.fill('Initial text');
+  await page.locator('button[type="submit"]').click();
+
+  await page.locator('button:has-text("Edit")').click();
+  await expect(characterCount).toHaveText('12 / 5000');
+
+  await bodyTextarea.fill('Updated text');
+  await expect(characterCount).toHaveText('12 / 5000');
+});

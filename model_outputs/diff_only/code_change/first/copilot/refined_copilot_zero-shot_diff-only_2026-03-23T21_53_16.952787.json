@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-23T21:53:16.952787",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 8.514,
+            "input_token_count": 375,
+            "output_token_count": 242,
+            "total_token_count": 617,
+            "tokens_per_sec": 28.42
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should display and clear notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the paragraph with the text is present\n  const paragraph = await page.locator('p.text-gray-500.dark\\\\:text-gray-400.text-sm.mb-6');\n  await expect(paragraph).toHaveText('Create and manage notes. Your notes are stored locally.');\n\n  // Check if the notes header is present\n  const notesHeader = await page.locator('h3.text-lg.font-semibold.text-gray-900.dark\\\\:text-white');\n  await expect(notesHeader).toHaveText(/Your Notes \\(\\d+\\)/);\n\n  // Check if the \"Clear all\" button is present when there are notes\n  const clearAllButton = page.locator('button.text-sm.text-red-600.dark\\\\:text-red-400.hover\\\\:underline');\n  if (await clearAllButton.isVisible()) {\n    await clearAllButton.click();\n\n    // Verify that notes are cleared\n    await expect(notesHeader).toHaveText('Your Notes (0)');\n  }\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should display and clear notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the paragraph with the text is present\n  const paragraph = await page.locator('p.text-gray-500.dark\\\\:text-gray-400.text-sm.mb-6');\n  await expect(paragraph).toHaveText('Create and manage notes. Your notes are stored locally.');\n\n  // Check if the notes header is present\n  const notesHeader = await page.locator('h3.text-lg.font-semibold.text-gray-900.dark\\\\:text-white');\n  await expect(notesHeader).toHaveText(/Your Notes \\(\\d+\\)/);\n\n  // Check if the \"Clear all\" button is present when there are notes\n  const clearAllButton = page.locator('button.text-sm.text-red-600.dark\\\\:text-red-400.hover\\\\:underline');\n  if (await clearAllButton.isVisible()) {\n    await clearAllButton.click();\n\n    // Verify that notes are cleared\n    await expect(notesHeader).toHaveText('Your Notes (0)');\n  }\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

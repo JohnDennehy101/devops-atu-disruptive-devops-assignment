@@ -1,0 +1,89 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:3:1 › copy note body button copies text to clipboard
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › copy note body button copies text to clipboard 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /new note/i })[22m
+
+
+       7 |
+       8 |   // Create a note first so there's something to copy
+    >  9 |   await page.getByRole('button', { name: /new note/i }).click();
+         |                                                         ^
+      10 |   const noteBody = 'Test note body for clipboard copy';
+      11 |   await page.getByRole('textbox', { name: /body/i }).fill(noteBody);
+      12 |   await page.getByRole('button', { name: /save/i }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:9:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-n-c2ecc-on-copies-text-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-n-c2ecc-on-copies-text-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-n-c2ecc-on-copies-text-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-n-c2ecc-on-copies-text-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-n-c2ecc-on-copies-text-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:22:1 › copy button is visible when a note is selected
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:22:1 › copy button is visible when a note is selected 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /new note/i })[22m
+
+
+      23 |   await page.goto('http://localhost:5175');
+      24 |
+    > 25 |   await page.getByRole('button', { name: /new note/i }).click();
+         |                                                         ^
+      26 |   await page.getByRole('textbox', { name: /body/i }).fill('Some content');
+      27 |   await page.getByRole('button', { name: /save/i }).click();
+      28 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:25:57
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-b-0f672-ble-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-b-0f672-ble-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-b-0f672-ble-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-b-0f672-ble-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_instruction/refined_instruction-copy-b-0f672-ble-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › copy note body button copies text to clipboard 
+    [chromium] › e2e/refined_instruction.spec.ts:22:1 › copy button is visible when a note is selected 
+
+
+=== STDERR ===
+

@@ -1,0 +1,27 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts: Invalid left-hand side in prefix operation. (1:2)
+
+> 1 | --- a/app/src/utils/api.ts
+    |   ^
+  2 | +++ b/app/src/utils/api.ts
+  3 | -export const api = {
+  4 | +export const api = {
+
+   at refined_zero-shot.spec.ts:1
+
+> 1 | --- a/app/src/utils/api.ts
+    |  ^
+  2 | +++ b/app/src/utils/api.ts
+  3 | -export const api = {
+  4 | +export const api = {
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

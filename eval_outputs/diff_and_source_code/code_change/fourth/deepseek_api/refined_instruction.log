@@ -1,0 +1,107 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home page tag filtering › should display tag filter input and filter notes
+[1A[2K[2/7] [chromium] › e2e/refined_instruction.spec.ts:15:3 › Home page tag filtering › should show correct note count in header
+[1A[2K[3/7] [chromium] › e2e/refined_instruction.spec.ts:20:3 › Home page tag filtering › should display "No notes yet" when no saved notes exist
+[1A[2K[4/7] [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home page tag filtering › should display "No notes match the filter" when filter yields no results
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home page tag filtering › should display "No notes match the filter" when filter yields no results 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..').getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..').getByText('No notes match the filter')[22m
+
+
+      30 |     const notesSection = page.getByRole('heading', { name: /your notes \(\d+\)/i }).locator('..');
+      31 |     const noMatchText = notesSection.getByText('No notes match the filter');
+    > 32 |     await expect(noMatchText).toBeVisible();
+         |                               ^
+      33 |   });
+      34 |
+      35 |   test('should filter notes based on tag input', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:32:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-f66bc-en-filter-yields-no-results-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-f66bc-en-filter-yields-no-results-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-f66bc-en-filter-yields-no-results-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-f66bc-en-filter-yields-no-results-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-f66bc-en-filter-yields-no-results-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/7] [chromium] › e2e/refined_instruction.spec.ts:35:3 › Home page tag filtering › should filter notes based on tag input
+[1A[2K[6/7] [chromium] › e2e/refined_instruction.spec.ts:46:3 › Home page tag filtering › should update note count when filter is applied
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:46:3 › Home page tag filtering › should update note count when filter is applied 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).not.[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('heading', { name: /your notes \(\d+\)/i })
+    Expected: not [32m"Your Notes (0)"[39m
+    Received: [31m"[7mYour Notes (0)[27m"[39m
+    Timeout:  5000ms
+
+    Call log:
+    [2m  - Expect "not toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: /your notes \(\d+\)/i })[22m
+    [2m    9 × locator resolved to <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">Your Notes (0)</h3>[22m
+    [2m      - unexpected value "Your Notes (0)"[22m
+
+
+      51 |     await filterInput.fill('work');
+      52 |     
+    > 53 |     await expect(notesHeader).not.toHaveText(initialCount!);
+         |                                   ^
+      54 |   });
+      55 |
+      56 |   test('should clear filter when input is emptied', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:53:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-7e93f-ount-when-filter-is-applied-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-7e93f-ount-when-filter-is-applied-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-7e93f-ount-when-filter-is-applied-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-7e93f-ount-when-filter-is-applied-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_instruction/refined_instruction-Home-p-7e93f-ount-when-filter-is-applied-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[7/7] [chromium] › e2e/refined_instruction.spec.ts:56:3 › Home page tag filtering › should clear filter when input is emptied
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:26:3 › Home page tag filtering › should display "No notes match the filter" when filter yields no results 
+    [chromium] › e2e/refined_instruction.spec.ts:46:3 › Home page tag filtering › should update note count when filter is applied 
+  5 passed (14.7s)
+
+
+=== STDERR ===
+

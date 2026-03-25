@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('Filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('input').fill('react');
+  await page.getByRole('input').blur();
+  await expect(page.getByRole('link')).toHaveCount(0);
+});
+
+test('Add a note and verify it exists', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('button', { name: 'Add Note' }).click();
+  await page.getByRole('input').fill('This is a test note');
+  await page.getByRole('textarea').fill('This is the content of the test note');
+  await page.getByRole('button', { name: 'Save' }).click();
+  await page.getByRole('link').filter({ hasText: 'This is a test note' }).isVisible();
+});

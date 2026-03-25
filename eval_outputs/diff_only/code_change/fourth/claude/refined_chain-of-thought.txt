@@ -1,0 +1,74 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag filter on Your Notes sidebar', () => {
+  test('should filter saved notes by tag', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    await expect(filterInput).toHaveValue('');
+
+    const notesHeading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(notesHeading).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" when filter has no matches', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    const savedCountText = await page.getByText(/Your Notes \((\d+)\)/).textContent();
+    const savedCount = parseInt(savedCountText?.match(/\((\d+)\)/)?.[1] ?? '0', 10);
+
+    if (savedCount > 0) {
+      await filterInput.fill('zzz_nonexistent_tag_xyz');
+      await expect(page.getByText('No notes match the filter')).toBeVisible();
+      await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+      await filterInput.clear();
+      await expect(page.getByText(`Your Notes (${savedCount})`)).toBeVisible();
+    } else {
+      await expect(page.getByText('No notes yet')).toBeVisible();
+    }
+  });
+
+  test('should update displayed count when filtering by tag', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    const initialHeading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(initialHeading).toBeVisible();
+    const initialText = await initialHeading.textContent();
+    const initialCount = parseInt(initialText?.match(/\((\d+)\)/)?.[1] ?? '0', 10);
+
+    if (initialCount > 0) {
+      await filterInput.fill('zzz_no_match_tag');
+      await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+      await filterInput.clear();
+      await expect(page.getByText(`Your Notes (${initialCount})`)).toBeVisible();
+    }
+  });
+
+  test('filter input should be case-insensitive', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    const headingText = await page.getByText(/Your Notes \((\d+)\)/).textContent();
+    const count = parseInt(headingText?.match(/\((\d+)\)/)?.[1] ?? '0', 10);
+
+    if (count > 0) {
+      await filterInput.fill('ZZZZNONEXISTENT');
+      await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+      await filterInput.clear();
+      await expect(page.getByText(`Your Notes (${count})`)).toBeVisible();
+    }
+  });
+});

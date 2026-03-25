@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:11:3 › Copy Note Body › Copy button is visible when a note is selected
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:25:3 › Copy Note Body › Copy button is not visible when no note is selected
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:31:3 › Copy Note Body › Copy button copies note body to clipboard
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:51:3 › Copy Note Body › Copy button appears alongside Edit button
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:62:3 › Copy Note Body › Copy button disappears when entering edit mode
+[1A[2K  5 passed (3.6s)
+
+
+=== STDERR ===
+

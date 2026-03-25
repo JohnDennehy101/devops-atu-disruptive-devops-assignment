@@ -1,0 +1,186 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Form Validation › form shows error when submitting without title
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Form Validation › form shows error when submitting without title 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Title is required')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Title is required')[22m
+
+
+      13 |     await page.getByRole("button", { name: "Create Note" }).click()
+      14 |
+    > 15 |     await expect(page.getByText("Title is required")).toBeVisible()
+         |                                                       ^
+      16 |   })
+      17 |
+      18 |   test("form shows error when submitting without body", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:15:55
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-208b4-en-submitting-without-title-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-208b4-en-submitting-without-title-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-208b4-en-submitting-without-title-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-208b4-en-submitting-without-title-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-208b4-en-submitting-without-title-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:18:3 › Note Taking App - Form Validation › form shows error when submitting without body
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:18:3 › Note Taking App - Form Validation › form shows error when submitting without body 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Body is required')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Body is required')[22m
+
+
+      21 |     await page.getByRole("button", { name: "Create Note" }).click()
+      22 |
+    > 23 |     await expect(page.getByText("Body is required")).toBeVisible()
+         |                                                      ^
+      24 |   })
+      25 |
+      26 |   test("form shows error when submitting without tags", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:23:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-9f12d-hen-submitting-without-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-9f12d-hen-submitting-without-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-9f12d-hen-submitting-without-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-9f12d-hen-submitting-without-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-9f12d-hen-submitting-without-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:26:3 › Note Taking App - Form Validation › form shows error when submitting without tags
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:26:3 › Note Taking App - Form Validation › form shows error when submitting without tags 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Tags is required')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Tags is required')[22m
+
+
+      29 |     await page.getByRole("button", { name: "Create Note" }).click()
+      30 |
+    > 31 |     await expect(page.getByText("Tags is required")).toBeVisible()
+         |                                                      ^
+      32 |   })
+      33 |
+      34 |   test("form shows character count for body", async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:31:54
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-969a5-hen-submitting-without-tags-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-969a5-hen-submitting-without-tags-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-969a5-hen-submitting-without-tags-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-969a5-hen-submitting-without-tags-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-969a5-hen-submitting-without-tags-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:34:3 › Note Taking App - Form Validation › form shows character count for body
+[1A[2K  4) [chromium] › e2e/refined_instruction.spec.ts:34:3 › Note Taking App - Form Validation › form shows character count for body 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('5000 / 5000')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('5000 / 5000')[22m
+
+
+      38 |     await page.getByRole("button", { name: "Create Note" }).click()
+      39 |
+    > 40 |     await expect(page.getByText("5000 / 5000")).toBeVisible()
+         |                                                 ^
+      41 |   })
+      42 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:40:49
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-c9dfd-ws-character-count-for-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-c9dfd-ws-character-count-for-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-c9dfd-ws-character-count-for-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-c9dfd-ws-character-count-for-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/mistral/artefacts/refined_instruction/refined_instruction-Note-T-c9dfd-ws-character-count-for-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Form Validation › form shows error when submitting without title 
+    [chromium] › e2e/refined_instruction.spec.ts:18:3 › Note Taking App - Form Validation › form shows error when submitting without body 
+    [chromium] › e2e/refined_instruction.spec.ts:26:3 › Note Taking App - Form Validation › form shows error when submitting without tags 
+    [chromium] › e2e/refined_instruction.spec.ts:34:3 › Note Taking App - Form Validation › form shows character count for body 
+
+
+=== STDERR ===
+

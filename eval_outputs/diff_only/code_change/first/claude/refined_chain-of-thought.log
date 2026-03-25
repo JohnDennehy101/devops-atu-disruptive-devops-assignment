@@ -1,0 +1,92 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:8:3 › Clear All Notes › should not show Clear all button when no notes exist
+[1A[2K[2/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:12:3 › Clear All Notes › should show Clear all button when notes exist and remove all notes on click
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:12:3 › Clear All Notes › should show Clear all button when notes exist and remove all notes on click 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      11 |
+      12 |   test('should show Clear all button when notes exist and remove all notes on click', async ({ page }) => {
+    > 13 |     await page.getByPlaceholder('Note title').fill('Test Note 1');
+         |                                               ^
+      14 |     await page.getByPlaceholder('Note body').fill('Body 1');
+      15 |     await page.getByRole('button', { name: /save/i }).click();
+      16 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:13:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-4d67d-d-remove-all-notes-on-click-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-4d67d-d-remove-all-notes-on-click-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-4d67d-d-remove-all-notes-on-click-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-4d67d-d-remove-all-notes-on-click-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-4d67d-d-remove-all-notes-on-click-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:34:3 › Clear All Notes › should display subtitle text
+[1A[2K[4/4] [chromium] › e2e/refined_chain-of-thought.spec.ts:38:3 › Clear All Notes › should clear form fields after clearing all notes
+[1A[2K  2) [chromium] › e2e/refined_chain-of-thought.spec.ts:38:3 › Clear All Notes › should clear form fields after clearing all notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      37 |
+      38 |   test('should clear form fields after clearing all notes', async ({ page }) => {
+    > 39 |     await page.getByPlaceholder('Note title').fill('My Note');
+         |                                               ^
+      40 |     await page.getByPlaceholder('Note body').fill('My Body');
+      41 |     await page.getByRole('button', { name: /save/i }).click();
+      42 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:39:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-b067c-ds-after-clearing-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-b067c-ds-after-clearing-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-b067c-ds-after-clearing-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-b067c-ds-after-clearing-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_chain-of-thought/refined_chain-of-thought-C-b067c-ds-after-clearing-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:12:3 › Clear All Notes › should show Clear all button when notes exist and remove all notes on click 
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:38:3 › Clear All Notes › should clear form fields after clearing all notes 
+  2 passed (43.9s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,64 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test("shows body character count and updates when typing", async ({ page }) => {
+    await expect(page.getByText("0 / 5000")).toBeVisible();
+    await page.getByLabel("Body").fill("Hello");
+    await expect(page.getByText("5 / 5000")).toBeVisible();
+    await page.getByLabel("Body").fill("Hello world");
+    await expect(page.getByText("11 / 5000")).toBeVisible();
+  });
+
+  test("displays error message when creating a note with empty title", async ({ page }) => {
+    await page.getByLabel("Title").fill("");
+    await page.getByLabel("Body").fill("Test body");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Title is required")).toBeVisible();
+  });
+
+  test("displays error message when creating a note with empty body", async ({ page }) => {
+    await page.getByLabel("Title").fill("Test title");
+    await page.getByLabel("Body").fill("");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Body is required")).toBeVisible();
+  });
+
+  test("displays success message when creating a note successfully", async ({ page }) => {
+    await page.getByLabel("Title").fill("Test title");
+    await page.getByLabel("Body").fill("Test body");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await expect(page.getByText("Note created successfully")).toBeVisible();
+  });
+
+  test("displays note details when a note is selected", async ({ page }) => {
+    await page.getByRole("button", { name: "Note #1" }).click();
+    await expect(page.getByText("Note Details")).toBeVisible();
+    await expect(page.getByText("ID: 1")).toBeVisible();
+    await expect(page.getByText("Title: Test title")).toBeVisible();
+    await expect(page.getByText("Body: Test body")).toBeVisible();
+    await expect(page.getByText("Tags: tag1, tag2")).toBeVisible();
+    await expect(page.getByText("Archived: No")).toBeVisible();
+    await expect(page.getByText("Updated:")).toBeVisible();
+  });
+
+  test("allows editing a note", async ({ page }) => {
+    await page.getByRole("button", { name: "Note #1" }).click();
+    await page.getByRole("button", { name: "Edit" }).click();
+    await expect(page.getByText("Edit Note")).toBeVisible();
+    await page.getByLabel("Title").fill("Updated title");
+    await page.getByLabel("Body").fill("Updated body");
+    await page.getByRole("button", { name: "Save" }).click();
+    await expect(page.getByText("Note updated successfully")).toBeVisible();
+  });
+
+  test("allows deleting a note", async ({ page }) => {
+    await page.getByRole("button", { name: "Note #1" }).click();
+    await page.getByRole("button", { name: "Delete" }).click();
+    await page.on('dialog', dialog => dialog.accept());
+    await expect(page.getByText("Note deleted successfully")).toBeVisible();
+  });
+});

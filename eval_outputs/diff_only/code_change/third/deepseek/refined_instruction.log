@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the "Copy" button on the home page copies the note body to the clipboard when a note is selected
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the "Copy" button on the home page copies the note body to the clipboard when a note is selected 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+       5 |
+       6 |   // Select a note (assuming there's a way to select a note, this is a placeholder)
+    >  7 |   await page.getByRole('button', { name: 'Copy' }).click();
+         |                                                    ^
+       8 |
+       9 |   // Check if the note body is copied to the clipboard
+      10 |   const copiedText = await navigator.clipboard.readText();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:7:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_instruction/refined_instruction-Verify-cdbca-ard-when-a-note-is-selected-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_instruction/refined_instruction-Verify-cdbca-ard-when-a-note-is-selected-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_instruction/refined_instruction-Verify-cdbca-ard-when-a-note-is-selected-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_instruction/refined_instruction-Verify-cdbca-ard-when-a-note-is-selected-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/deepseek/artefacts/refined_instruction/refined_instruction-Verify-cdbca-ard-when-a-note-is-selected-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify that the "Copy" button on the home page copies the note body to the clipboard when a note is selected 
+
+
+=== STDERR ===
+

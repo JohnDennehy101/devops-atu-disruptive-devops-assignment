@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:4:3 › Home page tag filter › should display a filter by tag input
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Home page tag filter › should show "No notes match the filter" when filter has no matches
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Home page tag filter › should show "No notes match the filter" when filter has no matches 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /new note/i })[22m
+
+
+      12 |
+      13 |     // First, create a note so the saved list is not empty
+    > 14 |     await page.getByRole('button', { name: /new note/i }).click();
+         |                                                           ^
+      15 |     const titleInput = page.getByPlaceholder(/title/i);
+      16 |     await titleInput.fill('Test Note for Filter');
+      17 |     const saveButton = page.getByRole('button', { name: /save/i });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:14:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_instruction/refined_instruction-Home-p-1fefc--when-filter-has-no-matches-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_instruction/refined_instruction-Home-p-1fefc--when-filter-has-no-matches-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_instruction/refined_instruction-Home-p-1fefc--when-filter-has-no-matches-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_instruction/refined_instruction-Home-p-1fefc--when-filter-has-no-matches-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_instruction/refined_instruction-Home-p-1fefc--when-filter-has-no-matches-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:31:3 › Home page tag filter › should show correct note count reflecting filtered results
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:38:3 › Home page tag filter › should filter notes by tag when typing in the filter input
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:51:3 › Home page tag filter › should show all saved notes when filter is cleared
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Home page tag filter › should show "No notes match the filter" when filter has no matches 
+  4 passed (23.7s)
+
+
+=== STDERR ===
+

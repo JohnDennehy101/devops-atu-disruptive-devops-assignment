@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('can clear all notes from the notes list', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const titleInput = page.getByLabel(/title/i);
+  const bodyInput = page.getByLabel(/body/i);
+  const tagsInput = page.getByLabel(/tags/i);
+  const saveButton = page.getByRole('button', { name: /save/i });
+
+  await titleInput.fill('First note');
+  await bodyInput.fill('Body for first note');
+  await tagsInput.fill('tag1');
+  await saveButton.click();
+
+  await titleInput.fill('Second note');
+  await bodyInput.fill('Body for second note');
+  await tagsInput.fill('tag2');
+  await saveButton.click();
+
+  await expect(page.getByRole('heading', { name: /your notes \(2\)/i })).toBeVisible();
+
+  const clearAllButton = page.getByRole('button', { name: /clear all/i });
+  await expect(clearAllButton).toBeVisible();
+  await clearAllButton.click();
+
+  await expect(page.getByRole('heading', { name: /your notes \(0\)/i })).toBeVisible();
+  await expect(clearAllButton).toHaveCount(0);
+
+  await expect(titleInput).toHaveValue('');
+  await expect(bodyInput).toHaveValue('');
+  await expect(tagsInput).toHaveValue('');
+
+  await page.reload();
+  await expect(page.getByRole('heading', { name: /your notes \(0\)/i })).toBeVisible();
+  await expect(page.getByRole('button', { name: /clear all/i })).toHaveCount(0);
+});

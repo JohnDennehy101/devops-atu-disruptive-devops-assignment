@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test('displays notes based on filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial state when there are no notes
+  await expect(page.getByText('No notes yet')).toBeVisible();
+
+  // Add a note to simulate having notes
+  await page.evaluate(() => {
+    // This is a placeholder for adding a note via API or UI
+    // Replace the following line with actual API call or UI interaction to add a note
+    api.addNote({ id: 1, tags: [], content: 'Sample Note' });
+  });
+
+  // Check if the note is displayed
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+  // Filter by tag
+  await page.fill('input[placeholder="Filter by tag"]', 'Sample');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+  // Check if the note matches the filter
+  await expect(page.getByText('Sample Note')).toBeVisible();
+
+  // Add another note with a different tag to simulate multiple notes
+  await page.evaluate(() => {
+    api.addNote({ id: 2, tags: ['test'], content: 'Test Note' });
+  });
+
+  // Check if the second note is not displayed initially
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByText('Test Note')).toBeVisible();
+
+  // Filter by the new tag
+  await page.fill('input[placeholder="Filter by tag"]', 'test');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('Test Note')).toBeVisible();
+
+  // Check if notes not matching the filter are hidden
+  await expect(page.getByText('No notes match the filter')).not.toBeVisible();
+});

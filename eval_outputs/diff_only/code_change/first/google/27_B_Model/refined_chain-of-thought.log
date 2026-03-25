@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts: Unexpected token, expected "</>/<=/>=" (37:9)
+
+  35 |   return (
+  36 |     <div>
+> 37 |       <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+     |          ^
+  38 |         Create and manage notes. Your notes are stored locally.
+  39 |       </p>
+  40 |
+
+   at refined_chain-of-thought.spec.ts:37
+
+  35 |   return (
+  36 |     <div>
+> 37 |       <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+     |         ^
+  38 |         Create and manage notes. Your notes are stored locally.
+  39 |       </p>
+  40 |
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

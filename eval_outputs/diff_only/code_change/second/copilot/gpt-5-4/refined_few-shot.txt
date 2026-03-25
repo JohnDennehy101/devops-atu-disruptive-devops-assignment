@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('shows body character count', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyField = page.locator('textarea');
+  await expect(page.getByText('0 / 5000')).toBeVisible();
+
+  await bodyField.fill('Hello world');
+  await expect(page.getByText('11 / 5000')).toBeVisible();
+});

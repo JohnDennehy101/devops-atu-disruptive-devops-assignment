@@ -1,0 +1,89 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Filter notes by tag ────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('input')[22m
+
+
+      3 | test('Filter notes by tag', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.getByRole('input').fill('react');
+        |                                 ^
+      6 |   await page.getByRole('input').blur();
+      7 |   await expect(page.getByRole('link')).toHaveCount(0);
+      8 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:5:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:10:1 › Add a note and verify it exists
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:10:1 › Add a note and verify it exists ───────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Add Note' })[22m
+
+
+      10 | test('Add a note and verify it exists', async ({ page }) => {
+      11 |   await page.goto('http://localhost:5175');
+    > 12 |   await page.getByRole('button', { name: 'Add Note' }).click();
+         |                                                        ^
+      13 |   await page.getByRole('input').fill('This is a test note');
+      14 |   await page.getByRole('textarea').fill('This is the content of the test note');
+      15 |   await page.getByRole('button', { name: 'Save' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:12:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Add-a-note-and-verify-it-exists-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Add-a-note-and-verify-it-exists-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Add-a-note-and-verify-it-exists-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Add-a-note-and-verify-it-exists-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Add-a-note-and-verify-it-exists-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Filter notes by tag ─────────────────────────
+    [chromium] › e2e/refined_instruction.spec.ts:10:1 › Add a note and verify it exists ────────────
+
+
+=== STDERR ===
+

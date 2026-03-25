@@ -1,0 +1,74 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page with clear all notes functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display the clear all button when there are notes', async ({ page }) => {
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'Test body content');
+    await page.click('button[type="submit"]');
+    
+    await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+    await expect(page.locator('button:has-text("Clear all")')).toBeVisible();
+  });
+
+  test('should not display the clear all button when there are no notes', async ({ page }) => {
+    await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+    await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+  });
+
+  test('should clear all notes when clear all button is clicked', async ({ page }) => {
+    await page.fill('#note-title', 'First Note');
+    await page.fill('#note-body', 'First body content');
+    await page.click('button[type="submit"]');
+    
+    await page.fill('#note-title', 'Second Note');
+    await page.fill('#note-body', 'Second body content');
+    await page.click('button[type="submit"]');
+    
+    await expect(page.locator('text=Your Notes (2)')).toBeVisible();
+    
+    await page.click('button:has-text("Clear all")');
+    
+    await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+    await expect(page.locator('text=No notes yet')).toBeVisible();
+    await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+    
+    await expect(page.locator('#note-title')).toHaveValue('');
+    await expect(page.locator('#note-body')).toHaveValue('');
+    await expect(page.locator('#note-tags')).toHaveValue('');
+  });
+
+  test('should persist clear all action after page reload', async ({ page }) => {
+    await page.fill('#note-title', 'Persistent Note');
+    await page.fill('#note-body', 'Persistent body content');
+    await page.click('button[type="submit"]');
+    
+    await expect(page.locator('text=Your Notes (1)')).toBeVisible();
+    
+    await page.click('button:has-text("Clear all")');
+    
+    await page.reload();
+    
+    await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+    await expect(page.locator('text=No notes yet')).toBeVisible();
+  });
+
+  test('should clear form fields and selected note when clearing all', async ({ page }) => {
+    await page.fill('#note-title', 'Note to Select');
+    await page.fill('#note-body', 'Body to select');
+    await page.click('button[type="submit"]');
+    
+    await page.click('button:has-text("Note #")');
+    await expect(page.locator('text=Note Details')).toBeVisible();
+    
+    await page.click('button:has-text("Clear all")');
+    
+    await expect(page.locator('text=Note Details')).not.toBeVisible();
+    await expect(page.locator('#note-title')).toHaveValue('');
+    await expect(page.locator('#note-body')).toHaveValue('');
+    await expect(page.locator('#note-tags')).toHaveValue('');
+  });
+});

@@ -1,0 +1,170 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Clear All Notes functionality › should display description text
+[1A[2K[2/6] [chromium] › e2e/refined_zero-shot.spec.ts:14:3 › Clear All Notes functionality › should not show Clear all button when there are no notes
+[1A[2K[3/6] [chromium] › e2e/refined_zero-shot.spec.ts:21:3 › Clear All Notes functionality › should show Clear all button when notes exist
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:21:3 › Clear All Notes functionality › should show Clear all button when notes exist 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      20 |
+      21 |   test('should show Clear all button when notes exist', async ({ page }) => {
+    > 22 |     await page.getByPlaceholder('Note title').fill('Test Note');
+         |                                               ^
+      23 |     await page.getByPlaceholder('Note body').fill('Test body content');
+      24 |     await page.getByRole('button', { name: /save/i }).click();
+      25 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:22:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-1e7ac-all-button-when-notes-exist-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-1e7ac-all-button-when-notes-exist-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-1e7ac-all-button-when-notes-exist-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-1e7ac-all-button-when-notes-exist-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-1e7ac-all-button-when-notes-exist-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/6] [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      29 |
+      30 |   test('should clear all notes when Clear all is clicked', async ({ page }) => {
+    > 31 |     await page.getByPlaceholder('Note title').fill('First Note');
+         |                                               ^
+      32 |     await page.getByPlaceholder('Note body').fill('First body');
+      33 |     await page.getByRole('button', { name: /save/i }).click();
+      34 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:31:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-46d6e-s-when-Clear-all-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-46d6e-s-when-Clear-all-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-46d6e-s-when-Clear-all-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-46d6e-s-when-Clear-all-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-46d6e-s-when-Clear-all-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/6] [chromium] › e2e/refined_zero-shot.spec.ts:50:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked
+[1A[2K  3) [chromium] › e2e/refined_zero-shot.spec.ts:50:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      49 |
+      50 |   test('should clear localStorage when Clear all is clicked', async ({ page }) => {
+    > 51 |     await page.getByPlaceholder('Note title').fill('Test Note');
+         |                                               ^
+      52 |     await page.getByPlaceholder('Note body').fill('Test body');
+      53 |     await page.getByRole('button', { name: /save/i }).click();
+      54 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:51:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-03d46-e-when-Clear-all-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-03d46-e-when-Clear-all-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-03d46-e-when-Clear-all-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-03d46-e-when-Clear-all-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-03d46-e-when-Clear-all-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[6/6] [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Clear All Notes functionality › should display notes count in header
+[1A[2K  4) [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Clear All Notes functionality › should display notes count in header 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Note title')[22m
+
+
+      64 |     await expect(page.getByText('Your Notes (0)')).toBeVisible();
+      65 |
+    > 66 |     await page.getByPlaceholder('Note title').fill('A Note');
+         |                                               ^
+      67 |     await page.getByPlaceholder('Note body').fill('Some content');
+      68 |     await page.getByRole('button', { name: /save/i }).click();
+      69 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:66:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-75aeb-splay-notes-count-in-header-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-75aeb-splay-notes-count-in-header-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-75aeb-splay-notes-count-in-header-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-75aeb-splay-notes-count-in-header-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/claude/artefacts/refined_zero-shot/refined_zero-shot-Clear-Al-75aeb-splay-notes-count-in-header-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:21:3 › Clear All Notes functionality › should show Clear all button when notes exist 
+    [chromium] › e2e/refined_zero-shot.spec.ts:30:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked 
+    [chromium] › e2e/refined_zero-shot.spec.ts:50:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked 
+    [chromium] › e2e/refined_zero-shot.spec.ts:63:3 › Clear All Notes functionality › should display notes count in header 
+  2 passed (1.5m)
+
+
+=== STDERR ===
+

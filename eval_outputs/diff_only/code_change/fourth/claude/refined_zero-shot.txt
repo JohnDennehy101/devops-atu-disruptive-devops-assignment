@@ -1,0 +1,69 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag Filter on Home Page', () => {
+  test('should display a tag filter input', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('should filter notes by tag and update the count', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // First, create a note with a known tag so we have something to filter
+    // Look for a way to add a note - navigate or use the UI
+    const addButton = page.getByRole('button', { name: /add|create|new|\+/i });
+    if (await addButton.isVisible({ timeout: 2000 }).catch(() => false)) {
+      await addButton.click();
+    }
+
+    // Wait for any notes to appear in the sidebar
+    const yourNotesHeading = page.getByText(/Your Notes \(\d+\)/);
+    await expect(yourNotesHeading).toBeVisible({ timeout: 5000 });
+
+    // Type a filter that likely won't match anything
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('nonexistenttag12345');
+
+    // Should show "No notes match the filter" and count should be 0
+    await expect(page.getByText('No notes match the filter')).toBeVisible({ timeout: 3000 });
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // Clear the filter
+    await filterInput.clear();
+
+    // Count should restore to the original number
+    await expect(page.getByText(/Your Notes \([1-9]\d*\)/)).toBeVisible({ timeout: 3000 });
+  });
+
+  test('should update displayed count when filtering by tag', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await expect(filterInput).toBeVisible();
+
+    // Get the initial count text
+    const notesHeading = page.getByText(/Your Notes \(\d+\)/);
+    const initialText = await notesHeading.textContent({ timeout: 5000 }).catch(() => null);
+
+    if (initialText) {
+      const initialCount = parseInt(initialText.match(/\((\d+)\)/)?.[1] ?? '0');
+
+      if (initialCount > 0) {
+        // Apply a non-matching filter
+        await filterInput.fill('zzzznonexistent');
+        await expect(page.getByText('Your Notes (0)')).toBeVisible({ timeout: 3000 });
+        await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+        // Clear filter and verify count restores
+        await filterInput.clear();
+        await expect(page.getByText(`Your Notes (${initialCount})`)).toBeVisible({ timeout: 3000 });
+      }
+    }
+  });
+});

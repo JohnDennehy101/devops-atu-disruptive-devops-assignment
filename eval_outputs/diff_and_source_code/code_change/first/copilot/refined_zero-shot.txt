@@ -1,0 +1,105 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('should display the correct initial UI', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Check the page title
+    await expect(page.locator('h1')).toHaveText('Note Taking App');
+
+    // Check the description text
+    await expect(page.locator('p.text-gray-500')).toHaveText('Create and manage notes. Your notes are stored locally.');
+
+    // Check the "Your Notes" section
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (0)');
+    await expect(page.locator('p.text-gray-500')).toHaveText('No notes yet');
+  });
+
+  test('should create a new note', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Fill out the form
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.fill('#note-tags', 'test, note');
+
+    // Submit the form
+    await page.click('button:has-text("Create Note")');
+
+    // Verify the note appears in the list
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (1)');
+    await expect(page.locator('button:has-text("Note #1")')).toBeVisible();
+  });
+
+  test('should clear all notes', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Create a note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.fill('#note-tags', 'test, note');
+    await page.click('button:has-text("Create Note")');
+
+    // Verify the note is created
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (1)');
+
+    // Click "Clear all" button
+    await page.click('button:has-text("Clear all")');
+
+    // Verify all notes are cleared
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (0)');
+    await expect(page.locator('p.text-gray-500')).toHaveText('No notes yet');
+  });
+
+  test('should edit an existing note', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Create a note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.fill('#note-tags', 'test, note');
+    await page.click('button:has-text("Create Note")');
+
+    // Open the note
+    await page.click('button:has-text("Note #1")');
+
+    // Click the "Edit" button
+    await page.click('button:has-text("Edit")');
+
+    // Update the note
+    await page.fill('#note-title', 'Updated Note');
+    await page.fill('#note-body', 'This is an updated test note.');
+    await page.fill('#note-tags', 'updated, test');
+    await page.click('button:has-text("Save")');
+
+    // Verify the note is updated
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (1)');
+    await page.click('button:has-text("Note #1")');
+    await expect(page.locator('p:has-text("Title: Updated Note")')).toBeVisible();
+    await expect(page.locator('p:has-text("Body: This is an updated test note.")')).toBeVisible();
+    await expect(page.locator('p:has-text("Tags: updated, test")')).toBeVisible();
+  });
+
+  test('should delete a note', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    // Create a note
+    await page.fill('#note-title', 'Test Note');
+    await page.fill('#note-body', 'This is a test note.');
+    await page.fill('#note-tags', 'test, note');
+    await page.click('button:has-text("Create Note")');
+
+    // Open the note
+    await page.click('button:has-text("Note #1")');
+
+    // Delete the note
+    await page.click('button:has-text("Delete")');
+    await page.on('dialog', async (dialog) => {
+      await dialog.accept();
+    });
+
+    // Verify the note is deleted
+    await expect(page.locator('h3.text-lg')).toHaveText('Your Notes (0)');
+    await expect(page.locator('p.text-gray-500')).toHaveText('No notes yet');
+  });
+});

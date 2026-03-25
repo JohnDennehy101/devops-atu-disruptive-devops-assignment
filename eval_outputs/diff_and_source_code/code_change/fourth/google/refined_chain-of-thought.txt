@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+import { api, Note } from '../services/api';
+
+test('Filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if there are any notes to filter
+  const noteCount = await page.locator('text=Note #').count();
+  expect(noteCount).toBeGreaterThan(0);
+
+  // Get the filter input element
+  const filterInput = page.locator('input[placeholder="Filter by tag"]');
+
+  // Enter a tag in the filter input
+  await filterInput.fill('tag1');
+
+  // Wait for the notes to update
+  await page.waitForTimeout(500);
+
+  // Check if the notes are filtered correctly
+  const filteredNoteCount = await page.locator('text=Note #').count();
+  expect(filteredNoteCount).toBeLessThan(noteCount);
+});

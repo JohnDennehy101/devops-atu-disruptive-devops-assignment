@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy button should copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there's at least one note created and selected
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page.waitForTimeout(1000); // Wait for the note details to load
+
+  // Click the Copy button
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  // Verify that the note body is copied to the clipboard
+  const clipboardText = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  const noteBody = await page.getByText('Body:').textContent();
+  expect(clipboardText).toBe(noteBody);
+});
+```
+```typescript
+
+test('Copy button should copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there's at least one note created and selected
+  await page.getByRole('button', { name: 'Edit' }).click();
+  await page.waitForTimeout(1000); // Wait for the note details to load
+
+  // Click the Copy button
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  // Verify that the note body is copied to the clipboard
+  const clipboardText = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  const noteBody = await page.getByText('Body:').textContent();
+  expect(clipboardText).toBe(noteBody);
+});
+```

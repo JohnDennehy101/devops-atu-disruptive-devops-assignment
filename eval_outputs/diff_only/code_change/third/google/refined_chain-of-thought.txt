@@ -1,0 +1,9 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.locator('text=Note title')).toBeVisible();
+  await page.locator('text=Copy').click();
+  await page.locator('text=Note title').click();
+  await expect(page.locator('text=Note title')).toBeVisible();
+});

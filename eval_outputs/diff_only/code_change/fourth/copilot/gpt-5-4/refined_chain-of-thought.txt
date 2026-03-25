@@ -1,0 +1,53 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag on Home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const yourNotesHeading = page.getByText(/Your Notes \(\d+\)/);
+  await expect(yourNotesHeading).toBeVisible();
+
+  const filterInput = page.getByPlaceholder('Filter by tag');
+  await expect(filterInput).toBeVisible();
+
+  const noteLinks = page.locator('a[href^="/notes/"]');
+  const initialCount = await noteLinks.count();
+
+  if (initialCount === 0) {
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    return;
+  }
+
+  const firstNoteLink = noteLinks.first();
+  await expect(firstNoteLink).toBeVisible();
+  const firstHref = await firstNoteLink.getAttribute('href');
+  expect(firstHref).toBeTruthy();
+
+  await firstNoteLink.click();
+  await page.waitForURL(/\/notes\/.+/);
+
+  const tagElements = page.locator('text=/^#/');
+  const tagCount = await tagElements.count();
+
+  if (tagCount === 0) {
+    test.skip(true, 'Selected note has no visible tags to filter by');
+  }
+
+  const firstTagText = await tagElements.first().textContent();
+  expect(firstTagText).toBeTruthy();
+  const tagValue = firstTagText!.replace(/^#/, '').trim();
+  expect(tagValue.length).toBeGreaterThan(0);
+
+  await page.goto('http://localhost:5175');
+  await expect(filterInput).toBeVisible();
+
+  await filterInput.fill(tagValue);
+
+  const filteredHeading = page.getByText(/Your Notes \(\d+\)/);
+  await expect(filteredHeading).toContainText('Your Notes (1)');
+
+  await expect(page.locator(`a[href="${firstHref}"]`)).toBeVisible();
+
+  await filterInput.fill('tag-that-should-not-match-any-note-xyz');
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  await expect(page.getByText(/Your Notes \(0\)/)).toBeVisible();
+});

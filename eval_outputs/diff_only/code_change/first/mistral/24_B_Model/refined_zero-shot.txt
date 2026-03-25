@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('should clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are some notes already present
+  await page.click('text=Your Notes (1)');
+
+  // Click the "Clear all" button
+  await page.click('text=Clear all');
+
+  // Verify that the notes section is empty
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+
+  // Verify that the local storage is cleared
+  const localStorage = await page.evaluate(() => JSON.parse(localStorage.getItem('noteIds')));
+  expect(localStorage).toEqual([]);
+});

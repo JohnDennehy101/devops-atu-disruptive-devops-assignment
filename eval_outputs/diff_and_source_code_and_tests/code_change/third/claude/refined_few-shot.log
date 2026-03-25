@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › can copy note body using the Copy button
+[1A[2K  1 passed (1.3s)
+
+
+=== STDERR ===
+

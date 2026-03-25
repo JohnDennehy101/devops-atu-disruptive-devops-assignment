@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes functionality', async ({ page }) => {
+  // Create some notes for testing
+  await page.getByLabel('Title').fill('Note 1');
+  await page.getByLabel('Body').fill('Body 1');
+  await page.getByLabel(/Tags/).fill('tag1');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await page.getByLabel('Title').fill('Note 2');
+  await page.getByLabel('Body').fill('Body 2');
+  await page.getByLabel(/Tags/).fill('tag2');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Check that "Clear all" button is visible
+  await expect(page.getByText('Clear all')).toBeVisible();
+
+  // Click "Clear all" button
+  await page.getByText('Clear all').click();
+
+  // Check that all notes are removed from the sidebar
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).not.toBeVisible();
+
+  // Check that "Your Notes (0)" text is displayed
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+  // Check that "Clear all" button is not visible
+  await expect(page.getByText('Clear all')).not.toBeVisible();
+});

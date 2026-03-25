@@ -1,0 +1,70 @@
+import { test, expect } from '@playwright/test';
+
+test('should create a new note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Fill out the form to create a new note
+  await page.fill('input[name="title"]', 'Test Note Title');
+  await page.fill('textarea[name="body"]', 'This is the body of the test note.');
+  await page.fill('input[name="tags"]', 'test, playwright');
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to appear in the list
+  await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(1);
+});
+
+test('should filter notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note with a tag
+  await page.fill('input[name="title"]', 'Tagged Note');
+  await page.fill('textarea[name="body"]', 'This note has a tag.');
+  await page.fill('input[name="tags"]', 'playwright');
+  await page.click('button[type="submit"]');
+
+  // Filter notes by the tag
+  await page.fill('input[placeholder="Filter by tag"]', 'playwright');
+
+  // Wait for the filtered note to appear
+  await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(1);
+});
+
+test('should edit a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note to edit
+  await page.fill('input[name="title"]', 'Editable Note');
+  await page.fill('textarea[name="body"]', 'This is the body of the editable note.');
+  await page.fill('input[name="tags"]', 'editable');
+  await page.click('button[type="submit"]');
+
+  // Edit the note
+  await page.click('text=Edit');
+  await page.fill('input[name="title"]', 'Updated Note Title');
+  await page.fill('textarea[name="body"]', 'This is the updated body of the note.');
+  await page.fill('input[name="tags"]', 'updated, playwright');
+  await page.click('button[type="submit"]');
+
+  // Wait for the note to be updated
+  await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(1);
+  await expect(page.locator('p', { hasText: 'Updated Note Title' })).toBeVisible();
+  await expect(page.locator('p', { hasText: 'This is the updated body of the note.' })).toBeVisible();
+  await expect(page.locator('p', { hasText: 'updated, playwright' })).toBeVisible();
+});
+
+test('should delete a note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note to delete
+  await page.fill('input[name="title"]', 'Deletable Note');
+  await page.fill('textarea[name="body"]', 'This note can be deleted.');
+  await page.fill('input[name="tags"]', 'deletable');
+  await page.click('button[type="submit"]');
+
+  // Delete the note
+  await page.click('text=Delete');
+
+  // Wait for the note to be removed
+  await expect(page.locator('button', { hasText: 'Note #' })).toHaveCount(0);
+});
+```

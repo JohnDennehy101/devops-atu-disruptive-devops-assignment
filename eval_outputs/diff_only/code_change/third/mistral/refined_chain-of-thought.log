@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Test copy note body
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Test copy note body ───────────────────
+
+    Error: expect: Property 'toHaveCountGreaterThan' not found.
+
+       5 |
+       6 |   // Ensure there are notes on the page
+    >  7 |   await expect(page.locator('.note')).toHaveCountGreaterThan(0);
+         |                                      ^
+       8 |
+       9 |   // Click on a note to select it
+      10 |   await page.locator('.note').first().click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:7:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-Test-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-Test-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-Test-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-Test-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_chain-of-thought/refined_chain-of-thought-Test-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Test copy note body ────────────────────
+
+
+=== STDERR ===
+

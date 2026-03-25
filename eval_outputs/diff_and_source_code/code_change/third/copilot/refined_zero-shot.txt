@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note body.');
+  await page.fill('#note-tags', 'test, playwright');
+  await page.click('button:has-text("Create Note")');
+
+  // Wait for the note to appear in the list
+  await page.waitForSelector('button:has-text("Note #1")');
+
+  // Select the note
+  await page.click('button:has-text("Note #1")');
+
+  // Wait for the note details to load
+  await page.waitForSelector('button:has-text("Copy")');
+
+  // Click the copy button
+  await page.click('button:has-text("Copy")');
+
+  // Verify clipboard content
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('This is a test note body.');
+});

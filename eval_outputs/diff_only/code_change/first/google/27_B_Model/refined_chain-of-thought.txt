@@ -1,0 +1,59 @@
+import { useState, useEffect } from'react';
+
+interface Note {
+  id: string;
+  title: string;
+  body: string;
+  tags: string[];
+}
+
+function Home() {
+  const [savedIds, setSavedIds] = useState<string[]>([]);
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null);
+  const [formTitle, setFormTitle] = useState('');
+  const [formBody, setFormBody] = useState('');
+  const [formTags, setFormTags] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const storedIds = localStorage.getItem('noteIds');
+    if (storedIds) {
+      setSavedIds(JSON.parse(storedIds));
+    }
+  }, []);
+
+  const clearAllNotes = () => {
+    setSavedIds([])
+    setSelectedNote(null)
+    setFormTitle("")
+    setFormBody("")
+    setFormTags("")
+    setIsEditing(false)
+    localStorage.setItem("noteIds", JSON.stringify([]))
+  }
+
+  return (
+    <div>
+      <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
+        Create and manage notes. Your notes are stored locally.
+      </p>
+
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Your Notes ({savedIds.length})
+        </h3>
+        {savedIds.length > 0 && (
+          <button
+            type="button"
+            onClick={clearAllNotes}
+            className="text-sm text-red-600 dark:text-red-400 hover:underline"
+          >
+            Clear all
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default Home;

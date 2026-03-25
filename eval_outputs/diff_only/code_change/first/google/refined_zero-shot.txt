@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the "Clear all" button is visible
+  await expect(page.locator('text=Clear all')).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.locator('text=Clear all').click();
+
+  // Verify that the note list is now empty
+  await expect(page.locator('ul')).toHaveCount(0);
+
+  // Verify that the "Your Notes (0)" text is displayed
+  await expect(page.locator('text=Your Notes (0)')).toBeVisible();
+});

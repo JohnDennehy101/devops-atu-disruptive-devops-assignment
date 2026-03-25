@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows character count for form body
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows character count for form body ───────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('textarea[name="formBody"]')[22m
+
+
+      4 |   await page.goto('http://localhost:5175');
+      5 |   const textarea = page.locator('textarea[name="formBody"]');
+    > 6 |   await textarea.fill('Hello, world!');
+        |                  ^
+      7 |   await expect(page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toContainText('13 / 5000');
+      8 |   await textarea.fill('A'.repeat(100));
+      9 |   await expect(page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1')).toContainText('100 / 5000');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:6:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_few-shot/refined_few-shot-shows-character-count-for-form-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_few-shot/refined_few-shot-shows-character-count-for-form-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_few-shot/refined_few-shot-shows-character-count-for-form-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_few-shot/refined_few-shot-shows-character-count-for-form-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_few-shot/refined_few-shot-shows-character-count-for-form-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › shows character count for form body ────────────
+
+
+=== STDERR ===
+

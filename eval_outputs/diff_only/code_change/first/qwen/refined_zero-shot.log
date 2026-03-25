@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › displays "Your Notes" heading and "Clear all" button when there are notes
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:20:1 › does not display "Clear all" button when there are no notes
+[1A[2K  2 passed (1.5s)
+
+
+=== STDERR ===
+

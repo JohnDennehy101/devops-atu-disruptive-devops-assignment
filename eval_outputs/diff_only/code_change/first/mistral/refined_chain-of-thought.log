@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts: Unexpected token (20:86)
+
+  18 |   // Verify that all notes are deleted and the "Clear all" button is no longer visible
+  19 |   await expect(page.locator('div[data-testid="note-card"]')).toHaveCount(0);
+> 20 |   await expect(page.locator('button:text("Clear all")')).toHaveCSS('display', 'none');
+     |                                                                                       ^
+
+   at refined_chain-of-thought.spec.ts:20
+
+  18 |   // Verify that all notes are deleted and the "Clear all" button is no longer visible
+  19 |   await expect(page.locator('div[data-testid="note-card"]')).toHaveCount(0);
+> 20 |   await expect(page.locator('button:text("Clear all")')).toHaveCSS('display', 'none');
+     |                                                                                      ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

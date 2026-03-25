@@ -1,0 +1,18 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Clear All Notes Feature › shows subtitle text about local storage
+[1A[2K[2/7] [chromium] › e2e/refined_instruction.spec.ts:16:3 › Clear All Notes Feature › does not show Clear all button when there are no notes
+[1A[2K[3/7] [chromium] › e2e/refined_instruction.spec.ts:21:3 › Clear All Notes Feature › shows Clear all button after creating a note
+[1A[2K[4/7] [chromium] › e2e/refined_instruction.spec.ts:30:3 › Clear All Notes Feature › Clear all removes all notes from the sidebar
+[1A[2K[5/7] [chromium] › e2e/refined_instruction.spec.ts:48:3 › Clear All Notes Feature › Clear all clears localStorage noteIds
+[1A[2K[6/7] [chromium] › e2e/refined_instruction.spec.ts:63:3 › Clear All Notes Feature › Clear all resets the form fields
+[1A[2K[7/7] [chromium] › e2e/refined_instruction.spec.ts:89:3 › Clear All Notes Feature › notes remain cleared after page reload
+[1A[2K  7 passed (4.6s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,89 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › filter notes by tag ─────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Filter by tag')[22m
+
+
+      14 |     await page.getByRole('button', { name: 'Create Note' }).click();
+      15 |
+    > 16 |     await page.getByLabel('Filter by tag').fill('tag1');
+         |                                            ^
+      17 |
+      18 |     await expect(page.getByRole('button', { name: /Note #\d+/ })).toBeVisible();
+      19 |     await expect(page.getByText('Your Notes (1)')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:16:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-Taking-App-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-Taking-App-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-Taking-App-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-Taking-App-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-Taking-App-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Note Taking App › no notes are displayed when filter does not match
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:22:3 › Note Taking App › no notes are displayed when filter does not match 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByLabel('Filter by tag')[22m
+
+
+      26 |     await page.getByRole('button', { name: 'Create Note' }).click();
+      27 |
+    > 28 |     await page.getByLabel('Filter by tag').fill('tag1');
+         |                                            ^
+      29 |
+      30 |     await expect(page.getByRole('button', { name: /Note #\d+/ })).not().toBeVisible();
+      31 |     await expect(page.getByText('Your Notes (0)')).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:28:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-T-19959--when-filter-does-not-match-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-T-19959--when-filter-does-not-match-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-T-19959--when-filter-does-not-match-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-T-19959--when-filter-does-not-match-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/artefacts/refined_instruction/refined_instruction-Note-T-19959--when-filter-does-not-match-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › filter notes by tag ──────
+    [chromium] › e2e/refined_instruction.spec.ts:22:3 › Note Taking App › no notes are displayed when filter does not match 
+
+
+=== STDERR ===
+

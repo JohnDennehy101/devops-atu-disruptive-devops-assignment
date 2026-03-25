@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the "Clear all" button is not present when there are no notes
+  await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+
+  // Create a note
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('button:has-text("Create Note")');
+
+  // Check if the "Clear all" button is now present
+  await expect(page.locator('button:has-text("Clear all")')).toBeVisible();
+
+  // Click the "Clear all" button
+  await page.click('button:has-text("Clear all")');
+
+  // Verify that all notes are cleared and the "Clear all" button is no longer visible
+  await expect(page.locator('button:has-text("Clear all")')).not.toBeVisible();
+  await expect(page.locator('button:has-text("Note #1")')).not.toBeVisible();
+});

@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ───────────
+
+    TypeError: page.locate is not a function
+
+       5 |
+       6 |   // Assuming there's a note with id 1 and its body is "Hello, World!"
+    >  7 |   await page.locate('button[data-testid="note-1-copy-button"]').click();
+         |              ^
+       8 |
+       9 |   // Check if "Hello, World!" is copied to clipboard
+      10 |   const text = await page.evaluate(() => navigator.clipboard.readText());
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should copy note body to clipboard ────────────
+
+
+=== STDERR ===
+

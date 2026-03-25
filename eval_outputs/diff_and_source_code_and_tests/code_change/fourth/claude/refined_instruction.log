@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Tag Filter on Home Page › shows filter by tag input field
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:14:3 › Tag Filter on Home Page › filters notes by tag
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:36:3 › Tag Filter on Home Page › shows 'No notes match the filter' when tag filter has no matches
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:48:3 › Tag Filter on Home Page › clearing the tag filter shows all notes again
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:63:3 › Tag Filter on Home Page › tag filter is case-insensitive
+[1A[2K  5 passed (2.6s)
+
+
+=== STDERR ===
+

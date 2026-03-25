@@ -1,0 +1,101 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag filter functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display the filter by tag input', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute('placeholder', 'Filter by tag');
+    await expect(filterInput).toHaveValue('');
+  });
+
+  test('should show all saved notes when filter is empty', async ({ page }) => {
+    const heading = page.getByRole('heading', { name: /Your Notes \(\d+\)/ });
+    await expect(heading).toBeVisible();
+    const noteButtons = page.getByRole('button', { name: /Note #/ });
+    const count = await noteButtons.count();
+    expect(count).toBeGreaterThan(0);
+    const headingText = await heading.textContent();
+    expect(headingText).toContain(`Your Notes (${count})`);
+  });
+
+  test('should filter notes by matching tag', async ({ page }) => {
+    const noteButtons = page.getByRole('button', { name: /Note #/ });
+    const initialCount = await noteButtons.count();
+    expect(initialCount).toBeGreaterThanOrEqual(2);
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('python');
+
+    const filteredButtons = page.getByRole('button', { name: /Note #/ });
+    await expect(filteredButtons).toHaveCount(1);
+
+    const heading = page.getByRole('heading', { name: 'Your Notes (1)' });
+    await expect(heading).toBeVisible();
+  });
+
+  test('should show "No notes match the filter" for non-matching tag', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('nonexistenttag');
+
+    const heading = page.getByRole('heading', { name: 'Your Notes (0)' });
+    await expect(heading).toBeVisible();
+
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+    const noteButtons = page.getByRole('button', { name: /Note #/ });
+    await expect(noteButtons).toHaveCount(0);
+  });
+
+  test('should update count in heading when filtering', async ({ page }) => {
+    const heading = page.getByRole('heading', { name: /Your Notes/ });
+    const initialText = await heading.textContent();
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('react');
+
+    await expect(heading).not.toHaveText(initialText!);
+    const updatedText = await heading.textContent();
+    const match = updatedText?.match(/Your Notes \((\d+)\)/);
+    expect(match).toBeTruthy();
+    const filteredCount = parseInt(match![1], 10);
+    expect(filteredCount).toBeLessThanOrEqual(parseInt(initialText!.match(/\((\d+)\)/)![1], 10));
+  });
+
+  test('should restore all notes when filter is cleared', async ({ page }) => {
+    const noteButtons = page.getByRole('button', { name: /Note #/ });
+    const initialCount = await noteButtons.count();
+
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('python');
+    await expect(noteButtons).not.toHaveCount(initialCount);
+
+    await filterInput.fill('');
+    await expect(noteButtons).toHaveCount(initialCount);
+  });
+
+  test('should perform case-insensitive tag filtering', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+
+    await filterInput.fill('PYTHON');
+    const upperCaseCount = await page.getByRole('button', { name: /Note #/ }).count();
+
+    await filterInput.fill('python');
+    const lowerCaseCount = await page.getByRole('button', { name: /Note #/ }).count();
+
+    expect(upperCaseCount).toBe(lowerCaseCount);
+    expect(upperCaseCount).toBeGreaterThan(0);
+  });
+
+  test('should support partial tag matching', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: 'Filter by tag' });
+    await filterInput.fill('java');
+
+    const noteButtons = page.getByRole('button', { name: /Note #/ });
+    const count = await noteButtons.count();
+    expect(count).toBeGreaterThan(0);
+  });
+});

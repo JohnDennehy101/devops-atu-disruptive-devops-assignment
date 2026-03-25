@@ -1,0 +1,28 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page - Verify note count and clear all functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Wait for the "Your Notes" heading to be visible
+  await page.getByText('Your Notes').isVisible();
+
+  // Get the current note count
+  const initialNoteCountText = await page.getByText('Your Notes').textContent();
+  const initialNoteCount = parseInt(initialNoteCountText?.split('(')[1].split(')')[0] || '0', 10);
+
+  // Click the "Clear all" button if it exists
+  if (await page.getByText('Clear all').isVisible()) {
+    await page.getByText('Clear all').click();
+  }
+
+  // Wait for the note count to update
+  await page.getByText('Your Notes').isVisible();
+  const updatedNoteCountText = await page.getByText('Your Notes').textContent();
+  const updatedNoteCount = parseInt(updatedNoteCountText?.split('(')[1].split(')')[0] || '0', 10);
+
+  // Assert that the note count has been reduced to 0
+  expect(updatedNoteCount).toBe(0);
+
+  // Verify the descriptive text is present
+  await page.getByText('Create and manage notes. Your notes are stored locally.').isVisible();
+});

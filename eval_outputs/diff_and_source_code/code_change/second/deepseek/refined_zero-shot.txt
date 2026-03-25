@@ -1,0 +1,24 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for formBody', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Ensure the form is loaded
+  await expect(page.locator('h1')).toHaveText('Note Taking App');
+
+  // Check initial character count display
+  const characterCount = page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  // Type in formBody
+  await page.fill('textarea[id="note-body"]', 'A'.repeat(100));
+  await expect(characterCount).toHaveText('100 / 5000');
+
+  // Type more to exceed 5000 characters
+  await page.fill('textarea[id="note-body"]', 'B'.repeat(4900));
+  await expect(characterCount).toHaveText('4900 / 5000');
+
+  // Try to exceed 5000 characters
+  await page.fill('textarea[id="note-body"]', 'C'.repeat(5100));
+  await expect(characterCount).toHaveText('5000 / 5000');
+});

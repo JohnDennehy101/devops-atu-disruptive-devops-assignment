@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag and updates count and empty state', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const saveButtons = page.locator('button[title="Save note"]');
+  const saveCount = await saveButtons.count();
+
+  if (saveCount >= 2) {
+    await saveButtons.nth(0).click();
+    await saveButtons.nth(1).click();
+  } else if (saveCount === 1) {
+    await saveButtons.nth(0).click();
+  }
+
+  await expect(page.getByPlaceholder('Filter by tag')).toBeVisible();
+
+  const notesHeading = page.getByText(/Your Notes \(\d+\)/);
+  await expect(notesHeading).toBeVisible();
+
+  const initialHeadingText = (await notesHeading.textContent()) || '';
+  const initialMatch = initialHeadingText.match(/\((\d+)\)/);
+  const initialCount = initialMatch ? Number(initialMatch[1]) : 0;
+
+  if (initialCount === 0) {
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    return;
+  }
+
+  await page.getByPlaceholder('Filter by tag').fill('tag-that-should-not-match-any-note');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+
+  await page.getByPlaceholder('Filter by tag').fill('');
+  await expect(page.getByText(`Your Notes (${initialCount})`)).toBeVisible();
+});

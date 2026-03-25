@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page › should display the description text
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:14:3 › Home Page › can clear all notes from sidebar
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:25:3 › Home Page › should show Clear all button only when notes exist
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:34:3 › Home Page › should reset form after clearing all notes
+[1A[2K  4 passed (2.3s)
+
+
+=== STDERR ===
+

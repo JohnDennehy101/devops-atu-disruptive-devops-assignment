@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Filter by tag › filter by tag shows only matching notes
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:34:3 › Filter by tag › filter is case-insensitive
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:49:3 › Filter by tag › filter matches partial tag names
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:61:3 › Filter by tag › filter input is visible and has correct placeholder
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:67:3 › Filter by tag › clearing filter restores all notes
+[1A[2K  5 passed (3.6s)
+
+
+=== STDERR ===
+

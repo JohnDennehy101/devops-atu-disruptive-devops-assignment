@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-23T11:13:05.781937",
+        "model_id": "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 87.357,
+            "tokens_per_sec": 4.27,
+            "input_token_count": 485,
+            "output_token_count": 373,
+            "total_token_count": 858
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should display the number of notes and have a clear all button', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the number of notes is displayed\n  const notesCount = await page.getByText('Your Notes (0)');\n  await expect(notesCount).toBeVisible();\n\n  // Check if the clear all button is not visible when there are no notes\n  const clearAllButton = await page.getByText('Clear all');\n  await expect(clearAllButton).not.toBeVisible();\n\n  // Add a note to simulate having notes\n  await page.getByPlaceholder('Title').fill('Test Note');\n  await page.getByPlaceholder('Body').fill('This is a test note.');\n  await page.getByPlaceholder('Tags').fill('test');\n  await page.getByRole('button', { name: 'Save' }).click();\n\n  // Check if the number of notes is updated and the clear all button is visible\n  await expect(page.getByText('Your Notes (1)')).toBeVisible();\n  await expect(page.getByText('Clear all')).toBeVisible();\n\n  // Clear all notes\n  await page.getByText('Clear all').click();\n\n  // Check if the number of notes is reset to 0 and the clear all button is not visible\n  await expect(page.getByText('Your Notes (0)')).toBeVisible();\n  await expect(page.getByText('Clear all')).not.toBeVisible();\n});\n```\n",
+            "extracted_code": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('should display the number of notes and have a clear all button', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the number of notes is displayed\n  const notesCount = await page.getByText('Your Notes (0)');\n  await expect(notesCount).toBeVisible();\n\n  // Check if the clear all button is not visible when there are no notes\n  const clearAllButton = await page.getByText('Clear all');\n  await expect(clearAllButton).not.toBeVisible();\n\n  // Add a note to simulate having notes\n  await page.getByPlaceholder('Title').fill('Test Note');\n  await page.getByPlaceholder('Body').fill('This is a test note.');\n  await page.getByPlaceholder('Tags').fill('test');\n  await page.getByRole('button', { name: 'Save' }).click();\n\n  // Check if the number of notes is updated and the clear all button is visible\n  await expect(page.getByText('Your Notes (1)')).toBeVisible();\n  await expect(page.getByText('Clear all')).toBeVisible();\n\n  // Clear all notes\n  await page.getByText('Clear all').click();\n\n  // Check if the number of notes is reset to 0 and the clear all button is not visible\n  await expect(page.getByText('Your Notes (0)')).toBeVisible();\n  await expect(page.getByText('Clear all')).not.toBeVisible();\n});\n```\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

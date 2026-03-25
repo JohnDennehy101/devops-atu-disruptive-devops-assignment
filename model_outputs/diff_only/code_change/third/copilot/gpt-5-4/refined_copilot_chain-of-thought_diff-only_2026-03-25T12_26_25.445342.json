@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T12:26:25.445342",
+        "model_id": "github/gpt-5.4",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 5.796,
+            "input_token_count": 238,
+            "output_token_count": 424,
+            "total_token_count": 662,
+            "tokens_per_sec": 73.15
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('can copy selected note body from Home page', async ({ page, context, browserName }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n  await page.goto('http://localhost:5175');\n\n  const noteItems = page.locator('button, [role=\"button\"]').filter({ has: page.locator('h3, h2, h4, p, span, div') });\n  const count = await noteItems.count();\n\n  let selectedTitle = '';\n  let selectedBody = '';\n\n  for (let i = 0; i < count; i++) {\n    const candidate = noteItems.nth(i);\n    const text = (await candidate.innerText()).trim();\n    if (text && text !== 'Copy') {\n      await candidate.click();\n      const copyButton = page.getByRole('button', { name: 'Copy' });\n      if (await copyButton.isVisible().catch(() => false)) {\n        selectedTitle = text;\n        break;\n      }\n    }\n  }\n\n  const copyButton = page.getByRole('button', { name: 'Copy' });\n  await expect(copyButton).toBeVisible();\n\n  const bodyContainer = copyButton.locator('xpath=ancestor::*[self::section or self::article or self::div][1]');\n  const containerText = await bodyContainer.innerText();\n  const lines = containerText\n    .split('\\n')\n    .map(line => line.trim())\n    .filter(Boolean)\n    .filter(line => line !== 'Copy' && line !== selectedTitle);\n\n  selectedBody = lines.join('\\n').trim();\n  expect(selectedBody.length).toBeGreaterThan(0);\n\n  await copyButton.click();\n\n  if (browserName === 'webkit') {\n    test.skip(true, 'Clipboard read may be restricted in WebKit');\n  }\n\n  await expect.poll(async () => {\n    return await page.evaluate(() => navigator.clipboard.readText());\n  }).toBe(selectedBody);\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('can copy selected note body from Home page', async ({ page, context, browserName }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n\n  await page.goto('http://localhost:5175');\n\n  const noteItems = page.locator('button, [role=\"button\"]').filter({ has: page.locator('h3, h2, h4, p, span, div') });\n  const count = await noteItems.count();\n\n  let selectedTitle = '';\n  let selectedBody = '';\n\n  for (let i = 0; i < count; i++) {\n    const candidate = noteItems.nth(i);\n    const text = (await candidate.innerText()).trim();\n    if (text && text !== 'Copy') {\n      await candidate.click();\n      const copyButton = page.getByRole('button', { name: 'Copy' });\n      if (await copyButton.isVisible().catch(() => false)) {\n        selectedTitle = text;\n        break;\n      }\n    }\n  }\n\n  const copyButton = page.getByRole('button', { name: 'Copy' });\n  await expect(copyButton).toBeVisible();\n\n  const bodyContainer = copyButton.locator('xpath=ancestor::*[self::section or self::article or self::div][1]');\n  const containerText = await bodyContainer.innerText();\n  const lines = containerText\n    .split('\\n')\n    .map(line => line.trim())\n    .filter(Boolean)\n    .filter(line => line !== 'Copy' && line !== selectedTitle);\n\n  selectedBody = lines.join('\\n').trim();\n  expect(selectedBody.length).toBeGreaterThan(0);\n\n  await copyButton.click();\n\n  if (browserName === 'webkit') {\n    test.skip(true, 'Clipboard read may be restricted in WebKit');\n  }\n\n  await expect.poll(async () => {\n    return await page.evaluate(() => navigator.clipboard.readText());\n  }).toBe(selectedBody);\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

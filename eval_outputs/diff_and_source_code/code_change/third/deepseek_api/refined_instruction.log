@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page Copy Button › should copy note body to clipboard when Copy button is clicked
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:47:3 › Home Page Copy Button › Copy button should be visible when a note is selected and not in edit mode
+[1A[2K  2 passed (1.8s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Clear All Notes functionality › should display subtitle text about local storage
+[1A[2K[2/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:15:3 › Clear All Notes functionality › should not show Clear all button when there are no notes
+[1A[2K[3/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:21:3 › Clear All Notes functionality › should show Clear all button when notes exist
+[1A[2K[4/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:30:3 › Clear All Notes functionality › should clear all notes when Clear all is clicked
+[1A[2K[5/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:50:3 › Clear All Notes functionality › should clear localStorage when Clear all is clicked
+[1A[2K[6/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:68:3 › Clear All Notes functionality › should reset form fields when Clear all is clicked while editing
+[1A[2K[7/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:90:3 › Clear All Notes functionality › should display Clear all button with correct styling
+[1A[2K[8/8] [chromium] › e2e/refined_chain-of-thought.spec.ts:104:3 › Clear All Notes functionality › should show Your Notes heading and Clear all button on the same row
+[1A[2K  8 passed (5.4s)
+
+
+=== STDERR ===
+

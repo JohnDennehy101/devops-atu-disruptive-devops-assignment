@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character count for note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Locate the note body textarea and type some text
+  const noteBody = page.locator('#note-body');
+  await noteBody.fill('This is a test note.');
+
+  // Verify the character count is displayed correctly
+  const charCount = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(charCount).toHaveText('20 / 5000');
+
+  // Add more text and verify the updated character count
+  await noteBody.fill('This is a longer test note to check the character count functionality.');
+  await expect(charCount).toHaveText('68 / 5000');
+});

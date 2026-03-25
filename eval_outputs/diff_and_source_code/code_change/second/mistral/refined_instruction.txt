@@ -1,0 +1,7 @@
+import { test, expect } from '@playwright/test';
+
+test('Check character count in form body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const bodyCount = await page.locator('getByText("5000 / 5000")').textContent();
+  expect(bodyCount).toBe('5000 / 5000');
+});

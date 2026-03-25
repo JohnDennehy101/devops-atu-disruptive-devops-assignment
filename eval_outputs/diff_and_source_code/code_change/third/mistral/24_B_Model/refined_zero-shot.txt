@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Select a note
+  await page.click('text=Note #1');
+
+  // Wait for the note details to load
+  await page.waitForSelector('text=Note Details');
+
+  // Click the "Copy" button
+  await page.click('text=Copy');
+
+  // Verify that the note body is copied to the clipboard
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardContent).toBe('Note body content');
+});

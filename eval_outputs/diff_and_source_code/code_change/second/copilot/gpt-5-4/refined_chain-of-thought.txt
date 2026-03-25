@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home note body character counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('shows and updates body character count, and resets after note creation', async ({ page }) => {
+    const titleInput = page.locator('#note-title');
+    const bodyTextarea = page.locator('#note-body');
+    const tagsInput = page.locator('#note-tags');
+    const createButton = page.getByRole('button', { name: 'Create Note' });
+
+    await expect(titleInput).toBeVisible();
+    await expect(bodyTextarea).toBeVisible();
+
+    const counter = page.getByText('0 / 5000');
+    await expect(counter).toBeVisible();
+
+    await bodyTextarea.fill('Hello');
+    await expect(page.getByText('5 / 5000')).toBeVisible();
+
+    await bodyTextarea.fill('Hello world!');
+    await expect(page.getByText('12 / 5000')).toBeVisible();
+
+    await titleInput.fill('Counter test note');
+    await tagsInput.fill('test, counter');
+    await createButton.click();
+
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+    await expect(titleInput).toHaveValue('');
+    await expect(bodyTextarea).toHaveValue('');
+    await expect(tagsInput).toHaveValue('');
+  });
+});

@@ -1,0 +1,89 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy the note body to clipboard when Copy button is clicked
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy the note body to clipboard when Copy button is clicked 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Title')[22m
+
+
+       9 |     const noteBody = 'This is the body to copy';
+      10 |
+    > 11 |     await page.getByPlaceholder('Title').fill(noteTitle);
+         |                                          ^
+      12 |     await page.getByPlaceholder('Body').fill(noteBody);
+      13 |     await page.getByRole('button', { name: 'Create' }).click();
+      14 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:11:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-5599a-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-5599a-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-5599a-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-5599a-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-5599a-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:26:3 › Copy Note Body › Copy button is only visible when a note is selected and not editing
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:26:3 › Copy Note Body › Copy button is only visible when a note is selected and not editing 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Title')[22m
+
+
+      32 |     const noteBody = 'Check copy button visibility';
+      33 |
+    > 34 |     await page.getByPlaceholder('Title').fill(noteTitle);
+         |                                          ^
+      35 |     await page.getByPlaceholder('Body').fill(noteBody);
+      36 |     await page.getByRole('button', { name: 'Create' }).click();
+      37 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:34:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-897ae-is-selected-and-not-editing-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-897ae-is-selected-and-not-editing-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-897ae-is-selected-and-not-editing-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-897ae-is-selected-and-not-editing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/claude/artefacts/refined_zero-shot/refined_zero-shot-Copy-Not-897ae-is-selected-and-not-editing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Copy Note Body › should copy the note body to clipboard when Copy button is clicked 
+    [chromium] › e2e/refined_zero-shot.spec.ts:26:3 › Copy Note Body › Copy button is only visible when a note is selected and not editing 
+
+
+=== STDERR ===
+

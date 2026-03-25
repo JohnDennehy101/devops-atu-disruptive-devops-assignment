@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display clear all button when there are saved notes
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display clear all button when there are saved notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button').nth(1)[22m
+
+
+      3 | test('should display clear all button when there are saved notes', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.locator('button').nth(1).click(); // Click on the first note
+        |                                       ^
+      6 |   await page.locator('button').nth(2).click(); // Click on the second note
+      7 |   await page.locator('button').nth(3).click(); // Click on the third note
+      8 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:5:39
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9e425--when-there-are-saved-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9e425--when-there-are-saved-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9e425--when-there-are-saved-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9e425--when-there-are-saved-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/mistral/artefacts/refined_zero-shot/refined_zero-shot-should-d-9e425--when-there-are-saved-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display clear all button when there are saved notes 
+
+
+=== STDERR ===
+

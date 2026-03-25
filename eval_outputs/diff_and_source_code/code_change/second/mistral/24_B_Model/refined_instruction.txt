@@ -1,0 +1,13 @@
+import { test, expect } from '@playwright/test';
+
+test('test note creation and character count', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.getByRole('textbox', { name: 'Title' }).fill('Test Note');
+  await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note body.');
+
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  const characterCount = await page.getByText('0 / 5000').textContent();
+  expect(characterCount).toBe('0 / 5000');
+});

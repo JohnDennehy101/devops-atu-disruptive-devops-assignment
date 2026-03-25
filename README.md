@@ -22,8 +22,39 @@ python scripts/generate_claude.py
 
 ## Generating Copilot outputs
 
+Using endpoint associated with Copilot account (limited to 50 requests per day)
+
 ```
 python scripts/generate_copilot.py
+```
+
+To directly use OpenAI (API key needed with credit applied to account)
+
+Running with default configured `gpt-4o` model
+
+```
+python scripts/generate_copilot.py --openai
+```
+
+Running with `gpt-5.4` model
+
+```
+python scripts/generate_copilot.py --refined --openai --model gpt-5.4
+
+```
+
+## Generating Deepseek API outputs
+
+Set API key in terminal
+
+```
+export DEEPSEEK_API_KEY="REPLACE WITH YOUR KEY VALUE"
+```
+
+Then run the script
+
+```
+python scripts/generate_deepseek.py --refined
 ```
 
 ## Using Model Context Protocol (MCP) for test generation
@@ -51,4 +82,18 @@ it only needs to be run once per change type
 
 ```
 python scripts/generate_playwright_agents.py --filter-prompt zero-shot --filter-scenario diff-and-source-code
+```
+
+## Analysing test runs
+
+Generate summary
+
+```
+python scripts/generate_summary.py
+```
+
+Generate error summary analysis
+
+```
+python scripts/generate_error_analysis.py
 ```

@@ -1,0 +1,93 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:8:3 › Home page tag filter feature › should display tag filter input and update note count
+[1A[2K[2/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:17:3 › Home page tag filter feature › should filter notes by tag and update displayed count
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:17:3 › Home page tag filter feature › should filter notes by tag and update displayed count 
+
+    Error: expect: Property 'first' not found.
+
+      20 |     await page.getByLabel('Tags (comma-separated)').fill('work, urgent');
+      21 |     await page.getByRole('button', { name: 'Create Note' }).click();
+    > 22 |     await expect(page.getByText('Note #')).first().toBeVisible();
+         |                                           ^
+      23 |
+      24 |     await page.getByLabel('Title').fill('Test Note 2');
+      25 |     await page.getByLabel('Body').fill('Test body 2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:22:43
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-ce2ff--and-update-displayed-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-ce2ff--and-update-displayed-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-ce2ff--and-update-displayed-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-ce2ff--and-update-displayed-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-ce2ff--and-update-displayed-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:47:3 › Home page tag filter feature › should show appropriate message when no notes exist
+[1A[2K  2) [chromium] › e2e/refined_chain-of-thought.spec.ts:47:3 › Home page tag filter feature › should show appropriate message when no notes exist 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      52 |     const filterInput = page.getByPlaceholder('Filter by tag');
+      53 |     await filterInput.fill('any');
+    > 54 |     await expect(page.getByText('No notes match the filter')).toBeVisible();
+         |                                                               ^
+      55 |   });
+      56 |
+      57 |   test('should filter case-insensitively', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:54:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-1cc17-message-when-no-notes-exist-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-1cc17-message-when-no-notes-exist-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-1cc17-message-when-no-notes-exist-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-1cc17-message-when-no-notes-exist-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek_api/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-1cc17-message-when-no-notes-exist-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:57:3 › Home page tag filter feature › should filter case-insensitively
+[1A[2K[5/5] [chromium] › e2e/refined_chain-of-thought.spec.ts:75:3 › Home page tag filter feature › should filter by partial tag match
+[1A[2K  2 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:17:3 › Home page tag filter feature › should filter notes by tag and update displayed count 
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:47:3 › Home page tag filter feature › should show appropriate message when no notes exist 
+  3 passed (9.5s)
+
+
+=== STDERR ===
+

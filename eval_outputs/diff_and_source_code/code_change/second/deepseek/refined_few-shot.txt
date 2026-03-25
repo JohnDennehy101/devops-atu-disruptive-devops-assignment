@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test('create and edit note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Create a new note
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('button:has-text("Create Note")');
+
+  // Wait for the note to appear in the list
+  await expect(page.locator('.space-y-2 button')).toContainText('Test Note');
+
+  // Edit the note
+  await page.click('text=Edit');
+  await page.fill('#note-title', 'Updated Note Title');
+  await page.fill('#note-body', 'This is an updated test note.');
+  await page.fill('#note-tags', 'updated, test');
+  await page.click('button:has-text("Save")');
+
+  // Wait for the note to be updated
+  await expect(page.locator('.space-y-2 button')).toContainText('Updated Note Title');
+
+  // Delete the note
+  await page.click('button:has-text("Delete")');
+
+  // Wait for the note to be removed from the list
+  await expect(page.locator('.space-y-2 button')).not.toContainText('Updated Note Title');
+});

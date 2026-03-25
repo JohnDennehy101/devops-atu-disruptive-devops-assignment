@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count for note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#note-body', 'This is a test note.');
+  const charCount = await page.textContent('p.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  expect(charCount).toBe('19 / 5000');
+});

@@ -1,0 +1,44 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Copy note body button functionality
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Copy note body button functionality ───
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      24 |
+      25 |   // Verify that the note body is copied to the clipboard
+    > 26 |   const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+         |                                    ^
+      27 |   expect(clipboardText).toBe('This is a test note body.');
+      28 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:26:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-Copy-note-body-button-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-Copy-note-body-button-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-Copy-note-body-button-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-Copy-note-body-button-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/copilot/artefacts/refined_chain-of-thought/refined_chain-of-thought-Copy-note-body-button-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › Copy note body button functionality ────
+
+
+=== STDERR ===
+

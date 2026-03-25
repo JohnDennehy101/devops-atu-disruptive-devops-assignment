@@ -1,0 +1,44 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag and updates count and empty state', async ({ page }) => {
+  const noteOneTitle = `QA Filter Note Alpha ${Date.now()}`;
+  const noteTwoTitle = `QA Filter Note Beta ${Date.now()}`;
+
+  await page.goto('http://localhost:5175');
+
+  await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+
+  await page.getByRole('textbox', { name: 'Title' }).fill(noteOneTitle);
+  await page.getByRole('textbox', { name: 'Body' }).fill('First note body');
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('work, urgent');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ }).first()).toBeVisible();
+
+  await page.getByRole('textbox', { name: 'Title' }).fill(noteTwoTitle);
+  await page.getByRole('textbox', { name: 'Body' }).fill('Second note body');
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('personal, ideas');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(2);
+
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('work');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(1);
+  await expect(page.getByText('No notes match the filter')).toHaveCount(0);
+
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('WORK');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(1);
+
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('missing-tag');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(0);
+
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('');
+  await expect(page.getByText('Your Notes (2)')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(2);
+});

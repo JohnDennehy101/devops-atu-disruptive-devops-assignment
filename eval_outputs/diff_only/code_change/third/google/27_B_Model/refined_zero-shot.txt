@@ -1,0 +1,28 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('text=Note 1').click();
+  await page.locator('button:has-text("Copy")').click();
+
+  const noteBody = await page.locator('text=This is the body of Note 1').textContent();
+  expect(noteBody).toBeDefined();
+
+  await page.locator('button:has-text("Copy")').click();
+  const currentClipboard = await page.evaluate(() => navigator.clipboard.readText());
+  expect(currentClipboard).toBe(noteBody);
+});
+
+test('clear selected note', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('text=Note 1').click();
+  await page.locator('button:has-text("Copy")').click();
+
+  await page.locator('text=Note 2').click();
+  await page.locator('button:has-text("Copy")').click();
+
+  await page.locator('text=Note 1').click();
+  await page.locator('button:has-text("Copy")').click();
+});

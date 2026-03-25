@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body button functionality
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body button functionality ───────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('.text-blue-600')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('.text-blue-600')[22m
+
+
+       6 |   await page.fill('#note-body', 'This is a test note body.');
+       7 |   await page.click('button:has-text("Create Note")');
+    >  8 |   await expect(page.locator('.text-blue-600')).toBeVisible();
+         |                                                ^
+       9 |   await page.click('.text-blue-600');
+      10 |   await expect(page.getByText('Copied')).toBeVisible();
+      11 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:8:48
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_few-shot/refined_few-shot-copy-note-body-button-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_few-shot/refined_few-shot-copy-note-body-button-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_few-shot/refined_few-shot-copy-note-body-button-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_few-shot/refined_few-shot-copy-note-body-button-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/deepseek/artefacts/refined_few-shot/refined_few-shot-copy-note-body-button-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body button functionality ────────────
+
+
+=== STDERR ===
+

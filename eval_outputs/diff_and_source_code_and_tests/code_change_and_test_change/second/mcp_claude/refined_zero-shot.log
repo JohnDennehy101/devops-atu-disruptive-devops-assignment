@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App - Body Character Count › shows body character count and updates when typing
+[1A[2K[2/3] [chromium] › e2e/refined_zero-shot.spec.ts:18:3 › Note Taking App - Body Character Count › character count resets to zero when body is cleared
+[1A[2K[3/3] [chromium] › e2e/refined_zero-shot.spec.ts:25:3 › Note Taking App - Body Character Count › character count resets after creating a note
+[1A[2K  3 passed (2.5s)
+
+
+=== STDERR ===
+

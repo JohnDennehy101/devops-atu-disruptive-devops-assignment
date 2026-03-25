@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-24T18:57:49.909328",
+        "model_id": "Qwen/Qwen2.5-Coder-32B-Instruct",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 43.761,
+            "tokens_per_sec": 5.74,
+            "input_token_count": 391,
+            "output_token_count": 251,
+            "total_token_count": 642
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('Home page should display correct information and functionality', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the informational paragraph is displayed correctly\n  const infoParagraph = page.getByText('Create and manage notes. Your notes are stored locally.');\n  await expect(infoParagraph).toBeVisible();\n\n  // Check if the \"Your Notes\" header is displayed correctly\n  const yourNotesHeader = page.getByRole('heading', { name: 'Your Notes' });\n  await expect(yourNotesHeader).toBeVisible();\n\n  // Check if the \"Clear all\" button is not visible when there are no notes\n  const clearAllButton = page.getByRole('button', { name: 'Clear all' });\n  await expect(clearAllButton).not.toBeVisible();\n\n  // Simulate adding a note (assuming there's a way to add a note on this page)\n  // This part would require additional setup and is not covered in the diff\n\n  // Check if the \"Clear all\" button is visible when there are notes\n  // This part would also require additional setup and is not covered in the diff\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('Home page should display correct information and functionality', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check if the informational paragraph is displayed correctly\n  const infoParagraph = page.getByText('Create and manage notes. Your notes are stored locally.');\n  await expect(infoParagraph).toBeVisible();\n\n  // Check if the \"Your Notes\" header is displayed correctly\n  const yourNotesHeader = page.getByRole('heading', { name: 'Your Notes' });\n  await expect(yourNotesHeader).toBeVisible();\n\n  // Check if the \"Clear all\" button is not visible when there are no notes\n  const clearAllButton = page.getByRole('button', { name: 'Clear all' });\n  await expect(clearAllButton).not.toBeVisible();\n\n  // Simulate adding a note (assuming there's a way to add a note on this page)\n  // This part would require additional setup and is not covered in the diff\n\n  // Check if the \"Clear all\" button is visible when there are notes\n  // This part would also require additional setup and is not covered in the diff\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

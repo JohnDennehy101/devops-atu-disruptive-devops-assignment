@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copies selected note body to clipboard when Copy is clicked
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copies selected note body to clipboard when Copy is clicked 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Copy' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Copy' })[22m
+
+
+       9 |
+      10 |   const noteBody = (await page.locator('main p').first().textContent())?.trim() || '';
+    > 11 |   await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+         |                                                            ^
+      12 |
+      13 |   await page.getByRole('button', { name: 'Copy' }).click();
+      14 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:11:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/gpt-5-4/artefacts/refined_few-shot/refined_few-shot-copies-se-4c018-pboard-when-Copy-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/gpt-5-4/artefacts/refined_few-shot/refined_few-shot-copies-se-4c018-pboard-when-Copy-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/copilot/gpt-5-4/artefacts/refined_few-shot/refined_few-shot-copies-se-4c018-pboard-when-Copy-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/copilot/gpt-5-4/artefacts/refined_few-shot/refined_few-shot-copies-se-4c018-pboard-when-Copy-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/copilot/gpt-5-4/artefacts/refined_few-shot/refined_few-shot-copies-se-4c018-pboard-when-Copy-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copies selected note body to clipboard when Copy is clicked 
+
+
+=== STDERR ===
+

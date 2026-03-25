@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-23T10:10:55.353617",
+        "model_id": "mistralai/Mistral-Nemo-Instruct-2407",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 32.285,
+            "tokens_per_sec": 9.48,
+            "input_token_count": 479,
+            "output_token_count": 306,
+            "total_token_count": 785
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n-import React from \"react\"\n+import React, { useMemo } from \"react\"\n+  const [tagFilter, setTagFilter] = useState(\"\")\n+  const [allNotes, setAllNotes] = useState<Note[]>([])\n+  useEffect(() => {\n+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))\n+  }, [savedIds])\n+\n+  const displayedIds = useMemo(() => {\n+    if (!tagFilter.trim()) return savedIds\n+    const lower = tagFilter.trim().toLowerCase()\n+    return allNotes\n+      .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))\n+      .map(n => n.id)\n+  }, [savedIds, allNotes, tagFilter])\n+\n-              Your Notes ({savedIds.length})\n+              Your Notes ({displayedIds.length})\n+            <input\n+              type=\"text\"\n+              placeholder=\"Filter by tag\"\n+              value={tagFilter}\n+              onChange={e => setTagFilter(e.target.value)}\n+              className=\"w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded mb-2 dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-1 focus:ring-blue-500\"\n+            />\n-              {savedIds.length === 0 ? (\n+              {displayedIds.length === 0 ? (\n-                  No notes yet\n+                  {savedIds.length === 0\n+                    ? \"No notes yet\"\n+                    : \"No notes match the filter\"}\n-                savedIds.map(id => (\n+                displayedIds.map(id => (\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('Home page', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check initial state\n  await expect(page.locator('text=Your Notes (0)')).toBeVisible();\n  await expect(page.locator('text=No notes yet')).toBeVisible();\n\n  // Add a note\n  await page.locator('text=Add Note').click();\n  await page.locator('input[name=\"title\"]').fill('Test Note');\n  await page.locator('input[name=\"tags\"]').fill('test, test2');\n  await page.locator('button[type=\"submit\"]').click();\n\n  // Check updated state\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=Test Note')).toBeVisible();\n\n  // Filter notes\n  await page.locator('input[placeholder=\"Filter by tag\"]').fill('test');\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=No notes match the filter')).toBeVisible();\n\n  // Clear filter\n  await page.locator('input[placeholder=\"Filter by tag\"]').fill('');\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=Test Note')).toBeVisible();\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('Home page', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Check initial state\n  await expect(page.locator('text=Your Notes (0)')).toBeVisible();\n  await expect(page.locator('text=No notes yet')).toBeVisible();\n\n  // Add a note\n  await page.locator('text=Add Note').click();\n  await page.locator('input[name=\"title\"]').fill('Test Note');\n  await page.locator('input[name=\"tags\"]').fill('test, test2');\n  await page.locator('button[type=\"submit\"]').click();\n\n  // Check updated state\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=Test Note')).toBeVisible();\n\n  // Filter notes\n  await page.locator('input[placeholder=\"Filter by tag\"]').fill('test');\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=No notes match the filter')).toBeVisible();\n\n  // Clear filter\n  await page.locator('input[placeholder=\"Filter by tag\"]').fill('');\n  await expect(page.locator('text=Your Notes (1)')).toBeVisible();\n  await expect(page.locator('text=Test Note')).toBeVisible();\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

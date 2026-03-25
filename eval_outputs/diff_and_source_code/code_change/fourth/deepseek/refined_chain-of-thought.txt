@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test('Note Taking App', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // 1. Verify that the notes count is displayed correctly.
+  const notesCount = await page.locator('.text-gray-900').first().textContent();
+  expect(notesCount).toBe('Your Notes (0)');
+
+  // 2. Enter a tag filter and verify that the notes are filtered accordingly.
+  await page.locator('input[placeholder="Filter by tag"]').fill('test');
+  await page.waitForTimeout(500); // Wait for the filter to apply
+  const filteredNotesCount = await page.locator('.text-gray-900').first().textContent();
+  expect(filteredNotesCount).toBe('Your Notes (0)'); // Assuming no notes match the filter initially
+
+  // 3. Create a new note and verify that it is saved and displayed.
+  await page.locator('button:has-text("Create Note")').click();
+  await page.locator('input[id="note-title"]').fill('Test Note');
+  await page.locator('textarea[id="note-body"]').fill('This is a test note.');
+  await page.locator('input[id="note-tags"]').fill('test');
+  await page.locator('button:has-text("Save")').click();
+  await page.waitForTimeout(500); // Wait for the note to be saved
+  const newNoteCount = await page.locator('.text-gray-900').first().textContent();
+  expect(newNoteCount).toBe('Your Notes (1)');
+
+  // 4. Edit a note and verify that the changes are saved and displayed.
+  await page.locator('button', { hasText: 'Note #' }).first().click();
+  await page.locator('button:has-text("Edit")').click();
+  await page.locator('input[id="note-title"]').fill('Updated Test Note');
+  await page.locator('textarea[id="note-body"]').fill('This is an updated test note.');
+  await page.locator('input[id="note-tags"]').fill('updated, test');
+  await page.locator('button:has-text("Save")').click();
+  await page.waitForTimeout(500); // Wait for the note to be updated
+  const updatedNoteTitle = await page.locator('div[class*="Note Details"]').locator('p').filter({ hasText: 'Title:' }).last().textContent();
+  expect(updatedNoteTitle).toBe('Title: Updated Test Note');
+
+  // 5. Delete a note and verify that it is removed from the list.
+  await page.locator('button', { hasText: 'Delete' }).click();
+  await page.waitForTimeout(500); // Wait for the note to be deleted
+  const deletedNoteCount = await page.locator('.text-gray-900').first().textContent();
+  expect(deletedNoteCount).toBe('Your Notes (0)');
+});

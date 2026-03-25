@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('can copy selected note body to clipboard from note details', async ({ page, context, browserName }) => {
+    test.skip(browserName === 'webkit', 'Clipboard permissions are not supported consistently in WebKit');
+
+    await context.grantPermissions(['clipboard-read', 'clipboard-write'], {
+      origin: 'http://localhost:5175',
+    });
+
+    const noteBody = 'Copy this note body into clipboard';
+
+    await page.getByLabel('Title').fill('Clipboard test');
+    await page.getByLabel('Body').fill(noteBody);
+    await page.getByLabel(/Tags/).fill('copy, test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const noteButton = page.getByRole('button', { name: /Note #\d+/ });
+    await expect(noteButton).toBeVisible();
+    await noteButton.click();
+
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).toBeVisible();
+    await copyButton.click();
+
+    const clipboardText = await page.evaluate(async () => await navigator.clipboard.readText());
+    expect(clipboardText).toBe(noteBody);
+  });
+});

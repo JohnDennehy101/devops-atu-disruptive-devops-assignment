@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-23T21:53:52.914953",
+        "model_id": "github/gpt-4o",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 1.632,
+            "input_token_count": 189,
+            "output_token_count": 114,
+            "total_token_count": 303,
+            "tokens_per_sec": 69.85
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should display character count in form', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  const formBody = await page.locator('textarea'); // Assuming the form body is a textarea\n  await formBody.fill('Test input');\n  const charCount = await page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(charCount).toHaveText('10 / 5000');\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should display character count in form', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  const formBody = await page.locator('textarea'); // Assuming the form body is a textarea\n  await formBody.fill('Test input');\n  const charCount = await page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(charCount).toHaveText('10 / 5000');\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

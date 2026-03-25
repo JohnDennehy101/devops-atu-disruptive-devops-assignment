@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('Copy button functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there is a note selected and displayed on the page
+  const copyButton = page.getByRole('button', { name: 'Copy' });
+  await copyButton.click();
+
+  // Check if the clipboard content matches the selected note's body
+  const clipboardContent = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  // Assuming the selected note's body is 'This is a test note'
+  expect(clipboardContent).toBe('This is a test note');
+});
+```
+
+This test script should verify that clicking the "Copy" button copies the selected note's body to the clipboard. The test assumes that there is a note selected and displayed on the page, and that the selected note's body is 'This is a test note'.

@@ -1,0 +1,88 @@
+--- a/app/src/components/NoteList.tsx
++++ b/app/src/components/NoteList.tsx
++import { Note } from "@/types/Note";
++
++interface NoteListProps {
++  notes: Note[];
++}
++
++const NoteList: React.FC<NoteListProps> = ({ notes }) => {
++  return (
++    <div className="space-y-4">
++      {notes.map((note) => (
++        <div key={note.id} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4">
++          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{note.title}</h3>
++          <p className="text-gray-700 dark:text-gray-400">{note.body}</p>
++          <div className="text-sm text-gray-500 dark:text-gray-400">Tags: {note.tags}</div>
++        </div>
++      ))}
++    </div>
++  );
++};
++
++export default NoteList;
+
+--- a/app/src/components/NoteForm.tsx
++++ b/app/src/components/NoteForm.tsx
++import { useState } from'react';
++
++interface NoteFormProps {
++  title: string;
++  body: string;
++  tags: string;
++  isEditing: boolean;
++  onSave: (title: string, body: string, tags: string) => void;
++  onCancel: () => void;
++}
++
++const NoteForm: React.FC<NoteFormProps> = ({ title, body, tags, isEditing, onSave, onCancel }) => {
++  const [formTitle, setFormTitle] = useState(title);
++  const [formBody, setFormBody] = useState(body);
++  const [formTags, setFormTags] = useState(tags);
++
++  const handleSubmit = (e: React.FormEvent) => {
++    e.preventDefault();
++    onSave(formTitle, formBody, formTags);
++  };
++
++  return (
++    <form onSubmit={handleSubmit} className="space-y-4">
++      <div>
++        <label htmlFor="title" className="block text-gray-700 dark:text-gray-400">Title:</label>
++        <input
++          type="text"
++          id="title"
++          value={formTitle}
++          onChange={(e) => setFormTitle(e.target.value)}
++          className="mt-1 block w-full px-3 py-2 text-gray-900 dark:text-white rounded-md"
++        />
++      </div>
++      <div>
++        <label htmlFor="body" className="block text-gray-700 dark:text-gray-400">Body:</label>
++        <textarea
++          id="body"
++          value={formBody}
++          onChange={(e) => setFormBody(e.target.value)}
++          className="mt-1 block w-full px-3 py-2 text-gray-900 dark:text-white rounded-md"
++        />
++      </div>
++      <div>
++        <label htmlFor="tags" className="block text-gray-700 dark:text-gray-400">Tags:</label>
++        <input
++          type="text"
++          id="tags"
++          value={formTags}
++          onChange={(e) => setFormTags(e.target.value)}
++          className="mt-1 block w-full px-3 py-2 text-gray-900 dark:text-white rounded-md"
++        />
++      </div>
++      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
++        Save
++      </button>
++      <button type="button" onClick={onCancel} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
++        Cancel
++      </button>
++    </form>
++  );
++};
++

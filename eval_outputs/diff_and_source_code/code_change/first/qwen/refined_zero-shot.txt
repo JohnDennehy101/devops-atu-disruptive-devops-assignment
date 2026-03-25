@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('displays the correct number of notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const noteCount = await page.locator('h3').textContent();
+  expect(noteCount).toContain('Your Notes (0)');
+});
+
+test('displays the clear all button when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Simulate adding a note (this part would need to be implemented based on actual app functionality)
+  // For example, filling out the form and submitting it
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('button[type="submit"]');
+
+  // Check if the clear all button is displayed
+  const clearAllButton = await page.locator('button:has-text("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+});
+
+test('clears all notes when the clear all button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Simulate adding a note (this part would need to be implemented based on actual app functionality)
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.fill('#note-tags', 'test, note');
+  await page.click('button[type="submit"]');
+
+  // Click the clear all button
+  await page.click('button:has-text("Clear all")');
+
+  // Check if the note count is reset to 0
+  const noteCount = await page.locator('h3').textContent();
+  expect(noteCount).toContain('Your Notes (0)');
+});

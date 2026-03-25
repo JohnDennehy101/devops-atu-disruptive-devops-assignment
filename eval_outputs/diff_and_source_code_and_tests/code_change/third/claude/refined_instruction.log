@@ -1,0 +1,14 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Copy Note Body › can copy note body to clipboard
+[1A[2K[2/3] [chromium] › e2e/refined_instruction.spec.ts:29:3 › Copy Note Body › Copy button is visible when viewing note details
+[1A[2K[3/3] [chromium] › e2e/refined_instruction.spec.ts:41:3 › Copy Note Body › Copy button is not visible when no note is selected
+[1A[2K  3 passed (2.0s)
+
+
+=== STDERR ===
+

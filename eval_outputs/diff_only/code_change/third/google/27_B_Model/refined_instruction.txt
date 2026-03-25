@@ -1,0 +1,13 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('link', { name: 'Read more' }).click();
+  await page.waitForURL('http://localhost:5175/note/1');
+  await page.getByText('This is the body of the note').click();
+  const copyButton = page.getByText('Copy');
+  await expect(copyButton).toBeVisible();
+  await copyButton.click();
+  const copiedText = await navigator.clipboard.readText();
+  await expect(copiedText).toBe('This is the body of the note');
+});

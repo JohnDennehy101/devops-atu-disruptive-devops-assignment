@@ -1,0 +1,59 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Tag Filter on Home Page › should display a tag filter input
+[1A[2K[2/4] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Tag Filter on Home Page › should show "No notes yet" when there are no saved notes
+[1A[2K[3/4] [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter on Home Page › should filter notes by tag and update the count
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter on Home Page › should filter notes by tag and update the count 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('No notes match the filter')
+    Expected: visible
+    Timeout: 3000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 3000ms[22m
+    [2m  - waiting for getByText('No notes match the filter')[22m
+
+
+      32 |
+      33 |     // Should show "No notes match the filter" and count should be 0
+    > 34 |     await expect(page.getByText('No notes match the filter')).toBeVisible({ timeout: 3000 });
+         |                                                               ^
+      35 |     await expect(page.getByText('Your Notes (0)')).toBeVisible();
+      36 |
+      37 |     // Clear the filter
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:34:63
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-4fbd7-by-tag-and-update-the-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-4fbd7-by-tag-and-update-the-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-4fbd7-by-tag-and-update-the-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-4fbd7-by-tag-and-update-the-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/claude/artefacts/refined_zero-shot/refined_zero-shot-Tag-Filt-4fbd7-by-tag-and-update-the-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_zero-shot.spec.ts:44:3 › Tag Filter on Home Page › should update displayed count when filtering by tag
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:15:3 › Tag Filter on Home Page › should filter notes by tag and update the count 
+  3 passed (5.8s)
+
+
+=== STDERR ===
+

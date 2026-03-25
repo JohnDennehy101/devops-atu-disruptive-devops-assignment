@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Home Page › has welcome message
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:14:3 › Home Page › can clear all notes from sidebar
+[1A[2K  2 passed (1.6s)
+
+
+=== STDERR ===
+

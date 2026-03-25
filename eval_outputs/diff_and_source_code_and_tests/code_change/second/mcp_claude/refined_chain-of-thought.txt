@@ -1,0 +1,49 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('shows 0 / 5000 when body is empty', async ({ page }) => {
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('updates character count as user types in body', async ({ page }) => {
+    await page.getByLabel('Body').fill('Hello world');
+    await expect(page.getByText('11 / 5000')).toBeVisible();
+  });
+
+  test('character counter reflects longer text accurately', async ({ page }) => {
+    const text = 'A'.repeat(100);
+    await page.getByLabel('Body').fill(text);
+    await expect(page.getByText('100 / 5000')).toBeVisible();
+  });
+
+  test('counter resets to 0 after creating a note', async ({ page }) => {
+    await page.getByLabel('Title').fill('Test note');
+    await page.getByLabel('Body').fill('Some content');
+    await expect(page.getByText('12 / 5000')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+  });
+
+  test('counter is positioned below the body textarea', async ({ page }) => {
+    const textarea = page.getByLabel('Body');
+    const counter = page.getByText('0 / 5000');
+
+    await expect(textarea).toBeVisible();
+    await expect(counter).toBeVisible();
+
+    const textareaBox = await textarea.boundingBox();
+    const counterBox = await counter.boundingBox();
+
+    expect(textareaBox).not.toBeNull();
+    expect(counterBox).not.toBeNull();
+    expect(counterBox!.y).toBeGreaterThan(textareaBox!.y);
+  });
+});

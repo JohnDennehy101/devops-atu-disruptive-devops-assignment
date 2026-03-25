@@ -1,0 +1,31 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page should display notes and filter functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify initial number of notes
+  const initialNotesCount = await page.locator('.note-count').innerText();
+  expect(initialNotesCount).toBe('Your Notes (0)');
+
+  // Add a note to simulate having notes
+  await page.evaluate(() => {
+    const api = {
+      getNotes: () => Promise.resolve([{ id: 1, tags: ['test'] }]),
+    };
+    // Assuming there's an API call to fetch notes
+  });
+
+  // Verify updated number of notes
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (1)');
+
+  // Verify filter input is present
+  await expect(page.locator('input[type="text"]')).toBeVisible();
+
+  // Apply filter and verify no matches
+  await page.locator('input[type="text"]').fill('non-existent-tag');
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (0)');
+
+  // Clear filter and verify notes are shown again
+  await page.locator('input[type="text"]').fill('');
+  await expect(page.locator('.note-count')).toHaveText('Your Notes (1)');
+});

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should create, edit, and delete a note
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should create, edit, and delete a note ────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[name="title"]')[22m
+
+
+       5 |
+       6 |   // Create a new note
+    >  7 |   await page.fill('input[name="title"]', 'Test Note Title');
+         |              ^
+       8 |   await page.fill('textarea[name="body"]', 'This is the body of the test note.');
+       9 |   await page.fill('input[name="tags"]', 'test, playwright');
+      10 |   await page.click('button:has-text("Create Note")');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_few-shot/refined_few-shot-should-create-edit-and-delete-a-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_few-shot/refined_few-shot-should-create-edit-and-delete-a-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_few-shot/refined_few-shot-should-create-edit-and-delete-a-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_few-shot/refined_few-shot-should-create-edit-and-delete-a-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/deepseek/artefacts/refined_few-shot/refined_few-shot-should-create-edit-and-delete-a-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should create, edit, and delete a note ─────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,99 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page displays correct note count and filter input
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page displays correct note count and filter input 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=Your Notes (\\d+)')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=Your Notes (\\d+)')[22m
+
+
+       6 |
+       7 |   const noteCountElement = await page.locator('text=Your Notes (\\d+)');
+    >  8 |   await expect(noteCountElement).toBeVisible();
+         |                                  ^
+       9 |
+      10 |   const filterInput = await page.locator('input[type="text"][placeholder="Filter by tag"]');
+      11 |   await expect(filterInput).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:8:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-a031f-note-count-and-filter-input-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-a031f-note-count-and-filter-input-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-a031f-note-count-and-filter-input-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-a031f-note-count-and-filter-input-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-a031f-note-count-and-filter-input-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/refined_zero-shot.spec.ts:20:1 › Home page displays "No notes yet" when no notes are saved
+[1A[2K[3/3] [chromium] › e2e/refined_zero-shot.spec.ts:27:1 › Home page displays "No notes match the filter" when no notes match the filter
+[1A[2K  2) [chromium] › e2e/refined_zero-shot.spec.ts:27:1 › Home page displays "No notes match the filter" when no notes match the filter 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('text=No notes match the filter')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('text=No notes match the filter')[22m
+
+
+      33 |
+      34 |   const noNotesMatchElement = await page.locator('text=No notes match the filter');
+    > 35 |   await expect(noNotesMatchElement).toBeVisible();
+         |                                     ^
+      36 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:35:37
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-eeaf0-n-no-notes-match-the-filter-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-eeaf0-n-no-notes-match-the-filter-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-eeaf0-n-no-notes-match-the-filter-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-eeaf0-n-no-notes-match-the-filter-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-eeaf0-n-no-notes-match-the-filter-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:1 › Home page displays correct note count and filter input 
+    [chromium] › e2e/refined_zero-shot.spec.ts:27:1 › Home page displays "No notes match the filter" when no notes match the filter 
+  1 passed (13.3s)
+
+
+=== STDERR ===
+

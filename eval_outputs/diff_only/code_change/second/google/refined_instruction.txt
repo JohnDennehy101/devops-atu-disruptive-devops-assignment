@@ -1,0 +1,12 @@
+import { test, expect } from '@playwright/test';
+
+test('check form body length', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const formBodyLengthElement = page.getByRole('paragraph');
+  const formBodyLengthText = await formBodyLengthElement.textContent();
+
+  const expectedFormBodyLength = '0 / 5000';
+
+  expect(formBodyLengthText).toBe(expectedFormBodyLength);
+});

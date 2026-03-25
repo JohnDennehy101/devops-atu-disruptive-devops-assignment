@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes button is present when notes exist', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('[data-testid="note-item"]').count({ must: 1 });
+
+  await page.locator('[data-testid="clear-all-notes"]').isVisible();
+});
+
+test('Clear all notes button is not present when no notes exist', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('[data-testid="note-item"]').count({ must: 0 });
+
+  await page.locator('[data-testid="clear-all-notes"]').isHidden();
+});
+
+test('Clear all notes button clears all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('[data-testid="note-item"]').count({ must: 1 });
+
+  await page.locator('[data-testid="clear-all-notes"]').click();
+
+  await page.locator('[data-testid="note-item"]').count({ must: 0 });
+});

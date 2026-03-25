@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page UI changes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify the new paragraph is displayed
+  const paragraph = await page.locator('p.text-gray-500.dark\\:text-gray-400.text-sm.mb-6');
+  await expect(paragraph).toBeVisible();
+
+  // Verify the heading "Your Notes" is displayed
+  const heading = await page.locator('h3.text-lg.font-semibold.text-gray-900.dark\\:text-white');
+  await expect(heading).toBeVisible();
+
+  // Verify the "Clear all" button is displayed when there are notes
+  await page.locator('button[type="button"]').first().click();
+  const clearButton = await page.locator('button.text-sm.text-red-600.dark\\:text-red-400.hover\\:underline');
+  await expect(clearButton).toBeVisible();
+
+  // Verify the "Clear all" button is not displayed when there are no notes
+  await page.locator('button[type="button"]').first().click();
+  await expect(clearButton).not.toBeVisible();
+
+  // Click the "Clear all" button and verify all notes are cleared
+  await clearButton.click();
+  await expect(clearButton).not.toBeVisible();
+});

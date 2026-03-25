@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('displays number of saved notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify that the "Your Notes" section is present
+  await expect(page.locator('h3')).toContainText('Your Notes');
+
+  // Verify that the paragraph element exists
+  const noteCountParagraph = page.locator('p:has-text("No notes yet")');
+  const noteCountParagraph2 = page.locator('p:has-text(/\\d+ \\/ 5000/)');
+
+  if (await noteCountParagraph.isVisible()) {
+    await expect(noteCountParagraph).toContainText('No notes yet');
+  } else {
+    await expect(noteCountParagraph2).toBeVisible();
+  }
+});
+```

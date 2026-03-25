@@ -1,0 +1,29 @@
+import { test, expect } from '@playwright/test';
+
+test('copies selected note body to clipboard from note details', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://localhost:5175' });
+
+  const title = `Copy Test ${Date.now()}`;
+  const body = `This is the note body to copy ${Date.now()}`;
+  const tags = 'copy,test';
+
+  await page.goto('http://localhost:5175');
+
+  await page.getByLabel('Title').fill(title);
+  await page.getByLabel('Body').fill(body);
+  await page.getByLabel('Tags (comma-separated)').fill(tags);
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  const noteButton = page.getByRole('button', { name: /Note #\d+/ }).last();
+  await expect(noteButton).toBeVisible();
+  await noteButton.click();
+
+  await expect(page.getByText('Note Details')).toBeVisible();
+  await expect(page.getByText(new RegExp(`Body:\\s*${body.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`))).toBeVisible();
+
+  await page.getByRole('button', { name: 'Copy' }).click();
+
+  await expect.poll(async () => {
+    return await page.evaluate(() => navigator.clipboard.readText());
+  }).toBe(body);
+});

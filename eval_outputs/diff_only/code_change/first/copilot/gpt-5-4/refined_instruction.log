@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › can clear all notes from the notes list
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › can clear all notes from the notes list ────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /save/i })[22m
+
+
+      14 |   await bodyInput.fill('Body for first note');
+      15 |   await tagsInput.fill('work');
+    > 16 |   await saveButton.click();
+         |                    ^
+      17 |
+      18 |   await titleInput.fill('Second note');
+      19 |   await bodyInput.fill('Body for second note');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:16:20
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-can-clear-all-notes-from-the-notes-list-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-can-clear-all-notes-from-the-notes-list-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-can-clear-all-notes-from-the-notes-list-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-can-clear-all-notes-from-the-notes-list-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_instruction/refined_instruction-can-clear-all-notes-from-the-notes-list-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › can clear all notes from the notes list ─────
+
+
+=== STDERR ===
+

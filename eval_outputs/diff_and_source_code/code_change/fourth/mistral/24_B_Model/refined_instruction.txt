@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page should display notes and allow filtering', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the title is displayed correctly
+  await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+
+  // Check if the notes section is displayed correctly
+  await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+
+  // Check if the filter input is displayed correctly
+  await expect(page.getByRole('textbox', { name: 'Filter by tag' })).toBeVisible();
+
+  // Add a note
+  await page.getByRole('textbox', { name: 'Title' }).fill('Test Note');
+  await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note.');
+  await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('test, note');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Check if the note is added
+  await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+  // Filter notes by tag
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('test');
+
+  // Check if the filtered note is displayed
+  await expect(page.getByRole('button', { name: 'Note #1' })).toBeVisible();
+
+  // Check if the message "No notes match the filter" is displayed when no notes match
+  await page.getByRole('textbox', { name: 'Filter by tag' }).fill('nonexistent');
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+});

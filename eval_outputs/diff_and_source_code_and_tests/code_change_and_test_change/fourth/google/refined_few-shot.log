@@ -1,0 +1,53 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › search input is visible
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › search input is visible ───────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByPlaceholder('Search...')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByPlaceholder('Search...')[22m
+
+
+      3 | test('search input is visible', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await expect(page.getByPlaceholder('Search...')).toBeVisible();
+        |                                                    ^
+      6 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-search-input-is-visible-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-search-input-is-visible-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-search-input-is-visible-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-search-input-is-visible-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change_and_test_change/fourth/google/artefacts/refined_few-shot/refined_few-shot-search-input-is-visible-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › search input is visible ────────────────────────
+
+
+=== STDERR ===
+

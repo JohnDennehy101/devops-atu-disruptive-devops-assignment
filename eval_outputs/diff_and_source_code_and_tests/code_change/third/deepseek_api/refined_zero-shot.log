@@ -1,0 +1,48 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App - Copy functionality › should have a Copy button when a note is selected
+[1A[2K[2/3] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Note Taking App - Copy functionality › should copy note body to clipboard when Copy button is clicked
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Note Taking App - Copy functionality › should copy note body to clipboard when Copy button is clicked 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      32 |     await page.getByRole('button', { name: 'Copy' }).click();
+      33 |
+    > 34 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+         |                                      ^
+      35 |     expect(clipboardText).toBe('This is the copied content');
+      36 |   });
+      37 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:34:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-ad399-when-Copy-button-is-clicked-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-ad399-when-Copy-button-is-clicked-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-ad399-when-Copy-button-is-clicked-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-ad399-when-Copy-button-is-clicked-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-Note-Tak-ad399-when-Copy-button-is-clicked-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/3] [chromium] › e2e/refined_zero-shot.spec.ts:38:3 › Note Taking App - Copy functionality › Copy button should only appear when a note is selected and not in edit mode
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Note Taking App - Copy functionality › should copy note body to clipboard when Copy button is clicked 
+  2 passed (3.2s)
+
+
+=== STDERR ===
+

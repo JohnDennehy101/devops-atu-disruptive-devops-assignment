@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display the new informational paragraph
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:9:1 › should have a flex container for the notes header and clear all button
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:15:1 › should not show the clear all button when there are no notes
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:21:1 › should show the clear all button when there are notes
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:33:1 › should clear all notes when the clear all button is clicked
+[1A[2K  5 passed (2.3s)
+
+
+=== STDERR ===
+

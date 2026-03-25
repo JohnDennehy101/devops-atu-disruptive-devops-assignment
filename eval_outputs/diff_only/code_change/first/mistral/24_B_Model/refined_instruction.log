@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page should display the correct note count and allow clearing all notes
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page should display the correct note count and allow clearing all notes 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Add Note' })[22m
+
+
+      13 |
+      14 |   // Simulate adding a note
+    > 15 |   await page.getByRole('button', { name: 'Add Note' }).click();
+         |                                                        ^
+      16 |   await page.getByRole('textbox', { name: 'Title' }).fill('Test Note');
+      17 |   await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note.');
+      18 |   await page.getByRole('button', { name: 'Save' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:15:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-e7de8-nd-allow-clearing-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-e7de8-nd-allow-clearing-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-e7de8-nd-allow-clearing-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-e7de8-nd-allow-clearing-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/mistral/24_B_Model/artefacts/refined_instruction/refined_instruction-Home-p-e7de8-nd-allow-clearing-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Home page should display the correct note count and allow clearing all notes 
+
+
+=== STDERR ===
+

@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App › displays clear all button when notes exist
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:19:3 › Note Taking App › hides clear all button when no notes exist
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:23:3 › Note Taking App › clears all notes when clear all button is clicked
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:42:3 › Note Taking App › displays informational text about local storage
+[1A[2K  4 passed (2.2s)
+
+
+=== STDERR ===
+

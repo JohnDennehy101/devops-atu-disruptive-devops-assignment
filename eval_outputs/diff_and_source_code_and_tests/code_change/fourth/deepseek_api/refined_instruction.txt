@@ -1,0 +1,93 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App - Tag Filter Feature', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('should display tag filter input in the sidebar', async ({ page }) => {
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+    await expect(page.getByPlaceholder('Filter by tag')).toBeVisible();
+  });
+
+  test('should show "No notes yet" when no notes exist', async ({ page }) => {
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('should filter notes by tag and update count', async ({ page }) => {
+    await page.getByLabel('Title').fill('Note with tag1');
+    await page.getByLabel('Body').fill('Body 1');
+    await page.getByLabel(/Tags/).fill('tag1, important');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note with tag2');
+    await page.getByLabel('Body').fill('Body 2');
+    await page.getByLabel(/Tags/).fill('tag2, secondary');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('tag1');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(1);
+
+    await filterInput.fill('important');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await filterInput.fill('nonexistent');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('should show original count when filter is cleared', async ({ page }) => {
+    await page.getByLabel('Title').fill('Note A');
+    await page.getByLabel('Body').fill('Body A');
+    await page.getByLabel(/Tags/).fill('alpha');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note B');
+    await page.getByLabel('Body').fill('Body B');
+    await page.getByLabel(/Tags/).fill('beta');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('alpha');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await filterInput.clear();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(2);
+  });
+
+  test('should filter case-insensitively', async ({ page }) => {
+    await page.getByLabel('Title').fill('Case Test');
+    await page.getByLabel('Body').fill('Body');
+    await page.getByLabel(/Tags/).fill('UPPERCASE');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('uppercase');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await filterInput.fill('UPPERCASE');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+
+  test('should filter by partial tag match', async ({ page }) => {
+    await page.getByLabel('Title').fill('Partial Match');
+    await page.getByLabel('Body').fill('Body');
+    await page.getByLabel(/Tags/).fill('javascript, typescript');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const filterInput = page.getByPlaceholder('Filter by tag');
+    await filterInput.fill('script');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await filterInput.fill('type');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+});

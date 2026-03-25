@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Home page with clear all notes functionality › should display the clear all button when there are notes
+[1A[2K[2/5] [chromium] › e2e/refined_zero-shot.spec.ts:17:3 › Home page with clear all notes functionality › should not display the clear all button when there are no notes
+[1A[2K[3/5] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Home page with clear all notes functionality › should clear all notes when clear all button is clicked
+[1A[2K[4/5] [chromium] › e2e/refined_zero-shot.spec.ts:44:3 › Home page with clear all notes functionality › should persist clear all action after page reload
+[1A[2K[5/5] [chromium] › e2e/refined_zero-shot.spec.ts:59:3 › Home page with clear all notes functionality › should clear form fields and selected note when clearing all
+[1A[2K  5 passed (2.6s)
+
+
+=== STDERR ===
+

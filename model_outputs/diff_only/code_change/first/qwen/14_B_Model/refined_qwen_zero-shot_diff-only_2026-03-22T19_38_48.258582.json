@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-22T19:38:48.258582",
+        "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 37.999,
+            "tokens_per_sec": 7.37,
+            "input_token_count": 367,
+            "output_token_count": 280,
+            "total_token_count": 647
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('displays \"Your Notes\" heading and \"Clear all\" button when there are notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Assuming there are notes saved in localStorage for this test\n  await page.evaluate(() => {\n    localStorage.setItem('noteIds', JSON.stringify(['note1', 'note2']));\n  });\n\n  await page.reload();\n\n  const heading = page.locator('h3:text(\"Your Notes (2)\")');\n  await expect(heading).toBeVisible();\n\n  const clearAllButton = page.locator('button:text(\"Clear all\")');\n  await expect(clearAllButton).toBeVisible();\n});\n\ntest('does not display \"Clear all\" button when there are no notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Clearing localStorage to simulate no notes\n  await page.evaluate(() => {\n    localStorage.removeItem('noteIds');\n  });\n\n  await page.reload();\n\n  const heading = page.locator('h3:text(\"Your Notes (0)\")');\n  await expect(heading).toBeVisible();\n\n  const clearAllButton = page.locator('button:text(\"Clear all\")');\n  await expect(clearAllButton).not.toBeVisible();\n});\n```",
+            "extracted_code": "```typescript\nimport { test, expect } from '@playwright/test';\n\ntest('displays \"Your Notes\" heading and \"Clear all\" button when there are notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Assuming there are notes saved in localStorage for this test\n  await page.evaluate(() => {\n    localStorage.setItem('noteIds', JSON.stringify(['note1', 'note2']));\n  });\n\n  await page.reload();\n\n  const heading = page.locator('h3:text(\"Your Notes (2)\")');\n  await expect(heading).toBeVisible();\n\n  const clearAllButton = page.locator('button:text(\"Clear all\")');\n  await expect(clearAllButton).toBeVisible();\n});\n\ntest('does not display \"Clear all\" button when there are no notes', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Clearing localStorage to simulate no notes\n  await page.evaluate(() => {\n    localStorage.removeItem('noteIds');\n  });\n\n  await page.reload();\n\n  const heading = page.locator('h3:text(\"Your Notes (0)\")');\n  await expect(heading).toBeVisible();\n\n  const clearAllButton = page.locator('button:text(\"Clear all\")');\n  await expect(clearAllButton).not.toBeVisible();\n});\n```"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

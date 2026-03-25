@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('character count display on Home page', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const charCountDisplay = await page.getByRole('paragraph', { name: /0 \/ 5000/ });
+  await expect(charCountDisplay).toBeVisible();
+  await expect(charCountDisplay).toHaveText('0 / 5000');
+});

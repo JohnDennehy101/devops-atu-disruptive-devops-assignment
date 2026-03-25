@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › should display the number of saved notes
+[1A[2K[2/2] [chromium] › e2e/refined_few-shot.spec.ts:8:1 › should display a warning when trying to clear all notes
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:8:1 › should display a warning when trying to clear all notes 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('p')
+    Expected: [32m"Are you sure you want to clear all notes?"[39m
+    Error: strict mode violation: locator('p') resolved to 2 elements:
+        1) <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">Create and manage notes. Your notes are stored lo…</p> aka getByText('Create and manage notes. Your')
+        2) <p class="text-gray-500 dark:text-gray-400 text-sm">No notes yet</p> aka getByText('No notes yet')
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('p')[22m
+
+
+       9 |   await page.goto('http://localhost:5175');
+      10 |   await page.locator('button').first().click();
+    > 11 |   await expect(page.locator('p')).toHaveText('Are you sure you want to clear all notes?');
+         |                                   ^
+      12 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:11:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_few-shot/refined_few-shot-should-di-34f13-n-trying-to-clear-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_few-shot/refined_few-shot-should-di-34f13-n-trying-to-clear-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_few-shot/refined_few-shot-should-di-34f13-n-trying-to-clear-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_few-shot/refined_few-shot-should-di-34f13-n-trying-to-clear-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/mistral/artefacts/refined_few-shot/refined_few-shot-should-di-34f13-n-trying-to-clear-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:8:1 › should display a warning when trying to clear all notes 
+  1 passed (1.4s)
+
+
+=== STDERR ===
+

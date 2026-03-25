@@ -1,0 +1,35 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Body character counter', () => {
+  test('should display character counter showing 0 / 5000 initially', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const counter = page.locator('text=0 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('should update character count as user types in the body field', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const bodyTextarea = page.locator('#note-body');
+    await bodyTextarea.fill('Hello');
+    const counter = page.locator('text=5 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('should update character count for longer text', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const bodyTextarea = page.locator('#note-body');
+    const longText = 'a'.repeat(100);
+    await bodyTextarea.fill(longText);
+    const counter = page.locator('text=100 / 5000');
+    await expect(counter).toBeVisible();
+  });
+
+  test('should reset character count when body is cleared', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    const bodyTextarea = page.locator('#note-body');
+    await bodyTextarea.fill('Some text');
+    await expect(page.locator('text=9 / 5000')).toBeVisible();
+    await bodyTextarea.fill('');
+    await expect(page.locator('text=0 / 5000')).toBeVisible();
+  });
+});

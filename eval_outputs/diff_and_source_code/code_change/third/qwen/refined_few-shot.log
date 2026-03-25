@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality ──────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button:has-text("Edit")')[22m
+
+
+       5 |
+       6 |   // Assuming there's at least one note created and selected
+    >  7 |   await page.click('button:has-text("Edit")'); // Click on the edit button to select a note
+         |              ^
+       8 |   await page.waitForTimeout(1000); // Wait for the note to be loaded
+       9 |
+      10 |   // Click on the copy button
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:7:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/qwen/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality ───────────────────
+
+
+=== STDERR ===
+

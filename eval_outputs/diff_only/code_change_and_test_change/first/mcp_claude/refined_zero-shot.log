@@ -1,0 +1,19 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 8 tests using 1 worker
+
+[1A[2K[1/8] [chromium] › e2e/refined_zero-shot.spec.ts:8:3 › Home page notes management › displays subtitle text about local storage
+[1A[2K[2/8] [chromium] › e2e/refined_zero-shot.spec.ts:14:3 › Home page notes management › shows note count in sidebar heading
+[1A[2K[3/8] [chromium] › e2e/refined_zero-shot.spec.ts:18:3 › Home page notes management › does not show Clear all button when there are no notes
+[1A[2K[4/8] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Home page notes management › shows Clear all button after creating a note
+[1A[2K[5/8] [chromium] › e2e/refined_zero-shot.spec.ts:31:3 › Home page notes management › can clear all notes from sidebar
+[1A[2K[6/8] [chromium] › e2e/refined_zero-shot.spec.ts:42:3 › Home page notes management › Clear all button disappears after clearing notes
+[1A[2K[7/8] [chromium] › e2e/refined_zero-shot.spec.ts:52:3 › Home page notes management › can clear multiple notes at once
+[1A[2K[8/8] [chromium] › e2e/refined_zero-shot.spec.ts:73:3 › Home page notes management › form is reset after clearing all notes
+[1A[2K  8 passed (4.3s)
+
+
+=== STDERR ===
+

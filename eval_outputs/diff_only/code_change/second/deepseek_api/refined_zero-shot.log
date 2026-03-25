@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for form body
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for form body ─
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('textarea[name="formBody"]')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('textarea[name="formBody"]')[22m
+
+
+       5 |   
+       6 |   const textarea = page.locator('textarea[name="formBody"]');
+    >  7 |   await expect(textarea).toBeVisible();
+         |                          ^
+       8 |   
+       9 |   const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+      10 |   await expect(counter).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:7:26
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-should-d-767af-aracter-count-for-form-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-should-d-767af-aracter-count-for-form-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-should-d-767af-aracter-count-for-form-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-should-d-767af-aracter-count-for-form-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/deepseek_api/artefacts/refined_zero-shot/refined_zero-shot-should-d-767af-aracter-count-for-form-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › should display character count for form body ──
+
+
+=== STDERR ===
+

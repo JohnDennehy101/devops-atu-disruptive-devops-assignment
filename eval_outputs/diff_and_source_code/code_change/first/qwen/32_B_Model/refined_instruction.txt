@@ -1,0 +1,37 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the correct message and clear all notes button when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Simulate having notes
+  await page.evaluate(() => {
+    localStorage.setItem("noteIds", JSON.stringify([1, 2, 3]));
+  });
+
+  // Reload the page to reflect the change in localStorage
+  await page.reload();
+
+  // Check for the new message
+  const message = await page.getByRole('paragraph', { name: /Create and manage notes\. Your notes are stored locally\./i });
+  await expect(message).toBeVisible();
+
+  // Check for the "Clear all" button
+  const clearButton = await page.getByRole('button', { name: /Clear all/i });
+  await expect(clearButton).toBeVisible();
+});
+
+test('should not display the "Clear all" button when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Simulate having no notes
+  await page.evaluate(() => {
+    localStorage.setItem("noteIds", JSON.stringify([]));
+  });
+
+  // Reload the page to reflect the change in localStorage
+  await page.reload();
+
+  // Check that the "Clear all" button is not visible
+  const clearButton = page.getByRole('button', { name: /Clear all/i });
+  await expect(clearButton).not.toBeVisible();
+});

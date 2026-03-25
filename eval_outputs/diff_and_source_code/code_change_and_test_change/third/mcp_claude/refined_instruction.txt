@@ -1,0 +1,84 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy Note Body', () => {
+  test('Copy button copies note body to clipboard', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('http://localhost:5175');
+
+    const bodyText = 'Text to copy from note';
+    await page.getByRole('textbox', { name: 'Title' }).fill('Copy test');
+    await page.getByRole('textbox', { name: 'Body' }).fill(bodyText);
+    await page.getByRole('textbox', { name: /Tags/ }).fill('tag1');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(bodyText);
+  });
+
+  test('Copy button is visible in note details view', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Visibility test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Some body content');
+    await page.getByRole('textbox', { name: /Tags/ }).fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();
+  });
+
+  test('Copy button is not visible when no note is selected', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+  });
+
+  test('Copy button is not visible in edit mode', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Edit mode test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Edit body');
+    await page.getByRole('textbox', { name: /Tags/ }).fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Edit' }).click();
+    await expect(page.getByRole('heading', { name: 'Edit Note' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+  });
+
+  test('Copy button copies correct body after selecting different notes', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('http://localhost:5175');
+
+    const firstBody = 'First note body content';
+    await page.getByRole('textbox', { name: 'Title' }).fill('First note');
+    await page.getByRole('textbox', { name: 'Body' }).fill(firstBody);
+    await page.getByRole('textbox', { name: /Tags/ }).fill('first');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const secondBody = 'Second note body content';
+    await page.getByRole('textbox', { name: 'Title' }).fill('Second note');
+    await page.getByRole('textbox', { name: 'Body' }).fill(secondBody);
+    await page.getByRole('textbox', { name: /Tags/ }).fill('second');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const noteButtons = page.getByRole('button', { name: /Note #\d+/ });
+    const count = await noteButtons.count();
+
+    // Click the last note (most recently created)
+    await noteButtons.nth(count - 1).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(secondBody);
+  });
+});

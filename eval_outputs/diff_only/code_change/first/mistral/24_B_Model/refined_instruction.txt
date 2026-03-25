@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page should display the correct note count and allow clearing all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the note count is displayed correctly
+  const noteCountElement = page.getByRole('heading', { name: new RegExp(`Your Notes \\\(0\\)`) });
+  await expect(noteCountElement).toBeVisible();
+
+  // Check if the "Clear all" button is not visible initially
+  const clearAllButton = page.getByText('Clear all');
+  await expect(clearAllButton).toBeHidden();
+
+  // Simulate adding a note
+  await page.getByRole('button', { name: 'Add Note' }).click();
+  await page.getByRole('textbox', { name: 'Title' }).fill('Test Note');
+  await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note.');
+  await page.getByRole('button', { name: 'Save' }).click();
+
+  // Check if the note count is updated
+  const updatedNoteCountElement = page.getByRole('heading', { name: new RegExp(`Your Notes \\\(1\\)`) });
+  await expect(updatedNoteCountElement).toBeVisible();
+
+  // Check if the "Clear all" button is visible now
+  await expect(clearAllButton).toBeVisible();
+
+  // Click the "Clear all" button
+  await clearAllButton.click();
+
+  // Check if the note count is reset to 0
+  const resetNoteCountElement = page.getByRole('heading', { name: new RegExp(`Your Notes \\\(0\\)`) });
+  await expect(resetNoteCountElement).toBeVisible();
+
+  // Check if the "Clear all" button is not visible again
+  await expect(clearAllButton).toBeHidden();
+});

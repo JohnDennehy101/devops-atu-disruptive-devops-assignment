@@ -1,0 +1,96 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 3 tests using 1 worker
+
+[1A[2K[1/3] [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title and create note form
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title and create note form ───
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('label', { name: 'Title' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('label', { name: 'Title' })[22m
+
+
+       8 |   await expect(page.getByRole('heading', { level: 2, name: 'Create New Note' })).toBeVisible();
+       9 |
+    > 10 |   await expect(page.getByRole('label', { name: 'Title' })).toBeVisible();
+         |                                                            ^
+      11 |   await expect(page.getByRole('textbox', { name: 'Title' })).toBeVisible();
+      12 |
+      13 |   await expect(page.getByRole('label', { name: 'Body' })).toBeVisible();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:10:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-and-create-note-form-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-and-create-note-form-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-and-create-note-form-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-and-create-note-form-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-and-create-note-form-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/3] [chromium] › e2e/refined_instruction.spec.ts:22:1 › home page shows "No notes yet" when no notes are saved
+[1A[2K[3/3] [chromium] › e2e/refined_instruction.spec.ts:28:1 › home page shows notes and clear all button when notes are saved
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:28:1 › home page shows notes and clear all button when notes are saved 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('input[id="note-body"]')[22m
+
+
+      33 |   await page.locator('button:nth-child(1)').click();
+      34 |   await page.locator('input[id="note-title"]').fill("test note");
+    > 35 |   await page.locator('input[id="note-body"]').fill("test body");
+         |                                               ^
+      36 |   await page.locator('input[id="note-tags"]').fill("test tag");
+      37 |   await page.locator('button:nth-child(1)').click();
+      38 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:35:47
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-p-e6bbb-button-when-notes-are-saved-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-p-e6bbb-button-when-notes-are-saved-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-p-e6bbb-button-when-notes-are-saved-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-p-e6bbb-button-when-notes-are-saved-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-p-e6bbb-button-when-notes-are-saved-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  2 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title and create note form ────
+    [chromium] › e2e/refined_instruction.spec.ts:28:1 › home page shows notes and clear all button when notes are saved 
+  1 passed (27.8s)
+
+
+=== STDERR ===
+

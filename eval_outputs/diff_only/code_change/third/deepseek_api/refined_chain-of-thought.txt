@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body when Copy button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const noteSelector = '[data-testid^="note-item-"]';
+  await page.waitForSelector(noteSelector);
+  const firstNote = page.locator(noteSelector).first();
+  await firstNote.click();
+
+  const copyButton = page.locator('button:has-text("Copy")');
+  await expect(copyButton).toBeVisible();
+  await copyButton.click();
+
+  const clipboardText = await page.evaluate(async () => {
+    return await navigator.clipboard.readText();
+  });
+
+  const noteBody = await page.locator('[data-testid="note-body"]').textContent();
+  expect(clipboardText).toBe(noteBody);
+});
+
+test('Copy button should not be visible when no note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const copyButton = page.locator('button:has-text("Copy")');
+  await expect(copyButton).not.toBeVisible();
+});

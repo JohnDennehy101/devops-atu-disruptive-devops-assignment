@@ -1,0 +1,62 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 7 tests using 1 worker
+
+[1A[2K[1/7] [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display the correct title and description on the home page
+[1A[2K[2/7] [chromium] › e2e/refined_instruction.spec.ts:9:1 › should display "Your Notes" section with count
+[1A[2K[3/7] [chromium] › e2e/refined_instruction.spec.ts:14:1 › should show "Clear all" button when there are saved notes
+[1A[2K[4/7] [chromium] › e2e/refined_instruction.spec.ts:24:1 › should create a new note
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:24:1 › should create a new note ──────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Test Note')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Test Note')[22m
+
+
+      28 |   await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('test, note');
+      29 |   await page.getByRole('button', { name: 'Create Note' }).click();
+    > 30 |   await expect(page.getByText('Test Note')).toBeVisible();
+         |                                             ^
+      31 | });
+      32 |
+      33 | test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:30:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_instruction/refined_instruction-should-create-a-new-note-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_instruction/refined_instruction-should-create-a-new-note-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_instruction/refined_instruction-should-create-a-new-note-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_instruction/refined_instruction-should-create-a-new-note-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/copilot/artefacts/refined_instruction/refined_instruction-should-create-a-new-note-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[5/7] [chromium] › e2e/refined_instruction.spec.ts:33:1 › should clear all notes when "Clear all" button is clicked
+[1A[2K[6/7] [chromium] › e2e/refined_instruction.spec.ts:42:1 › should edit an existing note
+[1A[2K[7/7] [chromium] › e2e/refined_instruction.spec.ts:54:1 › should delete an existing note
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:24:1 › should create a new note ───────────────────
+  6 passed (8.6s)
+
+
+=== STDERR ===
+

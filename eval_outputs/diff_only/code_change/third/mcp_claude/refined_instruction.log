@@ -1,0 +1,16 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 5 tests using 1 worker
+
+[1A[2K[1/5] [chromium] › e2e/refined_instruction.spec.ts:8:3 › Copy Note Body Feature › should display Copy button when a note is selected
+[1A[2K[2/5] [chromium] › e2e/refined_instruction.spec.ts:24:3 › Copy Note Body Feature › should not display Copy button when no note is selected
+[1A[2K[3/5] [chromium] › e2e/refined_instruction.spec.ts:28:3 › Copy Note Body Feature › should copy note body to clipboard when Copy button is clicked
+[1A[2K[4/5] [chromium] › e2e/refined_instruction.spec.ts:56:3 › Copy Note Body Feature › should not display Copy button when in editing mode
+[1A[2K[5/5] [chromium] › e2e/refined_instruction.spec.ts:76:3 › Copy Note Body Feature › Copy button should be next to Edit button in Note Details
+[1A[2K  5 passed (3.4s)
+
+
+=== STDERR ===
+

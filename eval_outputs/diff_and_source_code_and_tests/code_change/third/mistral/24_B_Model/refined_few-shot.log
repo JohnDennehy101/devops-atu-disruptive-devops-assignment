@@ -1,0 +1,57 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_few-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/4] [chromium] › e2e/refined_few-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/4] [chromium] › e2e/refined_few-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/4] [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body to clipboard 
+
+    Error: locator.click: Error: strict mode violation: getByText('Copy') resolved to 4 elements:
+        1) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">This is the body text to copy</textarea> aka getByRole('textbox', { name: 'Body' })
+        2) <button type="button" class="text-sm text-blue-600 dark:text-blue-400 hover:underline">Copy</button> aka getByRole('button', { name: 'Copy' })
+        3) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Title: Copy test')
+        4) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Body: This is the body text')
+
+    Call log:
+    [2m  - waiting for getByText('Copy')[22m
+
+
+      53 |     await page.getByRole("button", { name: /Note #\d+/ }).click()
+      54 |
+    > 55 |     await page.getByText("Copy").click()
+         |                                  ^
+      56 |
+      57 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText())
+      58 |     await expect(clipboardText).toBe("This is the body text to copy")
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:55:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-748c9-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-748c9-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-748c9-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-748c9-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/24_B_Model/artefacts/refined_few-shot/refined_few-shot-Note-Taki-748c9-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:47:3 › Note Taking App › can copy note body to clipboard 
+  3 passed (2.4s)
+
+
+=== STDERR ===
+

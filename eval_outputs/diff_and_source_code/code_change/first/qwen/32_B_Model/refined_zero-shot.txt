@@ -1,0 +1,46 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the new informational paragraph', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const paragraph = await page.locator('p:text-is("Create and manage notes. Your notes are stored locally.")');
+  await expect(paragraph).toBeVisible();
+});
+
+test('should have a flex container for the notes header and clear all button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const flexContainer = await page.locator('div.flex.justify-between.items-center');
+  await expect(flexContainer).toBeVisible();
+});
+
+test('should not show the clear all button when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const clearAllButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearAllButton).not.toBeVisible();
+});
+
+test('should show the clear all button when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Simulate adding a note
+  await page.fill('input#note-title', 'Test Note');
+  await page.fill('textarea#note-body', 'This is a test note.');
+  await page.fill('input#note-tags', 'test, example');
+  await page.click('button:text-is("Create Note")');
+
+  const clearAllButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearAllButton).toBeVisible();
+});
+
+test('should clear all notes when the clear all button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Simulate adding a note
+  await page.fill('input#note-title', 'Test Note');
+  await page.fill('textarea#note-body', 'This is a test note.');
+  await page.fill('input#note-tags', 'test, example');
+  await page.click('button:text-is("Create Note")');
+
+  // Click the clear all button
+  await page.click('button:text-is("Clear all")');
+
+  const clearAllButton = await page.locator('button:text-is("Clear all")');
+  await expect(clearAllButton).not.toBeVisible();
+});

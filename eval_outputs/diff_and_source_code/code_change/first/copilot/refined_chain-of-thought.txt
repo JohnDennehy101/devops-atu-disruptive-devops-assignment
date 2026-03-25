@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes button functionality', async ({ page }) => {
+  // Navigate to the base URL
+  await page.goto('http://localhost:5175');
+
+  // Verify the "Your Notes" section exists
+  const notesHeader = await page.locator('h3:has-text("Your Notes")');
+  await expect(notesHeader).toBeVisible();
+
+  // Check if the "Clear all" button is visible when there are saved notes
+  const clearAllButton = await page.locator('button:has-text("Clear all")');
+  const notesCount = await notesHeader.textContent();
+  const notesCountNumber = parseInt(notesCount?.match(/\d+/)?.[0] || '0', 10);
+
+  if (notesCountNumber > 0) {
+    await expect(clearAllButton).toBeVisible();
+
+    // Click the "Clear all" button
+    await clearAllButton.click();
+
+    // Verify that the notes count is updated to 0
+    const updatedNotesCount = await notesHeader.textContent();
+    const updatedNotesCountNumber = parseInt(updatedNotesCount?.match(/\d+/)?.[0] || '0', 10);
+    expect(updatedNotesCountNumber).toBe(0);
+
+    // Verify that the "Clear all" button is no longer visible
+    await expect(clearAllButton).not.toBeVisible();
+  } else {
+    // If there are no notes, ensure the "Clear all" button is not visible
+    await expect(clearAllButton).not.toBeVisible();
+  }
+});

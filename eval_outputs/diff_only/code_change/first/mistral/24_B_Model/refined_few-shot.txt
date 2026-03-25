@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes button is functional', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#note-input', 'Test Note');
+  await page.click('#save-note-button');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await page.click('text=Clear all');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+});

@@ -1,0 +1,55 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can clear all notes from the notes list
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can clear all notes from the notes list 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('First note')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('First note')[22m
+
+
+      18 |   await expect(page.getByRole('heading', { name: /your notes \(1\)/i })).toBeVisible();
+      19 |   await expect(page.getByRole('button', { name: /clear all/i })).toBeVisible();
+    > 20 |   await expect(page.getByText('First note')).toBeVisible();
+         |                                              ^
+      21 |
+      22 |   await titleInput.fill('Second note');
+      23 |   await bodyInput.fill('Body for second note');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:20:46
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-d659d-l-notes-from-the-notes-list-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-d659d-l-notes-from-the-notes-list-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-d659d-l-notes-from-the-notes-list-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-d659d-l-notes-from-the-notes-list-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/copilot/gpt-5-4/artefacts/refined_chain-of-thought/refined_chain-of-thought-c-d659d-l-notes-from-the-notes-list-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › can clear all notes from the notes list 
+
+
+=== STDERR ===
+

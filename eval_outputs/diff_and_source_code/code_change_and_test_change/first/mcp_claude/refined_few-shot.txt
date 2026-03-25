@@ -1,0 +1,87 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Clear all notes functionality', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    // Clear any existing localStorage state
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('displays description text on the home page', async ({ page }) => {
+    await expect(
+      page.getByText('Create and manage notes. Your notes are stored locally.')
+    ).toBeVisible();
+  });
+
+  test('does not show Clear all button when there are no notes', async ({ page }) => {
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('shows Clear all button after creating a note', async ({ page }) => {
+    await page.getByLabel('Title').fill('My Note');
+    await page.getByLabel('Body').fill('Some body');
+    await page.getByLabel(/Tags/).fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+  });
+
+  test('can clear all notes from sidebar', async ({ page }) => {
+    await page.getByLabel('Title').fill('To clear');
+    await page.getByLabel('Body').fill('Body');
+    await page.getByLabel(/Tags/).fill('x');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+
+    await expect(page.getByText('No notes yet')).toBeVisible();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Clear all' })).not.toBeVisible();
+  });
+
+  test('clear all removes notes from localStorage', async ({ page }) => {
+    await page.getByLabel('Title').fill('Persistent note');
+    await page.getByLabel('Body').fill('Body text');
+    await page.getByLabel(/Tags/).fill('persist');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    await page.getByRole('button', { name: 'Clear all' }).click();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+
+    // Verify localStorage was cleared
+    const noteIds = await page.evaluate(() => localStorage.getItem('noteIds'));
+    expect(JSON.parse(noteIds!)).toEqual([]);
+
+    // Verify notes stay cleared after reload
+    await page.reload();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('can clear multiple notes at once', async ({ page }) => {
+    // Create first note
+    await page.getByLabel('Title').fill('Note 1');
+    await page.getByLabel('Body').fill('Body 1');
+    await page.getByLabel(/Tags/).fill('a');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Create second note
+    await page.getByLabel('Title').fill('Note 2');
+    await page.getByLabel('Body').fill('Body 2');
+    await page.getByLabel(/Tags/).fill('b');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Clear all
+    await page.getByRole('button', { name: 'Clear all' }).click();
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+});

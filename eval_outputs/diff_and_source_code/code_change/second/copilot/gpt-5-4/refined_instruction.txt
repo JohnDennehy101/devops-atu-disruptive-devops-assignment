@@ -1,0 +1,26 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home page note form body character counter', () => {
+  test('updates and resets the body character counter', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    await expect(page.getByRole('heading', { name: 'Note Taking App' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Create New Note' })).toBeVisible();
+
+    const bodyInput = page.getByRole('textbox', { name: 'Body' });
+    await expect(bodyInput).toBeVisible();
+
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+
+    await bodyInput.fill('Hello world');
+    await expect(page.getByText('11 / 5000')).toBeVisible();
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Counter test note');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('qa, playwright');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await expect(page.getByText('0 / 5000')).toBeVisible();
+    await expect(bodyInput).toHaveValue('');
+    await expect(page.getByRole('heading', { name: /Your Notes \(\d+\)/ })).toBeVisible();
+  });
+});

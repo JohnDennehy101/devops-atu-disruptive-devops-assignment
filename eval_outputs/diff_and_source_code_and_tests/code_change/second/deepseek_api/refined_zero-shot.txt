@@ -1,0 +1,71 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Note Taking App - Character Counter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('should display character counter for note body', async ({ page }) => {
+    const bodyTextarea = page.getByLabel('Body');
+    await expect(bodyTextarea).toBeVisible();
+
+    const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+    await expect(counter).toBeVisible();
+    await expect(counter).toHaveText('0 / 5000');
+  });
+
+  test('character counter should update when typing in body field', async ({ page }) => {
+    const bodyTextarea = page.getByLabel('Body');
+    const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+    await bodyTextarea.fill('Hello');
+    await expect(counter).toHaveText('5 / 5000');
+
+    await bodyTextarea.fill('This is a longer note body text.');
+    await expect(counter).toHaveText('33 / 5000');
+  });
+
+  test('character counter should reset when creating a note', async ({ page }) => {
+    const bodyTextarea = page.getByLabel('Body');
+    const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+    await page.getByLabel('Title').fill('Test Note');
+    await bodyTextarea.fill('This is the body content.');
+    await page.getByLabel(/Tags/).fill('test');
+    await expect(counter).toHaveText('26 / 5000');
+
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(bodyTextarea).toHaveValue('');
+    await expect(counter).toHaveText('0 / 5000');
+  });
+
+  test('character counter should show correct count when editing a note', async ({ page }) => {
+    await page.getByLabel('Title').fill('Edit Counter Test');
+    await page.getByLabel('Body').fill('Initial body text.');
+    await page.getByLabel(/Tags/).fill('edit');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await page.getByRole('button', { name: 'Edit' }).click();
+
+    const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+    await expect(counter).toHaveText('18 / 5000');
+
+    const bodyTextarea = page.getByLabel('Body');
+    await bodyTextarea.fill('Updated body with more characters.');
+    await expect(counter).toHaveText('37 / 5000');
+  });
+
+  test('character counter should update when clearing body field', async ({ page }) => {
+    const bodyTextarea = page.getByLabel('Body');
+    const counter = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+
+    await bodyTextarea.fill('Some text');
+    await expect(counter).toHaveText('9 / 5000');
+
+    await bodyTextarea.fill('');
+    await expect(counter).toHaveText('0 / 5000');
+  });
+});

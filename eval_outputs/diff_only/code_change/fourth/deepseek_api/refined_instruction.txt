@@ -1,0 +1,66 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page Tag Filter', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+  });
+
+  test('should display tag filter input and initial note count', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await expect(filterInput).toBeVisible();
+    await expect(filterInput).toHaveAttribute('placeholder', 'Filter by tag');
+
+    const notesHeader = page.getByRole('heading', { name: /your notes/i });
+    await expect(notesHeader).toBeVisible();
+  });
+
+  test('should show "No notes yet" when there are no saved notes', async ({ page }) => {
+    const emptyStateText = page.getByText('No notes yet');
+    await expect(emptyStateText).toBeVisible();
+  });
+
+  test('should filter notes by tag when typing in filter input', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await filterInput.fill('important');
+    await expect(filterInput).toHaveValue('important');
+  });
+
+  test('should update note count when filter is applied', async ({ page }) => {
+    const notesHeader = page.getByRole('heading', { name: /your notes/i });
+    const initialCount = await notesHeader.textContent();
+    
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await filterInput.fill('work');
+    
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+    
+    const updatedCount = await notesHeader.textContent();
+    expect(updatedCount).not.toBe(initialCount);
+  });
+
+  test('should clear filter and show all notes', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await filterInput.fill('personal');
+    await expect(filterInput).toHaveValue('personal');
+    
+    await filterInput.fill('');
+    await expect(filterInput).toHaveValue('');
+  });
+
+  test('should display filtered notes only', async ({ page }) => {
+    const filterInput = page.getByRole('textbox', { name: /filter by tag/i });
+    await filterInput.fill('meeting');
+    
+    const noteItems = page.locator('[data-testid^="note-"]');
+    const count = await noteItems.count();
+    
+    if (count === 0) {
+      await expect(page.getByText('No notes match the filter')).toBeVisible();
+    } else {
+      for (let i = 0; i < count; i++) {
+        const note = noteItems.nth(i);
+        await expect(note).toBeVisible();
+      }
+    }
+  });
+});

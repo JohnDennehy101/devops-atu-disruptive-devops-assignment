@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display the number of notes and have a clear all button
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display the number of notes and have a clear all button 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByPlaceholder('Title')[22m
+
+
+      13 |
+      14 |   // Add a note to simulate having notes
+    > 15 |   await page.getByPlaceholder('Title').fill('Test Note');
+         |                                        ^
+      16 |   await page.getByPlaceholder('Body').fill('This is a test note.');
+      17 |   await page.getByPlaceholder('Tags').fill('test');
+      18 |   await page.getByRole('button', { name: 'Save' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:15:40
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_instruction/refined_instruction-should-f0c0c-and-have-a-clear-all-button-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_instruction/refined_instruction-should-f0c0c-and-have-a-clear-all-button-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_instruction/refined_instruction-should-f0c0c-and-have-a-clear-all-button-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_instruction/refined_instruction-should-f0c0c-and-have-a-clear-all-button-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/deepseek/artefacts/refined_instruction/refined_instruction-should-f0c0c-and-have-a-clear-all-button-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › should display the number of notes and have a clear all button 
+
+
+=== STDERR ===
+

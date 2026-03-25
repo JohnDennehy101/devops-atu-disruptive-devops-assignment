@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Copying › can copy note body
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Copying › can copy note body ─────────
+
+    TypeError: Cannot read properties of undefined (reading 'readText')
+
+      18 |     await page.getByRole("button", { name: "Copy" }).click()
+      19 |
+    > 20 |     const text = await navigator.clipboard.readText()
+         |                                            ^
+      21 |     await expect(text).toBe("Copy me")
+      22 |   })
+      23 | })
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:20:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Note-Copying-can-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Note-Copying-can-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Note-Copying-can-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Note-Copying-can-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/mistral/artefacts/refined_instruction/refined_instruction-Note-Copying-can-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Copying › can copy note body ──────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('should display character count in the body textarea', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.getByRole('textbox', { name: 'Body' }).fill('This is a test note.');
+  const characterCount = await page.getByRole('paragraph').getByText(/\/ 5000/).innerText();
+  expect(characterCount).toContain('18 / 5000');
+});

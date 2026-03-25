@@ -1,0 +1,53 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify character count limit in the note body field
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify character count limit in the note body field 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Error: Character limit exceeded')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Error: Character limit exceeded')[22m
+
+
+       7 |   await page.getByLabel('Body').fill('a'.repeat(5001));
+       8 |   await expect(page.getByText('5001 / 5000')).toBeVisible();
+    >  9 |   await expect(page.getByText('Error: Character limit exceeded')).toBeVisible();
+         |                                                                   ^
+      10 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:9:67
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-Verify-9a5db-imit-in-the-note-body-field-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-Verify-9a5db-imit-in-the-note-body-field-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-Verify-9a5db-imit-in-the-note-body-field-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-Verify-9a5db-imit-in-the-note-body-field-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/qwen/artefacts/refined_instruction/refined_instruction-Verify-9a5db-imit-in-the-note-body-field-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › Verify character count limit in the note body field 
+
+
+=== STDERR ===
+

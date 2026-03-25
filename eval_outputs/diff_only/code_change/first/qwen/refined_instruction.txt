@@ -1,0 +1,33 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes button appears when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there are notes already present
+  await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeVisible();
+});
+
+test('Clear all notes button does not appear when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming no notes are present
+  await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+  await expect(page.getByText('Clear all')).not.toBeVisible();
+});
+```
+
+```typescript
+
+test('Clear all notes button appears when there are notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there are notes already present
+  await expect(page.getByRole('heading', { name: 'Your Notes (1)' })).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeVisible();
+});
+
+test('Clear all notes button does not appear when there are no notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming no notes are present
+  await expect(page.getByRole('heading', { name: 'Your Notes (0)' })).toBeVisible();
+  await expect(page.getByText('Clear all')).not.toBeVisible();
+});
+```

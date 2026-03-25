@@ -1,0 +1,12 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App character counter › updates the body character counter as the user types and resets after note creation
+[1A[2K  1 passed (1.4s)
+
+
+=== STDERR ===
+

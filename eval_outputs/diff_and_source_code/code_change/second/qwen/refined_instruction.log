@@ -1,0 +1,29 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts: Unterminated template. (22:3)
+
+  20 |   await expect(page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')).toHaveText('25 / 5000');
+  21 | });
+> 22 | ```
+     |    ^
+  23 |
+  24 | The generated test should include the new character count feature and ensure it displays correctly after creating a note.
+
+   at refined_instruction.spec.ts:22
+
+  20 |   await expect(page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')).toHaveText('25 / 5000');
+  21 | });
+> 22 | ```
+     |   ^
+  23 |
+  24 | The generated test should include the new character count feature and ensure it displays correctly after creating a note.
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

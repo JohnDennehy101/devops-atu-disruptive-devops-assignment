@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('button:nth-child(1)').click();
+  await page.locator('input[id="note-title"]').fill('test title');
+  await page.locator('textarea[id="note-body"]').fill('test body');
+  await page.locator('button[type="submit"]').click();
+  await page.locator('button:nth-child(1)').click();
+  await page.locator('button:nth-child(3)').click();
+  await page.locator('button:nth-child(1)').click();
+  await page.locator('button:nth-child(1)').click();
+  const copyButton = page.locator('button[class="text-sm text-blue-600 dark:text-blue-400 hover:underline"]');
+  await copyButton.click();
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  expect(clipboardText).toBe('test body');
+});
+```

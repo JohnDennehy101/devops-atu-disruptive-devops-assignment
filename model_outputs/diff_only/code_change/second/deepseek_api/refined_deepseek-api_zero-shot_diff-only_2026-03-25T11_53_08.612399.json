@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T11:53:08.612399",
+        "model_id": "deepseek-api/deepseek-chat",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 7.53,
+            "input_token_count": 151,
+            "output_token_count": 209,
+            "total_token_count": 360,
+            "tokens_per_sec": 27.76
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('should display character count for form body', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  \n  const textarea = page.locator('textarea[name=\"formBody\"]');\n  await expect(textarea).toBeVisible();\n  \n  const counter = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(counter).toBeVisible();\n  \n  await expect(counter).toHaveText('0 / 5000');\n  \n  await textarea.fill('Hello World');\n  await expect(counter).toHaveText('11 / 5000');\n  \n  await textarea.fill('A'.repeat(100));\n  await expect(counter).toHaveText('100 / 5000');\n  \n  await textarea.fill('A'.repeat(5000));\n  await expect(counter).toHaveText('5000 / 5000');\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('should display character count for form body', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  \n  const textarea = page.locator('textarea[name=\"formBody\"]');\n  await expect(textarea).toBeVisible();\n  \n  const counter = page.locator('p.text-xs.text-gray-500.dark\\\\:text-gray-400.mt-1');\n  await expect(counter).toBeVisible();\n  \n  await expect(counter).toHaveText('0 / 5000');\n  \n  await textarea.fill('Hello World');\n  await expect(counter).toHaveText('11 / 5000');\n  \n  await textarea.fill('A'.repeat(100));\n  await expect(counter).toHaveText('100 / 5000');\n  \n  await textarea.fill('A'.repeat(5000));\n  await expect(counter).toHaveText('5000 / 5000');\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "DeepSeek API (deepseek-chat = DeepSeek-V3)"
+        }
+    }
+]

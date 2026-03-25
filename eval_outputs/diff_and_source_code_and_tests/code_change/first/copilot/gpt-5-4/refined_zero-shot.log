@@ -1,0 +1,13 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › has title, description, and create form visible
+[1A[2K[2/2] [chromium] › e2e/refined_zero-shot.spec.ts:17:3 › Note Taking App › shows clear all button only when notes exist and clears all notes
+[1A[2K  2 passed (1.9s)
+
+
+=== STDERR ===
+

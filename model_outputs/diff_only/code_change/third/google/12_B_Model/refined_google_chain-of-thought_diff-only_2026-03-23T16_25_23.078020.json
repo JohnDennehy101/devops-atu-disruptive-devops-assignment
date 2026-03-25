@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-23T16:25:23.078020",
+        "model_id": "google/gemma-3-12b-it",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 34.894,
+            "tokens_per_sec": 6.28,
+            "input_token_count": 271,
+            "output_token_count": 219,
+            "total_token_count": 490
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "---\n### Implementation Details:\nThe `Home.tsx` component now includes a \"Copy\" button next to each note. Clicking this button copies the note's body to the clipboard.\n\n### Test Steps:\n1. Navigate to `http://localhost:5175`.\n2. Verify that a note exists on the page.\n3. Click the \"Copy\" button next to the note.\n4. Verify that the note's body has been copied to the clipboard.\n\n### Playwright Test Code:\n\nimport { test, expect } from '@playwright/test';\n\ntest('Copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await expect(page.locator('text=Note title')).toBeVisible();\n  await page.locator('text=Copy').click();\n  await page.locator('text=Note title').click();\n  await expect(page.locator('text=Note title')).toBeVisible();\n});\n",
+            "extracted_code": "---\n### Implementation Details:\nThe `Home.tsx` component now includes a \"Copy\" button next to each note. Clicking this button copies the note's body to the clipboard.\n\n### Test Steps:\n1. Navigate to `http://localhost:5175`.\n2. Verify that a note exists on the page.\n3. Click the \"Copy\" button next to the note.\n4. Verify that the note's body has been copied to the clipboard.\n\n### Playwright Test Code:\n\nimport { test, expect } from '@playwright/test';\n\ntest('Copy note body to clipboard', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await expect(page.locator('text=Note title')).toBeVisible();\n  await page.locator('text=Copy').click();\n  await page.locator('text=Note title').click();\n  await expect(page.locator('text=Note title')).toBeVisible();\n});\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

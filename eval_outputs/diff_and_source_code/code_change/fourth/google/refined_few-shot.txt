@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('check that the number of notes displayed is correct', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText('Your Notes')).toBeVisible();
+  const noteCount = await page.locator('button').count();
+  await expect(noteCount).toBe(0);
+});

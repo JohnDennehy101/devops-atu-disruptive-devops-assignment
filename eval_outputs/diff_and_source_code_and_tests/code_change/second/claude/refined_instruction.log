@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Character counter for note body › displays character count as 0 / 5000 when body is empty
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:14:3 › Character counter for note body › updates character count when typing in the body field
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:19:3 › Character counter for note body › updates character count for longer text
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:25:3 › Character counter for note body › character count resets after creating a note
+[1A[2K  4 passed (2.1s)
+
+
+=== STDERR ===
+

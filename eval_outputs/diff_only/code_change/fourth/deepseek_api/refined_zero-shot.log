@@ -1,0 +1,25 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts: Unexpected token (106:26)
+
+  104 |
+  105 |     const filterInput = page.getByPlaceholder('Filter by tag');
+> 106 |     await filterInput.fill
+      |                           ^
+
+   at refined_zero-shot.spec.ts:106
+
+  104 |
+  105 |     const filterInput = page.getByPlaceholder('Filter by tag');
+> 106 |     await filterInput.fill
+      |                          ^
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

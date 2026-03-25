@@ -1,0 +1,27 @@
+import { test, expect } from '@playwright/test';
+
+test('should copy note body on button click', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there's a note with an ID that exists in the database
+  const noteId = 1; // Replace with the actual ID of the note you want to test
+
+  // Load the note with the specific ID
+  await page.click(`button:text("Note #${noteId}")`);
+
+  // Click the "Copy" button
+  await page.click('button:text("Copy")');
+
+  // Get the note body
+  const noteBody = await page.locator('.note-body').innerText();
+
+  // Use Playwright's clipboard to paste and assert
+  await page.evaluate(() => {
+    navigator.clipboard.readText().then(text => {
+      document.execCommand('paste');
+      const pastedText = document.getSelection().toString();
+      expect(pastedText).toBe(text);
+    });
+  });
+});
+```

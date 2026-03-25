@@ -1,0 +1,92 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Tag filter functionality", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("filter by tag shows only matching notes", async ({ page }) => {
+    // Create first note with "work, urgent" tags
+    await page.getByLabel("Title").fill("Work note");
+    await page.getByLabel("Body").fill("Body one");
+    await page.getByLabel(/Tags/).fill("work, urgent");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Create second note with "personal" tag
+    await page.getByLabel("Title").fill("Personal note");
+    await page.getByLabel("Body").fill("Body two");
+    await page.getByLabel(/Tags/).fill("personal");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    // Both notes should be visible
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+
+    // Filter by "work" — only the first note should show
+    await page.getByPlaceholder("Filter by tag").fill("work");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByRole("button", { name: /Note #/ }).first()).toBeVisible();
+
+    // Filter by nonexistent tag — no notes should match
+    await page.getByPlaceholder("Filter by tag").fill("nonexistent");
+    await expect(page.getByText("No notes match the filter")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+
+    // Clear the filter — all notes return
+    await page.getByPlaceholder("Filter by tag").fill("");
+    await expect(page.getByText("Your Notes (2)")).toBeVisible();
+  });
+
+  test("filter input is visible on page load", async ({ page }) => {
+    await expect(page.getByPlaceholder("Filter by tag")).toBeVisible();
+  });
+
+  test("filter is case-insensitive", async ({ page }) => {
+    // Create a note with lowercase tag
+    await page.getByLabel("Title").fill("Test note");
+    await page.getByLabel("Body").fill("Test body");
+    await page.getByLabel(/Tags/).fill("JavaScript");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Filter with different casing should still match
+    await page.getByPlaceholder("Filter by tag").fill("javascript");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    await page.getByPlaceholder("Filter by tag").fill("JAVASCRIPT");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+  });
+
+  test("filter matches partial tag names", async ({ page }) => {
+    await page.getByLabel("Title").fill("Dev note");
+    await page.getByLabel("Body").fill("Dev body");
+    await page.getByLabel(/Tags/).fill("development");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Partial match should work since the code uses .includes()
+    await page.getByPlaceholder("Filter by tag").fill("dev");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+  });
+
+  test("shows 'No notes yet' when no notes exist and filter is empty", async ({ page }) => {
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+  });
+
+  test("filter with whitespace-only input shows all notes", async ({ page }) => {
+    await page.getByLabel("Title").fill("Whitespace test");
+    await page.getByLabel("Body").fill("Body");
+    await page.getByLabel(/Tags/).fill("test");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+
+    // Whitespace-only filter should be treated as empty (show all)
+    await page.getByPlaceholder("Filter by tag").fill("   ");
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+  });
+});

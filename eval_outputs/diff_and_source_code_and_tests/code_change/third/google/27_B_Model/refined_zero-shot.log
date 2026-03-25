@@ -1,0 +1,45 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › Copy button copies note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › Copy button copies note body to clipboard 
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      12 |     await page.getByRole('button', { name: 'Copy' }).click();
+      13 |
+    > 14 |     const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+         |                                      ^
+      15 |     expect(clipboardText).toBe('This is the text to copy.');
+      16 |   });
+      17 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:14:38
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-50fba-pies-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-50fba-pies-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-50fba-pies-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-50fba-pies-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-Pag-50fba-pies-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:4:3 › Home Page › Copy button copies note body to clipboard 
+
+
+=== STDERR ===
+

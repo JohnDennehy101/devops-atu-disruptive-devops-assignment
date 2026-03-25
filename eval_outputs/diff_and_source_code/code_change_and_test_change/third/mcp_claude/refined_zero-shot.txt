@@ -1,0 +1,80 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Copy note body to clipboard', () => {
+  test('Copy button copies note body to clipboard', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('http://localhost:5175');
+
+    const bodyText = 'Text to copy from note';
+    await page.getByLabel('Title').fill('Copy test');
+    await page.getByLabel('Body').fill(bodyText);
+    await page.getByLabel(/Tags/).fill('tag1');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(bodyText);
+  });
+
+  test('Copy button is visible in note details view', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    await page.getByLabel('Title').fill('Visibility test');
+    await page.getByLabel('Body').fill('Some body content');
+    await page.getByLabel(/Tags/).fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('button', { name: /Note #\d+/ }).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+
+    const copyButton = page.getByRole('button', { name: 'Copy' });
+    await expect(copyButton).toBeVisible();
+  });
+
+  test('Copy button is not visible when no note is selected', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+
+    await expect(page.getByRole('button', { name: 'Copy' })).not.toBeVisible();
+  });
+
+  test('Copy button copies correct body when switching between notes', async ({ page, context }) => {
+    await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+    await page.goto('http://localhost:5175');
+
+    const body1 = 'First note body content';
+    const body2 = 'Second note body content';
+
+    await page.getByLabel('Title').fill('Note A');
+    await page.getByLabel('Body').fill(body1);
+    await page.getByLabel(/Tags/).fill('a');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note B');
+    await page.getByLabel('Body').fill(body2);
+    await page.getByLabel(/Tags/).fill('b');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    const noteButtons = page.getByRole('button', { name: /Note #\d+/ });
+    const count = await noteButtons.count();
+
+    // Click the last created note (Note B)
+    await noteButtons.nth(count - 1).click();
+    await expect(page.getByRole('heading', { name: 'Note Details' })).toBeVisible();
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    let clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(body2);
+
+    // Click the second-to-last note (Note A)
+    await noteButtons.nth(count - 2).click();
+    await expect(page.getByText(`Body: ${body1}`)).toBeVisible();
+    await page.getByRole('button', { name: 'Copy' }).click();
+
+    clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+    expect(clipboardText).toBe(body1);
+  });
+});

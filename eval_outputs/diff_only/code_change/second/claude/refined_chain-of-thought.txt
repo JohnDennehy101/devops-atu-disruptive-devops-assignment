@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('displays character counter below body textarea', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const bodyTextarea = page.locator('#note-body');
+  const charCounter = page.locator('text=/\\d+ \\/ 5000/');
+
+  // Initially shows 0 / 5000
+  await expect(charCounter).toHaveText('0 / 5000');
+
+  // Type some text and verify counter updates
+  await bodyTextarea.fill('Hello World');
+  await expect(charCounter).toHaveText('11 / 5000');
+
+  // Clear and verify reset
+  await bodyTextarea.fill('');
+  await expect(charCounter).toHaveText('0 / 5000');
+});

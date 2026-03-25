@@ -1,0 +1,31 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+SyntaxError: /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts: Unexpected token, expected "," (27:15)
+
+  25 |   return (
+  26 |     <div>
+> 27 |       <h1>Your Notes ({displayedIds.length})</h1>
+     |                ^
+  28 |       <input
+  29 |         type="text"
+  30 |         placeholder="Filter by tag"
+
+   at refined_chain-of-thought.spec.ts:27
+
+  25 |   return (
+  26 |     <div>
+> 27 |       <h1>Your Notes ({displayedIds.length})</h1>
+     |               ^
+  28 |       <input
+  29 |         type="text"
+  30 |         placeholder="Filter by tag"
+
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[1A[2K
+
+=== STDERR ===
+

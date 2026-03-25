@@ -1,0 +1,64 @@
+import { useState, useEffect } from "react"
+import { api, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
+
+export function Home(): JSX.Element {
+  const [tagFilter, setTagFilter] = useState("")
+  const [allNotes, setAllNotes] = useState<Note[]>([])
+  useEffect(() => {
+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
+  }, [savedIds])
+
+  const displayedIds = useMemo(() => {
+    if (!tagFilter.trim()) return savedIds
+    const lower = tagFilter.trim().toLowerCase()
+    return allNotes
+     .filter(n => savedIds.includes(n.id) && n.tags.some(t => t.toLowerCase().includes(lower)))
+     .map(n => n.id)
+  }, [savedIds, allNotes, tagFilter])
+
+  return (
+    <div className="w-full p-6">
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
+        Note Taking App
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2">
+          {/* Note creation form goes here */}
+        </div>
+
+        <div className="space-y-4">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              Your Notes ({displayedIds.length})
+            </h3>
+            <div className="space-y-2 max-h-64 overflow-y-auto">
+              {displayedIds.length === 0? (
+                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                  {savedIds.length === 0
+                   ? "No notes yet"
+                    : "No notes match the filter"}
+                </p>
+              ) : (
+                displayedIds.map(id => (
+                  <button
+                    key={id}
+                    onClick={() => {
+                      loadNote(id).catch(err => {
+                        console.error("Load note error:", err)
+                      })
+                    }}
+                    className="w-full text-left px-3 py-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded text-sm text-gray-900 dark:text-white"
+                  >
+                    Note #{id}
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```

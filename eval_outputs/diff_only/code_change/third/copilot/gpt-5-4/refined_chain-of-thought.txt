@@ -1,0 +1,50 @@
+import { test, expect } from '@playwright/test';
+
+test('can copy selected note body from Home page', async ({ page, context, browserName }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+  await page.goto('http://localhost:5175');
+
+  const noteItems = page.locator('button, [role="button"]').filter({ has: page.locator('h3, h2, h4, p, span, div') });
+  const count = await noteItems.count();
+
+  let selectedTitle = '';
+  let selectedBody = '';
+
+  for (let i = 0; i < count; i++) {
+    const candidate = noteItems.nth(i);
+    const text = (await candidate.innerText()).trim();
+    if (text && text !== 'Copy') {
+      await candidate.click();
+      const copyButton = page.getByRole('button', { name: 'Copy' });
+      if (await copyButton.isVisible().catch(() => false)) {
+        selectedTitle = text;
+        break;
+      }
+    }
+  }
+
+  const copyButton = page.getByRole('button', { name: 'Copy' });
+  await expect(copyButton).toBeVisible();
+
+  const bodyContainer = copyButton.locator('xpath=ancestor::*[self::section or self::article or self::div][1]');
+  const containerText = await bodyContainer.innerText();
+  const lines = containerText
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean)
+    .filter(line => line !== 'Copy' && line !== selectedTitle);
+
+  selectedBody = lines.join('\n').trim();
+  expect(selectedBody.length).toBeGreaterThan(0);
+
+  await copyButton.click();
+
+  if (browserName === 'webkit') {
+    test.skip(true, 'Clipboard read may be restricted in WebKit');
+  }
+
+  await expect.poll(async () => {
+    return await page.evaluate(() => navigator.clipboard.readText());
+  }).toBe(selectedBody);
+});

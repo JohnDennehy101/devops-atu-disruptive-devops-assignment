@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+
+test.describe("Clear All Notes", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175");
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test("Clear all button is hidden when there are no notes", async ({ page }) => {
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible();
+  });
+
+  test("Clear all button removes all notes from the sidebar", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note to clear");
+    await page.getByLabel("Body").fill("This will be cleared");
+    await page.getByLabel(/Tags/).fill("test");
+    await page.getByRole("button", { name: "Create Note" }).click();
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible();
+    await expect(page.getByText("Clear all")).toBeVisible();
+
+    await page.getByText("Clear all").click();
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible();
+    await expect(page.getByText("No notes yet")).toBeVisible();
+    await expect(page.getByText("Clear all")).not.toBeVisible();
+  });
+});

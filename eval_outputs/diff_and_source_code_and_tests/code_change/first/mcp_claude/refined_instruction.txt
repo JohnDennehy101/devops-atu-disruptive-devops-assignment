@@ -1,0 +1,92 @@
+import { test, expect } from "@playwright/test"
+
+test.describe("Clear All Notes Feature", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:5175")
+    await page.evaluate(() => localStorage.clear())
+    await page.reload()
+  })
+
+  test("does not show Clear all button when there are no notes", async ({ page }) => {
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("shows Clear all button when notes exist", async ({ page }) => {
+    await page.getByLabel("Title").fill("Test note")
+    await page.getByLabel("Body").fill("Body content")
+    await page.getByRole("button", { name: "Create Note" }).click()
+
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).toBeVisible()
+  })
+
+  test("Clear all removes all notes from the sidebar", async ({ page }) => {
+    await page.getByLabel("Title").fill("Note one")
+    await page.getByLabel("Body").fill("First body")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByLabel("Title").fill("Note two")
+    await page.getByLabel("Body").fill("Second body")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (2)")).toBeVisible()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("Clear all clears localStorage noteIds", async ({ page }) => {
+    await page.getByLabel("Title").fill("Persist test")
+    await page.getByLabel("Body").fill("Check storage")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    const storedIds = await page.evaluate(() => localStorage.getItem("noteIds"))
+    expect(storedIds).toBe("[]")
+  })
+
+  test("Clear all resets form and deselects note", async ({ page }) => {
+    await page.getByLabel("Title").fill("Select me")
+    await page.getByLabel("Body").fill("Body here")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByRole("button", { name: /Note #\d+/ }).click()
+    await expect(page.getByRole("heading", { name: "Note Details" })).toBeVisible()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByRole("heading", { name: "Note Details" })).not.toBeVisible()
+    await expect(page.getByLabel("Title")).toHaveValue("")
+    await expect(page.getByLabel("Body")).toHaveValue("")
+  })
+
+  test("Clear all persists after page reload", async ({ page }) => {
+    await page.getByLabel("Title").fill("Reload test")
+    await page.getByLabel("Body").fill("Should vanish")
+    await page.getByRole("button", { name: "Create Note" }).click()
+    await expect(page.getByText("Your Notes (1)")).toBeVisible()
+
+    await page.getByRole("button", { name: "Clear all" }).click()
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+
+    await page.reload()
+
+    await expect(page.getByText("Your Notes (0)")).toBeVisible()
+    await expect(page.getByText("No notes yet")).toBeVisible()
+    await expect(page.getByRole("button", { name: "Clear all" })).not.toBeVisible()
+  })
+
+  test("shows descriptive subtitle text", async ({ page }) => {
+    await expect(
+      page.getByText("Create and manage notes. Your notes are stored locally.")
+    ).toBeVisible()
+  })
+})

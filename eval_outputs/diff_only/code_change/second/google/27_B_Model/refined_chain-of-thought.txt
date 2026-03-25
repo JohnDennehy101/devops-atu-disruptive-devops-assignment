@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('Character count is displayed correctly', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const textarea = page.locator('#formBody');
+  const charCount = page.locator('.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+
+  await textarea.fill('This is a test.');
+  expect(await charCount.textContent()).toBe('15 / 5000');
+
+  await textarea.fill('This is a test. This is a longer test to reach a higher character count.');
+  expect(await charCount.textContent()).toBe('78 / 5000');
+
+  const longString = 'a'.repeat(4900);
+  await textarea.fill(longString);
+  expect(await charCount.textContent()).toBe('4900 / 5000');
+
+  const evenLongerString = 'b'.repeat(5000);
+  await textarea.fill(evenLongerString);
+  expect(await charCount.textContent()).toBe('5000 / 5000');
+});

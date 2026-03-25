@@ -1,0 +1,52 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality ──────────────────
+
+    TypeError: expect(...).resolves is not a function
+
+      12 |   await page.getByRole('button', { name: 'Copy' }).click();
+      13 |
+    > 14 |   await expect(page.evaluate(() => navigator.clipboard.readText())).resolves().toBe('This is a test body');
+         |                                                                     ^
+      15 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:14:69
+
+    Error: page.evaluate: NotAllowedError: Failed to execute 'readText' on 'Clipboard': Read permission denied.
+
+      12 |   await page.getByRole('button', { name: 'Copy' }).click();
+      13 |
+    > 14 |   await expect(page.evaluate(() => navigator.clipboard.readText())).resolves().toBe('This is a test body');
+         |                     ^
+      15 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:14:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/artefacts/refined_few-shot/refined_few-shot-copy-note-body-functionality-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › copy note body functionality ───────────────────
+
+
+=== STDERR ===
+

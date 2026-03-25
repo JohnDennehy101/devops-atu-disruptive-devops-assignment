@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App › can copy note body
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App › can copy note body ─
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('button[aria-label="Copy"]')[22m
+
+
+      18 |     await page.getByRole('button', { name: 'Edit' }).click();
+      19 |
+    > 20 |     await page.locator('button[aria-label="Copy"]').click();
+         |                                                     ^
+      21 |
+      22 |     const copiedText = await page.evaluate(() => navigator.clipboard.readText());
+      23 |     await expect(copiedText).toBe('Text to copy');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:20:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-can-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-can-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-can-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-can-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Note-Taking-App-can-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:10:3 › Note Taking App › can copy note body ──
+
+
+=== STDERR ===
+

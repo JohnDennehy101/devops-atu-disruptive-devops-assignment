@@ -1,0 +1,4 @@
+test("displays character count for note body", async ({ page }) => {
+  await page.getByLabel("Body").fill("This is a test note.")
+  await expect(page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')).toHaveText("19 / 5000")
+})

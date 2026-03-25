@@ -1,0 +1,34 @@
+import { test, expect } from '@playwright/test';
+
+test('Character Count Display and Note Operations', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Verify character count is displayed
+  const characterCount = page.locator('.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+  await expect(characterCount).toHaveText('0 / 5000');
+
+  // Create a new note
+  await page.fill('input[id="note-title"]', 'Test Note Title');
+  await page.fill('textarea[id="note-body"]', 'This is the body of the test note.');
+  await page.fill('input[id="note-tags"]', 'test, playwright');
+  await page.click('button:has-text("Create Note")');
+
+  // Verify character count updates after creating a note
+  await expect(characterCount).toHaveText('31 / 5000');
+
+  // Edit the note
+  await page.click('button:has-text("Edit")');
+  await page.fill('input[id="note-title"]', 'Updated Test Note Title');
+  await page.fill('textarea[id="note-body"]', 'This is the updated body of the test note.');
+  await page.fill('input[id="note-tags"]', 'playwright');
+  await page.click('button:has-text("Save")');
+
+  // Verify character count updates after editing a note
+  await expect(characterCount).toHaveText('39 / 5000');
+
+  // Delete the note
+  await page.click('button:has-text("Delete")');
+
+  // Verify character count updates after deleting a note
+  await expect(characterCount).toHaveText('0 / 5000');
+});

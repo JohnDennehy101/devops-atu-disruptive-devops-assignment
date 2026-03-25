@@ -1,0 +1,58 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 2 tests using 1 worker
+
+[1A[2K[1/2] [chromium] › e2e/refined_instruction.spec.ts:4:3 › Copy Note Body › should display a Copy button when a note is selected and copy the note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:4:3 › Copy Note Body › should display a Copy button when a note is selected and copy the note body to clipboard 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('This is the body to copy')
+    Expected: visible
+    Error: strict mode violation: getByText('This is the body to copy') resolved to 2 elements:
+        1) <textarea rows="8" required="" id="note-body" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white">This is the body to copy</textarea> aka getByRole('textbox', { name: 'Body' })
+        2) <p class="text-gray-600 dark:text-gray-300">…</p> aka getByText('Body: This is the body to copy')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('This is the body to copy')[22m
+
+
+      20 |     // Verify the Note Details panel is shown
+      21 |     await expect(page.getByText('Note Details')).toBeVisible();
+    > 22 |     await expect(page.getByText('This is the body to copy')).toBeVisible();
+         |                                                              ^
+      23 |
+      24 |     // Click the Copy button
+      25 |     await page.getByRole('button', { name: 'Copy' }).click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:22:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_instruction/refined_instruction-Copy-N-2b4bf--the-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_instruction/refined_instruction-Copy-N-2b4bf--the-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_instruction/refined_instruction-Copy-N-2b4bf--the-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_instruction/refined_instruction-Copy-N-2b4bf--the-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/third/claude/artefacts/refined_instruction/refined_instruction-Copy-N-2b4bf--the-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/2] [chromium] › e2e/refined_instruction.spec.ts:32:3 › Copy Note Body › should show the Copy button only when a note is selected and not in edit mode
+[1A[2K  1 failed
+    [chromium] › e2e/refined_instruction.spec.ts:4:3 › Copy Note Body › should display a Copy button when a note is selected and copy the note body to clipboard 
+  1 passed (2.8s)
+
+
+=== STDERR ===
+

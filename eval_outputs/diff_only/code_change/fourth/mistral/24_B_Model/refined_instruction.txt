@@ -1,0 +1,18 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page should display notes with filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const notesText = page.getByRole('heading', { name: /Your Notes/ });
+  await expect(notesText).toBeVisible();
+
+  const filterInput = page.getByPlaceholder('Filter by tag');
+  await filterInput.fill('tag1');
+
+  const noNotesText = page.getByText('No notes match the filter');
+  await expect(noNotesText).toBeVisible();
+
+  await filterInput.fill('');
+  const notesTextAfterClear = page.getByRole('heading', { name: /Your Notes/ });
+  await expect(notesTextAfterClear).toBeVisible();
+});

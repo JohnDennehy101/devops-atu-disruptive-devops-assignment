@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there are some notes initially, verify the initial note count
+  const initialNoteCount = await page.locator('h3').filter({hasText: /Your Notes \(\d+\)/}).count();
+  expect(initialNoteCount).toBeGreaterThan(0);
+
+  // Click the "Clear all" button
+  await page.locator('button').filter({hasText: 'Clear all'}).click();
+
+  // Verify that the note count is now 0
+  const finalNoteCount = await page.locator('h3').filter({hasText: /Your Notes \(\d+\)/}).innertext();
+  expect(finalNoteCount).toBe('Your Notes (0)');
+
+  // Verify that the "No notes yet" message is displayed
+  await page.locator('p').filter({hasText: 'No notes yet'}).isVisible();
+});

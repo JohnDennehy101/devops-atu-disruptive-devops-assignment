@@ -1,0 +1,49 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all button clears all notes
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all button clears all notes ─────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#clear-all')[22m
+
+
+      13 |   await page.click('text=Create Note');
+      14 |
+    > 15 |   await page.locator('#clear-all').click();
+         |                                    ^
+      16 |   await expect(page.getByText('No notes yet')).toBeVisible();
+      17 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:15:36
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/artefacts/refined_few-shot/refined_few-shot-clear-all-button-clears-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/artefacts/refined_few-shot/refined_few-shot-clear-all-button-clears-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/first/google/artefacts/refined_few-shot/refined_few-shot-clear-all-button-clears-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/first/google/artefacts/refined_few-shot/refined_few-shot-clear-all-button-clears-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/first/google/artefacts/refined_few-shot/refined_few-shot-clear-all-button-clears-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all button clears all notes ──────────────
+
+
+=== STDERR ===
+

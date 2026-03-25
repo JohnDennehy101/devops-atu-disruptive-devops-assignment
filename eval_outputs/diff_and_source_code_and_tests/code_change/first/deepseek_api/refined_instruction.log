@@ -1,0 +1,15 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:10:3 › Note Taking App - Clear All Notes › should show "Clear all" button only when notes exist
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:22:3 › Note Taking App - Clear All Notes › should clear all notes when "Clear all" button is clicked
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:41:3 › Note Taking App - Clear All Notes › should reset form fields after clearing all notes
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:62:3 › Note Taking App - Clear All Notes › should clear localStorage noteIds after clearing all notes
+[1A[2K  4 passed (2.6s)
+
+
+=== STDERR ===
+

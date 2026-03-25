@@ -1,0 +1,52 @@
+import { test, expect } from '@playwright/test';
+
+test('filters saved notes by tag in the Your Notes sidebar', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.evaluate(() => {
+    localStorage.clear();
+  });
+  await page.reload();
+
+  const unique = Date.now();
+  const firstTitle = `Work Note ${unique}`;
+  const secondTitle = `Personal Note ${unique}`;
+  const body = `Body ${unique}`;
+
+  await page.getByLabel('Title').fill(firstTitle);
+  await page.getByLabel('Body').fill(body);
+  await page.getByLabel('Tags (comma-separated)').fill('work, urgent');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByRole('heading', { name: /Your Notes \(1\)/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(1);
+
+  await page.getByLabel('Title').fill(secondTitle);
+  await page.getByLabel('Body').fill(body);
+  await page.getByLabel('Tags (comma-separated)').fill('personal, home');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  await expect(page.getByRole('heading', { name: /Your Notes \(2\)/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(2);
+
+  const filterInput = page.getByPlaceholder('Filter by tag');
+  await expect(filterInput).toBeVisible();
+
+  await filterInput.fill('work');
+  await expect(page.getByRole('heading', { name: /Your Notes \(1\)/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(1);
+  await expect(page.getByText('No notes match the filter')).toHaveCount(0);
+
+  await filterInput.fill('WORK');
+  await expect(page.getByRole('heading', { name: /Your Notes \(1\)/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(1);
+
+  await filterInput.fill('zzz-no-match');
+  await expect(page.getByRole('heading', { name: /Your Notes \(0\)/ })).toBeVisible();
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(0);
+
+  await filterInput.fill('');
+  await expect(page.getByRole('heading', { name: /Your Notes \(2\)/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Note #/ })).toHaveCount(2);
+});

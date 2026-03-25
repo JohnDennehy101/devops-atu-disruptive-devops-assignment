@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all button removes all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.evaluate(() => {
+    localStorage.setItem('noteIds', JSON.stringify([1, 2, 3]));
+  });
+  await page.reload();
+  await expect(page.getByText('Your Notes (3)')).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeVisible();
+  await page.getByText('Clear all').click();
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await expect(page.getByText('No notes yet')).toBeVisible();
+  await expect(page.getByText('Clear all')).toBeHidden();
+});

@@ -1,0 +1,134 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Tag Filter Feature', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.evaluate(() => localStorage.clear());
+    await page.reload();
+  });
+
+  test('displays the tag filter input in the sidebar', async ({ page }) => {
+    await expect(page.getByRole('textbox', { name: 'Filter by tag' })).toBeVisible();
+  });
+
+  test('shows "No notes yet" when there are no saved notes and no filter', async ({ page }) => {
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes yet')).toBeVisible();
+  });
+
+  test('filters notes by tag', async ({ page }) => {
+    // Create first note with tag "urgent"
+    await page.getByRole('textbox', { name: 'Title' }).fill('Urgent Task');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is urgent');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('urgent, work');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Create second note with tag "personal"
+    await page.getByRole('textbox', { name: 'Title' }).fill('Personal Task');
+    await page.getByRole('textbox', { name: 'Body' }).fill('This is personal');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('personal, home');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Filter by "urgent" — should show only 1 note
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('urgent');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by "personal" — should show only 1 note
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('personal');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+
+  test('shows "No notes match the filter" when filter has no matches', async ({ page }) => {
+    // Create a note first
+    await page.getByRole('textbox', { name: 'Title' }).fill('Test Note');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Test body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('demo');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by a non-existent tag
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('nonexistenttag');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+
+  test('shows all notes when filter is cleared', async ({ page }) => {
+    // Create a note
+    await page.getByRole('textbox', { name: 'Title' }).fill('Clear Filter Test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body text');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('alpha');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Apply a filter that matches
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('alpha');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Clear the filter — all notes should reappear
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+
+  test('tag filter is case-insensitive', async ({ page }) => {
+    // Create a note with mixed-case tag
+    await page.getByRole('textbox', { name: 'Title' }).fill('Case Test');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Case body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('Frontend');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter with lowercase should still match
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('frontend');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter with uppercase should still match
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('FRONTEND');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+
+  test('tag filter supports partial matching', async ({ page }) => {
+    // Create a note with a longer tag
+    await page.getByRole('textbox', { name: 'Title' }).fill('Partial Match');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Partial body');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('javascript');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Partial tag match should work
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('java');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+
+  test('displayed count updates as filter changes', async ({ page }) => {
+    // Create two notes with different tags
+    await page.getByRole('textbox', { name: 'Title' }).fill('Note A');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body A');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('red, shared');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByRole('textbox', { name: 'Title' }).fill('Note B');
+    await page.getByRole('textbox', { name: 'Body' }).fill('Body B');
+    await page.getByRole('textbox', { name: 'Tags (comma-separated)' }).fill('blue, shared');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Filter by "shared" — both match
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('shared');
+    await expect(page.getByText('Your Notes (2)')).toBeVisible();
+
+    // Filter by "red" — only one matches
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('red');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by "blue" — only one matches
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('blue');
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+
+    // Filter by something with no match
+    await page.getByRole('textbox', { name: 'Filter by tag' }).fill('green');
+    await expect(page.getByText('Your Notes (0)')).toBeVisible();
+    await expect(page.getByText('No notes match the filter')).toBeVisible();
+  });
+});
