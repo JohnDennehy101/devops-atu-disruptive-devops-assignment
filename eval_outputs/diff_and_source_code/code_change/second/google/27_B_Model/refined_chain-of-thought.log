@@ -1,0 +1,46 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › verify formBody character count
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › verify formBody character count ───────
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoContain[2m([22m[32mexpected[39m[2m) // indexOf[22m
+
+    Expected substring: [32m"0 / 5000"[39m
+    Received string:    [31m"72 / 5000"[39m
+
+       8 |   const characterCountElement = page.locator('p.text-xs.text-gray-500.dark\\:text-gray-400.mt-1');
+       9 |   const characterCountText = await characterCountElement.textContent();
+    > 10 |   expect(characterCountText).toContain(`${formBodyLength} / 5000`);
+         |                              ^
+      11 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:10:30
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-verify-formBody-character-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-verify-formBody-character-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-verify-formBody-character-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-verify-formBody-character-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-verify-formBody-character-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › verify formBody character count ────────
+
+
+=== STDERR ===
+

@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-25T13:02:04.573729",
+        "model_id": "google/gemma-3-27b-it",
+        "prompt_type": "chain-of-thought",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 85.798,
+            "tokens_per_sec": 4.92,
+            "input_token_count": 368,
+            "output_token_count": 422,
+            "total_token_count": 790
+        },
+        "content": {
+            "prompt": "Analyze the following data step-by-step:\n1. Identify the UI change from the diff.\n2. Map the change to the implementation in the source code.\n3. Outline the test steps.\n4. Write the final Playwright test code.\n\nIMPORTANT REQUIREMENTS for the final code:\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations\n- Ensure the code is syntactically valid TypeScript\nData:\n### GIT DIFF:\n\n--- a/app/e2e/Home.spec.ts\n+++ b/app/e2e/Home.spec.ts\n+\n+  test(\"shows body character count and updates when typing\", async ({ page }) => {\n+    await expect(page.getByText(\"0 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello\")\n+    await expect(page.getByText(\"5 / 5000\")).toBeVisible()\n+    await page.getByLabel(\"Body\").fill(\"Hello world\")\n+    await expect(page.getByText(\"11 / 5000\")).toBeVisible()\n+  })\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "1. Identify the UI change from the diff:\nThe UI change is the addition of a character count display below the body input field. It shows the current length of the text in the body input field out of a maximum of 5000 characters. The display format is \"{formBody.length} / 5000\".\n\n2. Map the change to the implementation in the source code:\nThe character count display is implemented in the `Home.tsx` file. The `<p>` element with the class names \"text-xs text-gray-500 dark:text-gray-400 mt-1\" is added to display the character count. The text content of the `<p>` element is bound to `formBody.length` to show the current length of the body text.\n\n3. Outline the test steps:\n- Navigate to the home page.\n- Assert that the initial character count is \"0 / 5000\".\n- Type \"Hello\" into the body input field.\n- Assert that the character count is updated to \"5 / 5000\".\n- Type \" world\" into the body input field.\n- Assert that the character count is updated to \"11 / 5000\".\n\n4. Write the final Playwright test code:\n\nimport { test, expect } from '@playwright/test';\n\ntest(\"shows body character count and updates when typing\", async ({ page }) => {\n  await page.goto(\"http://localhost:5175\");\n  await expect(page.getByText(\"0 / 5000\")).toBeVisible()\n  await page.getByLabel(\"Body\").fill(\"Hello\")\n  await expect(page.getByText(\"5 / 5000\")).toBeVisible()\n  await page.getByLabel(\"Body\").fill(\"Hello world\")\n  await expect(page.getByText(\"11 / 5000\")).toBeVisible()\n})\n",
+            "extracted_code": "1. Identify the UI change from the diff:\nThe UI change is the addition of a character count display below the body input field. It shows the current length of the text in the body input field out of a maximum of 5000 characters. The display format is \"{formBody.length} / 5000\".\n\n2. Map the change to the implementation in the source code:\nThe character count display is implemented in the `Home.tsx` file. The `<p>` element with the class names \"text-xs text-gray-500 dark:text-gray-400 mt-1\" is added to display the character count. The text content of the `<p>` element is bound to `formBody.length` to show the current length of the body text.\n\n3. Outline the test steps:\n- Navigate to the home page.\n- Assert that the initial character count is \"0 / 5000\".\n- Type \"Hello\" into the body input field.\n- Assert that the character count is updated to \"5 / 5000\".\n- Type \" world\" into the body input field.\n- Assert that the character count is updated to \"11 / 5000\".\n\n4. Write the final Playwright test code:\n\nimport { test, expect } from '@playwright/test';\n\ntest(\"shows body character count and updates when typing\", async ({ page }) => {\n  await page.goto(\"http://localhost:5175\");\n  await expect(page.getByText(\"0 / 5000\")).toBeVisible()\n  await page.getByLabel(\"Body\").fill(\"Hello\")\n  await expect(page.getByText(\"5 / 5000\")).toBeVisible()\n  await page.getByLabel(\"Body\").fill(\"Hello world\")\n  await expect(page.getByText(\"11 / 5000\")).toBeVisible()\n})\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

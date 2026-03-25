@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page displays formBody character count', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const formBodyElement = page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1');
+  await expect(formBodyElement).toBeVisible();
+
+  const initialCount = await formBodyElement.textContent();
+  expect(initialCount).toBe('0 / 5000');
+
+  const textarea = page.locator('textarea');
+  await textarea.fill('This is a test');
+
+  const updatedCount = await formBodyElement.textContent();
+  expect(updatedCount).toBe('14 / 5000');
+});

@@ -1,0 +1,56 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:4:3 › Home Page › displays formBody length
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:4:3 › Home Page › displays formBody length ──
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator: locator('.text-xs')
+    Expected pattern: [32m/14\/5000/[39m
+    Received string:  [31m"20 / 5000"[39m
+    Timeout: 5000ms
+
+    Call log:
+    [2m  - Expect "toHaveText" with timeout 5000ms[22m
+    [2m  - waiting for locator('.text-xs')[22m
+    [2m    9 × locator resolved to <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">20 / 5000</p>[22m
+    [2m      - unexpected value "20 / 5000"[22m
+
+
+      5 |     await page.goto('/');
+      6 |     await page.locator('textarea[id="note-body"]').fill('This is a test note.');
+    > 7 |     await expect(page.locator('.text-xs')).toHaveText(/14\/5000/);
+        |                                            ^
+      8 |   });
+      9 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:7:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-Page-displays-formBody-length-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-Page-displays-formBody-length-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-Page-displays-formBody-length-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-Page-displays-formBody-length-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/second/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-Home-Page-displays-formBody-length-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:4:3 › Home Page › displays formBody length ───
+
+
+=== STDERR ===
+

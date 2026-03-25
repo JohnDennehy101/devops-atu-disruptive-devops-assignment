@@ -1,0 +1,8 @@
+import { test, expect } from '@playwright/test';
+
+test('displays formBody length', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#note-body', 'This is a test note body.');
+  await expect(page.locator('.text-xs')).toBeVisible();
+  await expect(page.locator('.text-xs')).toHaveText(/11\/5000/);
+});

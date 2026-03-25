@@ -1,0 +1,10 @@
+import { test, expect } from '@playwright/test';
+
+test('displays the correct number of notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('#add-note-button').click();
+  await page.locator('#note-title-input').fill('Test Note');
+  await page.locator('#note-content-input').fill('Test Content');
+  await page.locator('#save-note-button').click();
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+});

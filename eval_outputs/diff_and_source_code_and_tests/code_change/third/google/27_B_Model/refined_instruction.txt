@@ -1,0 +1,15 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('copy note body', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.getByLabel("Title").fill("Test Note");
+    await page.getByLabel("Body").fill("This is the note body to copy.");
+    await page.getByLabel(/Tags/).fill("test");
+    await page.getByRole("button", { name: "Create Note" }).click();
+    await page.getByRole("button", { name: /Note #\d+/ }).click();
+    await page.getByRole("button", { name: "Edit" }).click();
+    await page.getByRole("button", { name: "Copy" }).click();
+    await expect(page.locator('textarea[aria-label="Body"]')).toHaveValue("This is the note body to copy.");
+  });
+});

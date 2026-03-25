@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+import { Note } from '../types';
+
+test('Home page displays correct note count and filter input', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const noteCountElement = await page.locator('text=Your Notes (\\d+)');
+  await expect(noteCountElement).toBeVisible();
+
+  const filterInput = await page.locator('input[type="text"][placeholder="Filter by tag"]');
+  await expect(filterInput).toBeVisible();
+
+  await filterInput.fill('test');
+  await page.waitForTimeout(500);
+
+  const noteCountAfterFilter = await page.locator('text=Your Notes (\\d+)');
+  await expect(noteCountAfterFilter).toBeVisible();
+});
+
+test('Home page displays "No notes yet" when no notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const noNotesElement = await page.locator('text=No notes yet');
+  await expect(noNotesElement).toBeVisible();
+});
+
+test('Home page displays "No notes match the filter" when no notes match the filter', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  const filterInput = await page.locator('input[type="text"][placeholder="Filter by tag"]');
+  await filterInput.fill('nonexistenttag');
+  await page.waitForTimeout(500);
+
+  const noNotesMatchElement = await page.locator('text=No notes match the filter');
+  await expect(noNotesMatchElement).toBeVisible();
+});

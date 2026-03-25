@@ -1,0 +1,17 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('Clear all notes button is visible when notes exist', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.locator('[data-testid="note-title"]').fill('Test Note');
+    await page.locator('[data-testid="note-body"]').fill('Test Body');
+    await page.locator('[data-testid="note-tags"]').fill('test');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.waitForSelector('[data-testid="note-id-1"]');
+    await page.getByText('Your Notes (1)');
+    await page.getByText('Clear all').click();
+    await page.getByText('No notes yet');
+  });
+});
+```

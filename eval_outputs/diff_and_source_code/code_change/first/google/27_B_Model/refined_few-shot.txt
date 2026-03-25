@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes button removes all notes and resets form', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.fill('#note-title', 'Test Note 1');
+  await page.fill('#note-body', 'Test Body 1');
+  await page.fill('#note-tags', 'test, tag');
+  await page.click('text=Create Note');
+
+  await page.fill('#note-title', 'Test Note 2');
+  await page.fill('#note-body', 'Test Body 2');
+  await page.fill('#note-tags', 'another, tag');
+  await page.click('text=Create Note');
+
+  await page.click('text=Clear all');
+
+  await expect(page.locator('text=No notes yet')).toBeVisible();
+  await expect(page.locator('#note-title')).toHaveValue('');
+  await expect(page.locator('#note-body')).toHaveValue('');
+  await expect(page.locator('#note-tags')).toHaveValue('');
+});

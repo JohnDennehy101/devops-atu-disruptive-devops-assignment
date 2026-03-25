@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "shows body character count and updates when typing", first declared in refined_chain-of-thought.spec.ts:3
+
+   at refined_chain-of-thought.spec.ts:11
+
+   9 | })
+  10 |
+> 11 | test("shows body character count and updates when typing", async ({ page }) => {
+     | ^
+  12 |     await page.goto("http://localhost:5175");
+  13 |     await expect(page.getByText("0 / 5000")).toBeVisible()
+  14 |     await page.getByLabel("Body").fill("Hello")
+
+[1A[2K
+
+=== STDERR ===
+

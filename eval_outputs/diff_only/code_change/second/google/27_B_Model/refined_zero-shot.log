@@ -1,0 +1,66 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page displays formBody character count
+[1A[2K  1) [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page displays formBody character count ──
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')
+    Expected: visible
+    SyntaxError: Failed to execute 'querySelectorAll' on 'Document': 'p.text-xs.text-gray-500.dark:text-gray-400.mt-1' is not a valid selector.
+        at query (<anonymous>:5288:41)
+        at <anonymous>:5298:7
+        at SelectorEvaluatorImpl._cached (<anonymous>:5075:20)
+        at SelectorEvaluatorImpl._queryCSS (<anonymous>:5285:17)
+        at SelectorEvaluatorImpl._querySimple (<anonymous>:5165:19)
+        at <anonymous>:5113:29
+        at SelectorEvaluatorImpl._cached (<anonymous>:5075:20)
+        at SelectorEvaluatorImpl.query (<anonymous>:5106:19)
+        at Object.query (<anonymous>:5320:44)
+        at <anonymous>:5278:21
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1')[22m
+
+        at query (<anonymous>:5288:41)
+        at <anonymous>:5298:7
+        at SelectorEvaluatorImpl._cached (<anonymous>:5075:20)
+        at SelectorEvaluatorImpl._queryCSS (<anonymous>:5285:17)
+        at SelectorEvaluatorImpl._querySimple (<anonymous>:5165:19)
+        at <anonymous>:5113:29
+        at SelectorEvaluatorImpl._cached (<anonymous>:5075:20)
+        at SelectorEvaluatorImpl.query (<anonymous>:5106:19)
+        at Object.query (<anonymous>:5320:44)
+        at <anonymous>:5278:21
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_zero-shot.spec.ts:7:33
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-cd22b-ys-formBody-character-count-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-cd22b-ys-formBody-character-count-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-cd22b-ys-formBody-character-count-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-cd22b-ys-formBody-character-count-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/second/google/27_B_Model/artefacts/refined_zero-shot/refined_zero-shot-Home-pag-cd22b-ys-formBody-character-count-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_zero-shot.spec.ts:3:1 › Home page displays formBody character count ───
+
+
+=== STDERR ===
+

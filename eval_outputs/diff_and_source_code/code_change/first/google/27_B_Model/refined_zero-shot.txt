@@ -1,0 +1,20 @@
+import { test, expect } from '@playwright/test';
+
+test('Clear all notes button', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await page.locator('input[id="note-title"]').fill('Test Note 1');
+  await page.locator('textarea[id="note-body"]').fill('Test Note Body 1');
+  await page.locator('input[id="note-tags"]').fill('test, tag');
+  await page.locator('button[type="submit"]').click();
+
+  await page.locator('input[id="note-title"]').fill('Test Note 2');
+  await page.locator('textarea[id="note-body"]').fill('Test Note Body 2');
+  await page.locator('input[id="note-tags"]').fill('test, tag');
+  await page.locator('button[type="submit"]').click();
+
+  await page.locator('button[class="text-sm text-red-600 dark:text-red-400 hover:underline"]').click();
+
+  const notesCount = await page.locator('h3').innerText();
+  expect(notesCount).toContain('(0)');
+});

@@ -1,0 +1,53 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › home page has title
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › home page has title ───────────────────────────
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Notes App')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Notes App')[22m
+
+
+      3 | test('home page has title', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await expect(page.getByText('Notes App')).toBeVisible();
+        |                                             ^
+      6 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:45
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-home-page-has-title-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-home-page-has-title-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-home-page-has-title-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-home-page-has-title-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-home-page-has-title-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › home page has title ────────────────────────────
+
+
+=== STDERR ===
+

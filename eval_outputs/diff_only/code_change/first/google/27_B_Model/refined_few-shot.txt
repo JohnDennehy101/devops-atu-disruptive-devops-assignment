@@ -1,0 +1,14 @@
+import { test, expect } from '@playwright/test';
+
+test('clear all notes button removes all notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#note-1-body', 'Note 1');
+  await page.fill('#note-1-title', 'Note 1');
+  await page.locator('#save-note-1').click();
+  await page.fill('#note-2-body', 'Note 2');
+  await page.fill('#note-2-title', 'Note 2');
+  await page.locator('#save-note-2').click();
+  await page.locator('[data-testid="clear-all-notes"]').click();
+  await expect(page.locator('#note-1')).not.toBeVisible();
+  await expect(page.locator('#note-2')).not.toBeVisible();
+});

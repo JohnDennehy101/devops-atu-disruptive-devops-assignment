@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-25T11:55:42.663734",
+        "model_id": "google/gemma-3-27b-it",
+        "prompt_type": "instruction",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 63.838,
+            "tokens_per_sec": 5.0,
+            "input_token_count": 461,
+            "output_token_count": 319,
+            "total_token_count": 780
+        },
+        "content": {
+            "prompt": "You are a Senior QA Engineer. Generate a Playwright test using these rules:\n1. Start with: import { test, expect } from '@playwright/test';\n2. Use http://localhost:5175 as the base URL for page.goto()\n3. Use getByRole or getByText locators.\n4. Ensure assertions using expect() are included.\n5. Use TypeScript.\n6. Output ONLY raw TypeScript code \u2014 no markdown fences (```), no explanations.\nData to process:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('Home page - Verify note count and clear all functionality', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Wait for the \"Your Notes\" heading to be visible\n  await page.getByText('Your Notes').isVisible();\n\n  // Get the current note count\n  const initialNoteCountText = await page.getByText('Your Notes').textContent();\n  const initialNoteCount = parseInt(initialNoteCountText?.split('(')[1].split(')')[0] || '0', 10);\n\n  // Click the \"Clear all\" button if it exists\n  if (await page.getByText('Clear all').isVisible()) {\n    await page.getByText('Clear all').click();\n  }\n\n  // Wait for the note count to update\n  await page.getByText('Your Notes').isVisible();\n  const updatedNoteCountText = await page.getByText('Your Notes').textContent();\n  const updatedNoteCount = parseInt(updatedNoteCountText?.split('(')[1].split(')')[0] || '0', 10);\n\n  // Assert that the note count has been reduced to 0\n  expect(updatedNoteCount).toBe(0);\n\n  // Verify the descriptive text is present\n  await page.getByText('Create and manage notes. Your notes are stored locally.').isVisible();\n});\n",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('Home page - Verify note count and clear all functionality', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  // Wait for the \"Your Notes\" heading to be visible\n  await page.getByText('Your Notes').isVisible();\n\n  // Get the current note count\n  const initialNoteCountText = await page.getByText('Your Notes').textContent();\n  const initialNoteCount = parseInt(initialNoteCountText?.split('(')[1].split(')')[0] || '0', 10);\n\n  // Click the \"Clear all\" button if it exists\n  if (await page.getByText('Clear all').isVisible()) {\n    await page.getByText('Clear all').click();\n  }\n\n  // Wait for the note count to update\n  await page.getByText('Your Notes').isVisible();\n  const updatedNoteCountText = await page.getByText('Your Notes').textContent();\n  const updatedNoteCount = parseInt(updatedNoteCountText?.split('(')[1].split(')')[0] || '0', 10);\n\n  // Assert that the note count has been reduced to 0\n  expect(updatedNoteCount).toBe(0);\n\n  // Verify the descriptive text is present\n  await page.getByText('Create and manage notes. Your notes are stored locally.').isVisible();\n});\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

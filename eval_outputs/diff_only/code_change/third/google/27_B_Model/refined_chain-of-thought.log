@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › copy note body
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › copy note body ────────────────────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.waitForSelector: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('.note-body') to be visible[22m
+
+
+       7 |   // You might need to adjust the selector to target the specific note
+       8 |   const noteBodySelector = '.note-body';
+    >  9 |   await page.waitForSelector(noteBodySelector);
+         |              ^
+      10 |   const noteBodyText = await page.locator(noteBodySelector).textContent();
+      11 |
+      12 |   // Click the copy button
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:9:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-copy-note-body-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-copy-note-body-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-copy-note-body-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-copy-note-body-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-copy-note-body-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › copy note body ─────────────────────────
+
+
+=== STDERR ===
+

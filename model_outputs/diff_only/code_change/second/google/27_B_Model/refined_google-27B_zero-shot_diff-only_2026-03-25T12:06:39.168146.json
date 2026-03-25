@@ -1,0 +1,25 @@
+[
+    {
+        "timestamp": "2026-03-25T12:06:39.168146",
+        "model_id": "google/gemma-3-27b-it",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 53.899,
+            "tokens_per_sec": 4.99,
+            "input_token_count": 163,
+            "output_token_count": 269,
+            "total_token_count": 432
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+                <p className=\"text-xs text-gray-500 dark:text-gray-400 mt-1\">\n+                  {formBody.length} / 5000\n+                </p>\n\n",
+            "raw_response": "--- a/app/src/components/TextEditor.tsx\n+++ b/app/src/components/TextEditor.tsx\n+    const [formBody, setFormBody] = useState<string>('');\n+\n+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {\n+      setFormBody(e.target.value);\n+    };\n\nimport { test, expect } from '@playwright/test';\n\ntest('Home page displays formBody character count', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const formBodyElement = page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1');\n  await expect(formBodyElement).toBeVisible();\n\n  const initialCount = await formBodyElement.textContent();\n  expect(initialCount).toBe('0 / 5000');\n\n  const textarea = page.locator('textarea');\n  await textarea.fill('This is a test');\n\n  const updatedCount = await formBodyElement.textContent();\n  expect(updatedCount).toBe('14 / 5000');\n});\n",
+            "extracted_code": "--- a/app/src/components/TextEditor.tsx\n+++ b/app/src/components/TextEditor.tsx\n+    const [formBody, setFormBody] = useState<string>('');\n+\n+    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {\n+      setFormBody(e.target.value);\n+    };\n\nimport { test, expect } from '@playwright/test';\n\ntest('Home page displays formBody character count', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const formBodyElement = page.locator('p.text-xs.text-gray-500.dark:text-gray-400.mt-1');\n  await expect(formBodyElement).toBeVisible();\n\n  const initialCount = await formBodyElement.textContent();\n  expect(initialCount).toBe('0 / 5000');\n\n  const textarea = page.locator('textarea');\n  await textarea.fill('This is a test');\n\n  const updatedCount = await formBodyElement.textContent();\n  expect(updatedCount).toBe('14 / 5000');\n});\n"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "return_full_text": false
+        }
+    }
+]

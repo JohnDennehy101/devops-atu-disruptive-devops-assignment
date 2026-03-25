@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all notes button removes all notes
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all notes button removes all notes ──────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#note-1-body')[22m
+
+
+      3 | test('clear all notes button removes all notes', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.fill('#note-1-body', 'Note 1');
+        |              ^
+      6 |   await page.fill('#note-1-title', 'Note 1');
+      7 |   await page.locator('#save-note-1').click();
+      8 |   await page.fill('#note-2-body', 'Note 2');
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-clear-all-notes-button-removes-all-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-clear-all-notes-button-removes-all-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/first/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-clear-all-notes-button-removes-all-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/first/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-clear-all-notes-button-removes-all-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/first/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-clear-all-notes-button-removes-all-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › clear all notes button removes all notes ───────
+
+
+=== STDERR ===
+

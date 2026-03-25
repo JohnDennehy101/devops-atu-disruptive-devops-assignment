@@ -1,0 +1,42 @@
+import { test, expect } from '@playwright/test';
+
+test('home page has title and create note form', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await expect(page.getByRole('heading', { level: 1, name: 'Note Taking App' })).toBeVisible();
+
+  await expect(page.getByRole('heading', { level: 2, name: 'Create New Note' })).toBeVisible();
+
+  await expect(page.getByRole('label', { name: 'Title' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Title' })).toBeVisible();
+
+  await expect(page.getByRole('label', { name: 'Body' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Body' })).toBeVisible();
+
+  await expect(page.getByRole('label', { name: 'Tags (comma-separated)' })).toBeVisible();
+  await expect(page.getByRole('textbox', { name: 'Tags (comma-separated)' })).toBeVisible();
+
+  await expect(page.getByRole('button', { name: 'Create Note' })).toBeVisible();
+});
+
+test('home page shows "No notes yet" when no notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  await expect(page.getByText('No notes yet')).toBeVisible();
+});
+
+test('home page shows notes and clear all button when notes are saved', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there is a way to add notes programmatically or through the UI
+  // For this test, we'll assume notes are already present
+  await page.locator('button:nth-child(1)').click();
+  await page.locator('input[id="note-title"]').fill("test note");
+  await page.locator('input[id="note-body"]').fill("test body");
+  await page.locator('input[id="note-tags"]').fill("test tag");
+  await page.locator('button:nth-child(1)').click();
+
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  await expect(page.getByText('Note #1')).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Clear all' })).toBeVisible();
+});

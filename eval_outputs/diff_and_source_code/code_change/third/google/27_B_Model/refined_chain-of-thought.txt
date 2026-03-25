@@ -1,0 +1,21 @@
+import { test, expect } from '@playwright/test';
+
+test('copy note body', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Assuming there is a note with some content
+  await page.locator('button:nth-child(1)').click();
+  await page.locator('button:nth-child(1)').click();
+
+  // Verify that the copy button exists
+  const copyButton = page.locator('button[class*="text-blue-600"]');
+  await expect(copyButton).toBeVisible();
+
+  // Click the copy button
+  await copyButton.click();
+
+  // Verify that the note body is copied to the clipboard
+  const noteBody = await page.locator('p:nth-child(4)').textContent();
+  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
+  await expect(clipboardText).toBe(noteBody);
+});

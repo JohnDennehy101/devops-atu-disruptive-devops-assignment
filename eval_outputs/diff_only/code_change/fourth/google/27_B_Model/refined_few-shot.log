@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_few-shot.spec.ts:3:1 › displays the correct number of notes
+[1A[2K  1) [chromium] › e2e/refined_few-shot.spec.ts:3:1 › displays the correct number of notes ──────────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('#add-note-button')[22m
+
+
+      3 | test('displays the correct number of notes', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.locator('#add-note-button').click();
+        |                                          ^
+      6 |   await page.locator('#note-title-input').fill('Test Note');
+      7 |   await page.locator('#note-content-input').fill('Test Content');
+      8 |   await page.locator('#save-note-button').click();
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_few-shot.spec.ts:5:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-displays-the-correct-number-of-notes-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-displays-the-correct-number-of-notes-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-displays-the-correct-number-of-notes-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-displays-the-correct-number-of-notes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/fourth/google/27_B_Model/artefacts/refined_few-shot/refined_few-shot-displays-the-correct-number-of-notes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_few-shot.spec.ts:3:1 › displays the correct number of notes ───────────
+
+
+=== STDERR ===
+

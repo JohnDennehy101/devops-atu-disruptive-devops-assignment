@@ -1,0 +1,145 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 4 tests using 1 worker
+
+[1A[2K[1/4] [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title
+[1A[2K  1) [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title ────────────────────────
+
+    Error: expect: Property 'getByText' not found.
+
+      3 | test('home page has title', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await expect(page.locator('h1')).getByText('Note Taking App');
+        |                                   ^
+      6 | });
+      7 |
+      8 | test('create note form exists', async ({ page }) => {
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:5:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-home-page-has-title-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[2/4] [chromium] › e2e/refined_instruction.spec.ts:8:1 › create note form exists
+[1A[2K  2) [chromium] › e2e/refined_instruction.spec.ts:8:1 › create note form exists ────────────────────
+
+    Error: expect: Property 'getByText' not found.
+
+       9 |   await page.goto('http://localhost:5175');
+      10 |   await expect(page.locator('form')).toBeVisible();
+    > 11 |   await expect(page.locator('label[for="note-title"]')).getByText('Title');
+         |                                                        ^
+      12 |   await expect(page.locator('label[for="note-body"]')).getByText('Body');
+      13 |   await expect(page.locator('label[for="note-tags"]')).getByText('Tags (comma-separated)');
+      14 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:11:56
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-create-note-form-exists-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-create-note-form-exists-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-create-note-form-exists-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-create-note-form-exists-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-create-note-form-exists-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[3/4] [chromium] › e2e/refined_instruction.spec.ts:16:1 › saved notes section exists
+[1A[2K  3) [chromium] › e2e/refined_instruction.spec.ts:16:1 › saved notes section exists ────────────────
+
+    Error: expect: Property 'getByText' not found.
+
+      16 | test('saved notes section exists', async ({ page }) => {
+      17 |   await page.goto('http://localhost:5175');
+    > 18 |   await expect(page.locator('h3')).getByText('Your Notes (0)');
+         |                                   ^
+      19 |   await expect(page.locator('div[class*="space-y-2"]')).toBeVisible();
+      20 | });
+      21 |
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:18:35
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-saved-notes-section-exists-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-saved-notes-section-exists-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-saved-notes-section-exists-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-saved-notes-section-exists-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-saved-notes-section-exists-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K[4/4] [chromium] › e2e/refined_instruction.spec.ts:22:1 › no notes message is displayed when no notes are saved
+[1A[2K  4) [chromium] › e2e/refined_instruction.spec.ts:22:1 › no notes message is displayed when no notes are saved 
+
+    Error: expect: Property 'getByText' not found.
+
+      22 | test('no notes message is displayed when no notes are saved', async ({ page }) => {
+      23 |   await page.goto('http://localhost:5175');
+    > 24 |   await expect(page.locator('p')).getByText('No notes yet');
+         |                                  ^
+      25 | });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_instruction.spec.ts:24:34
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-no-not-8b282-yed-when-no-notes-are-saved-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-no-not-8b282-yed-when-no-notes-are-saved-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-no-not-8b282-yed-when-no-notes-are-saved-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-no-not-8b282-yed-when-no-notes-are-saved-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code/code_change/fourth/google/27_B_Model/artefacts/refined_instruction/refined_instruction-no-not-8b282-yed-when-no-notes-are-saved-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  4 failed
+    [chromium] › e2e/refined_instruction.spec.ts:3:1 › home page has title ─────────────────────────
+    [chromium] › e2e/refined_instruction.spec.ts:8:1 › create note form exists ─────────────────────
+    [chromium] › e2e/refined_instruction.spec.ts:16:1 › saved notes section exists ─────────────────
+    [chromium] › e2e/refined_instruction.spec.ts:22:1 › no notes message is displayed when no notes are saved 
+
+
+=== STDERR ===
+

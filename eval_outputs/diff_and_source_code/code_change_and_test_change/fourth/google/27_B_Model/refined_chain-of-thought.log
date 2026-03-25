@@ -1,0 +1,19 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+Error: duplicate test title "filter by tag shows only matching notes", first declared in refined_chain-of-thought.spec.ts:3
+
+   at refined_chain-of-thought.spec.ts:29
+
+  27 | });
+  28 |
+> 29 | test("filter by tag shows only matching notes", async ({ page }) => {
+     | ^
+  30 |     await page.goto("http://localhost:5175");
+  31 |     await page.getByLabel("Title").fill("Work note")
+  32 |     await page.getByLabel("Body").fill("Body one")
+
+[1A[2K
+
+=== STDERR ===
+

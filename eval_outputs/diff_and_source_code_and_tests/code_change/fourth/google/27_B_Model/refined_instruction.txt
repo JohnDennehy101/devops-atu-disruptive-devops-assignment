@@ -1,0 +1,20 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('filter notes by tag', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.getByLabel('Title').fill('Note 1');
+    await page.getByLabel('Body').fill('Body 1');
+    await page.getByLabel(/Tags/).fill('tag1');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByLabel('Title').fill('Note 2');
+    await page.getByLabel('Body').fill('Body 2');
+    await page.getByLabel(/Tags/).fill('tag2');
+    await page.getByRole('button', { name: 'Create Note' }).click();
+
+    await page.getByPlaceholder('Filter by tag').fill('tag1');
+    await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(1);
+    await expect(page.getByText('Your Notes (1)')).toBeVisible();
+  });
+});

@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:5:3 › Home Page with Tag Filtering › filter notes by tag
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:5:3 › Home Page with Tag Filtering › filter notes by tag 
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: locator.fill: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('input', { name: 'Filter by tag' })[22m
+
+
+      23 |     await page.getByRole('button', { name: 'Create Note' }).click();
+      24 |
+    > 25 |     await page.getByRole('input', { name: 'Filter by tag' }).fill('tag1');
+         |                                                              ^
+      26 |
+      27 |     await expect(page.getByRole('button', { name: /Note #\d+/ })).toHaveCount(2);
+      28 |   });
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:25:62
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-c39db-ltering-filter-notes-by-tag-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-c39db-ltering-filter-notes-by-tag-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-c39db-ltering-filter-notes-by-tag-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-c39db-ltering-filter-notes-by-tag-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_and_source_code_and_tests/code_change/fourth/google/27_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-H-c39db-ltering-filter-notes-by-tag-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:5:3 › Home Page with Tag Filtering › filter notes by tag 
+
+
+=== STDERR ===
+

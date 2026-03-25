@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test('form body character limit', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.locator('text=Create New Note').click();
+  await page.locator('text=Body').click();
+  const bodyInput = page.locator('textarea[id="note-body"]');
+  const textToEnter = 'a'.repeat(5001);
+  await bodyInput.fill(textToEnter);
+  await expect(bodyInput).toHaveValue('a'.repeat(5000));
+});

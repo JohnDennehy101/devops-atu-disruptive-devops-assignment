@@ -1,0 +1,11 @@
+import { test, expect } from '@playwright/test';
+
+test.describe('Home Page', () => {
+  test('formBody length is displayed', async ({ page }) => {
+    await page.goto('http://localhost:5175');
+    await page.locator('[id="note-body"]').fill('This is a test note body.');
+    await expect(page.locator('.text-xs')).toBeVisible();
+    const bodyLength = await page.locator('[id="note-body"]').inputValue();
+    await expect(page.locator('.text-xs')).toHaveText(bodyLength.length.toString() +'/ 5000');
+  });
+});
