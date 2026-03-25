@@ -1,0 +1,36 @@
+import { test, expect } from '@playwright/test';
+
+test('displays correct number of notes', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await expect(page.getByText('Your Notes (0)')).toBeVisible();
+  await page.fill('#note-input', 'Test Note');
+  await page.click('#save-note');
+  await expect(page.getByText('Your Notes (1)')).toBeVisible();
+});
+Now, generate a Playwright test for this specific change:
+
+test('filters notes by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.fill('#note-input', 'Test Note 1');
+  await page.click('#save-note');
+  await page.fill('#note-input', 'Test Note 2');
+  await page.click('#save-note');
+  await page.fill('#note-input', 'Test Note 3 with Tag');
+  await page.click('#save-note');
+  await page.fill('#note-input', 'Test Note 4 with Tag');
+  await page.click('#save-note');
+  await page.fill('#note-input', 'Test Note 5');
+  await page.click('#save-note');
+
+  // Apply tag filter
+  await page.fill('#tag-filter', 'Tag');
+  await expect(page.getByText('Your Notes (4)')).toBeVisible();
+
+  // Clear tag filter
+  await page.fill('#tag-filter', '');
+  await expect(page.getByText('Your Notes (5)')).toBeVisible();
+
+  // Apply non-matching tag filter
+  await page.fill('#tag-filter', 'NonExistentTag');
+  await expect(page.getByText('No notes match the filter')).toBeVisible();
+});

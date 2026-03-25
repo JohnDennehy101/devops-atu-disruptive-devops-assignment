@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('should not show the "Copy" button when no note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  const copyButton = page.locator('button:text-is("Copy")');
+  await expect(copyButton).not.toBeVisible();
+});
+
+test('should show the "Copy" button when a note is selected', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.click('button:text-is("Note #1")'); // Assuming there is a note with ID 1
+  const copyButton = page.locator('button:text-is("Copy")');
+  await expect(copyButton).toBeVisible();
+});
+
+test('should copy the note body to the clipboard when the "Copy" button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  await page.click('button:text-is("Note #1")'); // Assuming there is a note with ID 1
+  const copyButton = page.locator('button:text-is("Copy")');
+  await copyButton.click();
+
+  // Mocking clipboard read for testing purposes
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  await expect(clipboardContent).toBe('Expected note body text'); // Replace with actual expected body text
+});

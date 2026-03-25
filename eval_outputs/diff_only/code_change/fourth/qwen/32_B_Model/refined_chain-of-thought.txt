@@ -1,0 +1,25 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page note filtering', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Verify that the initial number of notes displayed matches the number of saved notes.
+  const initialNoteCount = await page.locator('.note-item').count();
+  const initialSavedNoteCountText = await page.textContent('text=Your Notes (');
+  const initialSavedNoteCount = parseInt(initialSavedNoteCountText.split('(')[1].split(')')[0]);
+  expect(initialNoteCount).toBe(initialSavedNoteCount);
+
+  // Step 3: Enter a tag in the filter input field.
+  await page.fill('input[type="text"]', 'exampleTag');
+
+  // Step 4: Verify that the number of displayed notes changes according to the filter.
+  const filteredNoteCount = await page.locator('.note-item').count();
+  expect(filteredNoteCount).toBeLessThanOrEqual(initialNoteCount);
+
+  // Step 5: Clear the filter input field.
+  await page.fill('input[type="text"]', '');
+
+  // Step 6: Verify that the number of displayed notes returns to the initial count.
+  const finalNoteCount = await page.locator('.note-item').count();
+  expect(finalNoteCount).toBe(initialNoteCount);
+});

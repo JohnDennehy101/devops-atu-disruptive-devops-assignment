@@ -1,0 +1,163 @@
+### UPDATED SOURCE CODE FILE:
+
+import React, { useMemo, useState, useEffect } from "react"
+import { JSX, Note, CreateNoteInput, UpdateNoteInput } from "../services/api"
+
+export function Home(): JSX.Element {
+  const [notes, setNotes] = useState<Note[]>([])
+  const [selectedNote, setSelectedNote] = useState<Note | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const [formTitle, setFormTitle] = useState("")
+  const [formBody, setFormBody] = useState("")
+  const [formTags, setFormTags] = useState("")
+  const [isEditing, setIsEditing] = useState(false)
+  const [savedIds, setSavedIds] = useState<number[]>([])
+  const [tagFilter, setTagFilter] = useState("")
+  const [allNotes, setAllNotes] = useState<Note[]>([])
+
+  useEffect(() => {
+    const saved = localStorage.getItem("noteIds")
+    if (saved) {
+      setSavedIds(JSON.parse(saved) as number[])
+    }
+  }, [])
+
+  useEffect(() => {
+    api.getNotes().then(setAllNotes).catch(() => setAllNotes([]))
+  }, [savedIds])
+
+  const saveNoteId = (id: number) => {
+    const updated = [...savedIds]
+    if (!updated.includes(id)) {
+      updated.push(id)
+      setSavedIds(updated)
+      localStorage.setItem("noteIds", JSON.stringify(updated))
+    }
+  }
+
+  const removeNoteId = (id: number) => {
+    const updated = savedIds.filter(nid => nid!== id)
+    setSavedIds(updated)
+    localStorage.setItem("noteIds", JSON.stringify(updated))
+  }
+
+  const loadNote = async (id: number) => {
+    setLoading(true)
+    setError(null)
+    try {
+      const note = await api.getNote(id)
+      setSelectedNote(note)
+      setIsEditing(false)
+    } catch (err) {
+      setError(err instanceof Error? err.message : "Failed to load note")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleCreateNote = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError(null)
+
+    try {
+      const tags = formTags
+       .split(",")
+       .map(t => t.trim())
+       .filter(t => t)
+      const input: CreateNoteInput = {
+        title: formTitle,
+        body: formBody,
+        tags,
+      }
+
+      const note = await api.createNote(input)
+      setNotes([...notes, note])
+      saveNoteId(note.id)
+      setSelectedNote(null)
+      setIsEditing(false)
+      setFormTitle("")
+      setFormBody("")
+      setFormTags("")
+    } catch (err) {
+      setError(err instanceof Error? err.message : "Failed to create note")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleUpdateNote = async () => {
+    if (!selectedNote) return
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      const tags = formTags
+       .split(",")
+       .map(t => t.trim())
+       .filter(t => t)
+      const input: UpdateNoteInput = {
+        title: formTitle,
+        body: formBody,
+        tags,
+        archived: selectedNote.archived,
+      }
+
+      const updated = await api.updateNote(selectedNote.id, input)
+      setSelectedNote(updated)
+      setNotes(notes.map(n => (n.id === updated.id? updated : n)))
+      setIsEditing(false)
+    } catch (err) {
+      setError(err instanceof Error? err.message : "Failed to update note")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleDeleteNote = async () => {
+    if (!selectedNote) return
+
+    if (!confirm("Are you sure you want to delete this note?")) return
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      await api.deleteNote(selectedNote.id)
+      removeNoteId(selectedNote.id)
+      setNotes(notes.filter(n => n.id!== selectedNote.id))
+      setSelectedNote(null)
+      setIsEditing(false)
+      setFormTitle("")
+      setFormBody("")
+      setFormTags("")
+    } catch (err) {
+      setError(err instanceof Error? err.message : "Failed to delete note")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const startEdit = () => {
+    if (selectedNote) {
+      setFormTitle(selectedNote.title)
+      setFormBody(selectedNote.body)
+      setFormTags(selectedNote.tags.join(", "))
+      setIsEditing(true)
+    }
+  }
+
+  const cancelEdit = () => {
+    setIsEditing(false)
+    setSelectedNote(null)
+    setFormTitle("")
+    setFormBody("")
+    setFormTags("")
+  }
+
+  useEffect(() => {
+    if (selectedNote &&!isEditing) {
+      setFormTitle(selectedNote

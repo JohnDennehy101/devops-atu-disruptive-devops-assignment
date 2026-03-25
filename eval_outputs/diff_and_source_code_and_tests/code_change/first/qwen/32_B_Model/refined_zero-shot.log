@@ -1,0 +1,17 @@
+=== RETURN CODE: 0 ===
+
+=== STDOUT ===
+
+Running 6 tests using 1 worker
+
+[1A[2K[1/6] [chromium] › e2e/refined_zero-shot.spec.ts:10:3 › Note Taking App › has title and create form visible
+[1A[2K[2/6] [chromium] › e2e/refined_zero-shot.spec.ts:22:3 › Note Taking App › can create a note and see it in the sidebar
+[1A[2K[3/6] [chromium] › e2e/refined_zero-shot.spec.ts:32:3 › Note Taking App › can open a note and see its details
+[1A[2K[4/6] [chromium] › e2e/refined_zero-shot.spec.ts:47:3 › Note Taking App › has local storage paragraph visible
+[1A[2K[5/6] [chromium] › e2e/refined_zero-shot.spec.ts:53:3 › Note Taking App › clear all button visibility based on notes presence
+[1A[2K[6/6] [chromium] › e2e/refined_zero-shot.spec.ts:67:3 › Note Taking App › clear all button clears all notes
+[1A[2K  6 passed (3.0s)
+
+
+=== STDERR ===
+

@@ -1,0 +1,23 @@
+import { test, expect } from '@playwright/test';
+
+test('Home page should display correct information and functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check if the informational paragraph is displayed correctly
+  const infoParagraph = page.getByText('Create and manage notes. Your notes are stored locally.');
+  await expect(infoParagraph).toBeVisible();
+
+  // Check if the "Your Notes" header is displayed correctly
+  const yourNotesHeader = page.getByRole('heading', { name: 'Your Notes' });
+  await expect(yourNotesHeader).toBeVisible();
+
+  // Check if the "Clear all" button is not visible when there are no notes
+  const clearAllButton = page.getByRole('button', { name: 'Clear all' });
+  await expect(clearAllButton).not.toBeVisible();
+
+  // Simulate adding a note (assuming there's a way to add a note on this page)
+  // This part would require additional setup and is not covered in the diff
+
+  // Check if the "Clear all" button is visible when there are notes
+  // This part would also require additional setup and is not covered in the diff
+});

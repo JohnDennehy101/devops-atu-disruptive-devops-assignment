@@ -1,0 +1,22 @@
+import { test, expect } from '@playwright/test';
+
+test('Verify clear all notes functionality', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Step 2: Verify the presence of the new paragraph
+  await expect(page.locator('p:text-is("Create and manage notes. Your notes are stored locally.")')).toBeVisible();
+
+  // Step 3: Add a note to ensure there's at least one note
+  await page.fill('input[name="title"]', 'Test Note');
+  await page.fill('textarea[name="body"]', 'This is a test note.');
+  await page.click('button:text-is("Save")');
+
+  // Step 4: Click the "Clear all" button
+  await page.click('button:text-is("Clear all")');
+
+  // Step 5: Verify that the "Your Notes" count is zero
+  await expect(page.locator('h3:text-is("Your Notes (0)")')).toBeVisible();
+
+  // Step 6: Verify that the "Clear all" button is not visible
+  await expect(page.locator('button:text-is("Clear all")')).not.toBeVisible();
+});

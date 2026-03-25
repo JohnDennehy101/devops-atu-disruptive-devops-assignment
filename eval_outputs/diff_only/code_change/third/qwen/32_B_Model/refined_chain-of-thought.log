@@ -1,0 +1,50 @@
+=== RETURN CODE: 1 ===
+
+=== STDOUT ===
+
+Running 1 test using 1 worker
+
+[1A[2K[1/1] [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should copy note body to clipboard
+[1A[2K  1) [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should copy note body to clipboard ────
+
+    [31mTest timeout of 20000ms exceeded.[39m
+
+    Error: page.click: Test timeout of 20000ms exceeded.
+    Call log:
+    [2m  - waiting for locator('text=Select Note')[22m
+
+
+      3 | test('should copy note body to clipboard', async ({ page }) => {
+      4 |   await page.goto('http://localhost:5175');
+    > 5 |   await page.click('text=Select Note'); // Assuming there's a button or link to select a note
+        |              ^
+      6 |   await page.click('button:has-text("Copy")');
+      7 |   const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+      8 |   await expect(clipboardContent).toBe('Expected Note Body'); // Replace with actual expected note body
+        at /Users/johndennehy/Documents/Coding/devops-atu-disruptive-devops-assignment/app/e2e/refined_chain-of-thought.spec.ts:5:14
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-should-copy-note-body-to-clipboard-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-should-copy-note-body-to-clipboard-chromium/video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-should-copy-note-body-to-clipboard-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-should-copy-note-body-to-clipboard-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../eval_outputs/diff_only/code_change/third/qwen/32_B_Model/artefacts/refined_chain-of-thought/refined_chain-of-thought-should-copy-note-body-to-clipboard-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[1A[2K  1 failed
+    [chromium] › e2e/refined_chain-of-thought.spec.ts:3:1 › should copy note body to clipboard ─────
+
+
+=== STDERR ===
+

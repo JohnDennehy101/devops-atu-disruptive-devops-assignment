@@ -1,0 +1,41 @@
+import { test, expect } from '@playwright/test';
+
+test('should display the correct number of notes and filter by tag', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+
+  // Check initial note count
+  const initialNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(initialNoteCount).toMatch(/Your Notes \(\d+\)/);
+
+  // Add a new note
+  await page.getByLabel('Title').fill('Test Note');
+  await page.getByLabel('Body').fill('This is a test note.');
+  await page.getByLabel('Tags (comma-separated)').fill('test, example');
+  await page.getByRole('button', { name: 'Create Note' }).click();
+
+  // Wait for the note to be added
+  await page.waitForTimeout(1000); // Adjust timeout as necessary
+
+  // Check updated note count
+  const updatedNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(updatedNoteCount).toMatch(/Your Notes \(\d+\)/);
+  expect(parseInt(updatedNoteCount.match(/\d+/)![0])).toBeGreaterThan(parseInt(initialNoteCount.match(/\d+/)![0]));
+
+  // Filter by tag
+  await page.getByPlaceholder('Filter by tag').fill('test');
+  await page.waitForTimeout(1000); // Adjust timeout as necessary
+
+  // Check filtered note count
+  const filteredNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(filteredNoteCount).toMatch(/Your Notes \(\d+\)/);
+  expect(parseInt(filteredNoteCount.match(/\d+/)![0])).toBe(1);
+
+  // Clear filter
+  await page.getByPlaceholder('Filter by tag').fill('');
+  await page.waitForTimeout(1000); // Adjust timeout as necessary
+
+  // Check note count after clearing filter
+  const finalNoteCount = await page.getByRole('heading', { name: /Your Notes \(\d+\)/ }).innerText();
+  expect(finalNoteCount).toMatch(/Your Notes \(\d+\)/);
+  expect(parseInt(finalNoteCount.match(/\d+/)![0])).toBeGreaterThan(parseInt(updatedNoteCount.match(/\d+/)![0]));
+});

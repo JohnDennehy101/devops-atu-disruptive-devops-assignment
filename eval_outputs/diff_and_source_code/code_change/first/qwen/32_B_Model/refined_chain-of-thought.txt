@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('should clear all notes when "Clear all" button is clicked', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  
+  // Create a note to ensure there's at least one note
+  await page.fill('#note-title', 'Test Note');
+  await page.fill('#note-body', 'This is a test note.');
+  await page.click('button[type="submit"]');
+  
+  // Wait for the note to be saved and displayed
+  await page.waitForSelector('button:has-text("Note #1")');
+  
+  // Click the "Clear all" button
+  await page.click('button:has-text("Clear all")');
+  
+  // Verify that the "Your Notes" section shows "No notes yet"
+  await expect(page.locator('p:has-text("No notes yet")')).toBeVisible();
+});

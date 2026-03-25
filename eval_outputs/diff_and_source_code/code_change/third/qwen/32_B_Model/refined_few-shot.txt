@@ -1,0 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('copy button copies note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there's a way to select a note and make it the selectedNote
+  await page.click('button:has-text("Note #1")'); // Example selector, adjust as necessary
+  await page.click('button:has-text("Copy")');
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  await expect(clipboardContent).toBe('Expected Note Body Text'); // Replace with actual expected text
+});
+
+test('copy button copies note body to clipboard', async ({ page }) => {
+  await page.goto('http://localhost:5175');
+  // Assuming there's a way to select a note and make it the selectedNote
+  await page.click('button:has-text("Note #1")'); // Example selector, adjust as necessary
+  await page.click('button:has-text("Copy")');
+  const clipboardContent = await page.evaluate(() => navigator.clipboard.readText());
+  await expect(clipboardContent).toBe('Expected Note Body Text'); // Replace with actual expected text
+});
