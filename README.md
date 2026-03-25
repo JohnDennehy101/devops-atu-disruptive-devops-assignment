@@ -4,6 +4,11 @@ Repo for Disruptive Devops module assignment
 
 `provision.yml` workflow provisioned a GPU on Digital Ocean (this was working a few weeks ago).
 
+$200 in credits on Digital Ocean as part of Github student developer pack
+was useful but GPU availability is an issue across many platforms.
+
+It is good to build resilience into the action, using more than one provider to ensure availability.
+
 After numerous attempts tonight, it appears GPU availability is extremely limited there.
 
 Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models.
