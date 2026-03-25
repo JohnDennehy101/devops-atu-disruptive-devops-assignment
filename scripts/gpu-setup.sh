@@ -91,17 +91,20 @@ async def generate(
         logger.info(f"Model {model_id} loaded.")
     
     pipe = model_cache[model_id]
-    prompt = f"### Instruction:\nAnalyze the git diff and write a Playwright test.\n\n### Diff:\n{diff}\n\n### Response:\n"
+    prompt = payload.get("prompt", f"### Instruction:\nAnalyze the git diff and write a Playwright test.\n\n### Diff:\n{diff}\n\n### Response:\n")
     
     logger.info("Generating response...")
     output = pipe(
         prompt, 
-        max_new_tokens=500, 
+        max_new_tokens=1024,
         temperature=0.1, 
         do_sample=True,
         pad_token_id=pipe.tokenizer.eos_token_id
     )
-    return {"generated_code": output[0]['generated_text']}
+    generated = output[0]['generated_text']
+    if generated.startswith(prompt):
+        generated = generated[len(prompt):]
+    return {"generated_test": generated.strip()}
 EOF
 
 cat <<EOF > /etc/systemd/system/llm.service
