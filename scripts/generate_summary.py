@@ -8,10 +8,12 @@ from shared import EVAL_OUTPUTS_DIR_PATH
 RESULTS_JSONL_PATH = EVAL_OUTPUTS_DIR_PATH / "results.jsonl"
 
 # Path where generated summary JSON will be written
-SUMMARY_JSON_PATH = EVAL_OUTPUTS_DIR_PATH / "summary.json"
+SUMMARY_JSON_PATH = EVAL_OUTPUTS_DIR_PATH / "summary_2.json"
 
 # Constants at top of file for easy ref
-PROMPT_TYPES = ["zero-shot", "few-shot", "instruction", "chain-of-thought"]
+BASE_PROMPT_TYPES = ["zero-shot", "few-shot", "instruction", "chain-of-thought"]
+REFINED_PROMPT_TYPES = [f"refined_{pt}" for pt in BASE_PROMPT_TYPES]
+PROMPT_TYPES = BASE_PROMPT_TYPES + REFINED_PROMPT_TYPES
 SCENARIOS = ["diff-only", "diff-and-source-code", "diff-and-source-code-and-tests"]
 ITERATIONS = ["first", "second", "third", "fourth"]
 CHANGE_TYPES = ["code_change", "code_change_and_test_change"]
@@ -287,6 +289,28 @@ def generate_summary(records: list[dict]) -> dict:
             )
         }
 
+    # Build original prompts vs refined prompts (after early analysis of errors)
+    summary["refined_vs_unrefined"] = {}
+    for model in models:
+        model_records = full_records_index[("model", model)]
+
+        # Extract 'refined' vs 'unrefined' prompts
+        unrefined = [
+            r for r in model_records if not r["prompt_type"].startswith("refined_")
+        ]
+        refined = [r for r in model_records if r["prompt_type"].startswith("refined_")]
+
+        # Call helper function to generate the stats
+        unrefined_stats = calculate_summary_stats(unrefined)
+        refined_stats = calculate_summary_stats(refined)
+
+        # Include in summary
+        if unrefined_stats or refined_stats:
+            summary["refined_vs_unrefined"][model] = {
+                "unrefined": unrefined_stats,
+                "refined": refined_stats,
+            }
+
     # Nested loop to build a detailed calculation of each individual record for each model
     # To identify performance and trends
     for model in models:
@@ -376,6 +400,35 @@ def print_generated_summary(summary: dict) -> None:
         reverse=True,
     ):
         print(format_stats_line(model, summary["overall_by_model"][model]))
+
+    print("\nREFINED vs UNREFINED BY MODEL:")
+    # Loop over models and show initial prompt performance vs refined prompts comparison
+    for model in sorted(summary.get("refined_vs_unrefined", {})):
+        # Extract summary stats
+        comparison = summary["refined_vs_unrefined"][model]
+
+        # Extract initial prompt stats and refined prompt stats
+        unrefined = comparison.get("unrefined")
+        refined = comparison.get("refined")
+
+        if unrefined and refined:
+            # Calculate difference in pass rate between first and second runs of prompts
+            diff = (refined["pass_rate"] - unrefined["pass_rate"]) * 100
+            print(f"{model}:")
+            print(
+                f"Initial: {unrefined['passed_runs']:3d}/{unrefined['total_runs']:3d} ({unrefined['pass_rate']*100:5.1f}%)"
+            )
+            print(
+                f"Refined: {refined['passed_runs']:3d}/{refined['total_runs']:3d} ({refined['pass_rate']*100:5.1f}%)  ({diff:+.1f}%)"
+            )
+        elif unrefined:
+            print(
+                f"{model}: Initial only — {unrefined['passed_runs']}/{unrefined['total_runs']} ({unrefined['pass_rate']*100:.1f}%)"
+            )
+        elif refined:
+            print(
+                f"{model}: refined only — {refined['passed_runs']}/{refined['total_runs']} ({refined['pass_rate']*100:.1f}%)"
+            )
 
     print("\nPASS RATE BY PROMPT TYPE:")
     # Loop over prompt types and print out summary stats for each

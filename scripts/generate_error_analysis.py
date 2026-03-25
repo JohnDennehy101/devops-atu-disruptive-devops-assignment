@@ -7,18 +7,24 @@ from sys import stderr, stdout
 from shared import EVAL_OUTPUTS_DIR_PATH
 
 # Output path for the error analysis JSON file
-ERROR_ANALYSIS_PATH = EVAL_OUTPUTS_DIR_PATH / "error_analysis.json"
+ERROR_ANALYSIS_PATH = EVAL_OUTPUTS_DIR_PATH / "error_analysis_2.json"
 
 # Map from sub-directory names in eval_outputs directory name to model name used in results.jsonl
 DIRECTORY_TO_MODEL_MAP = {
     "claude": "claude-sonnet-4-20250514",
     "copilot": "gpt-4o",
     "deepseek": "DeepSeek-Coder-V2-Lite-Instruct",
+    "deepseek_api": "deepseek-chat",
     "google": "gemma-3-12b-it",
     "mcp_claude": "mcp-claude-sonnet-4-20250514",
     "mistral": "Mistral-Nemo-Instruct-2407",
     "playwright_agents": "playwright-agents-claude-sonnet-4-20250514",
     "qwen": "Qwen2.5-Coder-14B-Instruct",
+    # Recent model runs stored in subdirectories
+    "gpt-5-4": "gpt-5.4",
+    "32_B_Model": "Qwen2.5-Coder-32B-Instruct",
+    "24_B_Model": "Mistral-Small-24B-Instruct-2501",
+    "27_B_Model": "gemma-3-27b-it",
 }
 
 # Detailed descriptions for each identified error category
@@ -254,19 +260,26 @@ def resolve_metadata_from_path(log_path: Path) -> dict | None:
     path_parts = relative_path.parts
 
     # Validate the expected path structure
-    # If not as expected, return None
-    # Note this is fragile as directory changes would break this
-    if len(path_parts) != 5:
+    # Note two valid paths here (as some models are within subdirectories)
+    # 5 parts: scenario/change_type/iteration/model/prompt.log
+    # 6 parts: scenario/change_type/iteration/model/subdir/prompt.log
+    if len(path_parts) not in (5, 6):
         return None
 
-    # Once the length of the path parts has been validated
-    # can extract relevant information from the path as it meets
-    # the expected structure
+    # Extract scenario, change type, iteration from the path
     scenario_directory = path_parts[0]
     change_type = path_parts[1]
     iteration = path_parts[2]
-    model_directory = path_parts[3]
-    prompt_type = path_parts[4].replace(".log", "")
+
+    # Handle both model directories type based on length (6 is if additional sub-directory)
+    if len(path_parts) == 6:
+        # For sub-directories within models e.g. copilot/gpt-5-4/ or qwen/32_B_Model/
+        model_directory = path_parts[4]
+        prompt_type = path_parts[5].replace(".log", "")
+    else:
+        # For models without sub-directories e.g. google/ or deepseek_api/
+        model_directory = path_parts[3]
+        prompt_type = path_parts[4].replace(".log", "")
 
     # Both model and scenario need to be mapped for valid values
     model = DIRECTORY_TO_MODEL_MAP.get(model_directory)
@@ -438,7 +451,72 @@ def build_error_analysis(failures: list[dict]) -> dict:
             for iteration, categories in sorted(by_iteration.items())
         },
         "category_examples": dict(category_examples),
+        "refined_vs_unrefined": build_refined_comparison(failures),
         "all_failures": failures,
+    }
+
+
+def build_refined_comparison(failures: list[dict]) -> dict:
+    """
+    This function compares error types between initial and refined prompt runs.
+    Shows which error categories were reduced or introduced by prompt refinement.
+    """
+
+    # Split failures into unrefined and refined based on prompt_type prefix
+    unrefined = [f for f in failures if not f["prompt_type"].startswith("refined_")]
+    refined = [f for f in failures if f["prompt_type"].startswith("refined_")]
+
+    # Count error categories for each group
+    unrefined_counts = defaultdict(int)
+    for f in unrefined:
+        unrefined_counts[f["error_category"]] += 1
+
+    refined_counts = defaultdict(int)
+    for f in refined:
+        refined_counts[f["error_category"]] += 1
+
+    # Get all categories across both groups
+    all_categories = sorted(
+        set(list(unrefined_counts.keys()) + list(refined_counts.keys()))
+    )
+
+    # Build comparison showing change per category
+    category_comparison = []
+    for category in all_categories:
+        unrefined_count = unrefined_counts.get(category, 0)
+        refined_count = refined_counts.get(category, 0)
+        category_comparison.append(
+            {
+                "category": category,
+                "unrefined_count": unrefined_count,
+                "refined_count": refined_count,
+                "change": refined_count - unrefined_count,
+                "description": CATEGORY_DESCRIPTIONS.get(category, ""),
+            }
+        )
+
+    # Sort by categories that saw greatest reduction
+    # I.e. improvement
+    category_comparison.sort(key=lambda x: x["change"])
+
+    # Comparison of total failure counts across models
+    models = sorted(set(f["model"] for f in failures))
+    model_comparison = {}
+    for model in models:
+        unrefined_total = sum(1 for f in unrefined if f["model"] == model)
+        refined_total = sum(1 for f in refined if f["model"] == model)
+        model_comparison[model] = {
+            "unrefined_failures": unrefined_total,
+            "refined_failures": refined_total,
+            "change": refined_total - unrefined_total,
+        }
+
+    # Return comparison data in dict
+    return {
+        "total_unrefined_failures": len(unrefined),
+        "total_refined_failures": len(refined),
+        "category_comparison": category_comparison,
+        "model_comparison": model_comparison,
     }
 
 
@@ -499,6 +577,42 @@ def print_error_summary(analysis: dict) -> None:
         print(f"\n  {iteration} ({total} failures):")
         for individual_category, count in categories.items():
             print(f"  {count:4d}  {individual_category}")
+
+    # Print errors from initial runs against the second runs
+    # where prompts had been refined based on initial error analysis
+    comparison = analysis.get("refined_vs_unrefined", {})
+    if comparison:
+        print(f"\n{'-'*50}")
+        print("First Pass (unrefined) vs Second Pass (refined) comparison")
+        print(f"{'-'*50}")
+        print(
+            f"Total failures — Initial Run: {comparison['total_unrefined_failures']}, "
+            f"Total failures - Second Run: {comparison['total_refined_failures']}"
+        )
+
+        print("\nError category changes (negative = improvement):")
+        for entry in comparison.get("category_comparison", []):
+            # Get change in count of error category between runs
+            change = entry["change"]
+
+            # It has improved if fewer failures of that category in second run
+            indicator = "improved" if change < 0 else "worse" if change > 0 else "same"
+            print(
+                f"  {change:+4d}  {entry['category']}"
+                f" {entry['unrefined_count']} -> {entry['refined_count']}) [{indicator}]"
+            )
+
+        print("\nFailure count change by model:")
+        for model, data in sorted(comparison.get("model_comparison", {}).items()):
+            # Get change in count of error category between runs
+            change = data["change"]
+
+            # It has improved if fewer failures of that category in second run
+            indicator = "improved" if change < 0 else "worse" if change > 0 else "same"
+            print(
+                f"  {model}: {data['unrefined_failures']} -> {data['refined_failures']}"
+                f"  ({change:+d}) [{indicator}]"
+            )
 
 
 def main() -> None:
