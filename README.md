@@ -30,8 +30,17 @@ python scripts/generate_copilot.py
 
 To directly use OpenAI (API key needed with credit applied to account)
 
+Running with default configured `gpt-4o` model
+
 ```
 python scripts/generate_copilot.py --openai
+```
+
+Running with `gpt-5.4` model
+
+```
+python scripts/generate_copilot.py --refined --openai --model gpt-5.4
+
 ```
 
 ## Generating Deepseek API outputs

@@ -64,11 +64,17 @@ def call_copilot(prompt: str, model: str = "gpt-4o") -> tuple[str, float, dict]:
     t_start = time.time()
 
     # Call API with the prompt and hyperparams
+    # Newer models including gpt-5 require max_completion_tokens instead of max_tokens
+    token_param = (
+        {"max_completion_tokens": 1024}
+        if model.startswith("gpt-5")
+        else {"max_tokens": 1024}
+    )
     response = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0,
-        max_tokens=1024,
+        **token_param,
     )
 
     # Measure total duration taken for response from API
@@ -158,13 +164,16 @@ def main():
         label = f"{p['scenario']} / {p['change_type']} / {p['iteration']} / {p['prompt_type']}"
         print(f"[{i}/{len(prompts)}] {label}", end=" ", flush=True)
 
-        # Build output path
+        # Build output path within copilot directory
+        # Model subdirectory for each model for easy separation of outputs
+        model_subdir = args.model.replace(".", "-")
         output_directory = (
             MODEL_OUTPUTS_PATH
             / p["scenario_dir"]
             / p["change_type"]
             / p["iteration"]
             / "copilot"
+            / model_subdir
         )
 
         # Make output directory if it doesn't exist

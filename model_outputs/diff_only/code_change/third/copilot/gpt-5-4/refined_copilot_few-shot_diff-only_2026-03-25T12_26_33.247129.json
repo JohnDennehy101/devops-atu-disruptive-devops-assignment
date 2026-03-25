@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T12:26:33.247129",
+        "model_id": "github/gpt-5.4",
+        "prompt_type": "few-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 3.478,
+            "input_token_count": 387,
+            "output_token_count": 182,
+            "total_token_count": 569,
+            "tokens_per_sec": 52.33
+        },
+        "content": {
+            "prompt": "Examples of our testing style:\n\n### EXAMPLE 1\nGIT DIFF:\n+ <button id=\"cancel-order\">Cancel Order</button>\nEXISTING TEST FILE:\nimport { test, expect } from '@playwright/test';\n\ntest('cancel button is functional', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await page.locator('#cancel-order').click();\n  await expect(page.getByText('Order Cancelled')).toBeVisible();\n});\n\n### EXAMPLE 2\nGIT DIFF:\n- if (count > 0)\n+ if (count > 10)\nEXISTING TEST FILE:\nimport { test, expect } from '@playwright/test';\n\ntest('shows warning only when count exceeds 10', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n  await page.fill('#count-input', '5');\n  await expect(page.getByText('Warning')).setHidden();\n  await page.fill('#count-input', '11');\n  await expect(page.getByText('Warning')).toBeVisible();\n});\n\n\nIMPORTANT: Always include the import statement. Use http://localhost:5175 as the base URL. Output ONLY raw TypeScript code \u2014 no markdown fences.\nNow, generate a Playwright test for this specific change:\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const copyNoteBody = () => {\n+    if (selectedNote && navigator.clipboard) {\n+      navigator.clipboard.writeText(selectedNote.body)\n+    }\n+  }\n+\n+                <button\n+                  type=\"button\"\n+                  onClick={copyNoteBody}\n+                  className=\"text-sm text-blue-600 dark:text-blue-400 hover:underline\">\n+                  Copy\n+                </button>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('copies selected note body to clipboard when Copy is clicked', async ({ page, context }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n  await page.goto('http://localhost:5175');\n\n  const noteButton = page.locator('button').filter({ hasNotText: 'Copy' }).first();\n  await noteButton.click();\n\n  const noteBody = (await page.locator('main p').first().textContent())?.trim() || '';\n  await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();\n\n  await page.getByRole('button', { name: 'Copy' }).click();\n\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  expect(clipboardText).toBe(noteBody);\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('copies selected note body to clipboard when Copy is clicked', async ({ page, context }) => {\n  await context.grantPermissions(['clipboard-read', 'clipboard-write']);\n  await page.goto('http://localhost:5175');\n\n  const noteButton = page.locator('button').filter({ hasNotText: 'Copy' }).first();\n  await noteButton.click();\n\n  const noteBody = (await page.locator('main p').first().textContent())?.trim() || '';\n  await expect(page.getByRole('button', { name: 'Copy' })).toBeVisible();\n\n  await page.getByRole('button', { name: 'Copy' }).click();\n\n  const clipboardText = await page.evaluate(() => navigator.clipboard.readText());\n  expect(clipboardText).toBe(noteBody);\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]

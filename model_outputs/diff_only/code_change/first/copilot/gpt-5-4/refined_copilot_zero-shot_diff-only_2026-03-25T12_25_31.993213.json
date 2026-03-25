@@ -1,0 +1,26 @@
+[
+    {
+        "timestamp": "2026-03-25T12:25:31.993213",
+        "model_id": "github/gpt-5.4",
+        "prompt_type": "zero-shot",
+        "scenario": "diff-only",
+        "metrics": {
+            "inference_time_s": 4.568,
+            "input_token_count": 374,
+            "output_token_count": 362,
+            "total_token_count": 736,
+            "tokens_per_sec": 79.25
+        },
+        "content": {
+            "prompt": "Write a Playwright test in TypeScript for the following changes.\n\nIMPORTANT REQUIREMENTS:\n\n- Start with: import { test, expect } from '@playwright/test';\n- Use http://localhost:5175 as the base URL for page.goto()\n- Output ONLY raw TypeScript code \u2014 no markdown fences, no explanations\n- Ensure the code is syntactically valid TypeScript\n\n### GIT DIFF:\n\n--- a/app/src/pages/Home.tsx\n+++ b/app/src/pages/Home.tsx\n+  const clearAllNotes = () => {\n+    setSavedIds([])\n+    setSelectedNote(null)\n+    setFormTitle(\"\")\n+    setFormBody(\"\")\n+    setFormTags(\"\")\n+    setIsEditing(false)\n+    localStorage.setItem(\"noteIds\", JSON.stringify([]))\n+  }\n+\n+      <p className=\"text-gray-500 dark:text-gray-400 text-sm mb-6\">\n+        Create and manage notes. Your notes are stored locally.\n+      </p>\n+\n-            <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white mb-3\">\n-              Your Notes ({savedIds.length})\n-            </h3>\n+            <div className=\"flex justify-between items-center mb-3\">\n+              <h3 className=\"text-lg font-semibold text-gray-900 dark:text-white\">\n+                Your Notes ({savedIds.length})\n+              </h3>\n+              {savedIds.length > 0 && (\n+                <button\n+                  type=\"button\"\n+                  onClick={clearAllNotes}\n+                  className=\"text-sm text-red-600 dark:text-red-400 hover:underline\"\n+                >\n+                  Clear all\n+                </button>\n+              )}\n+            </div>\n\n",
+            "raw_response": "import { test, expect } from '@playwright/test';\n\ntest('can clear all notes from the notes list', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const titleInput = page.getByLabel(/title/i);\n  const bodyInput = page.getByLabel(/body/i);\n  const tagsInput = page.getByLabel(/tags/i);\n  const saveButton = page.getByRole('button', { name: /save/i });\n\n  await titleInput.fill('First note');\n  await bodyInput.fill('Body for first note');\n  await tagsInput.fill('tag1');\n  await saveButton.click();\n\n  await titleInput.fill('Second note');\n  await bodyInput.fill('Body for second note');\n  await tagsInput.fill('tag2');\n  await saveButton.click();\n\n  await expect(page.getByRole('heading', { name: /your notes \\(2\\)/i })).toBeVisible();\n\n  const clearAllButton = page.getByRole('button', { name: /clear all/i });\n  await expect(clearAllButton).toBeVisible();\n  await clearAllButton.click();\n\n  await expect(page.getByRole('heading', { name: /your notes \\(0\\)/i })).toBeVisible();\n  await expect(clearAllButton).toHaveCount(0);\n\n  await expect(titleInput).toHaveValue('');\n  await expect(bodyInput).toHaveValue('');\n  await expect(tagsInput).toHaveValue('');\n\n  await page.reload();\n  await expect(page.getByRole('heading', { name: /your notes \\(0\\)/i })).toBeVisible();\n  await expect(page.getByRole('button', { name: /clear all/i })).toHaveCount(0);\n});",
+            "extracted_code": "import { test, expect } from '@playwright/test';\n\ntest('can clear all notes from the notes list', async ({ page }) => {\n  await page.goto('http://localhost:5175');\n\n  const titleInput = page.getByLabel(/title/i);\n  const bodyInput = page.getByLabel(/body/i);\n  const tagsInput = page.getByLabel(/tags/i);\n  const saveButton = page.getByRole('button', { name: /save/i });\n\n  await titleInput.fill('First note');\n  await bodyInput.fill('Body for first note');\n  await tagsInput.fill('tag1');\n  await saveButton.click();\n\n  await titleInput.fill('Second note');\n  await bodyInput.fill('Body for second note');\n  await tagsInput.fill('tag2');\n  await saveButton.click();\n\n  await expect(page.getByRole('heading', { name: /your notes \\(2\\)/i })).toBeVisible();\n\n  const clearAllButton = page.getByRole('button', { name: /clear all/i });\n  await expect(clearAllButton).toBeVisible();\n  await clearAllButton.click();\n\n  await expect(page.getByRole('heading', { name: /your notes \\(0\\)/i })).toBeVisible();\n  await expect(clearAllButton).toHaveCount(0);\n\n  await expect(titleInput).toHaveValue('');\n  await expect(bodyInput).toHaveValue('');\n  await expect(tagsInput).toHaveValue('');\n\n  await page.reload();\n  await expect(page.getByRole('heading', { name: /your notes \\(0\\)/i })).toBeVisible();\n  await expect(page.getByRole('button', { name: /clear all/i })).toHaveCount(0);\n});"
+        },
+        "hyperparameters": {
+            "max_new_tokens": 1024,
+            "do_sample": false,
+            "temperature": 0,
+            "note": "GitHub Models API (Copilot subscription)"
+        }
+    }
+]
