@@ -32,3 +32,4 @@ jobs:
           app-directory: "app"
           dev-server-url: "http://localhost:5175"
           test-output-path: "e2e/ai-generated.spec.ts"
+          start-dev-server: "false"
