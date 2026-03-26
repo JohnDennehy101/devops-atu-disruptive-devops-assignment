@@ -17,6 +17,8 @@ Therefore, have added backup option of using Hugging Face Inferencing for the AP
 
 Testing MCP in pipeline with Claude again, should log tool calls.
 
+Retries now in place for API calls to external providers.
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
