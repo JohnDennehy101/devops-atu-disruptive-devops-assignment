@@ -19,6 +19,8 @@ Testing MCP in pipeline with Claude again, should log tool calls.
 
 Retries now in place for API calls to external providers.
 
+Qwen best-performing open-source Hugging Face Model in tests.
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
