@@ -3,6 +3,18 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      llm_provider:
+        description: "LLM provider"
+        type: choice
+        options:
+          - huggingface
+          - claude
+          - self-hosted
+        default: "huggingface"
+      model_id:
+        description: "Model ID (leave empty for default)"
+        required: false
 
 jobs:
   ai-playwright:
@@ -16,13 +28,36 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Resolve LLM configuration
+        id: llm
+        run: |
+          PROVIDER="${{ github.event.inputs.llm_provider || 'huggingface' }}"
+
+          case "$PROVIDER" in
+            claude)
+              echo "host=claude" >> $GITHUB_OUTPUT
+              echo "api_key=${{ secrets.ANTHROPIC_API_KEY }}" >> $GITHUB_OUTPUT
+              echo "model=${{ github.event.inputs.model_id || 'claude-sonnet-4-20250514' }}" >> $GITHUB_OUTPUT
+              ;;
+            self-hosted)
+              echo "host=${{ secrets.LLM_HOST }}" >> $GITHUB_OUTPUT
+              echo "api_key=${{ secrets.LLM_API_KEY }}" >> $GITHUB_OUTPUT
+              echo "model=${{ github.event.inputs.model_id || secrets.MODEL_NAME }}" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "host=huggingface" >> $GITHUB_OUTPUT
+              echo "api_key=${{ secrets.HF_API_KEY }}" >> $GITHUB_OUTPUT
+              echo "model=${{ github.event.inputs.model_id || 'Qwen/Qwen2.5-Coder-32B-Instruct' }}" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
       - name: AI Playwright
         uses: johndennehy101/ai-playwright-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          llm-api-key: ${{ secrets.LLM_API_KEY }}
-          llm-host: ${{ secrets.LLM_HOST }}
-          model-id: ${{ secrets.MODEL_NAME }}
+          llm-host: ${{ steps.llm.outputs.host }}
+          llm-api-key: ${{ steps.llm.outputs.api_key }}
+          model-id: ${{ steps.llm.outputs.model }}
           exclude-pattern: ^(versions|model_outputs|eval_outputs|scripts)/.*
           include-existing-tests: "true"
           include-source-files: "true"
