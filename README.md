@@ -21,6 +21,8 @@ Retries now in place for API calls to external providers.
 
 Qwen best-performing open-source Hugging Face Model in tests.
 
+Option to use open-source vs proprietary models.
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
