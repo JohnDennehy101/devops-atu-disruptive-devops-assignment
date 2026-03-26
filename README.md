@@ -16,6 +16,7 @@ Therefore, have added backup option of using Hugging Face Inferencing for the AP
 ## Model selection
 
 Testing MCP in pipeline with Claude again, should log tool calls.
+Note: MCP token usage does appear to be high.
 
 Retries now in place for API calls to external providers.
 
