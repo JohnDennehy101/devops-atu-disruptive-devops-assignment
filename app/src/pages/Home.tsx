@@ -187,16 +187,19 @@ export function Home(): JSX.Element {
               onSubmit={
                 isEditing
                   ? e => {
-                    e.preventDefault()
-                    handleUpdateNote().catch(err => {
-                      console.error("Update note error:", err)
-                    })
-                  }
+                      e.preventDefault()
+                      handleUpdateNote().catch(err => {
+                        console.error("Update note error:", err)
+                      })
+                    }
                   : handleCreateNote
               }
             >
               <div className="mb-4">
-                <label htmlFor="note-title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="note-title"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Title
                 </label>
                 <input
@@ -210,7 +213,10 @@ export function Home(): JSX.Element {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="note-body" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="note-body"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Body
                 </label>
                 <textarea
@@ -224,7 +230,10 @@ export function Home(): JSX.Element {
               </div>
 
               <div className="mb-4">
-                <label htmlFor="note-tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label
+                  htmlFor="note-tags"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+                >
                   Tags (comma-separated)
                 </label>
                 <input

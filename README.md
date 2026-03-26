@@ -1,5 +1,29 @@
 Repo for Disruptive Devops module assignment
 
+## GPU usage
+
+`provision.yml` workflow provisioned a GPU on Digital Ocean (this was working a few weeks ago).
+
+$200 in credits on Digital Ocean as part of Github student developer pack
+was useful but GPU availability is an issue across many platforms
+
+It is good to build resilience into the action, using more than one provider to ensure availability.
+
+After numerous attempts tonight, it appears GPU availability is extremely limited there.
+
+Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models.
+
+## Model selection
+
+Testing MCP in pipeline with Claude again, should log tool calls.
+Note: MCP token usage does appear to be high.
+
+Retries now in place for API calls to external providers.
+
+Qwen best-performing open-source Hugging Face Model in tests.
+
+Option to use open-source vs proprietary models..
+
 ## Run model outputs with Playwright
 
 ### Run all model outputs
