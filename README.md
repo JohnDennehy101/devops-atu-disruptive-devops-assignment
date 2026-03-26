@@ -11,7 +11,7 @@ It is good to build resilience into the action, using more than one provider to 
 
 After numerous attempts tonight, it appears GPU availability is extremely limited there.
 
-Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models
+Therefore, have added backup option of using Hugging Face Inferencing for the API calls for open-source models.
 
 ## Model selection
 
