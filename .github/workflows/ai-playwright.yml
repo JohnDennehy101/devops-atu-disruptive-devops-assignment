@@ -38,16 +38,19 @@ jobs:
               echo "host=claude" >> $GITHUB_OUTPUT
               echo "api_key=${{ secrets.ANTHROPIC_API_KEY }}" >> $GITHUB_OUTPUT
               echo "model=${{ github.event.inputs.model_id || 'claude-sonnet-4-20250514' }}" >> $GITHUB_OUTPUT
+              echo 'mcp_servers={"playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}}' >> $GITHUB_OUTPUT
               ;;
             self-hosted)
               echo "host=${{ secrets.LLM_HOST }}" >> $GITHUB_OUTPUT
               echo "api_key=${{ secrets.LLM_API_KEY }}" >> $GITHUB_OUTPUT
               echo "model=${{ github.event.inputs.model_id || secrets.MODEL_NAME }}" >> $GITHUB_OUTPUT
+              echo "mcp_servers=" >> $GITHUB_OUTPUT
               ;;
             *)
               echo "host=huggingface" >> $GITHUB_OUTPUT
               echo "api_key=${{ secrets.HF_API_KEY }}" >> $GITHUB_OUTPUT
               echo "model=${{ github.event.inputs.model_id || 'Qwen/Qwen2.5-Coder-32B-Instruct' }}" >> $GITHUB_OUTPUT
+              echo "mcp_servers=" >> $GITHUB_OUTPUT
               ;;
           esac
 
@@ -68,4 +71,4 @@ jobs:
           dev-server-url: "http://localhost:5175"
           test-output-path: "e2e/ai-generated.spec.ts"
           start-dev-server: "false"
-          mcp-servers: '{"playwright": {"command": "npx", "args": ["@playwright/mcp@latest"]}}'
+          mcp-servers: ${{ steps.llm.outputs.mcp_servers }}
