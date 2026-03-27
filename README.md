@@ -121,3 +121,9 @@ Generate error summary analysis
 ```
 python scripts/generate_error_analysis.py
 ```
+
+## Generating graphs from evaluation runs
+
+```
+python scripts/generate_graphs.py
+```
