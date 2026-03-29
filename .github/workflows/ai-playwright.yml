@@ -11,7 +11,7 @@ on:
           - huggingface
           - claude
           - self-hosted
-        default: "huggingface"
+        default: "claude"
       model_id:
         description: "Model ID (leave empty for default)"
         required: false
